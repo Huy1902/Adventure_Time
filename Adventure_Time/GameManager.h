@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 
+
 class GameManager
 {
 public:
@@ -18,15 +19,19 @@ public:
 
 	static GameManager* getInstance()
 	{
-		static GameManager* pInstance = new GameManager();
-		return pInstance;
+		if (s_pInstance == nullptr)
+		{
+			s_pInstance = new GameManager();
+		}
+		return s_pInstance;
 	}
-	
+
 	void setRunning(bool running) { m_bRunning = running; }
 	bool getRunning() const { return m_bRunning; }
 
 
 private:
+	static GameManager* s_pInstance;
 	bool m_bRunning;
 
 	SDL_Window* m_pWindow;
@@ -38,6 +43,8 @@ private:
 
 	int mWidthWindows;
 	int mHeightWindows;
+
+	int mIndexFrame;
 
 	GameManager();
 	~GameManager();

@@ -10,13 +10,19 @@
 //file SDL2
 #include <SDL_image.h>
 
+
+//project file
+#include "TextureManager.h"
 using namespace std;
+
+GameManager* GameManager::s_pInstance = nullptr;
 
 GameManager::GameManager() :
 	m_bRunning(false),
 	m_pWindow(nullptr),
 	m_pRenderer(nullptr),
 	m_pTexture(nullptr),
+	mIndexFrame(0),
 	mHeightWindows(0),
 	mWidthWindows(0),
 	srcRect({0, 0, 0, 0}),
@@ -77,31 +83,8 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 		cout << "failed";
 	}
 
-	cout << "Create surface...\n";
-	SDL_Surface* pSurface = IMG_Load("assets/main_character/vagabond_attack_Sheet.png");
-
-	if (pSurface == NULL)
-	{
-		cout << "failed";
-	}
-	else
-	{
-		cout << "Create texture...\n";
-		m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
-
-		SDL_FreeSurface(pSurface);
-	}
-
-	SDL_QueryTexture(m_pTexture, NULL, NULL, &srcRect.w, &srcRect.h);
-
-	srcRect.w /= 15;
-
-
-	destRect.x = 0;
-	destRect.y = 0;
-	destRect.w = srcRect.w * 3;
-	destRect.h = srcRect.h * 3;
-
+	cout << "Load image...\n";
+	TextureManager::getInstance()->load("assets/main_character/vagabond_attack_Sheet.png", "attack", m_pRenderer);
 	m_bRunning = true;
 }
 
@@ -124,19 +107,19 @@ void GameManager::takeInput()
 
 void GameManager::processData()
 {
-	static int i = 0;
-	srcRect.x = 128 * i;
-	++i;
-	if (i == 15)
+	++mIndexFrame;
+	if (mIndexFrame == 15)
 	{
-		i = 0;
+		mIndexFrame = 0;
 	}
 }
 
 void GameManager::renderWindows()
 {
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
-	SDL_RenderCopy(m_pRenderer, m_pTexture, &srcRect, &destRect);
+
+	TextureManager::getInstance()->drawSpritePic("attack", 0, 0, 128, 64, m_pRenderer, mIndexFrame, 2.5);
+
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
 

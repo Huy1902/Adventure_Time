@@ -13,8 +13,11 @@ class TextureManager
 public:
 	static TextureManager* getInstance()
 	{
-		static TextureManager* pInstance = new TextureManager();
-		return pInstance;
+		if (s_pInstance == nullptr)
+		{
+			s_pInstance = new TextureManager();
+		}
+		return s_pInstance;
 	}
 
 	//load image from pathfileName to pRenderer with id
@@ -28,9 +31,11 @@ public:
 	//a: angle to rotate
 	//f: flag to flip
 	void drawSpritePic(const std::string& id, int x, int y,
-		int w, int h, double a = 0.0, int indexFrame = 0,
-		SDL_Point* c = NULL, SDL_RendererFlip f = SDL_FLIP_NONE, SDL_Renderer* pRenderer = nullptr);
+		int w, int h, SDL_Renderer* pRenderer = nullptr, int indexFrame = 0, double scope = 1.0,
+		SDL_RendererFlip f = SDL_FLIP_NONE, double a = 0.0, SDL_Point* c = NULL);
 private:
+	static TextureManager* s_pInstance;
+
 	std::map<std::string, SDL_Texture*> mTexture;
 
 	TextureManager();

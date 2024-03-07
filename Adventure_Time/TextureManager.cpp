@@ -7,6 +7,8 @@
 
 using namespace std;
 
+TextureManager* TextureManager::s_pInstance = nullptr;
+
 TextureManager::TextureManager()
 {
 
@@ -21,7 +23,7 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 {
 	cout << "Load surface...\n";
 	SDL_Surface* pSurface = IMG_Load(fileName.c_str());
-	if (pSurface == 0)
+	if (pSurface == NULL)
 	{
 		cout << "failed";
 	}
@@ -29,7 +31,7 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 	{
 		cout << "Create texture...\n";
 		SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
-		if (pTexture == 0)
+		if (pTexture == NULL)
 		{
 			cout << "failed";
 		}
@@ -43,11 +45,11 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 }
 
 void TextureManager::drawSpritePic(const std::string& id, int x, int y,
-	int w, int h, double a , int indexFrame,
-	SDL_Point* c, SDL_RendererFlip f, SDL_Renderer* pRenderer)
+	int w, int h, SDL_Renderer* pRenderer, int indexFrame, double scope,
+	SDL_RendererFlip f, double a, SDL_Point* c)
 {
 	SDL_Rect srcRect = { w * indexFrame, 0, w, h };
-	SDL_Rect destRect = { x, y, w, h };
+	SDL_Rect destRect = { x, y, w * scope, h * scope };
 
 	SDL_RenderCopyEx(pRenderer, mTexture[id], &srcRect, &destRect, a, c, f);
 }
