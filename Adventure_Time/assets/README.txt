@@ -1,0 +1,1 @@
+Assets in this game can be found on: https://itch.io/game-assets/free/tag-2d/tag-sprites
