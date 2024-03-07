@@ -47,6 +47,7 @@ int main(int argc, char* args[])
 
 		SDL_RenderPresent(pRenderer);
 
+
 		SDL_Delay(3000);
 		SDL_Quit();
 	}
