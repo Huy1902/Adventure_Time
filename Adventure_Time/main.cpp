@@ -1,5 +1,5 @@
-#include "SDL2/include/SDL.h"
-#include "SDL2//include/SDL_image.h"
+#include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 #include <Windows.h>
 using namespace std;
