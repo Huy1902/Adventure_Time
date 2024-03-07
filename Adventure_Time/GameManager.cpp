@@ -29,7 +29,7 @@ GameManager::~GameManager()
 {
 }
 
-void GameManager::InitGame(const char* t, int x, int y, int w, int h)
+void GameManager::initGame(const char* t, int x, int y, int w, int h)
 {
 	//alloc console and write on it
 	AllocConsole();
@@ -105,7 +105,7 @@ void GameManager::InitGame(const char* t, int x, int y, int w, int h)
 	m_bRunning = true;
 }
 
-void GameManager::TakeInput()
+void GameManager::takeInput()
 {
 	SDL_Event event;
 	if (SDL_PollEvent(&event))
@@ -122,7 +122,7 @@ void GameManager::TakeInput()
 	}
 }
 
-void GameManager::ProcessData()
+void GameManager::processData()
 {
 	static int i = 0;
 	srcRect.x = 128 * i;
@@ -133,14 +133,14 @@ void GameManager::ProcessData()
 	}
 }
 
-void GameManager::RenderWindows()
+void GameManager::renderWindows()
 {
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
 	SDL_RenderCopy(m_pRenderer, m_pTexture, &srcRect, &destRect);
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
 
-void GameManager::CleanGame()
+void GameManager::cleanGame()
 {
 	std::cout << "cleaning game...\n";
 	SDL_DestroyWindow(m_pWindow);

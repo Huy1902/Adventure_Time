@@ -4,17 +4,17 @@ using namespace std;
 
 int main(int argc, char* args[])
 {
-	GameManager::getInstance()->InitGame("Test", 100, 100, 1280, 720);
+	GameManager::getInstance()->initGame("Test", 100, 100, 1280, 720);
 
 	while (GameManager::getInstance()->getRunning() == true)
 	{
-		GameManager::getInstance()->TakeInput();
-		GameManager::getInstance()->ProcessData();
-		GameManager::getInstance()->RenderWindows();
+		GameManager::getInstance()->takeInput();
+		GameManager::getInstance()->processData();
+		GameManager::getInstance()->renderWindows();
 
 		SDL_Delay(100);
 	}
 
-	GameManager::getInstance()->CleanGame();
+	GameManager::getInstance()->cleanGame();
 	return 0;
 }

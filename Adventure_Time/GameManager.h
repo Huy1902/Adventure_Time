@@ -10,11 +10,11 @@ public:
 	//t : title
 	//x, y : position
 	//w, h : size
-	void InitGame(const char* t, int x, int y, int w, int h);
-	void TakeInput();
-	void ProcessData();
-	void RenderWindows();
-	void CleanGame();
+	void initGame(const char* t, int x, int y, int w, int h);
+	void takeInput();
+	void processData();
+	void renderWindows();
+	void cleanGame();
 
 	static GameManager* getInstance()
 	{
