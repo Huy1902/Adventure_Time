@@ -87,7 +87,7 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
 
 	player = new GameObject();
-	player->loadTexture(new TextureLoader("run", 0, 0, 64, 64, 8, 2.5));
+	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("run", 0, 0, 64, 64, 8, 2.5) ));
 	m_bRunning = true;
 }
 

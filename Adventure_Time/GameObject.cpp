@@ -15,7 +15,7 @@ GameObject::GameObject() :
 
 }
 
-void GameObject::loadTexture(const TextureLoader* Info)
+void GameObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mTextureID = Info->getTextureID();
 	mXPos = Info->getX();

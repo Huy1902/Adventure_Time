@@ -13,7 +13,7 @@ public:
 	GameObject();
 	~GameObject();
 
-	void loadTexture(const TextureLoader* Info);
+	void loadTexture(std::unique_ptr<TextureLoader> Info);
 	void processData();
 	void renderObject() const;
 	void cleanObject();
