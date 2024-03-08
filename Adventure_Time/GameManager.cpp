@@ -13,6 +13,7 @@
 
 //project file
 #include "TextureManager.h"
+#include "TextureLoader.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -22,11 +23,9 @@ GameManager::GameManager() :
 	m_pWindow(nullptr),
 	m_pRenderer(nullptr),
 	m_pTexture(nullptr),
-	mIndexFrame(0),
 	mHeightWindows(0),
 	mWidthWindows(0),
-	srcRect({0, 0, 0, 0}),
-	destRect({ 0, 0, 0, 0 })
+	player(nullptr)
 {
 
 }
@@ -85,6 +84,10 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 
 	cout << "Load image...\n";
 	TextureManager::getInstance()->load("assets/main_character/vagabond_attack_Sheet.png", "attack", m_pRenderer);
+	TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
+
+	player = new GameObject();
+	player->loadTexture(new TextureLoader("run", 0, 0, 64, 64, 8, 2.5));
 	m_bRunning = true;
 }
 
@@ -107,18 +110,14 @@ void GameManager::takeInput()
 
 void GameManager::processData()
 {
-	++mIndexFrame;
-	if (mIndexFrame == 15)
-	{
-		mIndexFrame = 0;
-	}
+	player->processData();
 }
 
 void GameManager::renderWindows()
 {
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
 
-	TextureManager::getInstance()->drawSpritePic("attack", 0, 0, 128, 64, m_pRenderer, mIndexFrame, 2.5);
+	player->renderObject();
 
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
@@ -126,6 +125,7 @@ void GameManager::renderWindows()
 void GameManager::cleanGame()
 {
 	std::cout << "cleaning game...\n";
+	player->cleanObject();
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

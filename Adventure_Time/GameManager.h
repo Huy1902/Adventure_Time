@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 
+#include "GameObject.h"
 
 class GameManager
 {
@@ -29,6 +30,7 @@ public:
 	void setRunning(bool running) { m_bRunning = running; }
 	bool getRunning() const { return m_bRunning; }
 
+	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 
 private:
 	static GameManager* s_pInstance;
@@ -38,13 +40,10 @@ private:
 	SDL_Renderer* m_pRenderer;
 	SDL_Texture* m_pTexture;
 
-	SDL_Rect srcRect;
-	SDL_Rect destRect;
-
 	int mWidthWindows;
 	int mHeightWindows;
 
-	int mIndexFrame;
+	GameObject* player;
 
 	GameManager();
 	~GameManager();
