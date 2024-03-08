@@ -9,10 +9,8 @@ ObjectModel::ObjectModel() :
 	GameObject(),
 	mTextureID(""),
 	mIndexFrames(0),
-	mXPos(0),
-	mYPos(0),
-	mWidth(0),
-	mHeight(0),
+	mSize({0, 0}),
+	mPosition({ 0, 0 }),
 	mNumFrames(0),
 	mScope(1.0)
 {
@@ -27,17 +25,16 @@ ObjectModel::~ObjectModel()
 void ObjectModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mTextureID = Info->getTextureID();
-	mXPos = Info->getX();
-	mYPos = Info->getY();
-	mWidth = Info->getWidth();
-	mHeight = Info->getHeight();
+	mPosition = std::make_pair(Info->getX() , Info->getY());
+	mSize.setH(Info->getHeight());
+	mSize.setW(Info->getWidth());
 	mNumFrames = Info->getNumFrames();
 	mScope = Info->getScope();
 }
 
 void ObjectModel::processData()
 {
-	++mXPos;
+	mPosition.setX(mPosition.getX() + 10);
 	++mIndexFrames;
 	if (mIndexFrames == mNumFrames)
 	{
@@ -47,8 +44,11 @@ void ObjectModel::processData()
 
 void ObjectModel::renderObject() const
 {
-	TextureManager::getInstance()->drawSpritePic(mTextureID, mXPos, mYPos, mWidth, mHeight,
-		GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
+	int x = static_cast<int>(mPosition.getX());
+	int y = static_cast<int>(mPosition.getY());
+
+	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
+		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
 }
 
 void ObjectModel::cleanObject()

@@ -58,5 +58,8 @@
     <ClInclude Include="EnemyObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

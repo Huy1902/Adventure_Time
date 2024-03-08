@@ -1,7 +1,7 @@
 #include "TextureLoader.h"
 
-TextureLoader::TextureLoader(const std::string& textureID, int x, int y, int w, int h,
-	int numFrames, double scope) :
+
+TextureLoader::TextureLoader(const std::string& textureID, int x, int y, int w, int h, int numFrames, float scope):
 	mTextureID(textureID),
 	mXPos(x),
 	mYPos(y),
@@ -10,5 +10,4 @@ TextureLoader::TextureLoader(const std::string& textureID, int x, int y, int w, 
 	mNumFrames(numFrames),
 	mScope(scope)
 {
-
 }

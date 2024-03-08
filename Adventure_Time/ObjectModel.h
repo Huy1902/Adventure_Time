@@ -2,6 +2,7 @@
 #define OBJECTMODEL_H_
 
 #include "GameObject.h"
+#include "GameVector.h"
 
 class ObjectModel :
     public GameObject
@@ -18,13 +19,12 @@ public:
 protected:
 	std::string mTextureID;
 
+	GameVector mPosition;
+	GameSize mSize;
+
 	int mIndexFrames;
-	int mXPos;
-	int mYPos;
-	int mWidth;
-	int mHeight;
 	int mNumFrames;
-	double mScope;
+	float mScope;
 };
 
 #endif

@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameVector.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PlayerObject.h" />

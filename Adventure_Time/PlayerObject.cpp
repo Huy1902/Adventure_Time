@@ -19,12 +19,12 @@ void PlayerObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void PlayerObject::processData()
 {
-	mXPos += 10;
-	mYPos += 10;
-	if (mYPos == GameManager::getInstance()->getHeightWindows())
+	mPosition.setX(mPosition.getX() + 10);
+	mPosition.setY(mPosition.getY() + 10);
+	if (mPosition.getX() == GameManager::getInstance()->getHeightWindows())
 	{
-		mXPos = 0;
-		mYPos = 0;
+		mPosition.setX(0);
+		mPosition.setY(0);
 	}
 	++mIndexFrames;
 	if (mIndexFrames == mNumFrames)

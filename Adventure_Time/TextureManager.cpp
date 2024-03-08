@@ -45,11 +45,13 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 }
 
 void TextureManager::drawSpritePic(const std::string& id, int x, int y,
-	int w, int h, SDL_Renderer* pRenderer, int indexFrame, double scope,
-	SDL_RendererFlip f, double a, SDL_Point* c)
+	int w, int h, SDL_Renderer* pRenderer, int indexFrame, float scope,
+	SDL_RendererFlip f, float a, SDL_Point* c)
 {
 	SDL_Rect srcRect = { w * indexFrame, 0, w, h };
-	SDL_Rect destRect = { x, y, w * scope, h * scope };
+	w = static_cast<int>(w * scope);
+	h = static_cast<int>(h * scope);
+	SDL_Rect destRect = { x, y, w, h};
 
 	SDL_RenderCopyEx(pRenderer, mTexture[id], &srcRect, &destRect, a, c, f);
 }

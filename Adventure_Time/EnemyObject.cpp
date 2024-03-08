@@ -19,11 +19,11 @@ void EnemyObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void EnemyObject::processData()
 {
-	mXPos += 10;
-	if (mXPos == GameManager::getInstance()->getWidthWindows())
+	mPosition.setX(mPosition.getX() + 10);
+	if (mPosition.getX() == GameManager::getInstance()->getWidthWindows())
 	{
-		mXPos = 0;
-		mYPos += 100;
+		mPosition.setX(0);
+		mPosition.setY(mPosition.getY() + 100);
 	}
 	++mIndexFrames;
 	if (mIndexFrames == mNumFrames)
