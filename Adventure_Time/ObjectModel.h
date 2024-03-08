@@ -1,14 +1,14 @@
-#ifndef GAMEMODEL_H_
-#define GAMEMODEL_H_
+#ifndef OBJECTMODEL_H_
+#define OBJECTMODEL_H_
 
 #include "GameObject.h"
 
-class GameModel :
+class ObjectModel :
     public GameObject
 {
 public:
-	GameModel();
-	~GameModel();
+	ObjectModel();
+	~ObjectModel();
 
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();

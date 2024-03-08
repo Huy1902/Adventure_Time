@@ -37,6 +37,9 @@ public:
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 
+	int getWidthWindows() const { return mWidthWindows; }
+	int getHeightWindows() const { return mHeightWindows; }
+
 private:
 	static GameManager* s_pInstance;
 	bool m_bRunning;
