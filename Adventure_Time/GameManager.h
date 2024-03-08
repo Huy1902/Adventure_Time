@@ -1,8 +1,13 @@
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
+//file C++
+#include <vector>
+
+//SDL2 file
 #include <SDL.h>
 
+//project file
 #include "GameObject.h"
 
 class GameManager
@@ -43,7 +48,7 @@ private:
 	int mWidthWindows;
 	int mHeightWindows;
 
-	GameObject* player;
+	std::vector<GameObject*> mGameObject;
 
 	GameManager();
 	~GameManager();

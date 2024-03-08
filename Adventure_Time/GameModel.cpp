@@ -1,8 +1,12 @@
+#include "GameModel.h"
+
 #include "GameObject.h"
 
 #include "TextureManager.h"
 #include "GameManager.h"
-GameObject::GameObject() :
+
+GameModel::GameModel() :
+	GameObject(),
 	mTextureID(""),
 	mIndexFrames(0),
 	mXPos(0),
@@ -15,7 +19,12 @@ GameObject::GameObject() :
 
 }
 
-void GameObject::loadTexture(std::unique_ptr<TextureLoader> Info)
+GameModel::~GameModel()
+{
+
+}
+
+void GameModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mTextureID = Info->getTextureID();
 	mXPos = Info->getX();
@@ -26,7 +35,7 @@ void GameObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 	mScope = Info->getScope();
 }
 
-void GameObject::processData()
+void GameModel::processData()
 {
 	++mXPos;
 	++mIndexFrames;
@@ -36,13 +45,13 @@ void GameObject::processData()
 	}
 }
 
-void GameObject::renderObject() const
+void GameModel::renderObject() const
 {
 	TextureManager::getInstance()->drawSpritePic(mTextureID, mXPos, mYPos, mWidth, mHeight,
 		GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
 }
 
-void GameObject::cleanObject()
+void GameModel::cleanObject()
 {
 
 }

@@ -10,24 +10,15 @@
 class GameObject
 {
 public:
-	GameObject();
-	~GameObject();
 
-	void loadTexture(std::unique_ptr<TextureLoader> Info);
-	void processData();
-	void renderObject() const;
-	void cleanObject();
+	virtual void loadTexture(std::unique_ptr<TextureLoader> Info) = 0;
+	virtual void processData() = 0;
+	virtual void renderObject() const = 0;
+	virtual void cleanObject() = 0;
 
-private:
-	std::string mTextureID;
-
-	int mIndexFrames;
-	int mXPos;
-	int mYPos;
-	int mWidth;
-	int mHeight;
-	int mNumFrames;
-	double mScope;
+protected:
+	GameObject() {};
+	virtual ~GameObject() {}
 };
 
 #endif GAMEOBJECT_H_
