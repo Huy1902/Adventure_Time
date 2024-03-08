@@ -14,7 +14,7 @@
 //project file
 #include "TextureManager.h"
 #include "TextureLoader.h"
-#include "ObjectModel.h"
+#include "EnemyObject.h"
 #include "PlayerObject.h"
 using namespace std;
 
@@ -87,12 +87,12 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	TextureManager::getInstance()->load("assets/main_character/vagabond_attack_Sheet.png", "attack", m_pRenderer);
 	TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
 
-	ObjectModel* obj = new ObjectModel();
+	EnemyObject* enemy = new EnemyObject();
 	PlayerObject* player = new PlayerObject();
 	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("run", 0, 0, 64, 64, 8, 2.5) ));
 	mGameObject.push_back(player);
-	obj->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("attack", 0, 0, 128, 64, 15, 3.0)));
-	mGameObject.push_back(obj);
+	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("attack", 0, 0, 128, 64, 15, 3.0)));
+	mGameObject.push_back(enemy);
 
 	m_bRunning = true;
 }

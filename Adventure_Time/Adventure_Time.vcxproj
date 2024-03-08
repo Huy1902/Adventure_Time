@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="GameObject.h" />
