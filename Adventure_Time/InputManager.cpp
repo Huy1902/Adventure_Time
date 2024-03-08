@@ -3,6 +3,16 @@
 
 InputManager* InputManager::s_pInstance = nullptr;
 
+InputManager::InputManager()
+{
+	mMousePosition = new GameVector();
+}
+
+InputManager::~InputManager()
+{
+
+}
+
 void InputManager::takeInput()
 {
 	SDL_Event event;
@@ -91,7 +101,7 @@ void InputManager::isMouseUp(SDL_Event& event)
 	}
 }
 
-void InputManager::cleanInput()
+void InputManager::clearInput()
 {
 
 }

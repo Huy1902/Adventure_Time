@@ -139,12 +139,12 @@ void GameManager::quitGame()
 	m_bRunning = false;
 }
 
-void GameManager::cleanGame()
+void GameManager::clearGame()
 {
-	std::cout << "cleaning game...\n";
+	std::cout << "clearing game...\n";
 	for (GameObject* obj : mGameObject)
 	{
-		obj->cleanObject();
+		obj->clearObject();
 	}
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);

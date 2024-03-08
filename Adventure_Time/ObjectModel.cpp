@@ -12,7 +12,8 @@ ObjectModel::ObjectModel() :
 	mSize({0, 0}),
 	mPosition({ 0, 0 }),
 	mNumFrames(0),
-	mScope(1.0)
+	mScope(1.0),
+	mCurrentAction(nullptr)
 {
 
 }
@@ -51,7 +52,7 @@ void ObjectModel::renderObject() const
 		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
 }
 
-void ObjectModel::cleanObject()
+void ObjectModel::clearObject()
 {
 
 }

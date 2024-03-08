@@ -15,6 +15,6 @@ int main(int argc, char* args[])
 		SDL_Delay(100);
 	}
 
-	GameManager::getInstance()->cleanGame();
+	GameManager::getInstance()->clearGame();
 	return 0;
 }

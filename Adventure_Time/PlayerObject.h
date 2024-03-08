@@ -12,7 +12,9 @@ public:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();
 	virtual void renderObject() const;
-	virtual void cleanObject();
+	virtual void clearObject();
+
+
 };
 
 #endif

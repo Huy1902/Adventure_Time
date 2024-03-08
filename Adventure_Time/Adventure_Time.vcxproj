@@ -137,16 +137,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionModel.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="RunAction.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionModel.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />
@@ -154,6 +157,7 @@
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="RunAction.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>

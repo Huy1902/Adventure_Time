@@ -38,7 +38,7 @@ void PlayerObject::renderObject() const
 	ObjectModel::renderObject();
 }
 
-void PlayerObject::cleanObject()
+void PlayerObject::clearObject()
 {
 
 }

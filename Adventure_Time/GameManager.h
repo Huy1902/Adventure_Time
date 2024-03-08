@@ -22,7 +22,7 @@ public:
 	void processData();
 	void renderWindows();
 	void quitGame();
-	void cleanGame();
+	void clearGame();
 
 	static GameManager* getInstance()
 	{
