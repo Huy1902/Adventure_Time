@@ -21,6 +21,7 @@ public:
 	void takeInput();
 	void processData();
 	void renderWindows();
+	void quitGame();
 	void cleanGame();
 
 	static GameManager* getInstance()

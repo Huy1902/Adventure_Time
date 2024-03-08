@@ -134,6 +134,11 @@ void GameManager::renderWindows()
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
 
+void GameManager::quitGame()
+{
+	m_bRunning = false;
+}
+
 void GameManager::cleanGame()
 {
 	std::cout << "cleaning game...\n";
