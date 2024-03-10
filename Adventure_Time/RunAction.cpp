@@ -1,6 +1,7 @@
 #include "RunAction.h"
-#include "GameManager.h"
 
+#include "GameManager.h"
+#include "TextureManager.h"
 RunAction::RunAction() :
 	ActionModel()
 {
@@ -19,12 +20,13 @@ void RunAction::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void RunAction::processData()
 {
-	mPosition.setX(mPosition.getX() + 10);
-	mPosition.setY(mPosition.getY() + 10);
-	if (mPosition.getX() == GameManager::getInstance()->getHeightWindows())
+	if (m_bRight == true)
 	{
-		mPosition.setX(0);
-		mPosition.setY(0);
+		mPosition.setX(mPosition.getX() + 10);
+	}
+	else
+	{
+		mPosition.setX(mPosition.getX() - 10);
 	}
 	++mIndexFrames;
 	if (mIndexFrames == mNumFrames)
@@ -35,7 +37,21 @@ void RunAction::processData()
 
 void RunAction::renderObject() const
 {
-	ActionModel::renderObject();
+	int x = static_cast<int>(mPosition.getX());
+	int y = static_cast<int>(mPosition.getY());
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	if (m_bRight == true)
+	{
+		flip = SDL_FLIP_NONE;
+	}
+	else
+	{
+		flip = SDL_FLIP_HORIZONTAL;
+	}
+
+	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
+		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
 }
 
 void RunAction::clearObject()

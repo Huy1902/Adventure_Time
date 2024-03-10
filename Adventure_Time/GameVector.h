@@ -28,6 +28,12 @@ public:
 		mY = static_cast<float> (other.second);
 		return (*this);
 	}
+	GameVector& operator=(const GameVector& other)
+	{
+		mX = other.mX;
+		mY = other.mY;
+		return (*this);
+	}
 	GameVector operator+(const GameVector& other) const
 	{
 		return GameVector(mX + other.mX, mY + other.mY);

@@ -86,12 +86,14 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	cout << "Load image...\n";
 	TextureManager::getInstance()->load("assets/main_character/vagabond_attack_Sheet.png", "attack", m_pRenderer);
 	TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
+	TextureManager::getInstance()->load("assets/main_character/vagabond_jump_Sheet.png", "jump", m_pRenderer);
+	TextureManager::getInstance()->load("assets/main_character/vagabond.png", "vagabond", m_pRenderer);
 
 	EnemyObject* enemy = new EnemyObject();
 	PlayerObject* player = new PlayerObject();
-	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("run", 0, 0, 64, 64, 8, 2.5) ));
+	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("vagabond", 0, 0, 64, 64, 1, 2.5) ));
 	mGameObject.push_back(player);
-	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("attack", 0, 0, 128, 64, 15, 3.0)));
+	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("vagabond", 0, 0, 64, 64, 1, 2.5)));
 	mGameObject.push_back(enemy);
 
 	m_bRunning = true;

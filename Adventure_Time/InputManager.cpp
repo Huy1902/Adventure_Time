@@ -3,9 +3,10 @@
 
 InputManager* InputManager::s_pInstance = nullptr;
 
-InputManager::InputManager()
+InputManager::InputManager(): mKeyButton(nullptr)
 {
 	mMousePosition = new GameVector();
+	mMouseButton.resize(3, false);
 }
 
 InputManager::~InputManager()
@@ -31,8 +32,10 @@ void InputManager::takeInput()
 			break;
 		case SDL_MOUSEBUTTONUP:
 			isMouseUp(event);
+			break;
 		case SDL_MOUSEBUTTONDOWN:
 			isMouseDown(event);
+			break;
 		case SDL_QUIT:
 			GameManager::getInstance()->quitGame();
 			break;

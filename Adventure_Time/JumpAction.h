@@ -1,24 +1,19 @@
-#ifndef RUNACTION_H_
-#define RUNACTION_H_
+#ifndef JUMPACTION_H_
+#define JUMPACTION_H_
 #include "ActionModel.h"
-class RunAction :
+
+class JumpAction :
     public ActionModel
 {
 public:
-	RunAction();
-	~RunAction();
+	JumpAction();
+	~JumpAction();
 
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
-
-	virtual void setRightMove(bool b_)
-	{
-		m_bRight = b_;
-	}
-private:
 };
 
 #endif
