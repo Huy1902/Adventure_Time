@@ -20,14 +20,6 @@ void RunAction::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void RunAction::processData()
 {
-	if (m_bRight == true)
-	{
-		mPosition.setX(mPosition.getX() + 10);
-	}
-	else
-	{
-		mPosition.setX(mPosition.getX() - 10);
-	}
 	++mIndexFrames;
 	if (mIndexFrames == mNumFrames)
 	{

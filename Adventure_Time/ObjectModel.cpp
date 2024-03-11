@@ -35,7 +35,6 @@ void ObjectModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void ObjectModel::processData()
 {
-	mPosition.setX(mPosition.getX() + 10);
 	++mIndexFrames;
 	if (mIndexFrames == mNumFrames)
 	{

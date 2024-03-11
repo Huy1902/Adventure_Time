@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionModel.h" />
+    <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />

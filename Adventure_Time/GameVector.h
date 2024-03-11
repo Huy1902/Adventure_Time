@@ -6,26 +6,26 @@
 class GameVector
 {
 public:
-	GameVector(float x_, float y_)
+	GameVector(double x_, double y_)
 	{
 		mX = x_;
 		mY = y_;
 	}
 	GameVector() : mX(0), mY(0) {}
 
-	float getX() const { return mX; }
-	float getY() const { return mY; }
+	double getX() const { return mX; }
+	double getY() const { return mY; }
 
-	void setX(float x) { mX = x; }
-	void setY(float y) { mY = y; }
+	void setX(double x) { mX = x; }
+	void setY(double y) { mY = y; }
 
-	float getLength() { return std::sqrt(mX * mX + mY * mY); }
+	double getLength() { return std::sqrt(mX * mX + mY * mY); }
 
 	template <typename T>
 	GameVector& operator=(const std::pair<T, T>& other)
 	{
-		mX = static_cast<float> (other.first);
-		mY = static_cast<float> (other.second);
+		mX = static_cast<double> (other.first);
+		mY = static_cast<double> (other.second);
 		return (*this);
 	}
 	GameVector& operator=(const GameVector& other)
@@ -56,8 +56,8 @@ public:
 	}
 
 private:
-	float mX;
-	float mY;
+	double mX;
+	double mY;
 };
 
 class GameSize

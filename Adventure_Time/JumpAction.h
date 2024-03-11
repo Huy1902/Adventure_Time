@@ -14,6 +14,11 @@ public:
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
+
+private:
+	GameVector mBasePosition;
+	bool m_bMiddle;
+	int mCount;
 };
 
 #endif

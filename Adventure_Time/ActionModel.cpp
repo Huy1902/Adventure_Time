@@ -13,7 +13,8 @@ ActionModel::ActionModel() :
 	mSize({ 0, 0 }),
 	mNumFrames(0),
 	mScope(0.0),
-	m_bRight(false)
+	m_bRight(false),
+	m_bOnAir(false)
 {
 
 }

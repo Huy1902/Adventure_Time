@@ -1,10 +1,11 @@
 #include "JumpAction.h"
 #include "GameManager.h"
+#include "TextureManager.h"
 
 JumpAction::JumpAction() :
-	ActionModel()
+	ActionModel(),
+	m_bMiddle(false)
 {
-
 }
 
 JumpAction::~JumpAction()
@@ -19,16 +20,65 @@ void JumpAction::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void JumpAction::processData()
 {
-	++mIndexFrames;
-	if (mIndexFrames == mNumFrames)
+	if (m_bOnAir == false)
 	{
+		m_bOnAir = true;
+		m_bMiddle = false;
+		mBasePosition = mPosition;
+		std::cout << mPosition.getY() << '\n';
 		mIndexFrames = 0;
+		mCount = 0;
+	}
+	else
+	{
+		std::cout << mPosition.getY() << '\n';
+		mCount += 3;
+		mIndexFrames = mCount / 4;
+		if (mIndexFrames == mNumFrames)
+		{
+			m_bOnAir = false;
+		}
+		//if(mIndexFrames >= )
+		//if (m_bMiddle == true)
+		//{
+		//	if (mPosition.getY() >= mBasePosition.getY() - 40)
+		//	{
+		//		mIndexFrames = 2;
+		//		if (mPosition.getY() >= mBasePosition.getY())
+		//		{
+		//			m_bOnAir = false;
+		//		}
+
+		//	}
+		//}
+		//else 
+		//{
+		//	if (mPosition.getY() <= mBasePosition.getY() - 75)
+		//	{
+		//		m_bMiddle = true;
+		//		mIndexFrames = 1;
+		//	}
+		//}
 	}
 }
 
 void JumpAction::renderObject() const
 {
-	ActionModel::renderObject();
+	int x = static_cast<int>(mPosition.getX());
+	int y = static_cast<int>(mPosition.getY());
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	if (m_bRight == true)
+	{
+		flip = SDL_FLIP_NONE;
+	}
+	else
+	{
+		flip = SDL_FLIP_HORIZONTAL;
+	}
+
+	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
+		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
 }
 
 void JumpAction::clearObject()

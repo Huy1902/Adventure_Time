@@ -85,15 +85,17 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 
 	cout << "Load image...\n";
 	TextureManager::getInstance()->load("assets/main_character/vagabond_attack_Sheet.png", "attack", m_pRenderer);
-	TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
-	TextureManager::getInstance()->load("assets/main_character/vagabond_jump_Sheet.png", "jump", m_pRenderer);
-	TextureManager::getInstance()->load("assets/main_character/vagabond.png", "vagabond", m_pRenderer);
+	//TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
+	TextureManager::getInstance()->load("assets/knight_player/Walking_KG_1.png", "walk", m_pRenderer);
+	//TextureManager::getInstance()->load("assets/main_character/vagabond_jump_Sheet.png", "jump", m_pRenderer);
+	TextureManager::getInstance()->load("assets/knight_player/Jump_KG_1.png", "jump", m_pRenderer);
+	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_1.png", "idle", m_pRenderer);
 
 	EnemyObject* enemy = new EnemyObject();
 	PlayerObject* player = new PlayerObject();
-	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("vagabond", 0, 0, 64, 64, 1, 2.5) ));
+	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0) ));
 	mGameObject.push_back(player);
-	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("vagabond", 0, 0, 64, 64, 1, 2.5)));
+	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 0, 0, 100, 64, 4, 1.0)));
 	mGameObject.push_back(enemy);
 
 	m_bRunning = true;

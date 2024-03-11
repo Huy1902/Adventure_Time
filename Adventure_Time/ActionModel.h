@@ -14,7 +14,7 @@ public:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
 	//update postition
-	virtual void setPos(float x_, float y_)
+	virtual void setPos(double x_, double y_)
 	{
 		mPosition = std::make_pair(x_, y_);
 	}
@@ -25,6 +25,14 @@ public:
 	virtual void setRightMove(bool b_)
 	{
 		m_bRight = b_;
+	}
+	virtual bool isOnAir() const
+	{
+		return m_bOnAir;
+	}
+	virtual void setOnAir(bool b_)
+	{
+		m_bOnAir = b_;
 	}
 	virtual void processData();
 	virtual void renderObject() const;
@@ -37,8 +45,9 @@ protected:
 	GameVector mPosition;
 	int mIndexFrames;
 	int mNumFrames;
-	float mScope;
+	double mScope;
 	bool m_bRight;
+	bool m_bOnAir;
 };
 
 #endif

@@ -24,10 +24,12 @@ protected:
 
 	GameVector mPosition;
 	GameSize mSize;
+	GameVector mVelocity;
+	GameVector mAcceleration;
 
 	int mIndexFrames;
 	int mNumFrames;
-	float mScope;
+	double mScope;
 
 	std::map<std::string, ActionModel*> mActionMap;
 	ActionModel* mCurrentAction;

@@ -14,7 +14,8 @@ public:
 	virtual void renderObject() const;
 	virtual void clearObject();
 
-
+private:
+	bool m_bOnAir;
 };
 
 #endif
