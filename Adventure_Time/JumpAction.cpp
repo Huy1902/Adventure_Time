@@ -4,7 +4,8 @@
 
 JumpAction::JumpAction() :
 	ActionModel(),
-	m_bMiddle(false)
+	m_bMiddle(false),
+	mCount(-3)
 {
 }
 
@@ -26,8 +27,8 @@ void JumpAction::processData()
 		m_bMiddle = false;
 		mBasePosition = mPosition;
 		std::cout << mPosition.getY() << '\n';
+		mCount = -3;
 		mIndexFrames = 0;
-		mCount = 0;
 	}
 	else
 	{
@@ -36,6 +37,7 @@ void JumpAction::processData()
 		mIndexFrames = mCount / 4;
 		if (mIndexFrames == mNumFrames)
 		{
+			mIndexFrames = mNumFrames - 1;
 			m_bOnAir = false;
 		}
 		//if(mIndexFrames >= )

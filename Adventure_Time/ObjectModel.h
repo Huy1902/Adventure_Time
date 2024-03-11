@@ -26,7 +26,8 @@ protected:
 	GameSize mSize;
 	GameVector mVelocity;
 	GameVector mAcceleration;
-
+	
+	bool m_bRight;
 	int mIndexFrames;
 	int mNumFrames;
 	double mScope;

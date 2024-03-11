@@ -10,11 +10,11 @@ PlayerObject::PlayerObject() :
 	m_bOnAir(false)
 {
 	RunAction* walk = new RunAction();
-	walk->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("walk", mPosition.getX(), mPosition.getY(), 100, 64, 7, 1.0)));
+	walk->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("walk", (int)mPosition.getX(), (int)mPosition.getY(), 100, 64, 7, 1.0)));
 	mActionMap["walk"] = walk;
 
 	JumpAction* jump = new JumpAction();
-	jump->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("jump", mPosition.getX(), mPosition.getY(), 100, 64, 6, 1.0)));
+	jump->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("jump", (int)mPosition.getX(), (int)mPosition.getY(), 100, 64, 6, 1.0)));
 	mActionMap["jump"] = jump;
 	mCurrentAction = mActionMap["jump"];
 }
@@ -37,12 +37,14 @@ void PlayerObject::processData()
 		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_A))
 		{
 			mVelocity.setX(-15);
-			mCurrentAction->setRightMove(false);
+			m_bRight = false;
+			mCurrentAction->setRightMove(m_bRight);
 		}
 		else if (InputManager::getInstance()->keyDown(SDL_SCANCODE_D))
 		{
 			mVelocity.setX(15);
-			mCurrentAction->setRightMove(true);
+			m_bRight = true;
+			mCurrentAction->setRightMove(m_bRight);
 		}
 		else
 		{
@@ -53,6 +55,7 @@ void PlayerObject::processData()
 			m_bOnAir = false;
 			mVelocity.setY(0);
 			mAcceleration = { 0, 0 };
+			mCurrentAction = nullptr;
 		}
 		else
 		{
@@ -78,13 +81,15 @@ void PlayerObject::processData()
 		{
 			mVelocity.setX(-15);
 			mCurrentAction = mActionMap["walk"];
-			mCurrentAction->setRightMove(false);
+			m_bRight = false;
+			mCurrentAction->setRightMove(m_bRight);
 		}
 		else if (InputManager::getInstance()->keyDown(SDL_SCANCODE_D))
 		{
 			mCurrentAction = mActionMap["walk"];
 			mVelocity.setX(15);
-			mCurrentAction->setRightMove(true);
+			m_bRight = true;
+			mCurrentAction->setRightMove(m_bRight);
 		}
 		else
 		{

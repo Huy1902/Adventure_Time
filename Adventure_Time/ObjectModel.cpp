@@ -13,7 +13,8 @@ ObjectModel::ObjectModel() :
 	mPosition({ 0, 0 }),
 	mNumFrames(0),
 	mScope(1.0),
-	mCurrentAction(nullptr)
+	mCurrentAction(nullptr),
+	m_bRight(false)
 {
 
 }
@@ -47,8 +48,18 @@ void ObjectModel::renderObject() const
 	int x = static_cast<int>(mPosition.getX());
 	int y = static_cast<int>(mPosition.getY());
 
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	if (m_bRight == true)
+	{
+		flip = SDL_FLIP_NONE;
+	}
+	else
+	{
+		flip = SDL_FLIP_HORIZONTAL;
+	}
+
 	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
-		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
+		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
 }
 
 void ObjectModel::clearObject()
