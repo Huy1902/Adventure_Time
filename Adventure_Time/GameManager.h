@@ -9,6 +9,7 @@
 
 //project file
 #include "BaseObject.h"
+#include "FiniteStateMachine.h"
 
 class GameManager
 {
@@ -41,6 +42,8 @@ public:
 	int getWidthWindows() const { return mWidthWindows; }
 	int getHeightWindows() const { return mHeightWindows; }
 
+	FiniteStateMachine* getFSM() { return mFSM; }
+
 private:
 	static GameManager* s_pInstance;
 	bool m_bRunning;
@@ -53,6 +56,8 @@ private:
 	int mHeightWindows;
 
 	std::vector<BaseObject*> mBaseObject;
+
+	FiniteStateMachine* mFSM;
 
 	GameManager();
 	~GameManager();

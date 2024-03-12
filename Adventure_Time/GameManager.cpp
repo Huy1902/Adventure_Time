@@ -26,9 +26,9 @@ GameManager::GameManager() :
 	m_pRenderer(nullptr),
 	m_pTexture(nullptr),
 	mHeightWindows(0),
-	mWidthWindows(0)
+	mWidthWindows(0),
+	mFSM(nullptr)
 {
-
 }
 
 GameManager::~GameManager()

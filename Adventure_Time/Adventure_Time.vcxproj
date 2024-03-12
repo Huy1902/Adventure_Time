@@ -140,6 +140,7 @@
     <ClCompile Include="ActionModel.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
+    <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JumpAction.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />
+    <ClInclude Include="HomeState.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />
     <ClInclude Include="InputManager.h" />
