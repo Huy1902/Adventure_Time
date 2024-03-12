@@ -1,12 +1,12 @@
 #include "ObjectModel.h"
 
-#include "GameObject.h"
+#include "BaseObject.h"
 
 #include "TextureManager.h"
 #include "GameManager.h"
 
 ObjectModel::ObjectModel() :
-	GameObject(),
+	BaseObject(),
 	mTextureID(""),
 	mIndexFrames(0),
 	mSize({0, 0}),

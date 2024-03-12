@@ -68,6 +68,9 @@
     <ClCompile Include="JumpAction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FiniteStateMachine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -85,7 +88,7 @@
     <ClInclude Include="ObjectModel.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="BaseObject.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObject.h">
@@ -107,6 +110,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Constant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateMachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

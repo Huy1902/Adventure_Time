@@ -1,5 +1,5 @@
-#ifndef GAMEOBJECT_H_
-#define GAMEOBJECT_H_
+#ifndef BASEOBJECT_H_
+#define BASEOBJECT_H_
 
 //C++lin
 #include <iostream>
@@ -7,7 +7,7 @@
 //project file
 #include "TextureLoader.h"
 
-class GameObject
+class BaseObject
 {
 public:
 
@@ -17,9 +17,9 @@ public:
 	virtual void clearObject() = 0;
 
 protected:
-	GameObject() {};
-	virtual ~GameObject() {}
+	BaseObject() {};
+	virtual ~BaseObject() {}
 };
 
-#endif GAMEOBJECT_H_
+#endif BASEOBJECT_H_
 

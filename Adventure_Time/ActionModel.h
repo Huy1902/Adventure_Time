@@ -1,11 +1,11 @@
 #ifndef ACTIONMODEL_H_
 #define ACTIONMODEL_H_
 
-#include "GameObject.h"
+#include "BaseObject.h"
 #include "GameVector.h"
 
 class ActionModel :
-    public GameObject
+    public BaseObject
 {
 public:
 	ActionModel();

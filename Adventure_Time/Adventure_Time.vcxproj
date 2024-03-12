@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClCompile Include="ActionModel.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
+    <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JumpAction.cpp" />
@@ -153,14 +154,16 @@
     <ClInclude Include="ActionModel.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
+    <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="JumpAction.h" />
     <ClInclude Include="ObjectModel.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="BaseObject.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="RunAction.h" />
+    <ClInclude Include="BaseState.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>

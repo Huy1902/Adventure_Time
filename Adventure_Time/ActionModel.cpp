@@ -1,12 +1,12 @@
 #include "ActionModel.h"
 
-#include "GameObject.h"
+#include "BaseObject.h"
 
 #include "TextureManager.h"
 #include "GameManager.h"
 
 ActionModel::ActionModel() :
-	GameObject(),
+	BaseObject(),
 	mTextureID(""),
 	mIndexFrames(0),
 	mPosition({0, 0}),

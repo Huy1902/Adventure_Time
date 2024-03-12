@@ -3,12 +3,12 @@
 
 #include <map>
 
-#include "GameObject.h"
+#include "BaseObject.h"
 #include "GameVector.h"
 #include "ActionModel.h"
 
 class ObjectModel :
-	public GameObject
+	public BaseObject
 {
 public:
 	ObjectModel();

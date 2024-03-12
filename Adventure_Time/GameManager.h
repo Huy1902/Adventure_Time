@@ -8,7 +8,7 @@
 #include <SDL.h>
 
 //project file
-#include "GameObject.h"
+#include "BaseObject.h"
 
 class GameManager
 {
@@ -52,7 +52,7 @@ private:
 	int mWidthWindows;
 	int mHeightWindows;
 
-	std::vector<GameObject*> mGameObject;
+	std::vector<BaseObject*> mBaseObject;
 
 	GameManager();
 	~GameManager();

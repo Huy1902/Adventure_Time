@@ -94,9 +94,9 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	EnemyObject* enemy = new EnemyObject();
 	PlayerObject* player = new PlayerObject();
 	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0) ));
-	mGameObject.push_back(player);
+	mBaseObject.push_back(player);
 	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 0, 0, 100, 64, 4, 1.0)));
-	mGameObject.push_back(enemy);
+	mBaseObject.push_back(enemy);
 
 	m_bRunning = true;
 }
@@ -120,7 +120,7 @@ void GameManager::takeInput()
 
 void GameManager::processData()
 {
-	for (GameObject* obj : mGameObject)
+	for (BaseObject* obj : mBaseObject)
 	{
 		obj->processData();
 	}
@@ -130,7 +130,7 @@ void GameManager::renderWindows()
 {
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
 
-	for (GameObject* obj : mGameObject)
+	for (BaseObject* obj : mBaseObject)
 	{
 		obj->renderObject();
 	}
@@ -146,7 +146,7 @@ void GameManager::quitGame()
 void GameManager::clearGame()
 {
 	std::cout << "clearing game...\n";
-	for (GameObject* obj : mGameObject)
+	for (BaseObject* obj : mBaseObject)
 	{
 		obj->clearObject();
 	}
