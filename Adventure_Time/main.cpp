@@ -11,8 +11,6 @@ int main(int argc, char* args[])
 		GameManager::getInstance()->takeInput();
 		GameManager::getInstance()->processData();
 		GameManager::getInstance()->renderWindows();
-
-		SDL_Delay(100);
 	}
 
 	GameManager::getInstance()->clearGame();

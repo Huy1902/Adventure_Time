@@ -23,7 +23,6 @@ protected:
 	std::string mTextureID;
 
 	GameVector mPosition;
-	GameSize mSize;
 	GameVector mVelocity;
 	GameVector mAcceleration;
 	
@@ -31,6 +30,8 @@ protected:
 	int mIndexFrames;
 	int mNumFrames;
 	double mScope;
+	int mWidth;
+	int mHeight;
 
 	std::map<std::string, ActionModel*> mActionMap;
 	ActionModel* mCurrentAction;

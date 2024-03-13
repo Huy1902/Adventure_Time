@@ -9,6 +9,7 @@ PlayerObject::PlayerObject() :
 	ObjectModel(),
 	m_bOnAir(false)
 {
+	mActionMachine = new ActionMachine();
 	RunAction* walk = new RunAction();
 	walk->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("walk", (int)mPosition.getX(), (int)mPosition.getY(), 100, 64, 7, 1.0)));
 	mActionMap["walk"] = walk;

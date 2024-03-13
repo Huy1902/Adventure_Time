@@ -16,6 +16,8 @@
 #include "TextureLoader.h"
 #include "EnemyObject.h"
 #include "PlayerObject.h"
+#include "HomeState.h"
+#include "InputManager.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -91,14 +93,16 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	TextureManager::getInstance()->load("assets/knight_player/Jump_KG_1.png", "jump", m_pRenderer);
 	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_1.png", "idle", m_pRenderer);
 
-	EnemyObject* enemy = new EnemyObject();
-	PlayerObject* player = new PlayerObject();
-	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0) ));
-	mBaseObject.push_back(player);
-	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 0, 0, 100, 64, 4, 1.0)));
-	mBaseObject.push_back(enemy);
+	//EnemyObject* enemy = new EnemyObject();
+	//PlayerObject* player = new PlayerObject();
+	//player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0) ));
+	//mBaseObject.push_back(player);
+	//enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 0, 0, 100, 64, 4, 1.0)));
+	//mBaseObject.push_back(enemy);
 
 	m_bRunning = true;
+	mFSM = new FiniteStateMachine();
+	mFSM->pushState(new HomeState());
 }
 
 void GameManager::takeInput()
@@ -116,24 +120,20 @@ void GameManager::takeInput()
 			break;
 		}
 	}
+
 }
 
 void GameManager::processData()
 {
-	for (BaseObject* obj : mBaseObject)
-	{
-		obj->processData();
-	}
+	InputManager::getInstance()->takeInput();
+	mFSM->processData();
 }
 
 void GameManager::renderWindows()
 {
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
 
-	for (BaseObject* obj : mBaseObject)
-	{
-		obj->renderObject();
-	}
+	mFSM->renderState();
 
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
@@ -146,10 +146,6 @@ void GameManager::quitGame()
 void GameManager::clearGame()
 {
 	std::cout << "clearing game...\n";
-	for (BaseObject* obj : mBaseObject)
-	{
-		obj->clearObject();
-	}
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

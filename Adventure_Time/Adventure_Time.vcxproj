@@ -137,7 +137,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionMachine.cpp" />
     <ClCompile Include="ActionModel.cpp" />
+    <ClCompile Include="BaseAction.cpp" />
+    <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="HomeState.cpp" />
@@ -152,7 +155,10 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionMachine.h" />
     <ClInclude Include="ActionModel.h" />
+    <ClInclude Include="BaseAction.h" />
+    <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />

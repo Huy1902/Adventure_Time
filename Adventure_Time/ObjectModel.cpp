@@ -14,7 +14,7 @@ ObjectModel::ObjectModel() :
 	mNumFrames(0),
 	mScope(1.0),
 	mCurrentAction(nullptr),
-	m_bRight(false)
+	m_bRight(true)
 {
 
 }
