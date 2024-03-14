@@ -33,6 +33,8 @@ public:
 		}
 		return s_pInstance;
 	}
+
+	void resetState();
 private:
 	static InputManager* s_pInstance;
 

@@ -21,19 +21,12 @@ public:
 
 protected:
 	std::string mTextureID;
-
-	GameVector mPosition;
-	GameSize mSize;
-	GameVector mVelocity;
-	GameVector mAcceleration;
-	
-	bool m_bRight;
+	GameVector* mPosition;
+	int mWidth;
+	int mHeight;
 	int mIndexFrames;
 	int mNumFrames;
 	double mScope;
-
-	std::map<std::string, ActionModel*> mActionMap;
-	ActionModel* mCurrentAction;
 };
 
 #endif

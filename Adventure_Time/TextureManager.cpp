@@ -55,3 +55,8 @@ void TextureManager::drawSpritePic(const std::string& id, int x, int y,
 
 	SDL_RenderCopyEx(pRenderer, mTexture[id], &srcRect, &destRect, a, c, f);
 }
+
+void TextureManager::clearFromTexture(const std::string& id)
+{
+	mTexture.erase(id);
+}

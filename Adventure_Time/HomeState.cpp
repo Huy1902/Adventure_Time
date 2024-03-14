@@ -1,11 +1,16 @@
 #include "HomeState.h"
+
 #include "GameManager.h"
+#include "ObjectModel.h"
+#include "TextureManager.h"
+#include "ButtonModel.h"
+#include "PlayingState.h"
 
 const std::string  HomeState::m_sHomeID = "HOME";
 
 void HomeState::m_sHomeToPlay()
 {
-	//GameManager::getInstance()->getFSM()->changeState(new PlayState());
+	GameManager::getInstance()->getFSM()->changeState(new PlayingState());
 }
 
 void HomeState::m_sExitHome()
@@ -30,7 +35,14 @@ void HomeState::renderState()
 
 bool HomeState::startState()
 {
+	TextureManager::getInstance()->load("assets/play_button.png", "play_button", GameManager::getInstance()->getRenderer());
 
+	ButtonModel* play = new ButtonModel();
+	play->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("play_button", 300, 300, 250, 80, 3, 1.0)));
+	play->setCallback(m_sHomeToPlay);
+
+	mObjects.push_back(play);
+	return true;
 }
 bool HomeState::exitState()
 {
@@ -39,5 +51,5 @@ bool HomeState::exitState()
 		mObjects[i]->clearObject();
 	}
 	mObjects.clear();
-
+	return true;
 }

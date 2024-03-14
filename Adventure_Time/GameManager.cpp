@@ -16,6 +16,8 @@
 #include "TextureLoader.h"
 #include "EnemyObject.h"
 #include "PlayerObject.h"
+#include "HomeState.h"
+#include "InputManager.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -84,25 +86,17 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	}
 
 	cout << "Load image...\n";
-	TextureManager::getInstance()->load("assets/main_character/vagabond_attack_Sheet.png", "attack", m_pRenderer);
-	//TextureManager::getInstance()->load("assets/main_character/vagabond_run_Sheet.png", "run", m_pRenderer);
-	TextureManager::getInstance()->load("assets/knight_player/Walking_KG_1.png", "walk", m_pRenderer);
-	//TextureManager::getInstance()->load("assets/main_character/vagabond_jump_Sheet.png", "jump", m_pRenderer);
-	TextureManager::getInstance()->load("assets/knight_player/Jump_KG_1.png", "jump", m_pRenderer);
-	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_1.png", "idle", m_pRenderer);
 
-	EnemyObject* enemy = new EnemyObject();
-	PlayerObject* player = new PlayerObject();
-	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0) ));
-	mBaseObject.push_back(player);
-	enemy->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 0, 0, 100, 64, 4, 1.0)));
-	mBaseObject.push_back(enemy);
+
+	mFSM = new FiniteStateMachine();
+	mFSM->pushState(new HomeState());
 
 	m_bRunning = true;
 }
 
 void GameManager::takeInput()
 {
+	InputManager::getInstance()->takeInput();
 	SDL_Event event;
 	if (SDL_PollEvent(&event))
 	{
@@ -120,20 +114,14 @@ void GameManager::takeInput()
 
 void GameManager::processData()
 {
-	for (BaseObject* obj : mBaseObject)
-	{
-		obj->processData();
-	}
+	mFSM->processData();
 }
 
 void GameManager::renderWindows()
 {
 	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
 
-	for (BaseObject* obj : mBaseObject)
-	{
-		obj->renderObject();
-	}
+	mFSM->renderState();
 
 	SDL_RenderPresent(m_pRenderer); // draw to the screen
 }

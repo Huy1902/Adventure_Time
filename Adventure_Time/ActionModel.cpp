@@ -7,12 +7,6 @@
 
 ActionModel::ActionModel() :
 	BaseObject(),
-	mTextureID(""),
-	mIndexFrames(0),
-	mPosition({0, 0}),
-	mSize({ 0, 0 }),
-	mNumFrames(0),
-	mScope(0.0),
 	m_bRight(false),
 	m_bOnAir(false)
 {
@@ -27,9 +21,9 @@ ActionModel::~ActionModel()
 void ActionModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mTextureID = Info->getTextureID();
-	mPosition = std::make_pair(Info->getX(), Info->getY());
-	mSize.setH(Info->getHeight());
-	mSize.setW(Info->getWidth());
+	mPosition = new GameVector(Info->getX(), Info->getY());
+	mHeight = Info->getHeight();
+	mWidth = Info->getWidth();
 	mNumFrames = Info->getNumFrames();
 	mScope = Info->getScope();
 }
@@ -45,11 +39,11 @@ void ActionModel::processData()
 
 void ActionModel::renderObject() const
 {
-	int x = static_cast<int>(mPosition.getX());
-	int y = static_cast<int>(mPosition.getY());
+	int x = static_cast<int>(mPosition->getX());
+	int y = static_cast<int>(mPosition->getY());
 
 	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
-		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
+		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, mScope);
 }
 
 void ActionModel::clearObject()

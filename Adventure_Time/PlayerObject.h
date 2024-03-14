@@ -16,6 +16,16 @@ public:
 
 private:
 	bool m_bOnAir;
+
+
+	GameVector* mVelocity;
+	GameVector* mAcceleration;
+
+	bool m_bRight;
+
+
+	std::map<std::string, ActionModel*> mActionMap;
+	ActionModel* mCurrentAction;
 };
 
 #endif

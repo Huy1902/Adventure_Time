@@ -6,15 +6,7 @@
 #include "GameManager.h"
 
 ObjectModel::ObjectModel() :
-	BaseObject(),
-	mTextureID(""),
-	mIndexFrames(0),
-	mSize({0, 0}),
-	mPosition({ 0, 0 }),
-	mNumFrames(0),
-	mScope(1.0),
-	mCurrentAction(nullptr),
-	m_bRight(false)
+	BaseObject()
 {
 
 }
@@ -27,9 +19,9 @@ ObjectModel::~ObjectModel()
 void ObjectModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mTextureID = Info->getTextureID();
-	mPosition = std::make_pair(Info->getX() , Info->getY());
-	mSize.setH(Info->getHeight());
-	mSize.setW(Info->getWidth());
+	mPosition = new GameVector(Info->getX() , Info->getY());
+	mHeight = Info->getHeight();
+	mWidth = Info->getWidth();
 	mNumFrames = Info->getNumFrames();
 	mScope = Info->getScope();
 }
@@ -45,21 +37,11 @@ void ObjectModel::processData()
 
 void ObjectModel::renderObject() const
 {
-	int x = static_cast<int>(mPosition.getX());
-	int y = static_cast<int>(mPosition.getY());
-
-	SDL_RendererFlip flip = SDL_FLIP_NONE;
-	if (m_bRight == true)
-	{
-		flip = SDL_FLIP_NONE;
-	}
-	else
-	{
-		flip = SDL_FLIP_HORIZONTAL;
-	}
+	int x = static_cast<int>(mPosition->getX());
+	int y = static_cast<int>(mPosition->getY());
 
 	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
-		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
+		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, SDL_FLIP_NONE);
 }
 
 void ObjectModel::clearObject()

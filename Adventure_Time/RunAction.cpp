@@ -29,8 +29,8 @@ void RunAction::processData()
 
 void RunAction::renderObject() const
 {
-	int x = static_cast<int>(mPosition.getX());
-	int y = static_cast<int>(mPosition.getY());
+	int x = static_cast<int>(mPosition->getX());
+	int y = static_cast<int>(mPosition->getY());
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 	if (m_bRight == true)
@@ -43,7 +43,7 @@ void RunAction::renderObject() const
 	}
 
 	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
-		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
+		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
 }
 
 void RunAction::clearObject()

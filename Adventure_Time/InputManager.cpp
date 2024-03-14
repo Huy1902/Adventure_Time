@@ -71,7 +71,8 @@ bool InputManager::keyDown(SDL_Scancode key)
 
 void InputManager::isMouseMove(SDL_Event& event)
 {
-	*mMousePosition = std::make_pair(event.motion.x, event.motion.y);
+	mMousePosition->setX(event.motion.x);
+	mMousePosition->setY(event.motion.y);
 }
 void InputManager::isMouseDown(SDL_Event& event)
 {
@@ -107,4 +108,11 @@ void InputManager::isMouseUp(SDL_Event& event)
 void InputManager::clearInput()
 {
 
+}
+
+void InputManager::resetState()
+{
+	mMouseButton[LEFT] = false;
+	mMouseButton[MIDDLE] = false;
+	mMouseButton[RIGHT] = false;
 }

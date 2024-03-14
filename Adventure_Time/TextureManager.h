@@ -33,6 +33,8 @@ public:
 	void drawSpritePic(const std::string& id, int x, int y,
 		int w, int h, SDL_Renderer* pRenderer = nullptr, int indexFrame = 0, double scope = 1.0,
 		SDL_RendererFlip f = SDL_FLIP_NONE, double a = 0.0, SDL_Point* c = NULL);
+
+	void clearFromTexture(const std::string & id);
 private:
 	static TextureManager* s_pInstance;
 

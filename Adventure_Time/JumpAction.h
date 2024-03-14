@@ -16,7 +16,7 @@ public:
 	virtual void clearObject();
 
 private:
-	GameVector mBasePosition;
+	GameVector* mBasePosition;
 	bool m_bMiddle;
 	int mCount;
 };

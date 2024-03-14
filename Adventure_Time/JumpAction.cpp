@@ -26,13 +26,13 @@ void JumpAction::processData()
 		m_bOnAir = true;
 		m_bMiddle = false;
 		mBasePosition = mPosition;
-		std::cout << mPosition.getY() << '\n';
+		std::cout << mPosition->getY() << '\n';
 		mCount = -3;
 		mIndexFrames = 0;
 	}
 	else
 	{
-		std::cout << mPosition.getY() << '\n';
+		std::cout << mPosition->getY() << '\n';
 		mCount += 3;
 		mIndexFrames = mCount / 4;
 		if (mIndexFrames == mNumFrames)
@@ -43,10 +43,10 @@ void JumpAction::processData()
 		//if(mIndexFrames >= )
 		//if (m_bMiddle == true)
 		//{
-		//	if (mPosition.getY() >= mBasePosition.getY() - 40)
+		//	if (mPosition->getY() >= mBasePosition.getY() - 40)
 		//	{
 		//		mIndexFrames = 2;
-		//		if (mPosition.getY() >= mBasePosition.getY())
+		//		if (mPosition->getY() >= mBasePosition.getY())
 		//		{
 		//			m_bOnAir = false;
 		//		}
@@ -55,7 +55,7 @@ void JumpAction::processData()
 		//}
 		//else 
 		//{
-		//	if (mPosition.getY() <= mBasePosition.getY() - 75)
+		//	if (mPosition->getY() <= mBasePosition.getY() - 75)
 		//	{
 		//		m_bMiddle = true;
 		//		mIndexFrames = 1;
@@ -66,8 +66,8 @@ void JumpAction::processData()
 
 void JumpAction::renderObject() const
 {
-	int x = static_cast<int>(mPosition.getX());
-	int y = static_cast<int>(mPosition.getY());
+	int x = static_cast<int>(mPosition->getX());
+	int y = static_cast<int>(mPosition->getY());
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 	if (m_bRight == true)
@@ -80,7 +80,7 @@ void JumpAction::renderObject() const
 	}
 
 	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
-		mSize.getW(), mSize.getH(), GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
+		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, flip);
 }
 
 void JumpAction::clearObject()

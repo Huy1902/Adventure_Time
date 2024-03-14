@@ -14,11 +14,11 @@ public:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
 	//update postition
-	virtual void setPos(double x_, double y_)
+	virtual void setPos(const GameVector& other)
 	{
-		mPosition = std::make_pair(x_, y_);
+		*mPosition = other;
 	}
-	GameVector getPos() const
+	GameVector* getPos() const
 	{
 		return mPosition;
 	}
@@ -41,8 +41,9 @@ public:
 protected:
 	std::string mTextureID;
 
-	GameSize mSize;
-	GameVector mPosition;
+	int mHeight;
+	int mWidth;
+	GameVector* mPosition;
 	int mIndexFrames;
 	int mNumFrames;
 	double mScope;
