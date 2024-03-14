@@ -92,8 +92,6 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	mFSM->pushState(new HomeState());
 
 	m_bRunning = true;
-	mFSM = new FiniteStateMachine();
-	mFSM->pushState(new HomeState());
 }
 
 void GameManager::takeInput()
@@ -112,14 +110,11 @@ void GameManager::takeInput()
 			break;
 		}
 	}
-
 }
 
 void GameManager::processData()
 {
 	mFSM->processData();
-		obj->processData();
-	}
 }
 
 void GameManager::renderWindows()
@@ -139,6 +134,10 @@ void GameManager::quitGame()
 void GameManager::clearGame()
 {
 	std::cout << "clearing game...\n";
+	for (BaseObject* obj : mBaseObject)
+	{
+		obj->clearObject();
+	}
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

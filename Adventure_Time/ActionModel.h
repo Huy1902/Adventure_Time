@@ -1,21 +1,17 @@
 #ifndef ACTIONMODEL_H_
 #define ACTIONMODEL_H_
 
-#include "BaseAction.h"
+#include "BaseObject.h"
+#include "GameVector.h"
 
 class ActionModel :
-	public BaseAction
+    public BaseObject
 {
 public:
 	ActionModel();
 	~ActionModel();
 
-	virtual void setCallback(void(*callback)()) { mCallback = callback; }
-	virtual void processData();
-	virtual void renderAction();
-	virtual bool onEnter();
-	virtual bool onExit();
-	std::string getActionID() const { return mActionID; }
+	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
 	//update postition
 	virtual void setPos(const GameVector& other)
@@ -50,11 +46,9 @@ protected:
 	GameVector* mPosition;
 	int mIndexFrames;
 	int mNumFrames;
-
-	GameVector* mPosition;
-
-	int mWidth;
-	int mHeight;
-
+	double mScope;
+	bool m_bRight;
+	bool m_bOnAir;
 };
+
 #endif

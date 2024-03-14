@@ -55,6 +55,8 @@ private:
 	int mWidthWindows;
 	int mHeightWindows;
 
+	std::vector<BaseObject*> mBaseObject;
+
 	FiniteStateMachine* mFSM;
 
 	GameManager();

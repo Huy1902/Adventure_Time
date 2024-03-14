@@ -8,21 +8,17 @@ public:
 	RunAction();
 	~RunAction();
 
+	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
-	virtual void setCallback(void(*callback)()) { mCallback = callback; }
 	virtual void processData();
-	virtual void renderAction();
-	virtual bool onEnter();
-	virtual bool onExit();
-	std::string getActionID() const { return mActionID; }
+	virtual void renderObject() const;
+	virtual void clearObject();
+
+	virtual void setRightMove(bool b_)
+	{
+		m_bRight = b_;
+	}
 private:
-	void mFromRunToJump();
-	void mFromRunToDash();
-	void mFromRunToIdle();
-
-	GameVector* mVelocity;
-
-	std::string mTextureID;
 };
 
 #endif
