@@ -15,7 +15,7 @@ void ButtonModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 }
 
 void ButtonModel::processData()
-{
+{ 
 	GameVector* pMousePos = InputManager::getInstance()->getMousePosition();
 	if (pMousePos->getX() <= mPosition->getX() + mWidth
 		&& pMousePos->getX() >= mPosition->getX()
