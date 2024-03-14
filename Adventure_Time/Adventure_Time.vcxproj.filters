@@ -33,6 +33,12 @@
     <Filter Include="Header Files\NewType">
       <UniqueIdentifier>{9048d5be-9678-4749-926d-333c2170fba6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Action">
+      <UniqueIdentifier>{8113d04a-59d9-4863-9080-eee07c48efb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\State">
+      <UniqueIdentifier>{c62eae7f-7aa4-421a-8e13-82c48691a19f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +80,15 @@
     <ClCompile Include="HomeState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ButtonModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionMachine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -88,9 +103,6 @@
     <ClInclude Include="EnemyObject.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectModel.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="BaseObject.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
@@ -103,25 +115,37 @@
     <ClInclude Include="GameVector.h">
       <Filter>Header Files\NewType</Filter>
     </ClInclude>
-    <ClInclude Include="ActionModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RunAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Constant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FiniteStateMachine.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ActionModel.h">
+      <Filter>Header Files\Action</Filter>
     </ClInclude>
-    <ClInclude Include="BaseState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="RunAction.h">
+      <Filter>Header Files\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAction.h">
+      <Filter>Header Files\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateMachine.h">
+      <Filter>Header Files\State</Filter>
     </ClInclude>
     <ClInclude Include="HomeState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonModel.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
