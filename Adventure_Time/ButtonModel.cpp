@@ -25,6 +25,7 @@ void ButtonModel::processData()
 	{
 		if (InputManager::getInstance()->getMouseButton(LEFT))
 		{
+
 			mIndexFrames = CLICKED;
 			mCallback();
 			m_bReleased = false;
