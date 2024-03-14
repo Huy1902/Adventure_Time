@@ -1,24 +1,32 @@
 #include "PlayingState.h"
 
 #include "GameManager.h"
-#include "ObjectModel.h"
 #include "TextureManager.h"
+#include "InputManager.h"
+
 #include "PlayerObject.h"
 
-const std::string  PlayingState::m_sPlaying = "PLAING";
+#include "PauseState.h"
+#include "HomeState.h"
 
-void PlayingState::m_sHomeToPlay()
+const std::string  PlayingState::m_sPlaying = "PLAYING";
+
+void PlayingState::m_sPlayingToPause()
 {
-	//GameManager::getInstance()->getFSM()->changeState(new PlayState());
+	GameManager::getInstance()->getFSM()->pushState(new PauseState());
 }
 
-void PlayingState::m_sExitHome()
-{
-	GameManager::getInstance()->quitGame();
-}
+//void PlayingState::m_sPlayingToHome()
+//{
+//	GameManager::getInstance()->getFSM()->changeState(new HomeState());
+//}
 
 void PlayingState::processData()
 {
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_ESCAPE) == true)
+	{
+		m_sPlayingToPause();
+	}
 	for (size_t i = 0; i < mObjects.size(); ++i)
 	{
 		mObjects[i]->processData();

@@ -147,6 +147,7 @@
     <ClCompile Include="JumpAction.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="RunAction.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="JumpAction.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="RunAction.h" />

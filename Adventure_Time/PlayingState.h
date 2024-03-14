@@ -19,8 +19,8 @@ public:
 private:
     static const std::string m_sPlaying;
     std::vector<ObjectModel*> mObjects;
-    static void m_sHomeToPlay();
-    static void m_sExitHome();
+    static void m_sPlayingToPause();
+    //static void m_sPlayingToHome();
 };
 
 
