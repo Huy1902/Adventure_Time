@@ -3,7 +3,8 @@
 Layer::Layer(const std::string& layerString, const int& numRow, const int& numCol, const int& tileSize) :
 	mNumRow(numRow),
 	mNumCol(numCol),
-	mTileSize(tileSize)
+	mTileSize(tileSize),
+	m_pTileset(nullptr)
 {
 	mGrid.resize(numRow);
 	for (int i = 0; i < numRow; ++i)
@@ -24,7 +25,7 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 					++k;
 				}
 				mGrid[i][j] = std::stoi(temp) - 1;
-				std::cout << mGrid[i][j] << ' ';
+				//std::cout << mGrid[i][j] << ' ';
 			}
 			else
 			{
@@ -48,4 +49,13 @@ void Layer::renderLayer()
 			}
 		}
 	}
+}
+
+Layer::~Layer()
+{
+	for (int i = 0; i < mGrid.size(); ++i)
+	{
+		mGrid[i].clear();
+	}
+	mGrid.clear();
 }

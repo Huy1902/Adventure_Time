@@ -4,6 +4,8 @@
 #include <string>
 
 #include "Tileset.h"
+#include "GameVector.h"
+
 
 class Layer
 {
@@ -16,11 +18,15 @@ public:
 	{
 		m_pTileset = pTileSet;
 	}
+	void updateLayer();
 private:
 	std::vector<std::vector<int>> mGrid;
 	int mNumRow;
 	int mNumCol;
 	int mTileSize;
 	Tileset* m_pTileset;
+
+	GameVector mPosition;
+	GameVector mVelocity;
 };
 

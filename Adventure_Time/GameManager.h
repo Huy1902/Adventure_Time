@@ -11,6 +11,26 @@
 #include "BaseObject.h"
 #include "FiniteStateMachine.h"
 
+struct TileInfo
+{
+	std::string filePath;
+	int tileSize;
+	int tileWidth;
+	int tileHeight;
+	std::string fileName;
+	std::vector<int> ground;
+
+	TileInfo(const std::string& filePath_, const std::string & fileName_, int tileSize_, int tileWidth_, int tileHeight_) :
+		filePath(filePath_),
+		fileName(fileName_),
+		tileSize(tileSize_),
+		tileWidth(tileWidth_),
+		tileHeight(tileHeight_)
+	{
+
+	}
+};
+
 class GameManager
 {
 public:
@@ -44,6 +64,11 @@ public:
 
 	FiniteStateMachine* getFSM() { return mFSM; }
 
+	std::vector<TileInfo*>* getTileInfo()
+	{
+		return &mTileSet;
+	}
+
 private:
 	static GameManager* s_pInstance;
 	bool m_bRunning;
@@ -56,6 +81,7 @@ private:
 	int mHeightWindows;
 
 	std::vector<BaseObject*> mBaseObject;
+	std::vector<TileInfo*> mTileSet;
 
 	FiniteStateMachine* mFSM;
 

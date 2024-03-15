@@ -157,6 +157,7 @@
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tileset.cpp" />
+    <ClCompile Include="TileSetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionModel.h" />
@@ -182,8 +183,10 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tileset.h" />
+    <ClInclude Include="TileSetManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="map1.txt" />
     <Text Include="maplayer1.txt" />
     <Text Include="maplayer2.txt" />
     <Text Include="maplayer3.txt" />

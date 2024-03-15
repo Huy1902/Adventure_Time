@@ -7,10 +7,13 @@
 class Map
 {
 public:
+	Map();
+	void loadMap(const std::string& fileMap, const std::string& tileSetID);
+	void renderMap();
+
 private:
 	std::vector<Layer*> mLayer;
 	Tileset* mTileSet;
-
 };
 
 #endif
