@@ -15,15 +15,18 @@ int main(int argc, char* args[])
 	int begin_frame, time_frame;
 	GameManager::getInstance()->initGame("Test", 300, 300, 1280, 768);
 
-
-	
-	SDL_RenderClear(GameManager::getInstance()->getRenderer()); // clear the renderer to the draw color
-
 	Map* new_map = new Map();
 	new_map->loadMap("map1.txt", "tileset1");
-	new_map->renderMap();
+	while (1)
+	{
+		SDL_RenderClear(GameManager::getInstance()->getRenderer()); // clear the renderer to the draw color
+		new_map->updateMap();
+		new_map->renderMap();
 
-	SDL_RenderPresent(GameManager::getInstance()->getRenderer()); // draw to the screen
+		SDL_RenderPresent(GameManager::getInstance()->getRenderer()); // draw to the screen
+		SDL_Delay(10);
+	}
+
 
 	system("pause");
 

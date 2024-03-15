@@ -1,5 +1,9 @@
 #include "Layer.h"
 #include <iostream>
+
+const int WINDOWS_ROW = 24;
+const int WINDOWS_COL = 40;
+
 Layer::Layer(const std::string& layerString, const int& numRow, const int& numCol, const int& tileSize) :
 	mNumRow(numRow),
 	mNumCol(numCol),
@@ -35,17 +39,26 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 		}
 		std::cout << '\n';
 	}
+	mVelocity.setX(1);
+	mPosition = { 0, 0 };
+}
+
+void Layer::updateLayer()
+{
+	mPosition += mVelocity;
 }
 
 void Layer::renderLayer()
 {
-	for (int i = 0; i < mNumRow; ++i)
+	int x = mPosition.getX() / mTileSize;
+	int y = mPosition.getY() / mTileSize;
+	for (int i = 0; i < WINDOWS_ROW; ++i)
 	{
-		for (int j = 0; j < mNumCol; ++j)
+		for (int j = 0; j < WINDOWS_COL; ++j)
 		{
-			if (mGrid[i][j] != -1)
+			if (mGrid[i + y][j + x] != -1)
 			{
-				m_pTileset->renderTile(mGrid[i][j], j * mTileSize, i * mTileSize);
+				m_pTileset->renderTile(mGrid[i + y][j + x], j * mTileSize, i * mTileSize);
 			}
 		}
 	}

@@ -9,6 +9,8 @@ class Map
 public:
 	Map();
 	void loadMap(const std::string& fileMap, const std::string& tileSetID);
+
+	void updateMap();
 	void renderMap();
 
 private:
