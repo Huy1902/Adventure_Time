@@ -11,6 +11,7 @@ ButtonModel::ButtonModel() :
 
 void ButtonModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
+	mCallbackID = Info->getCallbackID();
 	ObjectModel::loadTexture(std::move(Info));
 }
 

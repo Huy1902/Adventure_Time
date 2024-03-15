@@ -9,6 +9,8 @@
 #include "PauseState.h"
 #include "HomeState.h"
 
+#include "ButtonModel.h"
+
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
 void PlayingState::m_sPlayingToPause()
@@ -27,16 +29,26 @@ void PlayingState::processData()
 	{
 		m_sPlayingToPause();
 	}
-	for (size_t i = 0; i < mObjects.size(); ++i)
+	if (mObjects.empty() == false)
 	{
-		mObjects[i]->processData();
+		for (int i = 0; i < mObjects.size(); ++i)
+		{
+			mObjects[i]->processData();
+			if (mObjects.empty())
+			{
+				break;
+			}
+		}
 	}
 }
 void PlayingState::renderState()
 {
-	for (size_t i = 0; i < mObjects.size(); ++i)
+	if (mObjects.empty() == false)
 	{
-		mObjects[i]->renderObject();
+		for (size_t i = 0; i < mObjects.size(); ++i)
+		{
+			mObjects[i]->renderObject();
+		}
 	}
 }
 
@@ -56,6 +68,7 @@ bool PlayingState::exitState()
 	for (size_t i = 0; i < mObjects.size(); ++i)
 	{
 		mObjects[i]->clearObject();
+		delete mObjects[i];
 	}
 	mObjects.clear();
 	return true;

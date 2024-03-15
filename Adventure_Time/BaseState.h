@@ -3,6 +3,9 @@
 
 #include <string>
 
+#include <vector>
+#include "ObjectModel.h"
+
 class BaseState
 {
 public:

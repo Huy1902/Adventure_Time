@@ -11,6 +11,10 @@ public:
 
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	void setCallback(void(*callback)()) { mCallback = callback; }
+	int getCallbackID() const
+	{
+		return mCallbackID;
+	}
 
 	virtual void processData();
 	virtual void renderObject() const;
@@ -26,6 +30,7 @@ private:
 
 	void(*mCallback)();
 	bool m_bReleased;
+	int mCallbackID;
 };
 
 #endif //BUTTONMODEL_H_

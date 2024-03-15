@@ -20,5 +20,6 @@ private:
     std::vector<ObjectModel*> mObjects;
     static void m_sPauseToPlay();
     static void m_sPauseToHome();
+
 };
 

@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActionModel.cpp" />
+    <ClCompile Include="ActionParser.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
@@ -145,6 +146,8 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JumpAction.cpp" />
+    <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -153,9 +156,11 @@
     <ClCompile Include="RunAction.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Tileset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionModel.h" />
+    <ClInclude Include="ActionParser.h" />
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
@@ -165,6 +170,8 @@
     <ClInclude Include="GameVector.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="JumpAction.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="PauseState.h" />
@@ -174,6 +181,13 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Tileset.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="maplayer1.txt" />
+    <Text Include="maplayer2.txt" />
+    <Text Include="maplayer3.txt" />
+    <Text Include="out.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

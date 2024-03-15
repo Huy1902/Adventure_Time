@@ -14,16 +14,9 @@ PlayerObject::PlayerObject() :
 	TextureManager::getInstance()->load("assets/knight_player/Walking_KG_1.png", "walk", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/knight_player/Jump_KG_1.png", "jump", GameManager::getInstance()->getRenderer());
 	mVelocity = new GameVector();
-	mPosition = new GameVector(600, 0);
+	mPosition = new GameVector();
 	mAcceleration = new GameVector();
-	RunAction* walk = new RunAction();
-	walk->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("walk", (int)mPosition->getX(), (int)mPosition->getY(), 100, 64, 7, 1.0)));
-	mActionMap["walk"] = walk;
 
-	JumpAction* jump = new JumpAction();
-	jump->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("jump", (int)mPosition->getX(), (int)mPosition->getY(), 100, 64, 6, 1.0)));
-	mActionMap["jump"] = jump;
-	mCurrentAction = mActionMap["jump"];
 }
 
 PlayerObject::~PlayerObject()
@@ -34,6 +27,14 @@ PlayerObject::~PlayerObject()
 void PlayerObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	ObjectModel::loadTexture(std::move(Info));
+	RunAction* walk = new RunAction();
+	walk->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("walk", (int)mPosition->getX(), (int)mPosition->getY(), 100, 64, 7, 1.0)));
+	mActionMap["walk"] = walk;
+
+	JumpAction* jump = new JumpAction();
+	jump->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("jump", (int)mPosition->getX(), (int)mPosition->getY(), 100, 64, 6, 1.0)));
+	mActionMap["jump"] = jump;
+	mCurrentAction = mActionMap["jump"];
 }
 
 void PlayerObject::processData()

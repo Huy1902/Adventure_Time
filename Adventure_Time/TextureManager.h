@@ -35,6 +35,8 @@ public:
 		SDL_RendererFlip f = SDL_FLIP_NONE, double a = 0.0, SDL_Point* c = NULL);
 
 	void clearFromTexture(const std::string & id);
+
+	SDL_Texture* getTexture(const std::string & id) { return mTexture[id]; }
 private:
 	static TextureManager* s_pInstance;
 

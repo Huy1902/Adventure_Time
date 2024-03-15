@@ -20,16 +20,26 @@ void HomeState::m_sExitHome()
 
 void HomeState::processData()
 {
-	for (size_t i = 0; i < mObjects.size(); ++i)
+	if (!mObjects.empty())
 	{
-		mObjects[i]->processData();
+		for (ObjectModel* ite: mObjects)
+		{
+			ite->processData();
+			if (mObjects.empty())
+			{
+				break;
+			}
+		}
 	}
 }
 void HomeState::renderState()
 {
-	for (size_t i = 0; i < mObjects.size(); ++i)
+	if (mObjects.empty() == false)
 	{
-		mObjects[i]->renderObject();
+		for (size_t i = 0; i < mObjects.size(); ++i)
+		{
+			mObjects[i]->renderObject();
+		}
 	}
 }
 
@@ -41,6 +51,7 @@ bool HomeState::startState()
 	play->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("play_button", 300, 300, 250, 80, 3, 1.0)));
 	play->setCallback(m_sHomeToPlay);
 
+
 	mObjects.push_back(play);
 	return true;
 }
@@ -49,6 +60,7 @@ bool HomeState::exitState()
 	for (size_t i = 0; i < mObjects.size(); ++i)
 	{
 		mObjects[i]->clearObject();
+		delete mObjects[i];
 	}
 	mObjects.clear();
 	return true;

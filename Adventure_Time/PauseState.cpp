@@ -23,16 +23,26 @@ void PauseState::m_sPauseToPlay()
 
 void PauseState::processData()
 {
-	for (size_t i = 0; i < mObjects.size(); ++i)
+	if (!mObjects.empty())
 	{
-		mObjects[i]->processData();
+		for (ObjectModel* ite : mObjects)
+		{
+			ite->processData();
+			if (mObjects.empty())
+			{
+				break;
+			}
+		}
 	}
 }
 void PauseState::renderState()
 {
-	for (size_t i = 0; i < mObjects.size(); ++i)
+	if (mObjects.empty() == false)
 	{
-		mObjects[i]->renderObject();
+		for (size_t i = 0; i < mObjects.size(); ++i)
+		{
+			mObjects[i]->renderObject();
+		}
 	}
 }
 
@@ -52,6 +62,7 @@ bool PauseState::startState()
 
 	mObjects.push_back(resume);
 	mObjects.push_back(exit);
+
 	return true;
 }
 bool PauseState::exitState()
@@ -59,6 +70,7 @@ bool PauseState::exitState()
 	for (size_t i = 0; i < mObjects.size(); ++i)
 	{
 		mObjects[i]->clearObject();
+		delete mObjects[i];
 	}
 	mObjects.clear();
 	return true;
