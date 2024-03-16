@@ -37,7 +37,7 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 				--j;
 			}
 		}
-		std::cout << '\n';
+		//std::cout << '\n';
 	}
 	mVelocity = new GameVector(0, 0);
 	mPosition = new GameVector(0, 0);

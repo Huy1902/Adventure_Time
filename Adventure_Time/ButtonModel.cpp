@@ -33,7 +33,6 @@ void ButtonModel::processData()
 		}
 		else
 		{
-			std::cout << "Yes\n";
 			mIndexFrames = MOUSE_OVER;
 		}
 	}

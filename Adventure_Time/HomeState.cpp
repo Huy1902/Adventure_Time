@@ -22,13 +22,9 @@ void HomeState::processData()
 {
 	if (!mObjects.empty())
 	{
-		for (ObjectModel* ite: mObjects)
+		for (size_t i = 0; i < mObjects.size(); ++i)
 		{
-			if (mObjects.empty())
-			{
-				break;
-			}
-			ite->processData();
+			mObjects[i]->processData();
 		}
 	}
 }
@@ -76,5 +72,6 @@ bool HomeState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
+
 	return true;
 }

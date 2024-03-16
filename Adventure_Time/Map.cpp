@@ -52,7 +52,8 @@ void Map::updateMap()
 	mPlayer->processData();
 	for (Layer* ite : mLayer)
 	{
-		ite->setVelocity(*mPlayer->getVelocity());
+		ite->setVelocityX(mPlayer->getVelocity()->getX() / 2);
+		//ite->setVelocity(*mPlayer->getVelocity());
 		ite->updateLayer();
 	}
 }

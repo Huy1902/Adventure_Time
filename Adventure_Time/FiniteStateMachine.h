@@ -21,6 +21,13 @@ public:
 private:
 	std::vector<BaseState*> mStates;
 
+	BaseState* pState;
+	bool m_bPop;
+	bool m_bChange;
+
+	void pop();
+	void change();
+
 };
 
 #endif // FINITESTATEMACHINE_H_

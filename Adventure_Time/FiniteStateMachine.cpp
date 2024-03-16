@@ -14,8 +14,57 @@ void FiniteStateMachine::pushState(BaseState* pState)
 	mStates.back()->startState();
 }
 
-void FiniteStateMachine::changeState(BaseState* pState)
+void FiniteStateMachine::changeState(BaseState* newState)
 {
+	m_bChange = true;
+	pState = newState;
+}
+
+void FiniteStateMachine::popState()
+{
+	m_bPop = true;
+}
+
+void FiniteStateMachine::processData()
+{
+	if (mStates.empty() == false)
+	{
+		mStates.back()->processData();
+	}
+	if (m_bChange == true)
+	{
+		change();
+		m_bChange = false;
+	}
+	if (m_bPop == true)
+	{
+		pop();
+		m_bPop = false;
+	}
+}
+
+void FiniteStateMachine::renderState()
+{
+	if (mStates.empty() == false)
+	{
+		mStates.back()->renderState();
+	}
+}
+
+void FiniteStateMachine::pop()
+{
+	if (mStates.empty() == false)
+	{
+		if (mStates.back()->exitState())
+		{
+			delete mStates.back();
+			mStates.pop_back();
+		}
+	}
+}
+void FiniteStateMachine::change()
+{
+	//std::cout << mStates.size();
 	if (mStates.empty() == false)
 	{
 		if (mStates.back()->getStateID() != pState->getStateID())
@@ -43,32 +92,4 @@ void FiniteStateMachine::changeState(BaseState* pState)
 		}
 	}
 	InputManager::getInstance()->resetState();
-}
-
-void FiniteStateMachine::popState()
-{
-	if (mStates.empty() == false)
-	{
-		if (mStates.back()->exitState())
-		{
-			delete mStates.back();
-			mStates.pop_back();
-		}
-	}
-}
-
-void FiniteStateMachine::processData()
-{
-	if (mStates.empty() == false)
-	{
-		mStates.back()->processData();
-	}
-}
-
-void FiniteStateMachine::renderState()
-{
-	if (mStates.empty() == false)
-	{
-		mStates.back()->renderState();
-	}
 }

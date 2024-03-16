@@ -24,6 +24,14 @@ public:
 	{
 		*mVelocity = obj;
 	}
+	void setVelocityX(const double & x_)
+	{
+		mVelocity->setX(x_);
+	}
+	void setVelocityY(const double& y_)
+	{
+		mVelocity->setX(y_);
+	}
 private:
 	std::vector<std::vector<int>> mGrid;
 	int mNumRow;
