@@ -26,13 +26,13 @@ void JumpAction::processData()
 		m_bOnAir = true;
 		m_bMiddle = false;
 		mBasePosition = mPosition;
-		std::cout << mPosition->getY() << '\n';
+		//std::cout << mPosition->getY() << '\n';
 		mCount = -3;
 		mIndexFrames = 0;
 	}
 	else
 	{
-		std::cout << mPosition->getY() << '\n';
+		//std::cout << mPosition->getY() << '\n';
 		mCount += 3;
 		mIndexFrames = mCount / 4;
 		if (mIndexFrames == mNumFrames)

@@ -54,6 +54,12 @@ public:
 		mY -= other.mY;
 		return (*this);
 	}
+	GameVector& operator *=(const int& other)
+	{
+		mX *= other;
+		mY *= other;
+		return (*this);
+	}
 
 private:
 	double mX;

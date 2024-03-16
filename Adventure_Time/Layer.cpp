@@ -45,7 +45,7 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 
 void Layer::updateLayer()
 {
-	if ( (mPosition->getX() / mTileSize + WINDOWS_COL >= mNumCol && mVelocity->getX() > 0) || (mPosition->getX() == 0 && mVelocity->getX() < 0))
+	if ( (mPosition->getX() / mTileSize + WINDOWS_COL >= mNumCol && mVelocity->getX() > 0) || (mPosition->getX() <= 0 && mVelocity->getX() < 0))
 	{
 		mVelocity->setX(0);
 	}

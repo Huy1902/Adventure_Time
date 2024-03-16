@@ -158,6 +158,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TileSetManager.cpp" />
+    <ClCompile Include="ViewPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionModel.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TileSetManager.h" />
+    <ClInclude Include="ViewPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt" />

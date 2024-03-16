@@ -18,7 +18,26 @@ public:
 	{
 		return mVelocity;
 	}
-
+	GameVector* getPosition()
+	{
+		return mPosition;
+	}
+	void setPosition(const GameVector& obj)
+	{
+		*mPosition = obj;
+	}
+	void setPositionX(const double& val)
+	{
+		mPosition->setX(val);
+	}
+	void setVelocity(const GameVector& obj)
+	{
+		*mVelocity = obj;
+	}
+	void setVelocityX(const double& val)
+	{
+		mVelocity->setX(val);
+	}
 private:
 	bool m_bOnAir;
 

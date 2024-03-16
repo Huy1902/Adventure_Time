@@ -4,10 +4,12 @@
 #include <iostream>
 
 #include "TileSetManager.h"
+#include "GameManager.h"
 
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
 const int TILE_SIZE = 32;
+
 
 using namespace std;
 
@@ -50,9 +52,10 @@ void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
 void Map::updateMap()
 {
 	mPlayer->processData();
+	mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 	for (Layer* ite : mLayer)
 	{
-		ite->setVelocityX(mPlayer->getVelocity()->getX() / 2);
+		ite->setVelocityX(mPlayer->getVelocity()->getX());
 		//ite->setVelocity(*mPlayer->getVelocity());
 		ite->updateLayer();
 	}

@@ -89,9 +89,6 @@
     <ClCompile Include="RunAction.cpp">
       <Filter>Source Files\Action</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonModel.cpp">
-      <Filter>Source Files\State</Filter>
-    </ClCompile>
     <ClCompile Include="PlayingState.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
@@ -109,6 +106,12 @@
     </ClCompile>
     <ClCompile Include="TileSetManager.cpp">
       <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonModel.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +186,9 @@
     </ClInclude>
     <ClInclude Include="TileSetManager.h">
       <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewPoint.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

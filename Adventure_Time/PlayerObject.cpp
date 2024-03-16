@@ -45,13 +45,13 @@ void PlayerObject::processData()
 	{
 		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_A))
 		{
-			mVelocity->setX(-15);
+			mVelocity->setX(-MOVE_SPEED);
 			m_bRight = false;
 			mCurrentAction->setRightMove(m_bRight);
 		}
 		else if (InputManager::getInstance()->keyDown(SDL_SCANCODE_D))
 		{
-			mVelocity->setX(15);
+			mVelocity->setX(MOVE_SPEED);
 			m_bRight = true;
 			mCurrentAction->setRightMove(m_bRight);
 		}
