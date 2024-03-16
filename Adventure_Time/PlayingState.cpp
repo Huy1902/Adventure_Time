@@ -40,6 +40,7 @@ void PlayingState::processData()
 			}
 		}
 	}
+	mMap->updateMap();
 }
 void PlayingState::renderState()
 {
@@ -50,17 +51,20 @@ void PlayingState::renderState()
 			mObjects[i]->renderObject();
 		}
 	}
+	mMap->renderMap();
 }
 
 bool PlayingState::startState()
 {
 	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_1.png", "idle", GameManager::getInstance()->getRenderer());
+	mMap = new Map();
+	mMap->loadMap("map1.txt", "tileset1");
 
-	PlayerObject* player = new PlayerObject();
-	player->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0)));
+	mPlayer = new PlayerObject();
+	mPlayer->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 600, 100, 64, 4, 1.0)));
+	mMap->setPlayer(mPlayer);
 
-
-	mObjects.push_back(player);
+	//mObjects.push_back(player);
 	return true;
 }
 bool PlayingState::exitState()
@@ -70,6 +74,9 @@ bool PlayingState::exitState()
 		mObjects[i]->clearObject();
 		delete mObjects[i];
 	}
+	mTextureID.clear();
 	mObjects.clear();
+	delete mMap;
+	delete mPlayer;
 	return true;
 }

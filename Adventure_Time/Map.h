@@ -4,6 +4,8 @@
 #include "Tileset.h"
 #include "Layer.h"
 
+#include "PlayerObject.h"
+
 class Map
 {
 public:
@@ -13,9 +15,16 @@ public:
 	void updateMap();
 	void renderMap();
 
+	void setPlayer(PlayerObject* obj)
+	{
+		mPlayer = obj;
+	}
+
 private:
 	std::vector<Layer*> mLayer;
 	Tileset* mTileSet;
+
+	PlayerObject* mPlayer;
 };
 
 #endif

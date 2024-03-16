@@ -49,8 +49,10 @@ void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
 
 void Map::updateMap()
 {
+	mPlayer->processData();
 	for (Layer* ite : mLayer)
 	{
+		ite->setVelocity(*mPlayer->getVelocity());
 		ite->updateLayer();
 	}
 }
@@ -61,4 +63,5 @@ void Map::renderMap()
 	{
 		ite->renderLayer();
 	}
+	mPlayer->renderObject();
 }

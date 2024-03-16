@@ -62,6 +62,8 @@ bool PauseState::startState()
 
 	mObjects.push_back(resume);
 	mObjects.push_back(exit);
+	mTextureID.push_back("resume_button");
+	mTextureID.push_back("exit_button");
 
 	return true;
 }
@@ -72,6 +74,11 @@ bool PauseState::exitState()
 		mObjects[i]->clearObject();
 		delete mObjects[i];
 	}
+	for (size_t i = 0; i < mTextureID.size(); ++i)
+	{
+		TextureManager::getInstance()->clearFromTexture(mTextureID[i]);
+	}
+	mTextureID.clear();
 	mObjects.clear();
 	return true;
 }

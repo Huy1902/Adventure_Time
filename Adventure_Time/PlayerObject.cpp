@@ -7,6 +7,8 @@
 
 #include "TextureManager.h"
 
+const int MOVE_SPEED = 10;
+
 PlayerObject::PlayerObject() :
 	ObjectModel(),
 	m_bOnAir(false)
@@ -86,7 +88,7 @@ void PlayerObject::processData()
 		}
 		else if (InputManager::getInstance()->keyDown(SDL_SCANCODE_A))
 		{
-			mVelocity->setX(-15);
+			mVelocity->setX(-MOVE_SPEED);
 			mCurrentAction = mActionMap["walk"];
 			m_bRight = false;
 			mCurrentAction->setRightMove(m_bRight);
@@ -94,12 +96,13 @@ void PlayerObject::processData()
 		else if (InputManager::getInstance()->keyDown(SDL_SCANCODE_D))
 		{
 			mCurrentAction = mActionMap["walk"];
-			mVelocity->setX(15);
+			mVelocity->setX(MOVE_SPEED);
 			m_bRight = true;
 			mCurrentAction->setRightMove(m_bRight);
 		}
 		else
 		{
+			mVelocity->setX(0);
 			mCurrentAction = nullptr;
 			ObjectModel::processData();
 		}

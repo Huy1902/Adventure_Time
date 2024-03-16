@@ -2,8 +2,8 @@
 #define BASESTATE_H_
 
 #include <string>
-
 #include <vector>
+
 #include "ObjectModel.h"
 
 class BaseState
@@ -16,6 +16,10 @@ public:
 	virtual bool exitState() = 0;
 	
 	virtual std::string getStateID() const = 0;
+
+protected:
+	std::vector<ObjectModel*> mObjects;
+	std::vector<std::string> mTextureID;
 };
 
 #endif //BASESTATE_H_

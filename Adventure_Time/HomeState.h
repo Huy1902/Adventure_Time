@@ -17,8 +17,8 @@ public:
 
 private:
     static const std::string m_sHomeID;
-    std::vector<ObjectModel*> mObjects;
-    std::vector<std::string> textureID;
+    //std::vector<ObjectModel*> mObjects;
+    //std::vector<std::string> textureID;
     static void m_sHomeToPlay();
     static void m_sExitHome();
 };

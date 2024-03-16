@@ -187,10 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt" />
-    <Text Include="maplayer1.txt" />
-    <Text Include="maplayer2.txt" />
-    <Text Include="maplayer3.txt" />
-    <Text Include="out.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

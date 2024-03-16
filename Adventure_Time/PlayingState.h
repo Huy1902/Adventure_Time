@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "ObjectModel.h"
+#include "Map.h"
 
 class PlayingState :
     public BaseState
@@ -18,10 +19,12 @@ public:
 
 private:
     static const std::string m_sPlaying;
-    std::vector<ObjectModel*> mObjects;
-    static void m_sPlayingToPause();
-    //static void m_sPlayingToHome();
+    //std::vector<ObjectModel*> mObjects;
 
+    //static void m_sPlayingToHome();
+    static void m_sPlayingToPause();
+    Map* mMap;
+    PlayerObject* mPlayer;
 };
 
 

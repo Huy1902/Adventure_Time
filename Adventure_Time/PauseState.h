@@ -17,7 +17,9 @@ public:
 
 private:
     static const std::string m_sPause;
-    std::vector<ObjectModel*> mObjects;
+    //std::vector<ObjectModel*> mObjects;
+	//std::vector<std::string> mTextureID;
+
     static void m_sPauseToPlay();
     static void m_sPauseToHome();
 

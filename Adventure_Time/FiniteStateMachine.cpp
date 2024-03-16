@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "InputManager.h"
 FiniteStateMachine::FiniteStateMachine()
 {
 
@@ -19,25 +20,29 @@ void FiniteStateMachine::changeState(BaseState* pState)
 	{
 		if (mStates.back()->getStateID() != pState->getStateID())
 		{
-			if (mStates.back()->exitState())
+			while (mStates.empty() == false && mStates.back()->getStateID() != pState->getStateID())
 			{
-				delete mStates.back();
-				mStates.pop_back();
-				
-				//push new state
-				mStates.push_back(pState);
-				mStates.back()->startState();
+				if (mStates.back()->exitState())
+				{
+					delete mStates.back();
+					mStates.pop_back();
+				}
+				else
+				{
+					std::cout << "Delete failed\n";
+				}
 			}
-			else
-			{
-				std::cout << "Delete failed\n";
-			}
+			//push new state
+			mStates.push_back(pState);
+			mStates.back()->startState();
+
 		}
 		else
 		{
 			std::cout << "State change is same as state before\n";
 		}
 	}
+	InputManager::getInstance()->resetState();
 }
 
 void FiniteStateMachine::popState()

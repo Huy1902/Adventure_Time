@@ -19,6 +19,11 @@ public:
 		m_pTileset = pTileSet;
 	}
 	void updateLayer();
+
+	void setVelocity(const GameVector& obj)
+	{
+		*mVelocity = obj;
+	}
 private:
 	std::vector<std::vector<int>> mGrid;
 	int mNumRow;
@@ -26,7 +31,7 @@ private:
 	int mTileSize;
 	Tileset* m_pTileset;
 
-	GameVector mPosition;
-	GameVector mVelocity;
+	GameVector* mPosition;
+	GameVector* mVelocity;
 };
 

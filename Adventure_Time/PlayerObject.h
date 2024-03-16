@@ -14,6 +14,11 @@ public:
 	virtual void renderObject() const;
 	virtual void clearObject();
 
+	GameVector* getVelocity() 
+	{
+		return mVelocity;
+	}
+
 private:
 	bool m_bOnAir;
 

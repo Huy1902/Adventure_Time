@@ -186,10 +186,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="maplayer1.txt" />
-    <Text Include="out.txt" />
-    <Text Include="maplayer2.txt" />
-    <Text Include="maplayer3.txt" />
     <Text Include="map1.txt" />
   </ItemGroup>
 </Project>
