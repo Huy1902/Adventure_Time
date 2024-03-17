@@ -5,6 +5,7 @@
 #include "Layer.h"
 
 #include "PlayerObject.h"
+#include "GameVector.h"
 
 class Map
 {
@@ -25,6 +26,8 @@ private:
 	Tileset* mTileSet;
 
 	PlayerObject* mPlayer;
+
+	GameVector* mPosition;
 };
 
 #endif

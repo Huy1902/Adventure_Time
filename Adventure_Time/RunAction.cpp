@@ -20,11 +20,13 @@ void RunAction::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void RunAction::processData()
 {
-	++mIndexFrames;
+	static int count = 0;
+	mIndexFrames = (count % (mNumFrames *2)) / 2;
 	if (mIndexFrames == mNumFrames)
 	{
 		mIndexFrames = 0;
 	}
+	++count;
 }
 
 void RunAction::renderObject() const

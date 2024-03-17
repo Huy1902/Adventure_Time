@@ -20,17 +20,25 @@ public:
 	}
 	void updateLayer();
 
-	void setVelocity(const GameVector& obj)
+	//void setVelocity(const GameVector& obj)
+	//{
+	//	*mVelocity = obj;
+	//}
+	//void setVelocityX(const double & x_)
+	//{
+	//	mVelocity->setX(x_);
+	//}
+	//void setVelocityY(const double& y_)
+	//{
+	//	mVelocity->setX(y_);
+	//}
+	void setPosition(const GameVector& obj)
 	{
-		*mVelocity = obj;
+		*mPosition = obj;
 	}
-	void setVelocityX(const double & x_)
+	GameVector* getPosition()
 	{
-		mVelocity->setX(x_);
-	}
-	void setVelocityY(const double& y_)
-	{
-		mVelocity->setX(y_);
+		return mPosition;
 	}
 private:
 	std::vector<std::vector<int>> mGrid;
@@ -40,6 +48,5 @@ private:
 	Tileset* m_pTileset;
 
 	GameVector* mPosition;
-	GameVector* mVelocity;
 };
 

@@ -60,6 +60,10 @@ public:
 		mY *= other;
 		return (*this);
 	}
+	GameVector operator / (const int& other)
+	{
+		return GameVector(mX / other, mY / other);
+	}
 
 private:
 	double mX;

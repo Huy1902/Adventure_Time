@@ -39,21 +39,21 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 		}
 		//std::cout << '\n';
 	}
-	mVelocity = new GameVector(0, 0);
+	//mVelocity = new GameVector(0, 0);
 	mPosition = new GameVector(0, 0);
 }
 
 void Layer::updateLayer()
 {
-	if ( (mPosition->getX() / mTileSize + WINDOWS_COL >= mNumCol && mVelocity->getX() > 0) || (mPosition->getX() <= 0 && mVelocity->getX() < 0))
-	{
-		mVelocity->setX(0);
-	}
-	if (mPosition->getY() / mTileSize + WINDOWS_ROW >= mNumRow )
-	{
-		mVelocity->setY(0);
-	}
-	*mPosition += *mVelocity;
+	//if ( (mPosition->getX() / mTileSize + WINDOWS_COL >= mNumCol && mVelocity->getX() > 0) || (mPosition->getX() <= 0 && mVelocity->getX() < 0))
+	//{
+	//	mVelocity->setX(0);
+	//}
+	//if (mPosition->getY() / mTileSize + WINDOWS_ROW >= mNumRow )
+	//{
+	//	mVelocity->setY(0);
+	//}
+	//*mPosition += *mVelocity;
 }
 
 void Layer::renderLayer()
@@ -80,5 +80,4 @@ Layer::~Layer()
 	}
 	mGrid.clear();
 	delete mPosition;
-	delete mVelocity;
 }
