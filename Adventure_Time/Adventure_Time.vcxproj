@@ -139,7 +139,9 @@
   <ItemGroup>
     <ClCompile Include="ActionModel.cpp" />
     <ClCompile Include="ActionParser.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="HomeState.cpp" />
@@ -163,7 +165,9 @@
   <ItemGroup>
     <ClInclude Include="ActionModel.h" />
     <ClInclude Include="ActionParser.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="ButtonModel.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />

@@ -2,6 +2,7 @@
 #define GAMEVECTOR_H_
 
 #include <cmath>
+#include <iostream>
 
 class GameVector
 {

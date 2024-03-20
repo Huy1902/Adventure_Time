@@ -56,6 +56,19 @@ void Layer::updateLayer()
 	//*mPosition += *mVelocity;
 }
 
+int Layer::getID(int& x, int& y) const
+{
+
+
+	x = x / mTileSize;
+	y = y / mTileSize;
+	int x_p = mPosition->getX() / mTileSize + x;
+	int y_p = mPosition->getY() / mTileSize + y;
+
+	y = (y_p) * mTileSize;
+	return mGrid[y_p][x_p + 2];
+}
+
 void Layer::renderLayer()
 {
 	int x = mPosition->getX() / mTileSize;

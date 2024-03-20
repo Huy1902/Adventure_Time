@@ -16,10 +16,7 @@ public:
 	void updateMap();
 	void renderMap();
 
-	void setPlayer(PlayerObject* obj)
-	{
-		mPlayer = obj;
-	}
+	void setPlayer(PlayerObject* obj);
 
 private:
 	std::vector<Layer*> mLayer;

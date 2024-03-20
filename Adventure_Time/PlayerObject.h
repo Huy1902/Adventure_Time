@@ -2,6 +2,8 @@
 #define PLAYEROBJECT_H_
 #include "ObjectModel.h"
 
+#include <SDL.h>
+
 class PlayerObject :
     public ObjectModel
 {
@@ -30,6 +32,10 @@ public:
 	{
 		mPosition->setX(val);
 	}
+	void setPositionY(const double& val)
+	{
+		mPosition->setY(val);
+	}
 	void setVelocity(const GameVector& obj)
 	{
 		*mVelocity = obj;
@@ -38,9 +44,19 @@ public:
 	{
 		mVelocity->setX(val);
 	}
+	void setVelocityY(const double& val)
+	{
+		mVelocity->setY(val);
+	}
+	int getHeight()const 
+	{
+		return mCharHeight;
+	}
+	int getCharWidth() const
+	{
+		return mCharWidth;
+	}
 private:
-	bool m_bOnAir;
-
 
 	GameVector* mVelocity;
 	GameVector* mAcceleration;
@@ -49,7 +65,32 @@ private:
 
 
 	std::map<std::string, ActionModel*> mActionMap;
-	ActionModel* mCurrentAction;
+	//ActionModel* mCurrentAction;
+
+	int mCharHeight;
+	int mCharWidth;
+
+	bool onGround();
+	bool headStuck();
+
+	bool m_bHeadStuck;
+	bool m_bJump;
+	bool m_bRun;
+	bool m_bOnGround;
+	SDL_RendererFlip mFlip;
+
+	void AnimationProcess();
+
+	enum Action
+	{
+		RUN = 0,
+		JUMP = 1,
+		IDLE = 2,
+		FALL = 3
+	};
+
+	Action mCurrentAction;
+	Action mBackAction;
 };
 
 #endif

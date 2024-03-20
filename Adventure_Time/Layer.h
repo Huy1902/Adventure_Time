@@ -40,6 +40,7 @@ public:
 	{
 		return mPosition;
 	}
+	int getID(int &x, int& y) const;
 private:
 	std::vector<std::vector<int>> mGrid;
 	int mNumRow;

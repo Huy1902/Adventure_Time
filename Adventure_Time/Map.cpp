@@ -5,6 +5,7 @@
 
 #include "TileSetManager.h"
 #include "GameManager.h"
+#include "CollisionManager.h"
 
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
@@ -50,7 +51,15 @@ void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
 	{
 		cout << "Cannot open file map";
 	}
+	CollisionManager::getInstance()->setGround(mLayer.back());
 }
+
+void Map::setPlayer(PlayerObject* obj)
+{
+	CollisionManager::getInstance()->setPlayer(obj);
+	mPlayer = obj;
+}
+
 
 void Map::updateMap()
 {
