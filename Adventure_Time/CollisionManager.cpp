@@ -17,10 +17,14 @@ bool CollisionManager::checkPlayerOnGround()
 	return false;
 }
 
-bool CollisionManager::checkPlayerHeadStuck()
+bool CollisionManager::checkPlayerHeadStuck(bool Right)
 {
 	double x = mPlayer->getPosition()->getX();
 	double y = mPlayer->getPosition()->getY() - 10;
+	if (Right == false)
+	{
+		x = mPlayer->getPosition()->getX() - 5;
+	}
 	if (mGround->getID(x, y) != -1)
 	{
 		return true;

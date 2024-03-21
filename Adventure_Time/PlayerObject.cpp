@@ -265,7 +265,11 @@ bool PlayerObject::onGround()
 
 bool PlayerObject::headStuck()
 {
-	return CollisionManager::getInstance()->checkPlayerHeadStuck();
+	if (mFlip == SDL_FLIP_NONE)
+	{
+		return CollisionManager::getInstance()->checkPlayerHeadStuck(true);
+	}
+	return CollisionManager::getInstance()->checkPlayerHeadStuck(false);
 }
 
 int PlayerObject::sideStuck()

@@ -6,7 +6,7 @@ class CollisionManager
 {
 public:
 	bool checkPlayerOnGround();
-	bool checkPlayerHeadStuck();
+	bool checkPlayerHeadStuck(bool Right);
 	bool checkPlayerSideLeft();
 	bool checkPlayerSideRight();
 
