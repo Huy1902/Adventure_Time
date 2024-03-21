@@ -72,6 +72,7 @@ private:
 
 	bool onGround();
 	bool headStuck();
+	int sideStuck();
 
 	bool m_bHeadStuck;
 	bool m_bJump;

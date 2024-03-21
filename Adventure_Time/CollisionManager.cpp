@@ -4,11 +4,12 @@ CollisionManager* CollisionManager::s_pInstance = nullptr;
 
 bool CollisionManager::checkPlayerOnGround()
 {
-	int x = mPlayer->getPosition()->getX();
-	int y = mPlayer->getPosition()->getY();
+	double x = mPlayer->getPosition()->getX();
+	double y = mPlayer->getPosition()->getY();
 	y += mPlayer->getHeight();
 	if (mGround->getID(x, y) != -1)
 	{
+		mGround->optimizePositionY(y);
 		mPlayer->setPositionY(y - mPlayer->getHeight());
 		return true;
 	}
@@ -18,16 +19,37 @@ bool CollisionManager::checkPlayerOnGround()
 
 bool CollisionManager::checkPlayerHeadStuck()
 {
-	int x = mPlayer->getPosition()->getX();
-	int y = mPlayer->getPosition()->getY() - 30;
+	double x = mPlayer->getPosition()->getX();
+	double y = mPlayer->getPosition()->getY() - 10;
 	if (mGround->getID(x, y) != -1)
 	{
 		return true;
 	}
-	//y = mPlayer->getPosition()->getY() - 10;
-	//if (mGround->getID(x, y) != -1)
-	//{
-	//	return true;
-	//}
+	return false;
+}
+
+bool CollisionManager::checkPlayerSideLeft()
+{
+	double x = mPlayer->getPosition()->getX() - 32;
+	for (double y = mPlayer->getPosition()->getY(), range = y + mPlayer->getHeight(); y < range; y += 20)
+	{
+		if (mGround->getID(x, y) != -1)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CollisionManager::checkPlayerSideRight()
+{
+	double x = mPlayer->getPosition()->getX() + 32;
+	for (double y = mPlayer->getPosition()->getY(), range = y + mPlayer->getHeight(); y < range; y += 20)
+	{
+		if (mGround->getID(x, y) != -1)
+		{
+			return true;
+		}
+	}
 	return false;
 }

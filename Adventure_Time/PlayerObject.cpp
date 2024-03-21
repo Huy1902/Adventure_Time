@@ -176,28 +176,38 @@ void PlayerObject::processData()
 		mCurrentAction = RUN;
 	}
 
-			if (InputManager::getInstance()->keyDown(SDL_SCANCODE_K) && m_bOnGround == true && m_bHeadStuck == false)
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_K) && m_bOnGround == true && m_bHeadStuck == false)
+	{
+		m_bOnGround = false;
+		m_bJump = true;
+		mCurrentAction = JUMP;
+		mVelocity->setY(UP_FORCE);
+	}
+	else
+		if (m_bJump == false && m_bOnGround == false)
+		{
+			mCurrentAction = FALL;
+		}
+		else
+			if (m_bHeadStuck == true && m_bOnGround == false)
 			{
-				m_bOnGround = false;
-				m_bJump = true;
-				mCurrentAction = JUMP;
-				mVelocity->setY(UP_FORCE);
+				mVelocity->setY(0);
 			}
 			else
-				if (m_bJump == false && m_bOnGround == false)
+				if (m_bJump == true)
 				{
-					mCurrentAction = FALL;
+					mCurrentAction = JUMP;
 				}
-				else
-					if (m_bHeadStuck == true && m_bOnGround == false)
-					{
-						mVelocity->setY(0);
-					}
-					else
-						if (m_bJump == true)
-						{
-							mCurrentAction = JUMP;
-						}
+
+	if (sideStuck() == 1 && mVelocity->getX() < 0)
+	{
+		mVelocity->setX(0);
+	}
+	if (sideStuck() == 2 && mVelocity->getX() > 0)
+	{
+		mVelocity->setX(0);
+	}
+
 	AnimationProcess();
 
 	*mVelocity += *mAcceleration;
@@ -256,4 +266,18 @@ bool PlayerObject::onGround()
 bool PlayerObject::headStuck()
 {
 	return CollisionManager::getInstance()->checkPlayerHeadStuck();
+}
+
+int PlayerObject::sideStuck()
+{
+	if (CollisionManager::getInstance()->checkPlayerSideLeft() == true)
+	{
+		return 1;
+	}
+	else
+		if (CollisionManager::getInstance()->checkPlayerSideRight() == true)
+		{
+			return 2;
+		}
+	return 0;
 }

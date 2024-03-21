@@ -40,7 +40,8 @@ public:
 	{
 		return mPosition;
 	}
-	int getID(int &x, int& y) const;
+	int getID(const double &x, const double& y) const;
+	void optimizePositionY(double& y);
 private:
 	std::vector<std::vector<int>> mGrid;
 	int mNumRow;

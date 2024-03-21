@@ -7,6 +7,8 @@ class CollisionManager
 public:
 	bool checkPlayerOnGround();
 	bool checkPlayerHeadStuck();
+	bool checkPlayerSideLeft();
+	bool checkPlayerSideRight();
 
 	void setGround(Layer* obj)
 	{

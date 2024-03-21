@@ -56,17 +56,21 @@ void Layer::updateLayer()
 	//*mPosition += *mVelocity;
 }
 
-int Layer::getID(int& x, int& y) const
+int Layer::getID(const double& x, const double& y) const
 {
+	
+	//std::cout << x << ' ' << y << '\n';
+	
+	int x_p = floor(mPosition->getX() / mTileSize) + floor(x / mTileSize);
+	int y_p = floor(mPosition->getY() / mTileSize) + floor(y / mTileSize);
 
-
-	x = x / mTileSize;
-	y = y / mTileSize;
-	int x_p = mPosition->getX() / mTileSize + x;
-	int y_p = mPosition->getY() / mTileSize + y;
-
-	y = (y_p) * mTileSize;
 	return mGrid[y_p][x_p + 2];
+}
+
+void Layer::optimizePositionY(double& y)
+{
+	y = floor(y / mTileSize);
+	y = y * mTileSize;
 }
 
 void Layer::renderLayer()
