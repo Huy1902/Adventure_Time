@@ -2,10 +2,13 @@
 
 #include <fstream>
 #include <iostream>
+#include <queue>
 
 #include "TileSetManager.h"
 #include "GameManager.h"
 #include "CollisionManager.h"
+
+#include "BarrerKnight.h"
 
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
@@ -20,6 +23,8 @@ using namespace std;
 Map::Map()
 {
 	mPosition = new GameVector(0, 0);
+	BarrerKnight* obj1 = new BarrerKnight();
+	mEnemy.push_back(obj1);
 }
 
 void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
@@ -64,6 +69,28 @@ void Map::setPlayer(PlayerObject* obj)
 void Map::updateMap()
 {
 	mPlayer->processData();
+	static queue<bool> need_erase;
+	vector<EnemyObject*>::iterator ite = mEnemy.begin();
+	for (size_t i = 0; i < mEnemy.size(); ++i)
+	{
+		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(mEnemy[i]))
+		{
+			need_erase.push(i);
+		}
+		mEnemy[i]->processData();
+	}
+	while (ite != mEnemy.end())
+	{
+		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
+		{
+			delete* ite;
+			ite = mEnemy.erase(ite);
+		}
+		else
+		{
+			++ite;
+		}
+	}
 	//std::cout << mPosition->getX() << '\n';
 	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / TILE_SIZE >= MAP_WIDTH)
 	{
@@ -121,6 +148,15 @@ void Map::renderMap()
 	for (Layer* ite : mLayer)
 	{
 		ite->renderLayer();
+	}
+	for (size_t i = 0; i < mEnemy.size(); ++i)
+	{
+		//std::cout << mEnemy[i]->getPosition()->getX() << ' ' << mPosition->getX() << ' ' << mEnemy[i]->getPosition()->getX() << ' ' << mPosition->getX() + WIN_WIDTH << '\n';
+		if (mEnemy[i]->getPosition()->getX() > mPosition->getX() && mEnemy[i]->getPosition()->getX() < mPosition->getX() + WIN_WIDTH)
+		{
+			mEnemy[i]->setMapPosition(*mPosition);
+			mEnemy[i]->renderObject();
+		}
 	}
 	mPlayer->renderObject();
 }

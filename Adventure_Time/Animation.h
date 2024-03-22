@@ -24,18 +24,18 @@ public:
 		mSpeed = v;
 	}
 
-	static Animation* getInstance()
+	/*static Animation* getInstance()
 	{
 		if (s_pInstance == nullptr)
 		{
 			s_pInstance = new Animation();
 		}
 		return s_pInstance;
-	}
-private:
-	static Animation* s_pInstance;
-
+	}*/
 	Animation();
+private:
+	//static Animation* s_pInstance;
+
 	int mIndexFrame;
 	std::string mTextureID;
 	int mNumFrame;

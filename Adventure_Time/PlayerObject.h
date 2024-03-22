@@ -4,6 +4,8 @@
 
 #include <SDL.h>
 
+#include "Animation.h"
+
 class PlayerObject :
     public ObjectModel
 {
@@ -56,6 +58,22 @@ public:
 	{
 		return mCharWidth;
 	}
+	bool isAttack() const
+	{
+		if (mCurrentAction == ATTACK1)
+		{
+			return true;
+		}
+		return false;
+	}
+	bool isRight() const
+	{
+		if (mFlip == SDL_FLIP_NONE)
+		{
+			return true;
+		}
+		return false;
+	}
 private:
 
 	GameVector* mVelocity;
@@ -63,9 +81,6 @@ private:
 
 	bool m_bRight;
 
-
-	std::map<std::string, ActionModel*> mActionMap;
-	//ActionModel* mCurrentAction;
 
 	int mCharHeight;
 	int mCharWidth;
@@ -78,6 +93,7 @@ private:
 	bool m_bJump;
 	bool m_bRun;
 	bool m_bOnGround;
+	bool m_bAttack;
 	SDL_RendererFlip mFlip;
 
 	void AnimationProcess();
@@ -87,11 +103,20 @@ private:
 		RUN = 0,
 		JUMP = 1,
 		IDLE = 2,
-		FALL = 3
+		FALL = 3,
+		ATTACK1 = 4
 	};
 
 	Action mCurrentAction;
 	Action mBackAction;
+
+	Animation* animation;
+
+	void run();
+	void jump();
+	void idle();
+	void fall();
+	void attack1();
 };
 
 #endif

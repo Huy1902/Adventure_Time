@@ -2,6 +2,8 @@
 
 #include "Layer.h"
 #include "PlayerObject.h"
+
+#include "EnemyObject.h"
 class CollisionManager
 {
 public:
@@ -9,6 +11,10 @@ public:
 	bool checkPlayerHeadStuck(bool Right);
 	bool checkPlayerSideLeft();
 	bool checkPlayerSideRight();
+
+	bool checkEnemyOnGround(EnemyObject* enemy);
+
+	bool checkPlayerAttackEnemy(EnemyObject* enemy);
 
 	void setGround(Layer* obj)
 	{

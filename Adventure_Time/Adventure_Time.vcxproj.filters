@@ -33,17 +33,11 @@
     <Filter Include="Header Files\NewType">
       <UniqueIdentifier>{9048d5be-9678-4749-926d-333c2170fba6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Action">
-      <UniqueIdentifier>{36facad5-8051-49e4-9c6d-97fd74018fbd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\State">
       <UniqueIdentifier>{570978d3-a066-4439-b475-a79ac22563d9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\State">
       <UniqueIdentifier>{b2821acd-f790-4b5a-a340-e6eeceb34d7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Action">
-      <UniqueIdentifier>{d919ff21-94bb-4c0f-b20c-5abc138453c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -80,15 +74,6 @@
     <ClCompile Include="Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ActionModel.cpp">
-      <Filter>Source Files\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionParser.cpp">
-      <Filter>Source Files\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="RunAction.cpp">
-      <Filter>Source Files\Action</Filter>
-    </ClCompile>
     <ClCompile Include="PlayingState.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
@@ -100,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="FiniteStateMachine.cpp">
       <Filter>Source Files\State</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpAction.cpp">
-      <Filter>Source Files\Action</Filter>
     </ClCompile>
     <ClCompile Include="TileSetManager.cpp">
       <Filter>Source Files\Manager</Filter>
@@ -117,6 +99,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BarrerKnight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -172,18 +160,6 @@
     <ClInclude Include="PauseState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="ActionModel.h">
-      <Filter>Header Files\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionParser.h">
-      <Filter>Header Files\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="RunAction.h">
-      <Filter>Header Files\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpAction.h">
-      <Filter>Header Files\Action</Filter>
-    </ClInclude>
     <ClInclude Include="FiniteStateMachine.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
@@ -200,6 +176,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BarrerKnight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

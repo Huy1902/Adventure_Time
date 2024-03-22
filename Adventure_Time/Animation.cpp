@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "TextureManager.h"
 
-Animation* Animation::s_pInstance = nullptr;
+//Animation* Animation::s_pInstance = nullptr;
 int count = 0;
 
 void Animation::update()

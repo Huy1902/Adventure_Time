@@ -7,6 +7,8 @@
 #include "PlayerObject.h"
 #include "GameVector.h"
 
+#include "EnemyObject.h"
+
 class Map
 {
 public:
@@ -25,6 +27,8 @@ private:
 	PlayerObject* mPlayer;
 
 	GameVector* mPosition;
+
+	std::vector<EnemyObject*> mEnemy;
 };
 
 #endif

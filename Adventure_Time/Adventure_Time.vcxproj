@@ -137,9 +137,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActionModel.cpp" />
-    <ClCompile Include="ActionParser.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BarrerKnight.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
@@ -147,15 +146,14 @@
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="JumpAction.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="ObjectLayer.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
-    <ClCompile Include="RunAction.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tileset.cpp" />
@@ -163,9 +161,8 @@
     <ClCompile Include="ViewPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionModel.h" />
-    <ClInclude Include="ActionParser.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BarrerKnight.h" />
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
@@ -175,15 +172,14 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="JumpAction.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="ObjectLayer.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
-    <ClInclude Include="RunAction.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
