@@ -83,7 +83,7 @@ void PlayerObject::processData()
 		if (mCountTimeHurt >= HURT_TIME)
 		{
 			m_bHurting = false;
-			m_bInvulnerable = false;
+			mStatus.isInvulnerable = false;
 			mCountTimeHurt = 0;
 		}
 		if (isRight() == true)
@@ -265,10 +265,10 @@ void PlayerObject::clearObject()
 }
 void PlayerObject::getHurt(const int& damage)
 {
-	if (m_bInvulnerable == false)
+	if (mStatus.isInvulnerable == false)
 	{
 		mStatus.HP -= damage;
-		m_bInvulnerable = true;
+		mStatus.isInvulnerable = true;
 	}
 	if (mStatus.HP <= 0)
 	{

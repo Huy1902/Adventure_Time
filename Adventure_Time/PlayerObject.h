@@ -104,7 +104,6 @@ private:
 	int mLandingTime;
 	int mTimeDash;
 	int mCooldownDash;
-	bool m_bInvulnerable;
 	bool m_bDying;
 	bool m_bHurting;
 	int mCountTimeDying;

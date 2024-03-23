@@ -8,11 +8,16 @@ const int MOVE_SPEED = 2;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
 const int ATTACK1_TIME = 100;
-
+const int HIT_TIME = 8;
 
 void BarrerKnight::getHurt(const int& dmg)
 {
-	mStatus.HP -= dmg;
+	if (mStatus.isInvulnerable == false)
+	{
+		mStatus.HP -= dmg;
+		m_bHit = true;
+	}
+
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
@@ -26,6 +31,7 @@ BarrerKnight::BarrerKnight() :
 	TextureManager::getInstance()->load("assets/barrel_knight/wake.png", "barrer_wake", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/none.png", "barrer_none", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/attack1.png", "barrer_attack1", GameManager::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());
 
 	animation = new Animation();
 
@@ -41,8 +47,10 @@ BarrerKnight::BarrerKnight() :
 	mTimeRun = 100;
 
 	mStatus.DMG = 2;
-	mStatus.HP = 10;
+	mStatus.HP = 50;
 	mStatus.MP = 10;
+
+	mCountHitTime = 0;
 }
 BarrerKnight::~BarrerKnight()
 {
@@ -68,6 +76,21 @@ void BarrerKnight::clearObject()
 
 void BarrerKnight::processData()
 {
+	if (m_bHit == true)
+	{
+		mCurrentAction = HIT;
+		++mCountHitTime;
+		if (mCountHitTime >= HIT_TIME)
+		{
+			m_bHit = false;
+			mStatus.isInvulnerable = false;
+			mCountHitTime = 0;
+		}
+		AnimationProcess();
+
+		return;
+	}
+
 	static int count_run = 0;
 	static bool right = true;
 	mVelocity->setX(0);
@@ -178,6 +201,8 @@ void BarrerKnight::AnimationProcess()
 	case BarrerKnight::ATTACK1:
 		attack1();
 		break;
+	case BarrerKnight::HIT:
+		hit();
 	default:
 		break;
 	}
@@ -225,6 +250,13 @@ void BarrerKnight::wakeUp()
 void BarrerKnight::attack1()
 {
 	animation->changeAnim("barrer_attack1", 5, mFlip);
+	animation->setSize(120, 64);
+	animation->setSpeed(2);
+}
+
+void BarrerKnight::hit()
+{
+	animation->changeAnim("barrer_hit", 2, mFlip);
 	animation->setSize(120, 64);
 	animation->setSpeed(2);
 }

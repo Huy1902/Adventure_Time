@@ -82,6 +82,8 @@ private:
 	bool m_bHeadStuck;
 	bool m_bRun;
 	bool m_bOnGround;
+	bool m_bHit;
+	int mCountHitTime;
 
 	int mCoolDownAttack1;
 	
@@ -95,6 +97,7 @@ private:
 	void none();
 	void wakeUp();
 	void attack1();
+	void hit();
 };
 
 #endif

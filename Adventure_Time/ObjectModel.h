@@ -35,6 +35,7 @@ struct Status
 	int MP;
 	int DMG;
 	bool isAlive = true;
+	bool isInvulnerable = false;
 };
 
 #endif

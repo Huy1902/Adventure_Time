@@ -115,7 +115,8 @@ protected:
 		IDLE = 2,
 		FALL = 3,
 		WAKE_UP = 4,
-		ATTACK1 = 5
+		ATTACK1 = 5,
+		HIT = 6
 	};
 
 	Action mCurrentAction;
