@@ -12,9 +12,12 @@ public:
 	bool checkPlayerSideLeft();
 	bool checkPlayerSideRight();
 
-	bool checkEnemyOnGround(EnemyObject* enemy);
-
 	bool checkPlayerAttackEnemy(EnemyObject* enemy);
+	bool checkEnemyOnGround(EnemyObject* enemy);
+	bool checkEnemyNearPlayer(EnemyObject* enemy);
+	bool checkEnemyAttackPlayer(EnemyObject* enemy);
+
+	bool checkPlayerIsRightSideWithEnemy(EnemyObject* enemy);
 
 	void setGround(Layer* obj)
 	{
@@ -23,6 +26,11 @@ public:
 	void setPlayer(PlayerObject* obj)
 	{
 		mPlayer = obj;
+	}
+
+	GameVector* getPlayerPosition()
+	{
+		return mPlayer->getPosition();
 	}
 
 	static CollisionManager* getInstance()

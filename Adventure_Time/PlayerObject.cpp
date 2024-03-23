@@ -8,11 +8,14 @@
 #include "TextureManager.h"
 #include "CollisionManager.h"
 
+const int HURT_MOVE_BACK = 2;
 const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
 const int UP_FORCE = -20;
 const int LANDING_TIME = 4;
 const int DASH_TIME = 12;
+const int HURT_TIME = 12;
+const int DYING_TIME = 12;
 
 PlayerObject::PlayerObject() :
 	ObjectModel()
@@ -26,8 +29,11 @@ PlayerObject::PlayerObject() :
 	TextureManager::getInstance()->load("assets/knight_player/Landing_KG_2.png", "landing2", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_2.png", "idle2", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/knight_player/Dashing_KG_2.png", "dash2", GameManager::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("assets/knight_player/Dying_KG_2.png", "dying2", GameManager::getInstance()->getRenderer());
 
-
+	mStatus.DMG = 2;
+	mStatus.HP = 100;
+	mStatus.MP = 10;
 
 	mPosition = new GameVector(100, 100);
 	mVelocity = new GameVector(0, 0);
@@ -47,13 +53,17 @@ PlayerObject::PlayerObject() :
 	animation->setPosition(*mPosition);
 
 	m_bAttack = false;
+	mLandingTime = LANDING_TIME;
+	mTimeDash = DASH_TIME;
+
+	mCountTimeDying = DYING_TIME;
+	mCountTimeHurt = 0;
 }
 
 PlayerObject::~PlayerObject()
 {
 
 }
-
 void PlayerObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	ObjectModel::loadTexture(std::move(Info));
@@ -65,6 +75,31 @@ void PlayerObject::processData()
 	mVelocity->setX(0);
 	m_bOnGround = onGround();
 	m_bHeadStuck = headStuck();
+
+	if (m_bHurting == true)
+	{
+		mCurrentAction = HURT;
+		++mCountTimeHurt;
+		if (mCountTimeHurt >= HURT_TIME)
+		{
+			m_bHurting = false;
+			m_bInvulnerable = false;
+			mCountTimeHurt = 0;
+		}
+		if (isRight() == true)
+		{
+			mVelocity->setX(-HURT_MOVE_BACK);
+		}
+		else
+		{
+			mVelocity->setX(HURT_MOVE_BACK);
+		}
+		*mPosition += *mVelocity;
+		animation->setPosition(*mPosition);
+		AnimationProcess();
+
+		return;
+	}
 
 
 	if (m_bOnGround == true)
@@ -228,6 +263,23 @@ void PlayerObject::clearObject()
 	TextureManager::getInstance()->clearFromTexture("walk2");
 	TextureManager::getInstance()->clearFromTexture("jump2");
 }
+void PlayerObject::getHurt(const int& damage)
+{
+	if (m_bInvulnerable == false)
+	{
+		mStatus.HP -= damage;
+		m_bInvulnerable = true;
+	}
+	if (mStatus.HP <= 0)
+	{
+	}
+	else
+	{
+		m_bHurting = true;
+	}
+}
+
+
 
 bool PlayerObject::onGround()
 {
@@ -286,6 +338,7 @@ void PlayerObject::attack1()
 void PlayerObject::hurt()
 {
 	animation->changeAnim("hurt2", 4, mFlip);
+	animation->setSpeed(3);
 }
 
 void PlayerObject::landing()
@@ -299,3 +352,11 @@ void PlayerObject::dash()
 	animation->changeAnim("dash2", 4, mFlip);
 	animation->setSpeed(3);
 }
+
+void PlayerObject::dying()
+{
+	m_bDying = true;
+	/*animation->changeAnim("dying2", 6, mFlip);
+	animation->setSpeed(2);*/
+}
+

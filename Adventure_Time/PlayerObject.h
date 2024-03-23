@@ -6,6 +6,7 @@
 
 #include "Animation.h"
 
+
 class PlayerObject :
     public ObjectModel
 {
@@ -73,6 +74,11 @@ public:
 		}
 		return false;
 	}
+	void getHurt(const int& damage);
+	int getDamage() const
+	{
+		return mStatus.DMG;
+	}
 private:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
@@ -98,6 +104,13 @@ private:
 	int mLandingTime;
 	int mTimeDash;
 	int mCooldownDash;
+	bool m_bInvulnerable;
+	bool m_bDying;
+	bool m_bHurting;
+	int mCountTimeDying;
+	int mCountTimeHurt;
+	Status mStatus;
+
 	SDL_RendererFlip mFlip;
 
 	void AnimationProcess();
@@ -128,6 +141,7 @@ private:
 	void hurt();
 	void landing();
 	void dash();
+	void dying();
 };
 
 #endif

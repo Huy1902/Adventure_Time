@@ -4,6 +4,8 @@
 
 #include <SDL.h>
 
+#include "Animation.h"
+
 class EnemyObject :
     public ObjectModel
 {
@@ -72,6 +74,30 @@ public:
 		}
 		return false;
 	}
+	virtual bool isAttack() const
+	{
+		if (mAttack1Time % 10 == 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	virtual Animation* getAnimation()
+	{
+		return animation;
+	}
+	virtual int getDamage() const
+	{
+		return mStatus.DMG;
+	}
+	virtual void getHurt(const int & dmg)
+	{
+
+	}
+	virtual bool isAlive()
+	{
+		return mStatus.isAlive;
+	}
 protected:
 
 	GameVector* mVelocity;
@@ -82,6 +108,24 @@ protected:
 	int mCharHeight = 64;
 	int mCharWidth = 64;
 
+
+	enum Action
+	{
+		RUN = 0,
+		IDLE = 2,
+		FALL = 3,
+		WAKE_UP = 4,
+		ATTACK1 = 5
+	};
+
+	Action mCurrentAction;
+
+
+
+private:
+	Status mStatus;
+	int mAttack1Time;
+	Animation* animation;
 	SDL_RendererFlip mFlip;
 };
 

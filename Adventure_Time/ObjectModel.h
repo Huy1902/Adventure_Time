@@ -27,6 +27,14 @@ protected:
 	int mIndexFrames;
 	int mNumFrames;
 	double mScope;
+
+};
+struct Status
+{
+	int HP;
+	int MP;
+	int DMG;
+	bool isAlive = true;
 };
 
 #endif

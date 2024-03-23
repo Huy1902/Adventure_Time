@@ -69,22 +69,27 @@ void Map::setPlayer(PlayerObject* obj)
 void Map::updateMap()
 {
 	mPlayer->processData();
-	static queue<bool> need_erase;
 	vector<EnemyObject*>::iterator ite = mEnemy.begin();
-	for (size_t i = 0; i < mEnemy.size(); ++i)
-	{
-		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(mEnemy[i]))
-		{
-			need_erase.push(i);
-		}
-		mEnemy[i]->processData();
-	}
 	while (ite != mEnemy.end())
 	{
+		if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
+		{
+			mPlayer->getHurt((*ite)->getDamage());
+		}
+		(*ite)->processData();
 		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
 		{
-			delete* ite;
-			ite = mEnemy.erase(ite);
+			(*ite)->getHurt(mPlayer->getDamage());
+			std::cout << "Player is attack\n";
+			if ((*ite)->isAlive() == false)
+			{
+				delete* ite;
+				ite = mEnemy.erase(ite);
+			}
+			else
+			{
+				++ite;
+			}
 		}
 		else
 		{
@@ -111,12 +116,12 @@ void Map::updateMap()
 			mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 			*mPosition += *mPlayer->getVelocity();
 		}
-		else if(mPlayer->getPosition()->getX() < 0)
+		else if (mPlayer->getPosition()->getX() < 0)
 		{
 			mPlayer->setPositionX(0);
 		}
 	}
-	else if(mPosition->getX() > 0 && mPosition->getX() < MAP_WIDTH * TILE_SIZE - WIN_WIDTH)
+	else if (mPosition->getX() > 0 && mPosition->getX() < MAP_WIDTH * TILE_SIZE - WIN_WIDTH)
 	{
 		mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 		*mPosition += *mPlayer->getVelocity();

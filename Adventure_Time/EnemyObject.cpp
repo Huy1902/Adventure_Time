@@ -5,7 +5,6 @@
 EnemyObject::EnemyObject() :
 	ObjectModel()
 {
-
 }
 
 EnemyObject::~EnemyObject()

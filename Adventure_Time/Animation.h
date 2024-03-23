@@ -23,7 +23,14 @@ public:
 	{
 		mSpeed = v;
 	}
-
+	int getWidth() const
+	{
+		return mW;
+	}
+	int getHeight() const
+	{
+		return mH;
+	}
 	/*static Animation* getInstance()
 	{
 		if (s_pInstance == nullptr)
