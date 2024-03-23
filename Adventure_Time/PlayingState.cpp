@@ -56,12 +56,10 @@ void PlayingState::renderState()
 
 bool PlayingState::startState()
 {
-	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_1.png", "idle", GameManager::getInstance()->getRenderer());
 	mMap = new Map();
 	mMap->loadMap("map1.txt", "tileset1");
 
 	mPlayer = new PlayerObject();
-	mPlayer->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("idle", 100, 100, 100, 64, 4, 1.0)));
 	mMap->setPlayer(mPlayer);
 
 	//mObjects.push_back(player);

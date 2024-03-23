@@ -13,7 +13,6 @@ public:
 	PlayerObject();
 	~PlayerObject();
 
-	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
@@ -60,7 +59,7 @@ public:
 	}
 	bool isAttack() const
 	{
-		if (mCurrentAction == ATTACK1)
+		if (mCurrentAction == ATTACK1 && mTimeAttack == 3)
 		{
 			return true;
 		}
@@ -75,6 +74,7 @@ public:
 		return false;
 	}
 private:
+	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
 	GameVector* mVelocity;
 	GameVector* mAcceleration;
@@ -94,6 +94,10 @@ private:
 	bool m_bRun;
 	bool m_bOnGround;
 	bool m_bAttack;
+	int mTimeAttack;
+	int mLandingTime;
+	int mTimeDash;
+	int mCooldownDash;
 	SDL_RendererFlip mFlip;
 
 	void AnimationProcess();
@@ -104,7 +108,11 @@ private:
 		JUMP = 1,
 		IDLE = 2,
 		FALL = 3,
-		ATTACK1 = 4
+		ATTACK1 = 4,
+		HURT = 5,
+		LANDING = 6,
+		DASH = 7
+
 	};
 
 	Action mCurrentAction;
@@ -117,6 +125,9 @@ private:
 	void idle();
 	void fall();
 	void attack1();
+	void hurt();
+	void landing();
+	void dash();
 };
 
 #endif

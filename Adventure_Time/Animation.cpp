@@ -21,10 +21,14 @@ void Animation::draw()
 
 void Animation::changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip)
 {
-	mTextureID = textureID;
-	mNumFrame = numFrame;
+	if (textureID != mTextureID)
+	{
+		mIndexFrame = 0;
+		mTextureID = textureID;
+		mNumFrame = numFrame;
+		mSpeed = 1;
+	}
 	mFlip = flip;
-	mSpeed = 1;
 }
 
 Animation::Animation()
