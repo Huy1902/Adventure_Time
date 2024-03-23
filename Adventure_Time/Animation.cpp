@@ -30,6 +30,20 @@ void Animation::changeAnim(const std::string& textureID, const int& numFrame, SD
 	}
 	mFlip = flip;
 }
+void Animation::changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip, const int& w, const int& h, const int& speed)
+{
+	if (textureID != mTextureID)
+	{
+		mIndexFrame = 0;
+		mTextureID = textureID;
+		mNumFrame = numFrame;
+		mSpeed = speed;
+		mW = w;
+		mH = h;
+	}
+	mFlip = flip;
+
+}
 
 Animation::Animation()
 {

@@ -4,6 +4,8 @@
 #include "GameManager.h"
 #include "CollisionManager.h"
 
+#include "ObjectParser.h"
+
 const int MOVE_SPEED = 2;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
@@ -27,11 +29,17 @@ void BarrerKnight::getHurt(const int& dmg)
 BarrerKnight::BarrerKnight() :
 	EnemyObject()
 {
-	TextureManager::getInstance()->load("assets/barrel_knight/run.png", "barrer_run", GameManager::getInstance()->getRenderer());
+	/*TextureManager::getInstance()->load("assets/barrel_knight/run.png", "barrer_run", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/wake.png", "barrer_wake", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/none.png", "barrer_none", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/attack1.png", "barrer_attack1", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());*/
+	
+	ObjectParser::getInstance()->parser("test.xml", actions, textureVector);
+	for (const auto& ite : textureVector)
+	{
+		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
+	}
 
 	animation = new Animation();
 
@@ -54,9 +62,10 @@ BarrerKnight::BarrerKnight() :
 }
 BarrerKnight::~BarrerKnight()
 {
-	TextureManager::getInstance()->clearFromTexture("barrer_run");
-	TextureManager::getInstance()->clearFromTexture("barrer_wake");
-	TextureManager::getInstance()->clearFromTexture("barrer_none");
+	for (const auto& ite : textureVector)
+	{
+		TextureManager::getInstance()->clearFromTexture(ite.textureID);
+	}
 }
 
 //void BarrerKnight::loadTexture(std::unique_ptr<TextureLoader> Info)
@@ -231,33 +240,44 @@ bool BarrerKnight::onGround()
 
 void BarrerKnight::run()
 {
-	animation->changeAnim("barrer_run", 7, mFlip);
-	animation->setSize(59, 64);
+	Info temp = actions["run"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+	std::cout << temp.numFrames << '\n';
+	/*animation->changeAnim("barrer_run", 7, mFlip);
+	animation->setSize(59, 64);*/
 }
 
 void BarrerKnight::none()
 {
-	animation->changeAnim("barrer_none", 1, mFlip);
-	animation->setSize(63, 64);
+	//animation->changeAnim("barrer_none", 1, mFlip);
+	//animation->setSize(63, 64);
+	Info temp = actions["none"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void BarrerKnight::wakeUp()
 {
-	animation->changeAnim("barrer_wake", 4, mFlip);
-	animation->setSize(63, 64);
+	//animation->changeAnim("barrer_wake", 4, mFlip);
+	//animation->setSize(63, 64);
+	Info temp = actions["wake"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void BarrerKnight::attack1()
 {
-	animation->changeAnim("barrer_attack1", 5, mFlip);
-	animation->setSize(120, 64);
-	animation->setSpeed(2);
+	//animation->changeAnim("barrer_attack1", 5, mFlip);
+	//animation->setSize(120, 64);
+	//animation->setSpeed(2);
+	Info temp = actions["attack1"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void BarrerKnight::hit()
 {
-	animation->changeAnim("barrer_hit", 2, mFlip);
-	animation->setSize(120, 64);
-	animation->setSpeed(2);
+	//animation->changeAnim("barrer_hit", 2, mFlip);
+	//animation->setSize(120, 64);
+	//animation->setSpeed(2);
+	Info temp = actions["hit"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 

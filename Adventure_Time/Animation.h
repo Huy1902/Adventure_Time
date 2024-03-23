@@ -10,6 +10,8 @@ public:
 	void update();
 	void draw();
 	void changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip);
+	void changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip, const int& w, const int&h, const int & speed);
+
 	void setPosition(const GameVector& position)
 	{
 		mPosition = position;

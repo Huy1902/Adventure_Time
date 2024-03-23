@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<CHARACTER>
+	<TEXTURES>
+		<texture filePath="assets/barrel_knight/run.png" textureID="barrer_run"/>
+		<texture filePath="assets/barrel_knight/wake.png" textureID="barrer_wake"/>
+		<texture filePath="assets/barrel_knight/none.png" textureID="barrer_none"/>
+		<texture filePath="assets/barrel_knight/attack1.png" textureID="barrer_attack1"/>
+		<texture filePath="assets/barrel_knight/hit.png" textureID="barrer_hit"/>
+	</TEXTURES>
+	<ACTIONS>
+		<action name="run" textureID="barrer_run" numFrame="7" w="59" h="64"/>
+		<action name="none" textureID="barrer_none" numFrame="1" w="63" h="64"/>
+		<action name="wake" textureID="barrer_wake" numFrame="4" w="63" h="64"/>
+		<action name="attack1" textureID="barrer_attack1" numFrame="5" w="120" h="64" speed="2"/>
+		<action name="hit" textureID="barrer_hit" numFrame="2" w="120" h="64" speed="2"/>
+	</ACTIONS>
+</CHARACTER>

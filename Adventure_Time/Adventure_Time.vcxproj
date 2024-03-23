@@ -151,6 +151,7 @@
     <ClCompile Include="ObjectLayer.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectParser.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TileSetManager.cpp" />
     <ClCompile Include="ViewPoint.cpp" />
+    <ClCompile Include="XmlTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -177,6 +179,7 @@
     <ClInclude Include="ObjectLayer.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="ObjectParser.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
@@ -186,9 +189,13 @@
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TileSetManager.h" />
     <ClInclude Include="ViewPoint.h" />
+    <ClInclude Include="XmlTree.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="test.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
