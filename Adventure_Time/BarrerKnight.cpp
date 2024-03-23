@@ -35,7 +35,7 @@ BarrerKnight::BarrerKnight() :
 	TextureManager::getInstance()->load("assets/barrel_knight/attack1.png", "barrer_attack1", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());*/
 	
-	ObjectParser::getInstance()->parser("test.xml", actions, textureVector);
+	ObjectParser::getInstance()->parserAction("BarerKnight.xml", actions, textureVector);
 	for (const auto& ite : textureVector)
 	{
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());

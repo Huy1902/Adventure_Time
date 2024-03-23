@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<STATES>
+	<TEXTURES>
+		<texture filePath="assets/button/play_button.png" textureID="play_button"/>
+		<texture filePath="assets/button/exit_button.png" textureID="exit_button"/>
+		<texture filePath="assets/button/score_button.png" textureID="score_button"/>
+	</TEXTURES>
+	<BUTTONS>
+		<action name="play" textureID="play_button" numFrame="2" w="388" h="125" callbackID="0" x="450" y="350"/>
+		<action name="score" textureID="score_button" numFrame="2" w="390" h="125" callbackID="1" x="450" y="480"/>
+		<action name="exit" textureID="exit_button" numFrame="2" w="383" h="125" callbackID="2" x="450" y="600"/>
+	</BUTTONS>
+</STATES>

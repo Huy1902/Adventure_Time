@@ -25,6 +25,8 @@ Map::Map()
 	mPosition = new GameVector(0, 0);
 	BarrerKnight* obj1 = new BarrerKnight();
 	mEnemy.push_back(obj1);
+
+	mBackGround = new Background();
 }
 
 void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
@@ -65,49 +67,8 @@ void Map::setPlayer(PlayerObject* obj)
 	mPlayer = obj;
 }
 
-
-void Map::updateMap()
+void Map::processMapAndPlayer()
 {
-	mPlayer->processData();
-	vector<EnemyObject*>::iterator ite = mEnemy.begin();
-	while (ite != mEnemy.end())
-	{
-		if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
-		{
-			mPlayer->getHurt((*ite)->getDamage());
-		}
-		(*ite)->processData();
-		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
-		{
-			(*ite)->getHurt(mPlayer->getDamage());
-			std::cout << "Player is attack\n";
-			if ((*ite)->isAlive() == false)
-			{
-				delete* ite;
-				ite = mEnemy.erase(ite);
-			}
-			else
-			{
-				++ite;
-			}
-		}
-		else
-		{
-			++ite;
-		}
-	}
-	//std::cout << mPosition->getX() << '\n';
-	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / TILE_SIZE >= MAP_WIDTH)
-	{
-		*mPosition += *mPlayer->getVelocity() / 2;
-	}
-	else if( (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 && (mPosition->getX() + mPlayer->getVelocity()->getX() + WIN_WIDTH) / TILE_SIZE < MAP_WIDTH)
-		|| (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPosition->getX() > 0)
-		)
-	{
-		mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
-		*mPosition += *mPlayer->getVelocity();
-	}*/
 	if (mPosition->getX() <= 0)
 	{
 		mPosition->setX(0);
@@ -140,16 +101,72 @@ void Map::updateMap()
 		}
 	}
 	mPosition->setY(0);
+}
+
+void Map::processEnemyAndPlayer()
+{
+	mPlayer->processData();
+	vector<EnemyObject*>::iterator ite = mEnemy.begin();
+	while (ite != mEnemy.end())
+	{
+		if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
+		{
+			mPlayer->getHurt((*ite)->getDamage());
+		}
+		(*ite)->processData();
+		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
+		{
+			(*ite)->getHurt(mPlayer->getDamage());
+			std::cout << "Player is attack\n";
+			if ((*ite)->isAlive() == false)
+			{
+				delete* ite;
+				ite = mEnemy.erase(ite);
+			}
+			else
+			{
+				++ite;
+			}
+		}
+		else
+		{
+			++ite;
+		}
+	}
+}
+
+
+void Map::updateMap()
+{
+
+	//std::cout << mPosition->getX() << '\n';
+	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / TILE_SIZE >= MAP_WIDTH)
+	{
+		*mPosition += *mPlayer->getVelocity() / 2;
+	}
+	else if( (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 && (mPosition->getX() + mPlayer->getVelocity()->getX() + WIN_WIDTH) / TILE_SIZE < MAP_WIDTH)
+		|| (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPosition->getX() > 0)
+		)
+	{
+		mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
+		*mPosition += *mPlayer->getVelocity();
+	}*/
+
+	processEnemyAndPlayer();
+	processMapAndPlayer();
+	
 	for (Layer* ite : mLayer)
 	{
 		//ite->setVelocity(*mPlayer->getVelocity());
 		ite->setPosition(*mPosition);
 		ite->updateLayer();
 	}
+	mBackGround->updateBackground();
 }
 
 void Map::renderMap()
 {
+	mBackGround->drawBackground();
 	for (Layer* ite : mLayer)
 	{
 		ite->renderLayer();

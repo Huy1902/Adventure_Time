@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BarrerKnight.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BarrerKnight.h" />
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -195,7 +197,8 @@
     <Text Include="map1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="test.xml" />
+    <Xml Include="BarerKnight.xml" />
+    <Xml Include="home_state.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

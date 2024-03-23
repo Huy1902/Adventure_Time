@@ -113,6 +113,9 @@
     <ClCompile Include="ObjectParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -196,13 +199,17 @@
     <ClInclude Include="ObjectParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="test.xml">
+    <Xml Include="BarerKnight.xml">
       <Filter>Source Files</Filter>
     </Xml>
+    <Xml Include="home_state.xml" />
   </ItemGroup>
 </Project>

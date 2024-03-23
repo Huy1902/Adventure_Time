@@ -20,6 +20,8 @@ public:
 protected:
 	std::vector<ObjectModel*> mObjects;
 	std::vector<std::string> mTextureID;
+
+	typedef void(*callback)();
 };
 
 #endif //BASESTATE_H_

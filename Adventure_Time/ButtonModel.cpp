@@ -24,16 +24,16 @@ void ButtonModel::processData()
 		&& pMousePos->getY() >= mPosition->getY()
 		)
 	{
+		mIndexFrames = MOUSE_OVER;
 		if (InputManager::getInstance()->getMouseButton(LEFT))
 		{
 
-			mIndexFrames = CLICKED;
+			//mIndexFrames = CLICKED;
 			mCallback();
-			m_bReleased = false;
+			//m_bReleased = false;
 		}
 		else
 		{
-			mIndexFrames = MOUSE_OVER;
 		}
 	}
 	else

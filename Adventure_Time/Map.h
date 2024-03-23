@@ -9,6 +9,8 @@
 
 #include "EnemyObject.h"
 
+#include "Background.h"
+
 class Map
 {
 public:
@@ -20,6 +22,7 @@ public:
 
 	void setPlayer(PlayerObject* obj);
 
+
 private:
 	std::vector<Layer*> mLayer;
 	Tileset* mTileSet;
@@ -29,6 +32,10 @@ private:
 	GameVector* mPosition;
 
 	std::vector<EnemyObject*> mEnemy;
+
+	Background* mBackGround;
+	void processMapAndPlayer();
+	void processEnemyAndPlayer();
 };
 
 #endif

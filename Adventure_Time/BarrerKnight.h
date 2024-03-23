@@ -6,20 +6,6 @@
 
 #include <vector>
 
-struct Info
-{
-	int w = 0;
-	int h = 0;
-	int numFrames = 0;
-	int speed = 1;
-	std::string textureID = "";
-};
-
-struct Texture
-{
-	std::string filePath = "";
-	std::string textureID = "";
-};
 
 class BarrerKnight :
     public EnemyObject

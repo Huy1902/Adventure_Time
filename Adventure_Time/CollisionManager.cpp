@@ -182,7 +182,7 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 			}
 			else
 			{
-				if (p_x + mPlayer->getCharWidth() > e_x - enemy->getCharWidth())
+				if (p_x + mPlayer->getCharWidth() > e_x - enemy->getAnimation()->getWidth() + 10)
 				{
 					return true;
 				}
@@ -192,7 +192,7 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 		{
 			if (enemy->isRight() == true)
 			{
-				if (p_x - mPlayer->getCharWidth() < e_x + enemy->getCharWidth())
+				if (p_x - mPlayer->getCharWidth() < e_x + enemy->getAnimation()->getWidth() - 10)
 				{
 					return true;
 				}

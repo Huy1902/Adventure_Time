@@ -151,7 +151,7 @@ void PlayerObject::processData()
 		else
 			if (m_bHeadStuck == true && m_bOnGround == false)
 			{
-				mVelocity->setY(0);
+				mVelocity->setY(5);
 			}
 			else
 				if (m_bJump == true)

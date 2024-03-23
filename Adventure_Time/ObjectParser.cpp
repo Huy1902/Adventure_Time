@@ -1,8 +1,6 @@
 #include "ObjectParser.h"
 #include <iostream>
 
-using namespace std;
-
 ObjectParser* ObjectParser::s_pInstance = nullptr;
 struct Info
 {
@@ -11,6 +9,9 @@ struct Info
 	int numFrames = 0;
 	int speed = 1;
 	std::string textureID = "";
+	int callbackID = -1;
+	int x = 0;
+	int y = 0;
 };
 
 struct Texture
@@ -30,21 +31,8 @@ ObjectParser::~ObjectParser()
 
 }
 
-void ObjectParser::parser(const std::string& filePath, std::map<std::string, Info>& objectMap, std::vector<Texture>& textureVector)
+void ObjectParser::loadTexture(std::vector<Texture>& textureVector, XmlNode* textures)
 {
-	XmlTree tree;
-	tree.parseXmlFile(filePath);
-	XmlNode* root = tree.getRoot();
-
-	XmlNode* textures = nullptr;
-	for (XmlNode* ite : root->child)
-	{
-		if (ite->element == std::string("TEXTURES"))
-		{
-			textures = ite;
-			break;
-		}
-	}
 	if (textures != nullptr)
 	{
 		for (XmlNode* texture : textures->child)
@@ -56,16 +44,10 @@ void ObjectParser::parser(const std::string& filePath, std::map<std::string, Inf
 			//cout << obj.filePath << ' ' << obj.textureID << '\n';
 		}
 	}
+}
 
-	XmlNode* actions = nullptr;
-	for (XmlNode* ite : root->child)
-	{
-		if (ite->element == std::string("ACTIONS"))
-		{
-			actions = ite;
-			break;
-		}
-	}
+void ObjectParser::loadAction(std::map<std::string, Info>& actionMap, XmlNode* actions)
+{
 	if (actions != nullptr)
 	{
 		for (XmlNode* action : actions->child)
@@ -81,8 +63,120 @@ void ObjectParser::parser(const std::string& filePath, std::map<std::string, Inf
 			{
 				obj.speed = 1;
 			}
-			objectMap[name] = obj;
+			actionMap[name] = obj;
 			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
 		}
 	}
+}
+
+void ObjectParser::loadButton(std::vector<Info>& buttonMap, XmlNode* buttons)
+{
+	if (buttons != nullptr)
+	{
+		for (XmlNode* button : buttons->child)
+		{
+			Info obj;
+			/*std::string name = "";
+			button->takeAttribute("name", &name);*/
+			button->takeAttribute("w", &obj.w);
+			button->takeAttribute("h", &obj.h);
+			button->takeAttribute("textureID", &obj.textureID);
+			button->takeAttribute("numFrame", &obj.numFrames);
+			button->takeAttribute("callbackID", &obj.callbackID);
+			button->takeAttribute("x", &obj.x);
+			button->takeAttribute("y", &obj.y);
+			if (button->takeAttribute("speed", &obj.speed) == false)
+			{
+				obj.speed = 1;
+			}
+			buttonMap.push_back(obj);
+			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
+		}
+	}
+}
+
+void ObjectParser::loadAnimation(std::vector<Info>& animMap, XmlNode* anims)
+{
+	if (anims != nullptr)
+	{
+		for (XmlNode* anim : anims->child)
+		{
+			Info obj;
+			/*std::string name = "";
+			button->takeAttribute("name", &name);*/
+			anim->takeAttribute("w", &obj.w);
+			anim->takeAttribute("h", &obj.h);
+			anim->takeAttribute("textureID", &obj.textureID);
+			anim->takeAttribute("numFrame", &obj.numFrames);
+			anim->takeAttribute("x", &obj.x);
+			anim->takeAttribute("y", &obj.y);
+			if (anim->takeAttribute("speed", &obj.speed) == false)
+			{
+				obj.speed = 1;
+			}
+			animMap.push_back(obj);
+			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
+		}
+	}
+}
+
+void ObjectParser::parserAction(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector)
+{
+	XmlTree tree;
+	tree.parseXmlFile(filePath);
+	XmlNode* root = tree.getRoot();
+
+	XmlNode* textures = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("TEXTURES"))
+		{
+			textures = ite;
+			break;
+		}
+	}
+
+	loadTexture(textureVector, textures);
+	
+
+	XmlNode* actions = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("ACTIONS"))
+		{
+			actions = ite;
+			break;
+		}
+	}
+	loadAction(actionMap, actions);
+}
+
+void ObjectParser::parserButton(const std::string& filePath, std::vector<Info>& buttonMap, std::vector<Texture>& textureVector)
+{
+	XmlTree tree;
+	tree.parseXmlFile(filePath);
+	XmlNode* root = tree.getRoot();
+
+	XmlNode* textures = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("TEXTURES"))
+		{
+			textures = ite;
+			break;
+		}
+	}
+	loadTexture(textureVector, textures);
+
+
+	XmlNode* buttons = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("BUTTONS"))
+		{
+			buttons = ite;
+			break;
+		}
+	}
+	loadButton(buttonMap, buttons);
 }

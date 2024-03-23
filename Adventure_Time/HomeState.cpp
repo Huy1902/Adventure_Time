@@ -6,6 +6,8 @@
 #include "ButtonModel.h"
 #include "PlayingState.h"
 
+#include "ObjectParser.h"
+
 const std::string  HomeState::m_sHomeID = "HOME";
 
 void HomeState::m_sHomeToPlay()
@@ -18,8 +20,32 @@ void HomeState::m_sExitHome()
 	GameManager::getInstance()->quitGame();
 }
 
+void HomeState::m_sHomToScore()
+{
+	std::cout << "enter Score\n";
+}
+
+HomeState::HomeState()
+{
+	mCallback.push_back(m_sHomeToPlay);
+	mCallback.push_back(m_sHomToScore);
+	mCallback.push_back(m_sExitHome);
+
+	background = new Background();
+	TextureManager::getInstance()->load("assets/button/menu_font.png", "font", GameManager::getInstance()->getRenderer());
+	font = new ObjectModel();
+	font->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("font", 0, 0, 1280, 768, 1)));
+}
+
+HomeState::~HomeState()
+{
+	TextureManager::getInstance()->clearFromTexture("font");
+}
+
 void HomeState::processData()
 {
+	background->updateBackground();
+	font->processData();
 	if (!mObjects.empty())
 	{
 		for (size_t i = 0; i < mObjects.size(); ++i)
@@ -30,6 +56,8 @@ void HomeState::processData()
 }
 void HomeState::renderState()
 {
+	background->drawBackground();
+	font->renderObject();
 	if (mObjects.empty() == false)
 	{
 		for (size_t i = 0; i < mObjects.size(); ++i)
@@ -41,22 +69,20 @@ void HomeState::renderState()
 
 bool HomeState::startState()
 {
-	TextureManager::getInstance()->load("assets/play_button.png", "play_button", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/exit_button.png", "exit_button", GameManager::getInstance()->getRenderer());
-
-
-	ButtonModel* play = new ButtonModel();
-	play->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("play_button", 300, 300, 250, 80, 3, 1.0)));
-	play->setCallback(m_sHomeToPlay);
-
-	ButtonModel* exit = new ButtonModel();
-	exit->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("exit_button", 300, 500, 250, 80, 3, 1.0)));
-	exit->setCallback(m_sExitHome);
-
-	mObjects.push_back(play);
-	mObjects.push_back(exit);
-	mTextureID.push_back("play_button");
-	mTextureID.push_back("exit_button");
+	/*TextureManager::getInstance()->load("assets/play_button.png", "play_button", GameManager::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("assets/exit_button.png", "exit_button", GameManager::getInstance()->getRenderer());*/
+	ObjectParser::getInstance()->parserButton("home_state.xml", mButton, mTexture);
+	for (const auto& ite : mTexture)
+	{
+		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
+	}
+	for (const auto& ite : mButton)
+	{
+		ButtonModel* obj = new ButtonModel();
+		obj->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader(ite.textureID, ite.x, ite.y, ite.w, ite.h, ite.numFrames, 1.0, ite.callbackID)));
+		obj->setCallback(mCallback[ite.callbackID]);
+		mObjects.push_back(obj);
+	}
 	return true;
 }
 bool HomeState::exitState()
@@ -66,9 +92,9 @@ bool HomeState::exitState()
 		mObjects[i]->clearObject();
 		delete mObjects[i];
 	}
-	for (size_t i = 0; i < mTextureID.size(); ++i)
+	for (size_t i = 0; i < mTexture.size(); ++i)
 	{
-		TextureManager::getInstance()->clearFromTexture(mTextureID[i]);
+		TextureManager::getInstance()->clearFromTexture(mTexture[i].textureID);
 	}
 	mTextureID.clear();
 	mObjects.clear();

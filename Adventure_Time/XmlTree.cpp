@@ -12,9 +12,20 @@ void XmlTree::parse(const char* file_name)
 {
 	ifstream fin(file_name);
 	string s;
-	getline(fin, s);
-
 	vector<string> xml;
+
+	getline(fin, s);
+	if (s.substr(0, 2) != std::string("<?"))
+	{
+		int i = 0;
+		while (s[i] == ' ')
+		{
+			++i;
+		}
+		s.erase(0, i);
+		xml.push_back(s);
+	}
+
 	while (getline(fin, s))
 	{
 		int i = 0;
