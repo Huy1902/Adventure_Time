@@ -29,7 +29,7 @@ private:
     Background* background;
     static void m_sHomeToPlay();
     static void m_sExitHome();
-    static void m_sHomToScore();
+    static void m_sHomeToScore();
 };
 
 #endif //HOMESTATE_H_

@@ -8,10 +8,14 @@
 
 #include "ObjectParser.h"
 
+#include "SoundManager.h"
+
+
 const std::string  HomeState::m_sHomeID = "HOME";
 
 void HomeState::m_sHomeToPlay()
 {
+	SoundManager::getInstance()->playSound("play_button", 0);
 	GameManager::getInstance()->getFSM()->changeState(new PlayingState());
 }
 
@@ -20,7 +24,7 @@ void HomeState::m_sExitHome()
 	GameManager::getInstance()->quitGame();
 }
 
-void HomeState::m_sHomToScore()
+void HomeState::m_sHomeToScore()
 {
 	std::cout << "enter Score\n";
 }
@@ -28,7 +32,7 @@ void HomeState::m_sHomToScore()
 HomeState::HomeState()
 {
 	mCallback.push_back(m_sHomeToPlay);
-	mCallback.push_back(m_sHomToScore);
+	mCallback.push_back(m_sHomeToScore);
 	mCallback.push_back(m_sExitHome);
 
 	background = new Background();
@@ -83,6 +87,8 @@ bool HomeState::startState()
 		obj->setCallback(mCallback[ite.callbackID]);
 		mObjects.push_back(obj);
 	}
+
+
 	return true;
 }
 bool HomeState::exitState()

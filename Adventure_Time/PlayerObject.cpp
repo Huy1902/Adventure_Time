@@ -15,7 +15,7 @@ const int UP_FORCE = -20;
 const int LANDING_TIME = 4;
 const int DASH_TIME = 12;
 const int HURT_TIME = 12;
-const int DYING_TIME = 12;
+const int DYING_TIME = 29;
 
 PlayerObject::PlayerObject() :
 	ObjectModel()
@@ -32,7 +32,7 @@ PlayerObject::PlayerObject() :
 	TextureManager::getInstance()->load("assets/knight_player/Dying_KG_2.png", "dying2", GameManager::getInstance()->getRenderer());
 
 	mStatus.DMG = 2;
-	mStatus.HP = 100;
+	mStatus.HP = 10;
 	mStatus.MP = 10;
 
 	mPosition = new GameVector(100, 100);
@@ -75,6 +75,13 @@ void PlayerObject::processData()
 	mVelocity->setX(0);
 	m_bOnGround = onGround();
 	m_bHeadStuck = headStuck();
+	if (mStatus.isAlive == false)
+	{
+		--mCountTimeDying;
+		mCurrentAction = DYING;
+		completeUpdateMethod();
+		return;
+	}
 
 	if (m_bHurting == true)
 	{
@@ -94,9 +101,8 @@ void PlayerObject::processData()
 		{
 			mVelocity->setX(HURT_MOVE_BACK);
 		}
-		*mPosition += *mVelocity;
-		animation->setPosition(*mPosition);
-		AnimationProcess();
+		completeUpdateMethod();
+
 
 		return;
 	}
@@ -211,12 +217,7 @@ void PlayerObject::processData()
 		mCurrentAction = LANDING;
 	}
 
-	AnimationProcess();
-
-	*mVelocity += *mAcceleration;
-	*mPosition += *mVelocity;
-
-	animation->setPosition(*mPosition);
+	completeUpdateMethod();
 }
 
 void PlayerObject::AnimationProcess()
@@ -247,6 +248,9 @@ void PlayerObject::AnimationProcess()
 	case PlayerObject::DASH:
 		dash();
 		break;
+	case PlayerObject::DYING:
+		dying();
+		break;
 	default:
 		break;
 	}
@@ -272,6 +276,7 @@ void PlayerObject::getHurt(const int& damage)
 	}
 	if (mStatus.HP <= 0)
 	{
+		mStatus.isAlive = false;
 	}
 	else
 	{
@@ -355,8 +360,17 @@ void PlayerObject::dash()
 
 void PlayerObject::dying()
 {
-	m_bDying = true;
-	/*animation->changeAnim("dying2", 6, mFlip);
-	animation->setSpeed(2);*/
+	animation->changeAnim("dying2", 6, mFlip);
+	animation->setSpeed(5);
+}
+
+void PlayerObject::completeUpdateMethod()
+{
+	AnimationProcess();
+
+	*mVelocity += *mAcceleration;
+	*mPosition += *mVelocity;
+
+	animation->setPosition(*mPosition);
 }
 

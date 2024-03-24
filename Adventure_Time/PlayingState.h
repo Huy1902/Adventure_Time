@@ -23,8 +23,11 @@ private:
 
     //static void m_sPlayingToHome();
     static void m_sPlayingToPause();
+    static void m_sPlayingToGameOver();
     Map* mMap;
     PlayerObject* mPlayer;
+
+    bool m_bSetupDying = false;
 };
 
 

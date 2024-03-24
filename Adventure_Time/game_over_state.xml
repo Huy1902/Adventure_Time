@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<STATES>
+	<TEXTURES>
+		<texture filePath="assets/button/back_home_button.png" textureID="back_home_button"/>
+		<texture filePath="assets/button/try_again_button.png" textureID="try_again_button"/>
+	</TEXTURES>
+	<BUTTONS>
+		<action name="try_again" textureID="try_again_button" numFrame="2" w="351" h="100" callbackID="0" x="490" y="390"/>
+		<action name="back_home" textureID="back_home_button" numFrame="2" w="348" h="100" callbackID="1" x="490" y="550"/>
+	</BUTTONS>
+</STATES>

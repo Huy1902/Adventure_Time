@@ -129,14 +129,14 @@ bool CollisionManager::checkEnemyAttackPlayer(EnemyObject* enemy)
 		{
 			if (mPlayer->isRight())
 			{
-				if (e_x + 10 < p_x + mPlayer->getCharWidth())
+				if (e_x < p_x + mPlayer->getCharWidth())
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (e_x + 10< p_x + mPlayer->getCharWidth())
+				if (e_x< p_x + mPlayer->getCharWidth())
 				{
 					return true;
 				}
@@ -171,18 +171,15 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 			return false;
 		}
 
-		if (mPlayer->isRight() == true)
+		if (e_x < p_x)
 		{
-			if (enemy->isRight() == true)
+			if (mPlayer->isRight())
 			{
-				if (p_x + mPlayer->getCharWidth() > e_x)
-				{
-					return true;
-				}
+				return false;
 			}
 			else
 			{
-				if (p_x + mPlayer->getCharWidth() > e_x - enemy->getAnimation()->getWidth() + 10)
+				if (e_x + enemy->getAnimation()->getWidth() > p_x)
 				{
 					return true;
 				}
@@ -190,18 +187,18 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 		}
 		else
 		{
-			if (enemy->isRight() == true)
+			if (mPlayer->isRight())
 			{
-				if (p_x - mPlayer->getCharWidth() < e_x + enemy->getAnimation()->getWidth() - 10)
+				if (e_x + 10 < p_x + mPlayer->getCharWidth())
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (p_x - mPlayer->getCharWidth() < e_x)
+				if (e_x + 10 < p_x + mPlayer->getCharWidth())
 				{
-					return true;
+					return false;
 				}
 			}
 		}

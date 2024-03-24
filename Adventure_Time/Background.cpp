@@ -1,12 +1,27 @@
 #include "Background.h"
 
+#include <random>
+
 #include "TextureManager.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 const int TIME_TO_MOVE = 10;
 Background::Background()
 {
-	TextureManager::getInstance()->load("assets/background1.png", "background1", GameManager::getInstance()->getRenderer());
+	srand(time(NULL));
+
+	int i = rand() % 2;
+	if (i == 0)
+	{
+		TextureManager::getInstance()->load("assets/background1.png", "background1", GameManager::getInstance()->getRenderer());
+		SoundManager::getInstance()->playMusic("home_theme", -1);
+	}
+	else
+	{
+		TextureManager::getInstance()->load("assets/background3.png", "background1", GameManager::getInstance()->getRenderer());
+		SoundManager::getInstance()->playMusic("night_theme", -1);
+	}
 
 	mWindowsWidth = GameManager::getInstance()->getWidthWindows() / 2;
 	mWindowsHeight = GameManager::getInstance()->getHeightWindows();

@@ -1,6 +1,8 @@
 #include "ButtonModel.h"
 
 #include "InputManager.h"
+
+#include "SoundManager.h"
 ButtonModel::ButtonModel() :
 	ObjectModel(),
 	m_bReleased(false),
@@ -25,15 +27,16 @@ void ButtonModel::processData()
 		)
 	{
 		mIndexFrames = MOUSE_OVER;
-		if (InputManager::getInstance()->getMouseButton(LEFT))
+		if (InputManager::getInstance()->getMouseButton(LEFT) && m_bReleased == true)
 		{
-
+			SoundManager::getInstance()->playSound("click_button", 0);
 			//mIndexFrames = CLICKED;
 			mCallback();
-			//m_bReleased = false;
+			m_bReleased = false;
 		}
 		else
 		{
+			m_bReleased = true;
 		}
 	}
 	else

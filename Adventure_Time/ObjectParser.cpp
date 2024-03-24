@@ -21,6 +21,25 @@ struct Texture
 };
 
 
+void ObjectParser::parserTexture(const std::string& filePath, std::vector<Texture>& textureVector)
+{
+	XmlTree tree;
+	tree.parseXmlFile(filePath);
+	XmlNode* root = tree.getRoot();
+
+	XmlNode* textures = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("TEXTURES"))
+		{
+			textures = ite;
+			break;
+		}
+	}
+
+	loadTexture(textureVector, textures);
+}
+
 ObjectParser::ObjectParser()
 {
 

@@ -79,6 +79,19 @@ public:
 	{
 		return mStatus.DMG;
 	}
+	Status* getStatus()
+	{
+		return &mStatus;
+	}
+
+	bool isDying() const
+	{
+		if (mCountTimeDying == 0)
+		{
+			return false;
+		}
+		return true;
+	}
 private:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
@@ -123,7 +136,8 @@ private:
 		ATTACK1 = 4,
 		HURT = 5,
 		LANDING = 6,
-		DASH = 7
+		DASH = 7,
+		DYING = 8
 
 	};
 
@@ -141,6 +155,8 @@ private:
 	void landing();
 	void dash();
 	void dying();
+
+	void completeUpdateMethod();
 };
 
 #endif

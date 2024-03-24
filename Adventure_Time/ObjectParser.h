@@ -23,6 +23,8 @@ public:
 		}
 		return s_pInstance;
 	}
+
+	void parserTexture(const std::string& filePath, std::vector<Texture>& textureVector);
 private:
 	static ObjectParser* s_pInstance;
 

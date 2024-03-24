@@ -242,7 +242,6 @@ void BarrerKnight::run()
 {
 	Info temp = actions["run"];
 	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-	std::cout << temp.numFrames << '\n';
 	/*animation->changeAnim("barrer_run", 7, mFlip);
 	animation->setSize(59, 64);*/
 }

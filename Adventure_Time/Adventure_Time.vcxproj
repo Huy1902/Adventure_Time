@@ -144,6 +144,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -156,6 +157,8 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="StatusManager.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tileset.cpp" />
@@ -172,6 +175,7 @@
     <ClInclude Include="Constant.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />
@@ -186,6 +190,8 @@
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="StatusManager.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tileset.h" />
@@ -198,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="BarerKnight.xml" />
+    <Xml Include="game_over_state.xml" />
     <Xml Include="home_state.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
