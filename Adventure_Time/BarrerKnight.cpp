@@ -23,6 +23,8 @@ void BarrerKnight::getHurt()
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
+		mPosition->setX(mPosition->getX() + animation->getWidth() / 2 - mActions["dying"].w / 2);
+		/*animation->setPosition({ m});*/
 	}
 }
 
@@ -63,6 +65,10 @@ BarrerKnight::BarrerKnight() :
 	mCountStamina = 0;
 
 	animation->setSize(0, 0);
+
+	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
+
+	std::cout << mDyingTime << '\n';
 }
 BarrerKnight::~BarrerKnight()
 {
@@ -89,6 +95,17 @@ void BarrerKnight::clearObject()
 
 void BarrerKnight::processData()
 {
+	if (mStatus.isAlive == false)
+	{
+		mCurrentAction = DYING;
+		--mDyingTime;
+		if (mDyingTime == 0)
+		{
+			m_bDying = false;
+		}
+		AnimationProcess();
+		return;
+	}
 
 	if (m_bHit == true)
 	{
@@ -207,16 +224,10 @@ void BarrerKnight::processData()
 		}
 	}
 
-	/*if (sideStuck() == 1 && mVelocity->getX() < 0)
+	if (sideStuck(this) == true)
 	{
 		mVelocity->setX(0);
-		right = true;
 	}
-	if (sideStuck() == 2 && mVelocity->getX() > 0)
-	{
-		mVelocity->setX(0);
-		right = false
-	}*/
 	if (m_bSleep == true)
 	{
 		mCountStamina = 0;
@@ -269,6 +280,9 @@ void BarrerKnight::AnimationProcess()
 		break;
 	case BarrerKnight::ATTACK2:
 		attack2();
+		break;
+	case BarrerKnight::DYING:
+		dying();
 		break;
 	default:
 		break;

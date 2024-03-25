@@ -2,6 +2,8 @@
 #include "GameManager.h"
 #include "InputManager.h"
 
+#include "CollisionManager.h"
+
 EnemyObject::EnemyObject() :
 	ObjectModel()
 {
@@ -88,5 +90,15 @@ void EnemyObject::dying()
 {
 	Info temp = mActions["dying"];
 	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}
+
+bool EnemyObject::sideStuck(EnemyObject* obj)
+{
+	if ( (CollisionManager::getInstance()->checkEnemySideLeft(obj) && obj->isRight() == false) || 
+		(CollisionManager::getInstance()->checkEnemySideRight(obj) && obj->isRight() == true) )
+	{
+		return true;
+	}
+	return false;
 }
 

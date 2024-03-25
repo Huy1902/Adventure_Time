@@ -51,6 +51,9 @@
     <Filter Include="Header Files\Parser">
       <UniqueIdentifier>{3e3605f4-157f-4a06-8fd1-f5135fc6932f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\XML">
+      <UniqueIdentifier>{7915e206-ea91-45dc-bf66-409b7bbcdfa0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -237,13 +240,23 @@
     <Text Include="map1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="BarerKnight.xml">
-      <Filter>Source Files</Filter>
+    <Xml Include="droid_zapper.xml">
+      <Filter>Source Files\XML</Filter>
     </Xml>
-    <Xml Include="home_state.xml" />
-    <Xml Include="game_over_state.xml" />
-    <Xml Include="MainCharacter.xml" />
-    <Xml Include="pause_state.xml" />
-    <Xml Include="droid_zapper.xml" />
+    <Xml Include="BarerKnight.xml">
+      <Filter>Source Files\XML</Filter>
+    </Xml>
+    <Xml Include="pause_state.xml">
+      <Filter>Source Files\XML</Filter>
+    </Xml>
+    <Xml Include="game_over_state.xml">
+      <Filter>Source Files\XML</Filter>
+    </Xml>
+    <Xml Include="home_state.xml">
+      <Filter>Source Files\XML</Filter>
+    </Xml>
+    <Xml Include="MainCharacter.xml">
+      <Filter>Source Files\XML</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

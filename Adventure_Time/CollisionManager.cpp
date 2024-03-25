@@ -112,6 +112,28 @@ bool CollisionManager::checkPlayerSideRight()
 	return false;
 }
 
+bool CollisionManager::checkEnemySideLeft(EnemyObject* enemy)
+{
+	double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX();
+	double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
+	if (mGround->getID(e_x, e_y) != -1)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool CollisionManager::checkEnemySideRight(EnemyObject* enemy)
+{
+	double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth();
+	double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
+	if (mGround->getID(e_x, e_y) != -1)
+	{
+		return true;
+	}
+	return false;
+}
+
 bool CollisionManager::checkEnemyOnGround(EnemyObject* enemy)
 {
 	double x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth() / 2;

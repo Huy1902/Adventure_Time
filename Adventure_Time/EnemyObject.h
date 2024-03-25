@@ -129,8 +129,8 @@ protected:
 		ATTACK2 = 7,
 		DYING = 8
 	};
-	bool m_bDying = false;
-
+	bool m_bDying = true;
+	int mDyingTime = 0;
 	Action mCurrentAction;
 
 	Status mStatus;
@@ -150,6 +150,8 @@ protected:
 	void hit();
 	void attack2();
 	void dying();
+
+	bool sideStuck(EnemyObject* obj);
 private:
 	int mAttack1Time;
 };

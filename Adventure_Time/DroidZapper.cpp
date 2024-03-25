@@ -97,7 +97,6 @@ void DroidZapper::processData()
 	if (mStatus.isAlive == false)
 	{
 		mCurrentAction = DYING;
-		m_bDying = true;
 		--mDyingTime;
 		if (mDyingTime == 0)
 		{
@@ -215,6 +214,10 @@ void DroidZapper::processData()
 		mVelocity->setX(0);
 		right = false
 	}*/
+	if (sideStuck(this) == true)
+	{
+		mVelocity->setX(0);
+	}
 	if (m_bSleep == true)
 	{
 		mCountStamina = 0;
@@ -278,18 +281,4 @@ bool DroidZapper::onGround()
 {
 	return CollisionManager::getInstance()->checkEnemyOnGround(this);
 }
-
-//int DroidZapper::sideStuck()
-//{
-//	if (CollisionManager::getInstance()->checkPlayerSideLeft() == true)
-//	{
-//		return 1;
-//	}
-//	else
-//		if (CollisionManager::getInstance()->checkPlayerSideRight() == true)
-//		{
-//			return 2;
-//		}
-//	return 0;
-//}
 

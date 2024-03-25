@@ -85,7 +85,6 @@ private:
 	bool m_bHit;
 	int mCountHitTime;
 	int mCountStamina;
-	int mDyingTime;
 
 
 	bool m_bSleep = true;

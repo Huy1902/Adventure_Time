@@ -29,8 +29,8 @@ using namespace std;
 Map::Map()
 {
 	mPosition = new GameVector(0, 0);
-	/*BarrerKnight* obj1 = new BarrerKnight();
-	mEnemy.push_back(obj1);*/
+	BarrerKnight* obj1 = new BarrerKnight();
+	mEnemy.push_back(obj1);
 
 	DroidZapper* obj2 = new DroidZapper();
 	mEnemy.push_back(obj2);
@@ -140,6 +140,7 @@ void Map::processEnemyAndPlayer()
 					mPlayer->getHurt();
 				}
 			}
+			(*ite)->processData();
 			if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
 			{
 				if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
@@ -147,24 +148,24 @@ void Map::processEnemyAndPlayer()
 					std::cout << "Player is attack\n";
 					(*ite)->getHurt();
 					std::cout << (*ite)->getStatus()->HP << '\n';
-					if ((*ite)->isAlive() == false && (*ite)->getDying() == false)
-					{
-						delete* ite;
-						ite = mEnemy.erase(ite);
-					}
-					else
-					{
-						increase_ite = true;
-					}
+					//std::cout << (*ite)->getDying() << '\n';
 				}
 			}
 			else
 			{
 				increase_ite = true;
 			}
-			(*ite)->processData();
+			if ((*ite)->isAlive() == false && (*ite)->getDying() == false)
+			{
+				delete* ite;
+				ite = mEnemy.erase(ite);
+			}
+			else
+			{
+				increase_ite = true;
+			}
 
-			if (increase_ite == true)
+			if (increase_ite == true && ite != mEnemy.end())
 			{
 				++ite;
 			}
@@ -235,7 +236,7 @@ void Map::renderMap()
 	for (size_t i = 0; i < mEnemy.size(); ++i)
 	{
 		//std::cout << mEnemy[i]->getPosition()->getX() << ' ' << mPosition->getX() << ' ' << mEnemy[i]->getPosition()->getX() << ' ' << mPosition->getX() + WIN_WIDTH << '\n';
-		if (mEnemy[i]->getPosition()->getX() > mPosition->getX() && mEnemy[i]->getPosition()->getX() < mPosition->getX() + WIN_WIDTH)
+		if (mEnemy[i]->getPosition()->getX() >= mPosition->getX() && mEnemy[i]->getPosition()->getX() < mPosition->getX() + WIN_WIDTH)
 		{
 			mEnemy[i]->setMapPosition(*mPosition);
 			mEnemy[i]->renderObject();
