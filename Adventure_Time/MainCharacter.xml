@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<CHARACTER>
+	<TEXTURES>
+		<texture filePath="assets/knight_player/Walking_KG_2.png" textureID="run2"/>
+		<texture filePath="assets/knight_player/Jump_KG_2.png" textureID="jump2"/>
+		<texture filePath="assets/knight_player/Fall_KG_2.png" textureID="fall2"/>
+		<texture filePath="assets/knight_player/Attack_KG_1.png" textureID="attack1"/>
+		<texture filePath="assets/knight_player/Hurt_KG_2.png" textureID="hurt2"/>
+		<texture filePath="assets/knight_player/Idle_KG_2.png" textureID="idle2"/>
+		<texture filePath="assets/knight_player/Dashing_KG_2.png" textureID="dash2"/>
+		<texture filePath="assets/knight_player/Dying_KG_2.png" textureID="dying2"/>
+		<texture filePath="assets/knight_player/Landing_KG_2.png" textureID="landing2"/>
+	</TEXTURES>
+	<ACTIONS>
+		<action name="run" textureID="run2" numFrame="7" w="100" h="64"/>
+		<action name="jump" textureID="jump2" numFrame="6" w="100" h="64" speed="4"/>
+		<action name="fall" textureID="fall2" numFrame="3" w="100" h="64"/>
+		<action name="attack1" textureID="attack1" numFrame="6" w="100" h="64"/>
+		<action name="hurt" textureID="hurt2" numFrame="4" w="100" h="64" speed="3"/>
+		<action name="idle" textureID="idle2" numFrame="4" w="100" h="64"/>
+		<action name="dash" textureID="dash2" numFrame="4" w="100" h="64" speed="3"/>
+		<action name="dying" textureID="dying2" numFrame="6" w="100" h="64" speed="5"/>
+		<action name="landing" textureID="landing2" numFrame="4" w="100" h="64"/>
+	</ACTIONS>
+	<SOUNDS>
+		<sound filePath="assets/sfx/dying_sfx.wav" soundID="dying" type="1"/>
+	</SOUNDS>
+</CHARACTER>

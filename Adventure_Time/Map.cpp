@@ -10,6 +10,10 @@
 
 #include "BarrerKnight.h"
 
+#include "SoundManager.h"
+
+#include "StatusManager.h"
+
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
 const int TILE_SIZE = 32;
@@ -106,31 +110,77 @@ void Map::processMapAndPlayer()
 void Map::processEnemyAndPlayer()
 {
 	mPlayer->processData();
-	vector<EnemyObject*>::iterator ite = mEnemy.begin();
-	while (ite != mEnemy.end())
+	if (mEnemy.empty() == true)
 	{
-		if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
+		m_bFight = false;
+	}
+	else
+	{
+		vector<EnemyObject*>::iterator ite = mEnemy.begin();
+		while (ite != mEnemy.end())
 		{
-			mPlayer->getHurt((*ite)->getDamage());
-		}
-		(*ite)->processData();
-		if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
-		{
-			(*ite)->getHurt(mPlayer->getDamage());
-			std::cout << "Player is attack\n";
-			if ((*ite)->isAlive() == false)
+			if (CollisionManager::getInstance()->checkEnemyNearPlayer(*ite) == true)
 			{
-				delete* ite;
-				ite = mEnemy.erase(ite);
+				m_bFight = true;
+			}
+			else
+			{
+				m_bFight = false;
+			}
+			if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
+			{
+				if (StatusManager::getInstance()->whenEnemyAttackPlayer(*ite) == true)
+				{
+					mPlayer->getHurt();
+				}
+			}
+			(*ite)->processData();
+			if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
+			{
+				if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
+				{
+					std::cout << "Player is attack\n";
+					(*ite)->getHurt();
+					std::cout << (*ite)->getStatus()->HP << '\n';
+					if ((*ite)->isAlive() == false)
+					{
+						delete* ite;
+						ite = mEnemy.erase(ite);
+					}
+					else
+					{
+						++ite;
+					}
+				}
 			}
 			else
 			{
 				++ite;
 			}
 		}
-		else
+	}
+	if (m_bFight == true)
+	{
+		mCountFightTime = 50;
+		if (m_bIsPlayingFight == false)
 		{
-			++ite;
+			Mix_HaltMusic();
+			SoundManager::getInstance()->playMusic("fight_theme", -1);
+			m_bIsPlayingFight = true;
+		}
+	}
+	else
+	{
+		if (mCountFightTime > 0)
+		{
+			--mCountFightTime;
+		}
+		else if (mCountFightTime == 0)
+		{
+			Mix_HaltMusic();
+			SoundManager::getInstance()->playMusic("play_theme", -1);
+			m_bIsPlayingFight = false;
+			--mCountFightTime;
 		}
 	}
 }
@@ -154,7 +204,7 @@ void Map::updateMap()
 
 	processEnemyAndPlayer();
 	processMapAndPlayer();
-	
+
 	for (Layer* ite : mLayer)
 	{
 		//ite->setVelocity(*mPlayer->getVelocity());

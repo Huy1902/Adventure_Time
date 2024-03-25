@@ -88,15 +88,19 @@ public:
 	}
 	virtual int getDamage() const
 	{
-		return mStatus.DMG;
+		return mStatus.ATK;
 	}
-	virtual void getHurt(const int & dmg)
+	virtual void getHurt()
 	{
 
 	}
 	virtual bool isAlive()
 	{
 		return mStatus.isAlive;
+	}
+	virtual Status* getStatus()
+	{
+		return &mStatus;
 	}
 protected:
 
@@ -116,15 +120,16 @@ protected:
 		FALL = 3,
 		WAKE_UP = 4,
 		ATTACK1 = 5,
-		HIT = 6
+		HIT = 6,
+		ATTACK2 = 7
 	};
 
 	Action mCurrentAction;
 
+	Status mStatus;
 
 
 private:
-	Status mStatus;
 	int mAttack1Time;
 	Animation* animation;
 	SDL_RendererFlip mFlip;

@@ -13,8 +13,7 @@
 #include "HomeState.h"
 #include "PlayingState.h"
 
-
-const std::string  GameOverState::m_sHomeID = "GAME_OVER";
+const std::string  GameOverState::m_sGameOverID = "GAME_OVER";
 
 
 
@@ -57,6 +56,7 @@ void GameOverState::renderState()
 			mObjects[i]->renderObject();
 		}
 	}
+
 }
 
 bool GameOverState::startState()

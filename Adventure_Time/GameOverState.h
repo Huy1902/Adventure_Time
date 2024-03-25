@@ -14,10 +14,10 @@ public:
     virtual void renderState();
     virtual bool startState();
     virtual bool exitState();
-    virtual std::string getStateID() const { return m_sHomeID; }
+    virtual std::string getStateID() const { return m_sGameOverID; }
 
 private:
-    static const std::string m_sHomeID;
+    static const std::string m_sGameOverID;
     //std::vector<ObjectModel*> mObjects;
     //std::vector<std::string> textureID;
     std::vector<callback> mCallback;

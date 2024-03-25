@@ -19,6 +19,7 @@
 #include "HomeState.h"
 #include "InputManager.h"
 #include "SoundManager.h"
+#include "FontManager.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -42,6 +43,7 @@ GameManager::GameManager() :
 	SoundManager::getInstance()->loadSound("assets/music/Make_Haste_Partner.mp3", "fight_theme", MUSIC);
 	SoundManager::getInstance()->loadSound("assets/sfx/join_game.wav", "play_button", SFX);
 	SoundManager::getInstance()->loadSound("assets/sfx/click_sfx.wav", "click_button", SFX);
+
 }
 
 GameManager::~GameManager()
@@ -103,6 +105,9 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	mFSM->pushState(new HomeState());
 
 	m_bRunning = true;
+
+	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 24, m_pRenderer);
+
 }
 
 void GameManager::takeInput()

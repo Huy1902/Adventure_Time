@@ -7,7 +7,7 @@
 #include "InputManager.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
-
+#include "ObjectParser.h"
 const int HURT_MOVE_BACK = 2;
 const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
@@ -21,19 +21,23 @@ PlayerObject::PlayerObject() :
 	ObjectModel()
 	//m_bOnAir(false)
 {
-	TextureManager::getInstance()->load("assets/knight_player/Walking_KG_2.png", "run2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Jump_KG_2.png", "jump2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Fall_KG_2.png", "fall2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Attack_KG_1.png", "attack1", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Hurt_KG_2.png", "hurt2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Landing_KG_2.png", "landing2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Idle_KG_2.png", "idle2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Dashing_KG_2.png", "dash2", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/knight_player/Dying_KG_2.png", "dying2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Walking_KG_2.png", "run2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Jump_KG_2.png", "jump2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Fall_KG_2.png", "fall2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Attack_KG_1.png", "attack1", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Hurt_KG_2.png", "hurt2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Landing_KG_2.png", "landing2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Idle_KG_2.png", "idle2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Dashing_KG_2.png", "dash2", GameManager::getInstance()->getRenderer());
+	//TextureManager::getInstance()->load("assets/knight_player/Dying_KG_2.png", "dying2", GameManager::getInstance()->getRenderer());
 
-	mStatus.DMG = 2;
-	mStatus.HP = 10;
-	mStatus.MP = 10;
+	ObjectParser::getInstance()->parserAction("MainCharacter.xml", mActions, mTextures);
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
+	}
+
+	animation = new Animation();
 
 	mPosition = new GameVector(100, 100);
 	mVelocity = new GameVector(0, 0);
@@ -52,10 +56,10 @@ PlayerObject::PlayerObject() :
 	animation->setSize(100, 64);
 	animation->setPosition(*mPosition);
 
+
 	m_bAttack = false;
 	mLandingTime = LANDING_TIME;
 	mTimeDash = DASH_TIME;
-
 	mCountTimeDying = DYING_TIME;
 	mCountTimeHurt = 0;
 }
@@ -267,11 +271,10 @@ void PlayerObject::clearObject()
 	TextureManager::getInstance()->clearFromTexture("walk2");
 	TextureManager::getInstance()->clearFromTexture("jump2");
 }
-void PlayerObject::getHurt(const int& damage)
+void PlayerObject::getHurt()
 {
 	if (mStatus.isInvulnerable == false)
 	{
-		mStatus.HP -= damage;
 		mStatus.isInvulnerable = true;
 	}
 	if (mStatus.HP <= 0)
@@ -316,52 +319,62 @@ int PlayerObject::sideStuck()
 
 void PlayerObject::run()
 {
-	animation->changeAnim("run2", 7, mFlip);
+	Info temp = mActions["run"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+	/*animation->changeAnim("barrer_run", 7, mFlip);
+	animation->setSize(59, 64);*/
 }
+//void PlayerObject::run()
+//{
+//	animation->changeAnim("run2", 7, mFlip);
+//}
 
 void PlayerObject::jump()
 {
-	animation->changeAnim("jump2", 6, mFlip);
-	animation->setSpeed(4);
+	Info temp = mActions["jump"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::idle()
 {
-	animation->changeAnim("idle2", 4, mFlip);
+	Info temp = mActions["idle"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::fall()
 {
-	animation->changeAnim("fall2", 3, mFlip);
+	Info temp = mActions["fall"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::attack1()
 {
-	animation->changeAnim("attack1", 6, mFlip);
+	Info temp = mActions["attack1"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::hurt()
 {
-	animation->changeAnim("hurt2", 4, mFlip);
-	animation->setSpeed(3);
+	Info temp = mActions["hurt"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::landing()
 {
-	animation->changeAnim("landing2", 4, mFlip);
-	//animation->setSpeed(2);
+	Info temp = mActions["landing"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::dash()
 {
-	animation->changeAnim("dash2", 4, mFlip);
-	animation->setSpeed(3);
+	Info temp = mActions["dash"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::dying()
 {
-	animation->changeAnim("dying2", 6, mFlip);
-	animation->setSpeed(5);
+	Info temp = mActions["dying"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 void PlayerObject::completeUpdateMethod()

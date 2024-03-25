@@ -12,11 +12,11 @@ const int UP_FORCE = -20;
 const int ATTACK1_TIME = 100;
 const int HIT_TIME = 8;
 
-void BarrerKnight::getHurt(const int& dmg)
+void BarrerKnight::getHurt()
 {
+	//std::cout << mStatus.HP << '\n';
 	if (mStatus.isInvulnerable == false)
 	{
-		mStatus.HP -= dmg;
 		m_bHit = true;
 	}
 
@@ -34,7 +34,7 @@ BarrerKnight::BarrerKnight() :
 	TextureManager::getInstance()->load("assets/barrel_knight/none.png", "barrer_none", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/attack1.png", "barrer_attack1", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());*/
-	
+
 	ObjectParser::getInstance()->parserAction("BarerKnight.xml", actions, textureVector);
 	for (const auto& ite : textureVector)
 	{
@@ -54,11 +54,11 @@ BarrerKnight::BarrerKnight() :
 
 	mTimeRun = 100;
 
-	mStatus.DMG = 2;
-	mStatus.HP = 50;
-	mStatus.MP = 10;
+	mStatus.HP = 200;
 
 	mCountHitTime = 0;
+
+	mCountStamina = 0;
 }
 BarrerKnight::~BarrerKnight()
 {
@@ -85,6 +85,7 @@ void BarrerKnight::clearObject()
 
 void BarrerKnight::processData()
 {
+
 	if (m_bHit == true)
 	{
 		mCurrentAction = HIT;
@@ -102,6 +103,7 @@ void BarrerKnight::processData()
 
 	static int count_run = 0;
 	static bool right = true;
+	static int countAttack2 = 9;
 	mVelocity->setX(0);
 	m_bOnGround = onGround();
 	//m_bHeadStuck = headStuck();
@@ -119,33 +121,70 @@ void BarrerKnight::processData()
 		mCurrentAction = FALL;
 	}
 
+
 	if (m_bOnGround == true)
 	{
+		if (countAttack2 > 0)
+		{
+			mCurrentAction = ATTACK2;
+			--countAttack2;
+			if (animation->getIndexFrame() == 4)
+			{
+				if (mFlip == SDL_FLIP_HORIZONTAL)
+				{
+					mVelocity->setX(-200);
+				}
+				else
+				{
+					mVelocity->setX(200);
+				}
+			}
+		}
+		else
+		{
+			mCurrentAction = RUN;
+		}
 		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) == true)
 		{
 			/*if (mCurrentAction != ATTACK1)
 			{
 				mSavePosition = *mPosition;
 			}*/
-			mCurrentAction = ATTACK1;
-			if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
+			if (mCountStamina == mStatus.STA * 5)
 			{
-				mFlip = SDL_FLIP_HORIZONTAL;
+				mCurrentAction = ATTACK2;
+				mCountStamina = 0;
+				countAttack2 = 9;
 			}
-			else
+			else if (mCountStamina > mStatus.STA * 0)
 			{
-				mFlip = SDL_FLIP_NONE;
+				mCurrentAction = ATTACK1;
 			}
-			++mAttack1Time;
-			if (mAttack1Time == ATTACK1_TIME)
+			++mCountStamina;
+
+			if (mCurrentAction != ATTACK2)
 			{
-				mAttack1Time = 0;
+				if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
+				{
+					mFlip = SDL_FLIP_HORIZONTAL;
+					mVelocity->setX(-MOVE_SPEED * 2);
+				}
+				else
+				{
+					mFlip = SDL_FLIP_NONE;
+					mVelocity->setX(MOVE_SPEED * 2);
+				}
 			}
+
+			//++mAttack1Time;
+			//if (mAttack1Time == ATTACK1_TIME)
+			//{
+			//	mAttack1Time = 0;
+			//}
 		}
 		else
 		{
-			mAttack1Time = 0;
-			mCurrentAction = RUN;
+			//mAttack1Time = 0;
 			if (count_run == mTimeRun)
 			{
 				if (right == true)
@@ -182,9 +221,33 @@ void BarrerKnight::processData()
 		mVelocity->setX(0);
 		right = false
 	}*/
-
+	if (m_bSleep == true)
+	{
+		mCountStamina = 0;
+		mCurrentAction = IDLE;
+		mVelocity->setX(0);
+		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) == true)
+		{
+			m_bSleep = false;
+			static int countWake = 100;
+			--countWake;
+			if (countWake == 0)
+			{
+			}
+		}
+	}
+	else
+	{
+		static int wakeTime = 12;
+		if (wakeTime > 0)
+		{
+			mCountStamina = 0;
+			mCurrentAction = WAKE_UP;
+			--wakeTime;
+		}
+	}
 	AnimationProcess();
-
+	//std::cout << mVelocity->getX() << '\n';
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
 
@@ -212,6 +275,10 @@ void BarrerKnight::AnimationProcess()
 		break;
 	case BarrerKnight::HIT:
 		hit();
+		break;
+	case BarrerKnight::ATTACK2:
+		attack2();
+		break;
 	default:
 		break;
 	}
@@ -277,6 +344,12 @@ void BarrerKnight::hit()
 	//animation->setSize(120, 64);
 	//animation->setSpeed(2);
 	Info temp = actions["hit"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}
+
+void BarrerKnight::attack2()
+{
+	Info temp = actions["attack2"];
 	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 

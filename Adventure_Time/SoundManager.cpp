@@ -1,5 +1,13 @@
 ﻿#include "SoundManager.h"
 #include  <iostream>
+
+enum sound_type
+{
+	NONE = -1,
+	MUSIC = 0,
+	SFX = 1
+};
+
 SoundManager* SoundManager::s_pInstance = nullptr;
 
 SoundManager::SoundManager()
@@ -20,7 +28,7 @@ SoundManager::SoundManager()
 	Mix_OpenAudio(22050, AUDIO_S16, 2, 2048);
 }
 
-bool SoundManager::loadSound(std::string   fileName, std::string   id, sound_type type)
+bool SoundManager::loadSound(std::string fileName, std::string id, sound_type type)
 {
 	if (type == MUSIC)
 	{

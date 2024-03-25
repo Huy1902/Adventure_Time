@@ -16,6 +16,7 @@
 #include "GameOverState.h"
 
 #include "SoundManager.h"
+
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
 void PlayingState::m_sPlayingToPause()
@@ -93,6 +94,8 @@ bool PlayingState::startState()
 	mMap->setPlayer(mPlayer);
 
 	StatusManager::getInstance()->setPlayer(mPlayer);
+
+	SoundManager::getInstance()->playMusic("play_theme", -1);
 
 	//mObjects.push_back(player);
 	return true;

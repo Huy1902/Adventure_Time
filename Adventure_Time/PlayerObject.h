@@ -5,6 +5,7 @@
 #include <SDL.h>
 
 #include "Animation.h"
+#include <vector>
 
 
 class PlayerObject :
@@ -60,7 +61,7 @@ public:
 	}
 	bool isAttack() const
 	{
-		if (mCurrentAction == ATTACK1 && mTimeAttack == 3)
+		if (mCurrentAction == ATTACK1 && animation->getIndexFrame() >= 1 && animation->getIndexFrame() <= 3)
 		{
 			return true;
 		}
@@ -74,12 +75,12 @@ public:
 		}
 		return false;
 	}
-	void getHurt(const int& damage);
+	void getHurt();
 	int getDamage() const
 	{
-		return mStatus.DMG;
+		return mStatus.ATK;
 	}
-	Status* getStatus()
+	virtual Status* getStatus()
 	{
 		return &mStatus;
 	}
@@ -157,6 +158,9 @@ private:
 	void dying();
 
 	void completeUpdateMethod();
+
+	std::map<std::string, Info> mActions;
+	std::vector<Texture> mTextures;
 };
 
 #endif

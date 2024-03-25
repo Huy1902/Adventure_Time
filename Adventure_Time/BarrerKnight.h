@@ -33,7 +33,7 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		if (mAttack1Time % 10 == 0)
+		if ( (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 4) ) || (mCurrentAction == ATTACK2 && animation->getIndexFrame() == 5))
 		{
 			return true;
 		}
@@ -45,9 +45,9 @@ public:
 	}
 	virtual int getDamage() const
 	{
-		return mStatus.DMG;
+		return mStatus.ATK;
 	}
-	virtual void getHurt(const int& dmg);
+	virtual void getHurt();
 	virtual bool isAlive()
 	{
 		return mStatus.isAlive;
@@ -68,7 +68,6 @@ private:
 	Animation* animation;
 	SDL_RendererFlip mFlip;
 	int mAttackTine;
-	Status mStatus;
 
 	bool m_bRight;
 	int mAttack1Time;
@@ -88,9 +87,9 @@ private:
 	bool m_bHit;
 	int mCountHitTime;
 
-	int mCoolDownAttack1;
-	
-	
+	int mCountStamina;
+
+	bool m_bSleep = true;
 
 	void AnimationProcess();
 
@@ -101,6 +100,7 @@ private:
 	void wakeUp();
 	void attack1();
 	void hit();
+	void attack2();
 
 	std::map<std::string, Info> actions;
 	std::vector<Texture> textureVector;

@@ -33,6 +33,10 @@ public:
 	{
 		return mH;
 	}
+	int getIndexFrame() const
+	{
+		return mIndexFrame;
+	}
 	/*static Animation* getInstance()
 	{
 		if (s_pInstance == nullptr)

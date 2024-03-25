@@ -36,6 +36,10 @@ private:
 	Background* mBackGround;
 	void processMapAndPlayer();
 	void processEnemyAndPlayer();
+
+	int mCountFightTime;
+	bool m_bFight;
+	bool m_bIsPlayingFight;
 };
 
 #endif

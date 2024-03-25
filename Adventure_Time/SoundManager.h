@@ -5,11 +5,7 @@
 #include <string>
 #include "SDL_mixer.h"
 
-enum sound_type
-{
-	MUSIC = 0,
-	SFX = 1
-};
+enum sound_type;
 
 //Need a singleton because every music and sound should be saved at one place and can be accessed from anywhere of the program
 class SoundManager

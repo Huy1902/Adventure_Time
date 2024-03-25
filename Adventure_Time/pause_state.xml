@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<STATES>
+	<TEXTURES>
+		<texture filePath="assets/button/back_home_button.png" textureID="back_home_button"/>
+		<texture filePath="assets/button/continue_button.png" textureID="continue_button"/>
+	</TEXTURES>
+	<BUTTONS>
+		<action name="continue_button" textureID="continue_button" numFrame="2" w="347" h="106" callbackID="1" x="660" y="530"/>
+		<action name="back_home" textureID="back_home_button" numFrame="2" w="348" h="100" callbackID="0" x="280" y="530"/>
+	</BUTTONS>
+</STATES>

@@ -8,6 +8,7 @@
 
 struct Info;
 struct Texture;
+struct Sound;
 class ObjectParser
 
 {
@@ -25,6 +26,9 @@ public:
 	}
 
 	void parserTexture(const std::string& filePath, std::vector<Texture>& textureVector);
+
+	void parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::vector<Sound>& soundVector);
+
 private:
 	static ObjectParser* s_pInstance;
 
@@ -35,6 +39,7 @@ private:
 	void loadAction(std::map<std::string, Info>& actionMap, XmlNode* actions);
 	void loadButton(std::vector<Info>& buttonMap, XmlNode* buttons);
 	void loadAnimation(std::vector<Info>& animMap, XmlNode* anims);
+	void loadSound(std::vector<Sound>& soundVector, XmlNode* sounds);
 };
 
 #endif

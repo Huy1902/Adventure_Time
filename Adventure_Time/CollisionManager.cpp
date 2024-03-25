@@ -88,7 +88,7 @@ bool CollisionManager::checkEnemyOnGround(EnemyObject* enemy)
 bool CollisionManager::checkEnemyNearPlayer(EnemyObject* enemy)
 {
 	double len = ( (*enemy->getPosition() - *enemy->getMapPosition()) - *mPlayer->getPosition()).getLength();
-	if (len <= 300.0)
+	if (len <= 500.0)
 	{
 		return true;
 	}
@@ -104,7 +104,7 @@ bool CollisionManager::checkEnemyAttackPlayer(EnemyObject* enemy)
 		double p_x = mPlayer->getPosition()->getX();
 		double p_y = mPlayer->getPosition()->getY();
 		//right
-		if (p_y != e_y)
+		if ( abs(p_y - e_y) > 20)
 		{
 			return false;
 		}
@@ -166,7 +166,7 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 		double p_x = mPlayer->getPosition()->getX();
 		double p_y = mPlayer->getPosition()->getY();
 
-		if (e_y != p_y)
+		if ( abs(e_y - p_y ) > 20)
 		{
 			return false;
 		}

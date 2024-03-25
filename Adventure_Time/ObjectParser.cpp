@@ -19,6 +19,19 @@ struct Texture
 	std::string filePath = "";
 	std::string textureID = "";
 };
+enum sound_type
+{
+	NONE = -1,
+	MUSIC = 0,
+	SFX = 1
+};
+
+struct Sound
+{
+	std::string filePath = "";
+	int type = -1;
+	std::string soundID = "";
+};
 
 
 void ObjectParser::parserTexture(const std::string& filePath, std::vector<Texture>& textureVector)
@@ -38,6 +51,10 @@ void ObjectParser::parserTexture(const std::string& filePath, std::vector<Textur
 	}
 
 	loadTexture(textureVector, textures);
+}
+
+void ObjectParser::parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::vector<Sound>& soundVector)
+{
 }
 
 ObjectParser::ObjectParser()
@@ -134,6 +151,20 @@ void ObjectParser::loadAnimation(std::vector<Info>& animMap, XmlNode* anims)
 				obj.speed = 1;
 			}
 			animMap.push_back(obj);
+			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
+		}
+	}
+}
+
+void ObjectParser::loadSound(std::vector<Sound>& soundVector, XmlNode* sounds)
+{
+	if (sounds != nullptr)
+	{
+		for (XmlNode* sound : sounds->child)
+		{
+			Sound obj;
+
+			soundVector.push_back(obj);
 			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
 		}
 	}

@@ -7,6 +7,18 @@
 #include "GameVector.h"
 #include "ActionModel.h"
 
+struct Status
+{
+	int HP = 100;
+	int STA = 20;
+	int ATK = 20;
+	int DEF = 10;
+	int IQ = 10;
+	int LUCK = 10;
+	int EXP = 100;
+	bool isAlive = true;
+	bool isInvulnerable = false;
+};
 class ObjectModel :
 	public BaseObject
 {
@@ -19,6 +31,11 @@ public:
 	virtual void renderObject() const;
 	virtual void clearObject();
 
+	virtual Status* getStatus()
+	{
+		return &mStatus;
+	}
+
 protected:
 	std::string mTextureID;
 	GameVector* mPosition;
@@ -28,14 +45,7 @@ protected:
 	int mNumFrames;
 	double mScope;
 
-};
-struct Status
-{
-	int HP;
-	int MP;
-	int DMG;
-	bool isAlive = true;
-	bool isInvulnerable = false;
+	Status mStatus;
 };
 
 #endif
