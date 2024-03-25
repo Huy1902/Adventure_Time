@@ -37,6 +37,8 @@ PlayerObject::PlayerObject() :
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
 	}
 
+	mStatus.LUCK = 100;
+
 	animation = new Animation();
 
 	mPosition = new GameVector(100, 100);
@@ -46,7 +48,7 @@ PlayerObject::PlayerObject() :
 	animation = new Animation();
 
 	mCharHeight = 64;
-	mCharWidth = 100;
+	mCharWidth = 64;
 	mCurrentAction = IDLE;
 	mBackAction = IDLE;
 	mFlip = SDL_FLIP_NONE;

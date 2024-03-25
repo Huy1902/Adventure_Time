@@ -20,12 +20,22 @@ void Tileset::renderTile(const int & id, const int & x, const int & y) const
 {
 	int src_x = id % mNumCol;
 	int src_y = id / mNumCol;
-	TextureManager::getInstance()->drawSpritePic(mID, x * mTileSize, y * mTileSize, mTileSize, mTileSize,
-		GameManager::getInstance()->getRenderer(), 1);
+	//TextureManager::getInstance()->drawSpritePicByCol(mID, x * mTileSize, y * mTileSize, mTileSize, mTileSize,
+	//	GameManager::getInstance()->getRenderer(), 1);
 
 	SDL_Rect srcRect = { src_x * mTileSize, src_y * mTileSize, mTileSize, mTileSize };
 	SDL_Rect destRect = { x, y, mTileSize, mTileSize };
 
+	SDL_RenderCopyEx(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture(mID), &srcRect, &destRect, NULL, NULL, SDL_FLIP_NONE);
+}
+
+void Tileset::renderPartOfTile(const int& id, const int& x, const int& y, const int& xSrc, const int& wSrc) const
+{
+	int src_x = id % mNumCol;
+	int src_y = id / mNumCol;
+
+	SDL_Rect srcRect = { src_x * mTileSize + xSrc, src_y * mTileSize, wSrc, mTileSize };
+	SDL_Rect destRect = { x, y, wSrc, mTileSize };
 	SDL_RenderCopyEx(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture(mID), &srcRect, &destRect, NULL, NULL, SDL_FLIP_NONE);
 }
 

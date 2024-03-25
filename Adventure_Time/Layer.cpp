@@ -60,11 +60,12 @@ int Layer::getID(const double& x, const double& y) const
 {
 	
 	//std::cout << x << ' ' << y << '\n';
-	
-	int x_p = floor(mPosition->getX() / mTileSize) + floor(x / mTileSize);
-	int y_p = floor(mPosition->getY() / mTileSize) + floor(y / mTileSize);
+	//std::cout << x / mTileSize << ' ' << y / mTileSize << ' ';
+	int x_p = (mPosition->getX() / mTileSize) + (x / mTileSize);
+	int y_p = (mPosition->getY() / mTileSize) + (y / mTileSize);
+	//std::cout << mPosition->getX() / mTileSize << ' ' << y_p << mPosition->getY() / mTileSize << '\n';
 
-	return mGrid[y_p][x_p + 2];
+	return mGrid[y_p][x_p];
 }
 
 void Layer::optimizePositionY(double& y)
@@ -77,16 +78,43 @@ void Layer::renderLayer()
 {
 	int x = mPosition->getX() / mTileSize;
 	int y = mPosition->getY() / mTileSize;
+
+	int edge_end_witdth = (int)mPosition->getX() % mTileSize;
+	int edge_start_width = mTileSize - edge_end_witdth;
+	int w2 = edge_end_witdth;
+	int w1 = edge_start_width;
+
+	//for (int i = 0; i < WINDOWS_ROW; ++i)
+	//{
+	//	if (mGrid[i + y][j + x] != -1)
+	//	{
+	//		m_pTileset->renderTile(mGrid[i + y][j + x], j * mTileSize, i * mTileSize);
+	//	}
+	//}
 	for (int i = 0; i < WINDOWS_ROW; ++i)
 	{
-		for (int j = 0; j < WINDOWS_COL; ++j)
+		if (mGrid[i + y][0 + x] != -1)
+		{
+			m_pTileset->renderPartOfTile(mGrid[i + y][0 + x], 0 * mTileSize, i * mTileSize, w2, w1);
+		}
+	}
+	for (int i = 0; i < WINDOWS_ROW; ++i)
+	{
+		for (int j = 1; j <= WINDOWS_COL; ++j)
 		{
 			if (mGrid[i + y][j + x] != -1)
 			{
-				m_pTileset->renderTile(mGrid[i + y][j + x], j * mTileSize, i * mTileSize);
+				m_pTileset->renderTile(mGrid[i + y][j + x], j * mTileSize - w2, i * mTileSize);
 			}
 		}
 	}
+	//for (int i = 0; i < WINDOWS_ROW; ++i)
+	//{
+	//	if (mGrid[i + y][WINDOWS_COL+ x] != -1)
+	//	{
+	//		m_pTileset->renderPartOfTile(mGrid[i + y][WINDOWS_COL + x], (WINDOWS_COL) * mTileSize - w2, i * mTileSize, w1, w2);
+	//	}
+	//}
 }
 
 Layer::~Layer()

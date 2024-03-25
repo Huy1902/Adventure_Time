@@ -117,7 +117,7 @@ StatusManager::~StatusManager()
 
 double StatusManager::getDMGtaken(const int& luck, const int& atk, const int& def)
 {
-	srand(time(NULL));
+	srand(time(0));
 	int random = rand() % 100 + 1;
 	double dmg_taken;
 	if (random <= luck)

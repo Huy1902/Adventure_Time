@@ -10,6 +10,7 @@ public:
 	~Tileset();
 
 	void renderTile(const int& id, const int& x, const int& y) const;
+	void renderPartOfTile(const int& id, const int& x, const int& y, const int& xSrc, const int& wSrc) const;
 	void setGround(const std::vector<int>& ground);
 	bool isGround(const int& id);
 	int getNumTile() const { return mNumTile; }

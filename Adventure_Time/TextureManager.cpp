@@ -9,6 +9,16 @@ using namespace std;
 
 TextureManager* TextureManager::s_pInstance = nullptr;
 
+void TextureManager::drawSpriteByRow(const std::string& id, int x, int y, int w, int h, SDL_Renderer* pRenderer, int indexFrame, double scope, SDL_RendererFlip f, double a, SDL_Point* c)
+{
+	SDL_Rect srcRect = { w , 0, w, h * indexFrame };
+	w = static_cast<int>(w * scope);
+	h = static_cast<int>(h * scope);
+	SDL_Rect destRect = { x, y, w, h };
+
+	SDL_RenderCopyEx(pRenderer, mTexture[id], &srcRect, &destRect, a, c, f);
+}
+
 TextureManager::TextureManager()
 {
 
@@ -44,7 +54,7 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 	
 }
 
-void TextureManager::drawSpritePic(const std::string& id, int x, int y,
+void TextureManager::drawSpritePicByCol(const std::string& id, int x, int y,
 	int w, int h, SDL_Renderer* pRenderer, int indexFrame, double scope,
 	SDL_RendererFlip f, double a, SDL_Point* c)
 {
@@ -55,6 +65,7 @@ void TextureManager::drawSpritePic(const std::string& id, int x, int y,
 
 	SDL_RenderCopyEx(pRenderer, mTexture[id], &srcRect, &destRect, a, c, f);
 }
+
 
 void TextureManager::clearFromTexture(const std::string& id)
 {

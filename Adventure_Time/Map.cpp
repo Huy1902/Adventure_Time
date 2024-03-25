@@ -14,6 +14,8 @@
 
 #include "StatusManager.h"
 
+#include "DroidZapper.h"
+
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
 const int TILE_SIZE = 32;
@@ -27,8 +29,11 @@ using namespace std;
 Map::Map()
 {
 	mPosition = new GameVector(0, 0);
-	BarrerKnight* obj1 = new BarrerKnight();
-	mEnemy.push_back(obj1);
+	/*BarrerKnight* obj1 = new BarrerKnight();
+	mEnemy.push_back(obj1);*/
+
+	DroidZapper* obj2 = new DroidZapper();
+	mEnemy.push_back(obj2);
 
 	mBackGround = new Background();
 }
@@ -73,9 +78,9 @@ void Map::setPlayer(PlayerObject* obj)
 
 void Map::processMapAndPlayer()
 {
-	if (mPosition->getX() <= 0)
+	if (mPosition->getX() <= mPlayer->getCharWidth())
 	{
-		mPosition->setX(0);
+		mPosition->setX(mPlayer->getCharWidth());
 		if (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 - 100 && mPlayer->getVelocity()->getX() > 0)
 		{
 			mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
@@ -119,7 +124,8 @@ void Map::processEnemyAndPlayer()
 		vector<EnemyObject*>::iterator ite = mEnemy.begin();
 		while (ite != mEnemy.end())
 		{
-			if (CollisionManager::getInstance()->checkEnemyNearPlayer(*ite) == true)
+			bool increase_ite = false;
+			if (CollisionManager::getInstance()->checkEnemyNearPlayer(*ite) <= 400)
 			{
 				m_bFight = true;
 			}
@@ -134,7 +140,6 @@ void Map::processEnemyAndPlayer()
 					mPlayer->getHurt();
 				}
 			}
-			(*ite)->processData();
 			if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
 			{
 				if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
@@ -142,18 +147,24 @@ void Map::processEnemyAndPlayer()
 					std::cout << "Player is attack\n";
 					(*ite)->getHurt();
 					std::cout << (*ite)->getStatus()->HP << '\n';
-					if ((*ite)->isAlive() == false)
+					if ((*ite)->isAlive() == false && (*ite)->getDying() == false)
 					{
 						delete* ite;
 						ite = mEnemy.erase(ite);
 					}
 					else
 					{
-						++ite;
+						increase_ite = true;
 					}
 				}
 			}
 			else
+			{
+				increase_ite = true;
+			}
+			(*ite)->processData();
+
+			if (increase_ite == true)
 			{
 				++ite;
 			}

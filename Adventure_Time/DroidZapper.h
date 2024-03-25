@@ -1,17 +1,14 @@
-#ifndef BARRERKNIGHT_H_
-#define BARRERKNIGHT_H_
+#ifndef DROIDZAPPER_H_
+#define DROIDZAPPER_H_
+
 #include "EnemyObject.h"
 
 #include <SDL.h>
-
-
-
-class BarrerKnight :
+class DroidZapper :
     public EnemyObject
 {
-
 public:
-	
+
 	//virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();
 	virtual void renderObject() const;
@@ -32,7 +29,7 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		if ( (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 4) ) || (mCurrentAction == ATTACK2 && animation->getIndexFrame() == 5))
+		if ((mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 4)) || (mCurrentAction == ATTACK2 && animation->getIndexFrame() == 5))
 		{
 			return true;
 		}
@@ -51,6 +48,7 @@ public:
 	{
 		return mStatus.isAlive;
 	}
+
 	virtual int getHeight()const
 	{
 		return mCharHeight;
@@ -64,9 +62,8 @@ public:
 		return m_bDying;
 	}
 
-
-	BarrerKnight();
-	~BarrerKnight();
+	DroidZapper();
+	~DroidZapper();
 
 
 
@@ -76,10 +73,6 @@ private:
 
 	bool m_bRight;
 	int mAttack1Time;
-
-
-	int mCharHeight;
-	int mCharWidth;
 
 	int mTimeRun;
 
@@ -91,15 +84,15 @@ private:
 	bool m_bOnGround;
 	bool m_bHit;
 	int mCountHitTime;
-
 	int mCountStamina;
+	int mDyingTime;
+
 
 	bool m_bSleep = true;
 
 	void AnimationProcess();
 
-
-
+	int HIT_TIME;
 };
 
 #endif

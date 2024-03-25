@@ -93,6 +93,14 @@ public:
 		}
 		return true;
 	}
+	int getSpaceLen() const
+	{
+		return mSpaceLen;
+	}
+	Animation* getAnimation()
+	{
+		return animation;
+	}
 private:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
@@ -122,6 +130,8 @@ private:
 	bool m_bHurting;
 	int mCountTimeDying;
 	int mCountTimeHurt;
+
+	int mSpaceLen = 18;
 	Status mStatus;
 
 	SDL_RendererFlip mFlip;

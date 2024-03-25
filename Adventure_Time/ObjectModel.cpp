@@ -40,7 +40,7 @@ void ObjectModel::renderObject() const
 	int x = static_cast<int>(mPosition->getX());
 	int y = static_cast<int>(mPosition->getY());
 
-	TextureManager::getInstance()->drawSpritePic(mTextureID, x, y,
+	TextureManager::getInstance()->drawSpritePicByCol(mTextureID, x, y,
 		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, SDL_FLIP_NONE);
 }
 

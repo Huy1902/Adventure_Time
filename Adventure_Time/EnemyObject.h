@@ -3,6 +3,7 @@
 #include "ObjectModel.h"
 
 #include <SDL.h>
+#include <vector>
 
 #include "Animation.h"
 
@@ -50,11 +51,11 @@ public:
 	{
 		mVelocity->setY(val);
 	}
-	int getHeight()const
+	virtual int getHeight()const
 	{
 		return mCharHeight;
 	}
-	int getCharWidth() const
+	virtual int getCharWidth() const
 	{
 		return mCharWidth;
 	}
@@ -102,6 +103,10 @@ public:
 	{
 		return &mStatus;
 	}
+	virtual bool getDying()
+	{
+		return m_bDying;
+	}
 protected:
 
 	GameVector* mVelocity;
@@ -121,18 +126,32 @@ protected:
 		WAKE_UP = 4,
 		ATTACK1 = 5,
 		HIT = 6,
-		ATTACK2 = 7
+		ATTACK2 = 7,
+		DYING = 8
 	};
+	bool m_bDying = false;
 
 	Action mCurrentAction;
 
 	Status mStatus;
 
+	Animation* animation;
 
+	SDL_RendererFlip mFlip;
+
+	std::map<std::string, Info> mActions;
+
+	std::vector<Texture> mTextures;
+
+	void run();
+	void none();
+	void wake();
+	void attack1();
+	void hit();
+	void attack2();
+	void dying();
 private:
 	int mAttack1Time;
-	Animation* animation;
-	SDL_RendererFlip mFlip;
 };
 
 #endif

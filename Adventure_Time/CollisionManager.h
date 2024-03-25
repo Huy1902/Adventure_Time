@@ -14,7 +14,7 @@ public:
 
 	bool checkPlayerAttackEnemy(EnemyObject* enemy);
 	bool checkEnemyOnGround(EnemyObject* enemy);
-	bool checkEnemyNearPlayer(EnemyObject* enemy);
+	int checkEnemyNearPlayer(EnemyObject* enemy);
 	bool checkEnemyAttackPlayer(EnemyObject* enemy);
 
 	bool checkPlayerIsRightSideWithEnemy(EnemyObject* enemy);

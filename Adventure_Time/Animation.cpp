@@ -16,7 +16,7 @@ void Animation::update()
 
 void Animation::draw()
 {
-	TextureManager::getInstance()->drawSpritePic(mTextureID, mPosition.getX(), mPosition.getY(), mW, mH, GameManager::getInstance()->getRenderer(), mIndexFrame / mSpeed, 1.0, mFlip);
+	TextureManager::getInstance()->drawSpritePicByCol(mTextureID, mPosition.getX(), mPosition.getY(), mW, mH, GameManager::getInstance()->getRenderer(), mIndexFrame / mSpeed, 1.0, mFlip);
 }
 
 void Animation::changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip)

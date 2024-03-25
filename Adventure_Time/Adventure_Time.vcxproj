@@ -142,6 +142,7 @@
     <ClCompile Include="BarrerKnight.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="DroidZapper.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="FontManager.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="DroidZapper.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="FontManager.h" />
@@ -202,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="BarerKnight.xml" />
+    <Xml Include="droid_zapper.xml" />
     <Xml Include="game_over_state.xml" />
     <Xml Include="home_state.xml" />
     <Xml Include="MainCharacter.xml" />
