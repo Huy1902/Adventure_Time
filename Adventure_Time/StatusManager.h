@@ -1,9 +1,19 @@
-#pragma once
+#ifndef STATUSMANAGER_H_
+#define STATUSMANAGER_H_
 
 #include "PlayerObject.h"
 #include "EnemyObject.h"
 
 #include "Animation.h"
+
+struct Bar
+{
+	int x;
+	int y;
+	int w;
+	int h;
+};
+
 class StatusManager
 {
 public:
@@ -45,5 +55,9 @@ private:
 	~StatusManager();
 
 	double getDMGtaken(const int& luck, const int& atk, const int& def);
+
+	std::vector<Texture> mTexture;
 };
+
+#endif //STATUSMANAGER_H_
 

@@ -1,6 +1,6 @@
 #ifndef ENEMYMODEL_H_
 #define ENEMYMODEL_H_
-#include "ObjectModel.h"
+#include "CharModel.h"
 
 #include <SDL.h>
 #include <vector>
@@ -8,7 +8,7 @@
 #include "Animation.h"
 
 class EnemyObject :
-    public ObjectModel
+    public CharModel
 {
 public:
 	EnemyObject();
@@ -31,25 +31,9 @@ public:
 	{
 		*mPosition = obj;
 	}
-	void setPositionX(const double& val)
-	{
-		mPosition->setX(val);
-	}
-	void setPositionY(const double& val)
-	{
-		mPosition->setY(val);
-	}
 	void setVelocity(const GameVector& obj)
 	{
 		*mVelocity = obj;
-	}
-	void setVelocityX(const double& val)
-	{
-		mVelocity->setX(val);
-	}
-	void setVelocityY(const double& val)
-	{
-		mVelocity->setY(val);
 	}
 	virtual int getHeight()const
 	{
@@ -77,10 +61,6 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		if (mAttack1Time % 10 == 0)
-		{
-			return true;
-		}
 		return false;
 	}
 	virtual Animation* getAnimation()
@@ -103,57 +83,25 @@ public:
 	{
 		return &mStatus;
 	}
-	virtual bool getDying()
+	virtual Status* getMaxStatus()
 	{
-		return m_bDying;
+		return &MaxStatus;
+	}
+	virtual bool isDying() const
+	{
+		if (mDyingTime == 1)
+		{
+			return false;
+		}
+		return true;
 	}
 protected:
-
-	GameVector* mVelocity;
-	GameVector* mAcceleration;
-
 	GameVector* mMapPosition;
-
-	int mCharHeight = 64;
-	int mCharWidth = 64;
-
-
-	enum Action
-	{
-		RUN = 0,
-		IDLE = 2,
-		FALL = 3,
-		WAKE_UP = 4,
-		ATTACK1 = 5,
-		HIT = 6,
-		ATTACK2 = 7,
-		DYING = 8
-	};
-	bool m_bDying = true;
-	int mDyingTime = 0;
-	Action mCurrentAction;
-
-	Status mStatus;
-
-	Animation* animation;
-
-	SDL_RendererFlip mFlip;
-
-	std::map<std::string, Info> mActions;
-
-	std::vector<Texture> mTextures;
-
-	void run();
-	void none();
-	void wake();
-	void attack1();
-	void hit();
-	void attack2();
-	void dying();
+	bool m_bSleep = true;
+	int mWakeTime;
 
 	bool sideStuck(EnemyObject* obj);
-private:
-	int mAttack1Time;
+
 };
 
 #endif

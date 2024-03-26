@@ -20,18 +20,6 @@ public:
 	}
 	void updateLayer();
 
-	//void setVelocity(const GameVector& obj)
-	//{
-	//	*mVelocity = obj;
-	//}
-	//void setVelocityX(const double & x_)
-	//{
-	//	mVelocity->setX(x_);
-	//}
-	//void setVelocityY(const double& y_)
-	//{
-	//	mVelocity->setX(y_);
-	//}
 	void setPosition(const GameVector& obj)
 	{
 		*mPosition = obj;

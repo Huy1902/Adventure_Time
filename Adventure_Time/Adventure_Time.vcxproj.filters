@@ -140,6 +140,9 @@
     <ClCompile Include="DroidZapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CharModel.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -233,6 +236,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DroidZapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

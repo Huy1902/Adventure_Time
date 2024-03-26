@@ -141,6 +141,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BarrerKnight.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
+    <ClCompile Include="CharModel.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DroidZapper.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BarrerKnight.h" />
     <ClInclude Include="ButtonModel.h" />
+    <ClInclude Include="CharModel.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="DroidZapper.h" />

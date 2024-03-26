@@ -17,26 +17,26 @@ bool CollisionManager::checkPlayerOnGround()
 	if (mGround->getID(x + 10, y + 32) != -1)
 	{
 		mGround->optimizePositionY(y);
-		mPlayer->setPositionY(y - 32);
+		mPlayer->getPosition()->setY(y - 32);
 		return true;
 	}
 	if (mGround->getID(x - 10, y + 32) != -1)
 	{
 		mGround->optimizePositionY(y);
-		mPlayer->setPositionY(y - 32);
+		mPlayer->getPosition()->setY(y - 32);
 		return true;
 	}
 	y += mPlayer->getHeight();
 	if (mGround->getID(x + 10, y) != -1)
 	{
 		mGround->optimizePositionY(y);
-		mPlayer->setPositionY(y - mPlayer->getHeight());
+		mPlayer->getPosition()->setY(y - mPlayer->getHeight());
 		return true;
 	}
 	if (mGround->getID(x - 10, y) != -1)
 	{
 		mGround->optimizePositionY(y);
-		mPlayer->setPositionY(y - mPlayer->getHeight());
+		mPlayer->getPosition()->setY(y - mPlayer->getHeight());
 		return true;
 	}
 	return false;
@@ -141,14 +141,14 @@ bool CollisionManager::checkEnemyOnGround(EnemyObject* enemy)
 	if (mGround->getID(x, y + 32) != -1)
 	{
 		mGround->optimizePositionY(y);
-		enemy->setPositionY(y - 32);
+		enemy->getPosition()->setY(y - 32);
 		return true;
 	}
 	y += enemy->getAnimation()->getHeight();
 	if (mGround->getID(x, y) != -1)
 	{
 		mGround->optimizePositionY(y);
-		enemy->setPositionY(y - enemy->getAnimation()->getHeight());
+		enemy->getPosition()->setY(y - enemy->getAnimation()->getHeight());
 		return true;
 	}
 

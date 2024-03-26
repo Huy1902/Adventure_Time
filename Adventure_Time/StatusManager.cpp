@@ -14,8 +14,7 @@ StatusManager* StatusManager::s_pInstance = nullptr;
 
 void StatusManager::updatePlayerStatus()
 {
-	mCurrentPlayer = *mPlayer->getStatus();
-	mSrcPoint.w = mDestPoint.w = (mCurrentPlayer.HP * 1.0 / mMaxPlayer.HP) * mLenPoint;
+	mSrcPoint.w = mDestPoint.w = int( ( (*mPlayer->getStatus()).HP * 1.0 / mMaxPlayer.HP) * mLenPoint);
 }
 
 void StatusManager::renderPlayerStatus()
@@ -35,7 +34,7 @@ bool StatusManager::whenPlayerAttackEnemy(EnemyObject* obj)
 	Status* taken = obj->getStatus();
 	Status* cause = mPlayer->getStatus();
 
-	int dmg	= getDMGtaken(taken->LUCK, cause->ATK, taken->DEF);
+	int dmg	= int(getDMGtaken(taken->LUCK, cause->ATK, taken->DEF));
 	taken->HP -= dmg;
 	return (dmg != 0);
 }
@@ -45,7 +44,7 @@ bool StatusManager::whenEnemyAttackPlayer(EnemyObject* obj)
 	Status* taken = mPlayer->getStatus();
 	Status* cause = obj->getStatus();
 
-	int dmg = getDMGtaken(taken->LUCK, cause->ATK, taken->DEF);
+	int dmg = int(getDMGtaken(taken->LUCK, cause->ATK, taken->DEF));
 	taken->HP -= dmg;
 	return (dmg != 0);
 }
@@ -96,10 +95,10 @@ StatusManager::StatusManager()
 {
 	TextureManager::getInstance()->load("assets/status/health_bar.png", "health_bar", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/status/health_point.png", "health_point", GameManager::getInstance()->getRenderer());
-	mSrcPoint = { 0, 0, 140, 10 };
-	mDestPoint = { 47, 27, 140, 10 };
-	mSrcHealth = { 0, 0, 190, 57 };
-	mDestHealth = { 0, 0, 190, 57 };
+	mSrcPoint = { 0, 0, 140, 10 }; // 0 0 w h
+	mDestPoint = { 47, 27, 140, 10 }; // x y w h
+	mSrcHealth = { 0, 0, 190, 57 }; // 0 0 w h
+	mDestHealth = { 0, 0, 190, 57 }; //x y w h
 
 	mLenPoint = mSrcPoint.w;
 
@@ -117,7 +116,7 @@ StatusManager::~StatusManager()
 
 double StatusManager::getDMGtaken(const int& luck, const int& atk, const int& def)
 {
-	srand(time(0));
+	srand(static_cast<unsigned int>(time(NULL)));
 	int random = rand() % 100 + 1;
 	double dmg_taken;
 	if (random <= luck)

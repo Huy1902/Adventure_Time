@@ -1,6 +1,6 @@
 #ifndef PLAYEROBJECT_H_
 #define PLAYEROBJECT_H_
-#include "ObjectModel.h"
+#include "CharModel.h"
 
 #include <SDL.h>
 
@@ -9,7 +9,7 @@
 
 
 class PlayerObject :
-    public ObjectModel
+    public CharModel
 {
 public:
 	PlayerObject();
@@ -31,25 +31,9 @@ public:
 	{
 		*mPosition = obj;
 	}
-	void setPositionX(const double& val)
-	{
-		mPosition->setX(val);
-	}
-	void setPositionY(const double& val)
-	{
-		mPosition->setY(val);
-	}
 	void setVelocity(const GameVector& obj)
 	{
 		*mVelocity = obj;
-	}
-	void setVelocityX(const double& val)
-	{
-		mVelocity->setX(val);
-	}
-	void setVelocityY(const double& val)
-	{
-		mVelocity->setY(val);
 	}
 	int getHeight()const 
 	{
@@ -59,7 +43,7 @@ public:
 	{
 		return mCharWidth;
 	}
-	bool isAttack() const
+	virtual  bool isAttack() const
 	{
 		if (mCurrentAction == ATTACK1 && animation->getIndexFrame() >= 1 && animation->getIndexFrame() <= 3)
 		{
@@ -85,17 +69,13 @@ public:
 		return &mStatus;
 	}
 
-	bool isDying() const
+	virtual bool isDying() const
 	{
-		if (mCountTimeDying == 0)
+		if (mDyingTime == 1)
 		{
 			return false;
 		}
 		return true;
-	}
-	int getSpaceLen() const
-	{
-		return mSpaceLen;
 	}
 	Animation* getAnimation()
 	{
@@ -103,19 +83,10 @@ public:
 	}
 private:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
-
-	GameVector* mVelocity;
-	GameVector* mAcceleration;
-
-	bool m_bRight;
-
-
-	int mCharHeight;
-	int mCharWidth;
-
 	bool onGround();
 	bool headStuck();
 	int sideStuck();
+
 
 	bool m_bHeadStuck;
 	bool m_bJump;
@@ -126,51 +97,14 @@ private:
 	int mLandingTime;
 	int mTimeDash;
 	int mCooldownDash;
-	bool m_bDying;
+
 	bool m_bHurting;
-	int mCountTimeDying;
+
 	int mCountTimeHurt;
-
-	int mSpaceLen = 18;
-	Status mStatus;
-
-	SDL_RendererFlip mFlip;
-
 	void AnimationProcess();
-
-	enum Action
-	{
-		RUN = 0,
-		JUMP = 1,
-		IDLE = 2,
-		FALL = 3,
-		ATTACK1 = 4,
-		HURT = 5,
-		LANDING = 6,
-		DASH = 7,
-		DYING = 8
-
-	};
-
-	Action mCurrentAction;
-	Action mBackAction;
-
-	Animation* animation;
-
-	void run();
-	void jump();
-	void idle();
-	void fall();
-	void attack1();
-	void hurt();
-	void landing();
-	void dash();
-	void dying();
 
 	void completeUpdateMethod();
 
-	std::map<std::string, Info> mActions;
-	std::vector<Texture> mTextures;
 };
 
 #endif

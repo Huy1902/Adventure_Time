@@ -17,8 +17,7 @@ const int DASH_TIME = 12;
 const int HURT_TIME = 12;
 const int DYING_TIME = 29;
 
-PlayerObject::PlayerObject() :
-	ObjectModel()
+PlayerObject::PlayerObject()
 	//m_bOnAir(false)
 {
 	//TextureManager::getInstance()->load("assets/knight_player/Walking_KG_2.png", "run2", GameManager::getInstance()->getRenderer());
@@ -37,7 +36,7 @@ PlayerObject::PlayerObject() :
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
 	}
 
-	mStatus.LUCK = 100;
+	mStatus.LUCK = 10;
 
 	animation = new Animation();
 
@@ -50,7 +49,6 @@ PlayerObject::PlayerObject() :
 	mCharHeight = 64;
 	mCharWidth = 64;
 	mCurrentAction = IDLE;
-	mBackAction = IDLE;
 	mFlip = SDL_FLIP_NONE;
 	animation->changeAnim("idle2", 4, mFlip);
 
@@ -62,7 +60,7 @@ PlayerObject::PlayerObject() :
 	m_bAttack = false;
 	mLandingTime = LANDING_TIME;
 	mTimeDash = DASH_TIME;
-	mCountTimeDying = DYING_TIME;
+	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
 	mCountTimeHurt = 0;
 }
 
@@ -83,7 +81,7 @@ void PlayerObject::processData()
 	m_bHeadStuck = headStuck();
 	if (mStatus.isAlive == false)
 	{
-		--mCountTimeDying;
+		--mDyingTime;
 		mCurrentAction = DYING;
 		completeUpdateMethod();
 		return;
@@ -319,65 +317,6 @@ int PlayerObject::sideStuck()
 	return 0;
 }
 
-void PlayerObject::run()
-{
-	Info temp = mActions["run"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-	/*animation->changeAnim("barrer_run", 7, mFlip);
-	animation->setSize(59, 64);*/
-}
-//void PlayerObject::run()
-//{
-//	animation->changeAnim("run2", 7, mFlip);
-//}
-
-void PlayerObject::jump()
-{
-	Info temp = mActions["jump"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::idle()
-{
-	Info temp = mActions["idle"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::fall()
-{
-	Info temp = mActions["fall"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::attack1()
-{
-	Info temp = mActions["attack1"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::hurt()
-{
-	Info temp = mActions["hurt"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::landing()
-{
-	Info temp = mActions["landing"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::dash()
-{
-	Info temp = mActions["dash"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
-
-void PlayerObject::dying()
-{
-	Info temp = mActions["dying"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-}
 
 void PlayerObject::completeUpdateMethod()
 {

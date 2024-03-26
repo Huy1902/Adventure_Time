@@ -9,11 +9,11 @@
 		<texture filePath="assets/droid_zapper/death.png" textureID="droid_zapper_death"/>
 	</TEXTURES>
 	<ACTIONS>
-		<action name="run" textureID="droid_zapper_run" numFrame="6" w="384" h="64"/>
-		<action name="none" textureID="droid_zapper_none" numFrame="1" w="384" h="64"/>
-		<action name="wake" textureID="droid_zapper_wake" numFrame="7" w="384" h="64" speed="3"/>
-		<action name="attack1" textureID="droid_zapper_attack1" numFrame="10" w="384" h="64" speed="4"/>
-		<action name="dying" textureID="droid_zapper_death" numFrame="8" w="384" h="64" speed="2"/>
-		<action name="hit" textureID="droid_zapper_hit" numFrame="2" w="384" h="64" speed="2"/>
+		<action name="run" textureID="droid_zapper_run" numFrame="6" w="190" h="64"/>
+		<action name="none" textureID="droid_zapper_none" numFrame="1" w="190" h="64"/>
+		<action name="wake" textureID="droid_zapper_wake" numFrame="7" w="190" h="64" speed="2"/>
+		<action name="attack1" textureID="droid_zapper_attack1" numFrame="10" w="190" h="64" speed="2"/>
+		<action name="dying" textureID="droid_zapper_death" numFrame="8" w="190" h="64" speed="2"/>
+		<action name="hit" textureID="droid_zapper_hit" numFrame="2" w="190" h="64" speed="2"/>
 	</ACTIONS>
 </CHARACTER>

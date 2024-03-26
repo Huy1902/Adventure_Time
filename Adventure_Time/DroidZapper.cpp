@@ -29,11 +29,6 @@ void DroidZapper::getHurt()
 DroidZapper::DroidZapper() :
 	EnemyObject()
 {
-	/*TextureManager::getInstance()->load("assets/barrel_knight/run.png", "barrer_run", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/wake.png", "barrer_wake", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/none.png", "barrer_none", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/attack1.png", "barrer_attack1", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());*/
 
 	ObjectParser::getInstance()->parserAction("droid_zapper.xml", mActions, mTextures);
 	for (const auto& ite : mTextures)
@@ -63,10 +58,14 @@ DroidZapper::DroidZapper() :
 	HIT_TIME = mActions["hit"].numFrames * mActions["hit"].speed;
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
+	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed;
+
 
 	animation->setSize(0, 0);
 
 	mCharWidth = 40;
+
+	MaxStatus = mStatus;
 
 }
 DroidZapper::~DroidZapper()
@@ -77,10 +76,6 @@ DroidZapper::~DroidZapper()
 	}
 }
 
-//void DroidZapper::loadTexture(std::unique_ptr<TextureLoader> Info)
-//{
-//	ObjectModel::loadTexture(std::move(Info));
-//}
 void DroidZapper::renderObject() const
 {
 	animation->setPosition(*mPosition - *mMapPosition);
@@ -98,10 +93,6 @@ void DroidZapper::processData()
 	{
 		mCurrentAction = DYING;
 		--mDyingTime;
-		if (mDyingTime == 0)
-		{
-			m_bDying = false;
-		}
 		AnimationProcess();
 		return;
 	}
@@ -150,13 +141,7 @@ void DroidZapper::processData()
 			{
 				mSavePosition = *mPosition;
 			}*/
-			if (mCountStamina == mStatus.STA * 5)
-			{
-				mCurrentAction = ATTACK2;
-				mCountStamina = 0;
-				countAttack2 = 9;
-			}
-			else if (mCountStamina > mStatus.STA * 0)
+			if (mCountStamina > mStatus.STA * 2)
 			{
 				mCurrentAction = ATTACK1;
 			}
@@ -176,7 +161,7 @@ void DroidZapper::processData()
 		}
 		else
 		{
-			//mAttack1Time = 0;
+			mCurrentAction = RUN;
 			if (count_run == mTimeRun)
 			{
 				if (right == true)
@@ -203,17 +188,6 @@ void DroidZapper::processData()
 		}
 
 	}
-
-	/*if (sideStuck() == 1 && mVelocity->getX() < 0)
-	{
-		mVelocity->setX(0);
-		right = true;
-	}
-	if (sideStuck() == 2 && mVelocity->getX() > 0)
-	{
-		mVelocity->setX(0);
-		right = false
-	}*/
 	if (sideStuck(this) == true)
 	{
 		mVelocity->setX(0);
@@ -230,12 +204,11 @@ void DroidZapper::processData()
 	}
 	else
 	{
-		static int wakeTime = 12;
-		if (wakeTime > 0)
+		if (mWakeTime > 0)
 		{
 			mCountStamina = 0;
 			mCurrentAction = WAKE_UP;
-			--wakeTime;
+			--mWakeTime;
 		}
 	}
 	//std::cout << mVelocity->getX() << '\n';

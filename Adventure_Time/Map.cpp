@@ -83,17 +83,17 @@ void Map::processMapAndPlayer()
 		mPosition->setX(mPlayer->getCharWidth());
 		if (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 - 100 && mPlayer->getVelocity()->getX() > 0)
 		{
-			mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
+			mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 			*mPosition += *mPlayer->getVelocity();
 		}
 		else if (mPlayer->getPosition()->getX() < 0)
 		{
-			mPlayer->setPositionX(0);
+			mPlayer->getPosition()->setX(0);
 		}
 	}
 	else if (mPosition->getX() > 0 && mPosition->getX() < MAP_WIDTH * TILE_SIZE - WIN_WIDTH)
 	{
-		mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
+		mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 		*mPosition += *mPlayer->getVelocity();
 	}
 	else
@@ -101,12 +101,12 @@ void Map::processMapAndPlayer()
 		mPosition->setX(MAP_WIDTH * TILE_SIZE - WIN_WIDTH);
 		if (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPlayer->getVelocity()->getX() < 0)
 		{
-			mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
+			mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 			*mPosition += *mPlayer->getVelocity();
 		}
 		else if (mPlayer->getPosition()->getX() > WIN_WIDTH)
 		{
-			mPlayer->setPositionX(WIN_WIDTH);
+			mPlayer->getPosition()->setX(WIN_WIDTH);
 		}
 	}
 	mPosition->setY(0);
@@ -121,6 +121,7 @@ void Map::processEnemyAndPlayer()
 	}
 	else
 	{
+		m_bFight = false;
 		vector<EnemyObject*>::iterator ite = mEnemy.begin();
 		while (ite != mEnemy.end())
 		{
@@ -128,10 +129,6 @@ void Map::processEnemyAndPlayer()
 			if (CollisionManager::getInstance()->checkEnemyNearPlayer(*ite) <= 400)
 			{
 				m_bFight = true;
-			}
-			else
-			{
-				m_bFight = false;
 			}
 			if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
 			{
@@ -148,14 +145,14 @@ void Map::processEnemyAndPlayer()
 					std::cout << "Player is attack\n";
 					(*ite)->getHurt();
 					std::cout << (*ite)->getStatus()->HP << '\n';
-					//std::cout << (*ite)->getDying() << '\n';
+					//std::cout << (*ite)->isDying() << '\n';
 				}
 			}
 			else
 			{
 				increase_ite = true;
 			}
-			if ((*ite)->isAlive() == false && (*ite)->getDying() == false)
+			if ((*ite)->isAlive() == false && (*ite)->isDying() == false)
 			{
 				delete* ite;
 				ite = mEnemy.erase(ite);

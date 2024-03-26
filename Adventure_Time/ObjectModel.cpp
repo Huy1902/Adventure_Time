@@ -13,7 +13,7 @@ ObjectModel::ObjectModel() :
 
 ObjectModel::~ObjectModel()
 {
-
+	delete mPosition;
 }
 
 void ObjectModel::loadTexture(std::unique_ptr<TextureLoader> Info)

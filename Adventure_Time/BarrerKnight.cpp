@@ -31,11 +31,6 @@ void BarrerKnight::getHurt()
 BarrerKnight::BarrerKnight() :
 	EnemyObject()
 {
-	/*TextureManager::getInstance()->load("assets/barrel_knight/run.png", "barrer_run", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/wake.png", "barrer_wake", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/none.png", "barrer_none", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/attack1.png", "barrer_attack1", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/barrel_knight/hit.png", "barrer_hit", GameManager::getInstance()->getRenderer());*/
 
 	ObjectParser::getInstance()->parserAction("BarerKnight.xml", mActions, mTextures);
 	for (const auto& ite : mTextures)
@@ -67,8 +62,12 @@ BarrerKnight::BarrerKnight() :
 	animation->setSize(0, 0);
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
+	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed;
 
 	std::cout << mDyingTime << '\n';
+
+	MaxStatus = mStatus;
+
 }
 BarrerKnight::~BarrerKnight()
 {
@@ -78,10 +77,6 @@ BarrerKnight::~BarrerKnight()
 	}
 }
 
-//void BarrerKnight::loadTexture(std::unique_ptr<TextureLoader> Info)
-//{
-//	ObjectModel::loadTexture(std::move(Info));
-//}
 void BarrerKnight::renderObject() const
 {
 	animation->setPosition(*mPosition - *mMapPosition);
@@ -99,10 +94,6 @@ void BarrerKnight::processData()
 	{
 		mCurrentAction = DYING;
 		--mDyingTime;
-		if (mDyingTime == 0)
-		{
-			m_bDying = false;
-		}
 		AnimationProcess();
 		return;
 	}
@@ -240,12 +231,13 @@ void BarrerKnight::processData()
 	}
 	else
 	{
-		static int wakeTime = 12;
-		if (wakeTime > 0)
+		mStatus.isInvulnerable = false;
+		if (mWakeTime > 0)
 		{
 			mCountStamina = 0;
 			mCurrentAction = WAKE_UP;
-			--wakeTime;
+			--mWakeTime;
+			mStatus.isInvulnerable = true;
 		}
 	}
 	AnimationProcess();
@@ -294,19 +286,3 @@ bool BarrerKnight::onGround()
 {
 	return CollisionManager::getInstance()->checkEnemyOnGround(this);
 }
-
-//int BarrerKnight::sideStuck()
-//{
-//	if (CollisionManager::getInstance()->checkPlayerSideLeft() == true)
-//	{
-//		return 1;
-//	}
-//	else
-//		if (CollisionManager::getInstance()->checkPlayerSideRight() == true)
-//		{
-//			return 2;
-//		}
-//	return 0;
-//}
-
-

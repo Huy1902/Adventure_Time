@@ -12,8 +12,8 @@
 	<ACTIONS>
 		<action name="run" textureID="barrer_run" numFrame="7" w="59" h="64"/>
 		<action name="none" textureID="barrer_none" numFrame="1" w="63" h="64"/>
-		<action name="wake" textureID="barrer_wake" numFrame="4" w="63" h="64" speed="3"/>
-		<action name="attack1" textureID="barrer_attack1" numFrame="5" w="120" h="64" speed="4"/>
+		<action name="wake" textureID="barrer_wake" numFrame="4" w="63" h="64" speed="2"/>
+		<action name="attack1" textureID="barrer_attack1" numFrame="5" w="120" h="64" speed="2"/>
 		<action name="attack2" textureID="barrer_attack2" numFrame="9" w="156" h="64" speed="1"/>
 		<action name="hit" textureID="barrer_hit" numFrame="2" w="120" h="64" speed="2"/>
 		<action name="dying" textureID="barrer_death" numFrame="6" w="312" h="64" speed="4"/>

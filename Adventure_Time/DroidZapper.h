@@ -8,8 +8,6 @@ class DroidZapper :
     public EnemyObject
 {
 public:
-
-	//virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
@@ -29,7 +27,7 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		if ((mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 4)) || (mCurrentAction == ATTACK2 && animation->getIndexFrame() == 5))
+		if (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 6)) 
 		{
 			return true;
 		}
@@ -57,9 +55,13 @@ public:
 	{
 		return mCharWidth;
 	}
-	virtual bool getDying()
+	virtual bool isDying() const
 	{
-		return m_bDying;
+		if (mDyingTime == 1)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	DroidZapper();
@@ -70,9 +72,6 @@ public:
 private:
 	GameVector mSavePosition;
 	int mAttackTine;
-
-	bool m_bRight;
-	int mAttack1Time;
 
 	int mTimeRun;
 
@@ -85,9 +84,6 @@ private:
 	bool m_bHit;
 	int mCountHitTime;
 	int mCountStamina;
-
-
-	bool m_bSleep = true;
 
 	void AnimationProcess();
 
