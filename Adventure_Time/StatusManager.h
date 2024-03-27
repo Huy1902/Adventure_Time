@@ -12,6 +12,7 @@ struct Bar
 	int y;
 	int w;
 	int h;
+	std::string textureID;
 };
 
 class StatusManager
@@ -25,6 +26,8 @@ public:
 	bool whenEnemyAttackPlayer(EnemyObject* obj);
 
 	void renderOnGamePause();
+
+	void renderEnemyStatus(EnemyObject* obj);
 
 	static StatusManager* getInstance()
 	{
@@ -56,7 +59,8 @@ private:
 
 	double getDMGtaken(const int& luck, const int& atk, const int& def);
 
-	std::vector<Texture> mTexture;
+	std::vector<Texture> mTextures;
+	std::map<std::string, Bar> mBars;
 };
 
 #endif //STATUSMANAGER_H_

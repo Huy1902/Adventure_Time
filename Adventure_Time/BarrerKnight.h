@@ -65,6 +65,10 @@ public:
 		}
 		return true;
 	}
+	virtual void setPosition(GameVector obj)
+	{
+		*mPosition = obj;
+	}
 
 	BarrerKnight();
 	~BarrerKnight();
@@ -88,15 +92,14 @@ private:
 	bool m_bHeadStuck;
 	bool m_bRun;
 	bool m_bOnGround;
-	bool m_bHit;
-	int mCountHitTime;
+
 
 	int mCountStamina;
 
 
 
 	void AnimationProcess();
-
+	void completeUpdateMethod();
 
 
 };

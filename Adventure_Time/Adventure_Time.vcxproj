@@ -174,7 +174,6 @@
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CharModel.h" />
     <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="Constant.h" />
     <ClInclude Include="DroidZapper.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />
@@ -205,6 +204,7 @@
     <Text Include="map1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="bar.xml" />
     <Xml Include="BarerKnight.xml" />
     <Xml Include="droid_zapper.xml" />
     <Xml Include="game_over_state.xml" />

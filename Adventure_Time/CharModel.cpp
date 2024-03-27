@@ -28,7 +28,6 @@ void CharModel::run()
 {
 	Info temp = mActions["run"];
 	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
-	std::cout << temp.textureID << '\n';
 }
 
 void CharModel::jump()
@@ -101,5 +100,23 @@ void CharModel::hit()
 void CharModel::attack2()
 {
 	Info temp = mActions["attack2"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}
+
+void CharModel::bash()
+{
+	Info temp = mActions["bash"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}
+
+void CharModel::crit()
+{
+	Info temp = mActions["crit"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}
+
+void CharModel::stun()
+{
+	Info temp = mActions["stun"];
 	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }

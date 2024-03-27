@@ -134,14 +134,14 @@
     <ClCompile Include="Tileset.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DroidZapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CharModel.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="DroidZapper.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +171,6 @@
     </ClInclude>
     <ClInclude Include="GameVector.h">
       <Filter>Header Files\NewType</Filter>
-    </ClInclude>
-    <ClInclude Include="Constant.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\State</Filter>
@@ -232,18 +229,15 @@
     <ClInclude Include="Tileset.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="FontManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CharModel.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="DroidZapper.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CharModel.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="FontManager.h">
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="map1.txt" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="droid_zapper.xml">
@@ -264,5 +258,13 @@
     <Xml Include="MainCharacter.xml">
       <Filter>Source Files\XML</Filter>
     </Xml>
+    <Xml Include="bar.xml">
+      <Filter>Source Files\XML</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="map1.txt">
+      <Filter>Source Files\XML</Filter>
+    </Text>
   </ItemGroup>
 </Project>

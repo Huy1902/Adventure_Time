@@ -33,6 +33,17 @@ struct Sound
 	std::string soundID = "";
 };
 
+struct Bar
+{
+	int x;
+	int y;
+	int w;
+	int h;
+	std::string textureID;
+};
+
+
+
 
 void ObjectParser::parserTexture(const std::string& filePath, std::vector<Texture>& textureVector)
 {
@@ -55,6 +66,37 @@ void ObjectParser::parserTexture(const std::string& filePath, std::vector<Textur
 
 void ObjectParser::parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::vector<Sound>& soundVector)
 {
+}
+
+void ObjectParser::parserBar(const std::string& filePath, std::map<std::string, Bar>& barMap, std::vector<Texture>& textureVector)
+{
+	XmlTree tree;
+	tree.parseXmlFile(filePath);
+	XmlNode* root = tree.getRoot();
+
+	XmlNode* textures = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("TEXTURES"))
+		{
+			textures = ite;
+			break;
+		}
+	}
+
+	loadTexture(textureVector, textures);
+
+
+	XmlNode* bars = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("BARS"))
+		{
+			bars = ite;
+			break;
+		}
+	}
+	loadBar(barMap, bars);
 }
 
 ObjectParser::ObjectParser()
@@ -166,6 +208,26 @@ void ObjectParser::loadSound(std::vector<Sound>& soundVector, XmlNode* sounds)
 
 			soundVector.push_back(obj);
 			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
+		}
+	}
+}
+
+void ObjectParser::loadBar(std::map<std::string, Bar>& barMap, XmlNode* bars)
+{
+	if (bars != nullptr)
+	{
+		for (XmlNode* bar : bars->child)
+		{
+			Bar obj;
+			std::string name = "";
+			bar->takeAttribute("name", &name);
+			bar->takeAttribute("w", &obj.w);
+			bar->takeAttribute("h", &obj.h);
+			bar->takeAttribute("textureID", &obj.textureID);
+			bar->takeAttribute("x", &obj.x);
+			bar->takeAttribute("y", &obj.y);
+
+			barMap[name] = obj;
 		}
 	}
 }

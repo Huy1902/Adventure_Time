@@ -10,6 +10,8 @@
 		<texture filePath="assets/knight_player/Dashing_KG_2.png" textureID="dash2"/>
 		<texture filePath="assets/knight_player/Dying_KG_2.png" textureID="dying2"/>
 		<texture filePath="assets/knight_player/Landing_KG_2.png" textureID="landing2"/>
+		<texture filePath="assets/knight_player/Shield_Bash_KG.png" textureID="bash"/>
+		<texture filePath="assets/knight_player/Attack_KG_3.png" textureID="attack3"/>
 	</TEXTURES>
 	<ACTIONS>
 		<action name="run" textureID="run2" numFrame="7" w="100" h="64"/>
@@ -21,6 +23,8 @@
 		<action name="dash" textureID="dash2" numFrame="4" w="100" h="64" speed="3"/>
 		<action name="dying" textureID="dying2" numFrame="6" w="100" h="64" speed="5"/>
 		<action name="landing" textureID="landing2" numFrame="4" w="100" h="64"/>
+		<action name="bash" textureID="bash" numFrame="5" w="100" h="64" speed="1"/>
+		<action name="crit" textureID="attack3" numFrame="9" w="100" h="64" speed="1"/>
 	</ACTIONS>
 	<SOUNDS>
 		<sound filePath="assets/sfx/dying_sfx.wav" soundID="dying" type="1"/>

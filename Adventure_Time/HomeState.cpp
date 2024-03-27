@@ -83,7 +83,7 @@ bool HomeState::startState()
 	for (const auto& ite : mButton)
 	{
 		ButtonModel* obj = new ButtonModel();
-		obj->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader(ite.textureID, ite.x, ite.y, ite.w, ite.h, ite.numFrames, 1.0, ite.callbackID)));
+		obj->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader(ite.textureID, ite.x, ite.y, ite.w, ite.h, ite.numFrames, ite.callbackID)));
 		obj->setCallback(mCallback[ite.callbackID]);
 		mObjects.push_back(obj);
 	}

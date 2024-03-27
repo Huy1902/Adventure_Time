@@ -14,7 +14,6 @@ const int UP_FORCE = -20;
 
 void DroidZapper::getHurt()
 {
-	//std::cout << mStatus.HP << '\n';
 	if (mStatus.isInvulnerable == false)
 	{
 		m_bHit = true;
@@ -123,7 +122,7 @@ void DroidZapper::processData()
 	{
 		mVelocity->setY(0);
 		mAcceleration->setY(0);
-		mCurrentAction = IDLE;
+		mCurrentAction = RUN;
 	}
 	else
 	{
@@ -134,7 +133,7 @@ void DroidZapper::processData()
 
 	if (m_bOnGround == true)
 	{
-		mCurrentAction = IDLE;
+		mCurrentAction = RUN;
 		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
 		{
 			/*if (mCurrentAction != ATTACK1)
@@ -211,7 +210,6 @@ void DroidZapper::processData()
 			--mWakeTime;
 		}
 	}
-	//std::cout << mVelocity->getX() << '\n';
 	AnimationProcess();
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;

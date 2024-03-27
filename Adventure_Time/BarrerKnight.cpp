@@ -9,15 +9,14 @@
 const int MOVE_SPEED = 2;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
-const int ATTACK1_TIME = 100;
-const int HIT_TIME = 8;
-
 void BarrerKnight::getHurt()
 {
-	//std::cout << mStatus.HP << '\n';
+	//std::
+	// 
+	//  << mStatus.HP << '\n';
 	if (mStatus.isInvulnerable == false)
 	{
-		m_bHit = true;
+		mCountTimeHit = mActions["hit"].numFrames * mActions["hit"].speed;
 	}
 
 	if (mStatus.HP <= 0)
@@ -55,16 +54,12 @@ BarrerKnight::BarrerKnight() :
 
 	mStatus.HP = 200;
 
-	mCountHitTime = 0;
-
 	mCountStamina = 0;
 
 	animation->setSize(0, 0);
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed;
-
-	std::cout << mDyingTime << '\n';
 
 	MaxStatus = mStatus;
 
@@ -98,24 +93,37 @@ void BarrerKnight::processData()
 		return;
 	}
 
-	if (m_bHit == true)
+	if (mCountTimeHit > 0)
 	{
 		mCurrentAction = HIT;
-		++mCountHitTime;
-		if (mCountHitTime >= HIT_TIME)
-		{
-			m_bHit = false;
-			mStatus.isInvulnerable = false;
-			mCountHitTime = 0;
-		}
+		--mCountTimeHit;
+		mStatus.isInvulnerable = true;
 		AnimationProcess();
 
 		return;
 	}
 
+	if (mCountTimeAttack2 > 0)
+	{
+		mCurrentAction = ATTACK2;
+		--mCountTimeAttack2;
+		if (animation->getIndexFrame() == 4)
+		{
+			if (mFlip == SDL_FLIP_HORIZONTAL)
+			{
+				mVelocity->setX(-50);
+			}
+			else
+			{
+				mVelocity->setX(50);
+			}
+		}
+		completeUpdateMethod();
+		return;
+	}
+
 	static int count_run = 0;
 	static bool right = true;
-	static int countAttack2 = 9;
 	mVelocity->setX(0);
 	m_bOnGround = onGround();
 	//m_bHeadStuck = headStuck();
@@ -136,81 +144,59 @@ void BarrerKnight::processData()
 
 	if (m_bOnGround == true)
 	{
-		if (countAttack2 > 0)
+		mCurrentAction = RUN;
+		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
 		{
-			mCurrentAction = ATTACK2;
-			--countAttack2;
-			if (animation->getIndexFrame() == 4)
+			if (mCountStamina == mStatus.STA * 5)
 			{
-				if (mFlip == SDL_FLIP_HORIZONTAL)
-				{
-					mVelocity->setX(-200);
-				}
-				else
-				{
-					mVelocity->setX(200);
-				}
+				mCurrentAction = ATTACK2;
+				mCountStamina = 0;
+				mCountTimeAttack2 = mActions["attack2"].numFrames * mActions["attack2"].speed;
 			}
-		}
-		else
-		{
-			mCurrentAction = RUN;
-			if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
+			else if (mCountStamina > mStatus.STA * 0)
 			{
-				/*if (mCurrentAction != ATTACK1)
-				{
-					mSavePosition = *mPosition;
-				}*/
-				if (mCountStamina == mStatus.STA * 5)
-				{
-					mCurrentAction = ATTACK2;
-					mCountStamina = 0;
-					countAttack2 = 9;
-				}
-				else if (mCountStamina > mStatus.STA * 0)
-				{
-					mCurrentAction = ATTACK1;
-				}
-				++mCountStamina;
+				mCurrentAction = ATTACK1;
+				mCountTimeAttack1 = mActions["attack1"].numFrames * mActions["attack1"].speed;
+			}
+			++mCountStamina;
 
-				if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
-				{
-					mFlip = SDL_FLIP_HORIZONTAL;
-					mVelocity->setX(-MOVE_SPEED * 2);
-				}
-				else
-				{
-					mFlip = SDL_FLIP_NONE;
-					mVelocity->setX(MOVE_SPEED * 2);
-				}
-
+			if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
+			{
+				mFlip = SDL_FLIP_HORIZONTAL;
+				mVelocity->setX(-MOVE_SPEED * 2);
 			}
 			else
 			{
-				//mAttack1Time = 0;
-				if (count_run == mTimeRun)
-				{
-					if (right == true)
-					{
-						right = false;
-					}
-					else
-					{
-						right = true;
-					}
-					count_run = 0;
-				}
-				++count_run;
+				mFlip = SDL_FLIP_NONE;
+				mVelocity->setX(MOVE_SPEED * 2);
+			}
+
+		}
+		else
+		{
+			//mAttack1Time = 0;
+			if (count_run == mTimeRun)
+			{
 				if (right == true)
 				{
-					mFlip = SDL_FLIP_NONE;
-					mVelocity->setX(MOVE_SPEED);
+					right = false;
 				}
 				else
 				{
-					mFlip = SDL_FLIP_HORIZONTAL;
-					mVelocity->setX(-MOVE_SPEED);
+					right = true;
 				}
+				count_run = 0;
+			}
+			++count_run;
+			if (right == true)
+			{
+				mFlip = SDL_FLIP_NONE;
+				mVelocity->setX(MOVE_SPEED);
+			}
+			else
+			{
+				mFlip = SDL_FLIP_HORIZONTAL;
+				mVelocity->setX(-MOVE_SPEED);
 			}
 		}
 	}
@@ -241,7 +227,6 @@ void BarrerKnight::processData()
 		}
 	}
 	AnimationProcess();
-	//std::cout << mVelocity->getX() << '\n';
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
 
@@ -286,3 +271,14 @@ bool BarrerKnight::onGround()
 {
 	return CollisionManager::getInstance()->checkEnemyOnGround(this);
 }
+
+void BarrerKnight::completeUpdateMethod()
+{
+	AnimationProcess();
+
+	*mVelocity += *mAcceleration;
+	*mPosition += *mVelocity;
+
+	animation->setPosition(*mPosition);
+}
+

@@ -40,6 +40,7 @@ private:
 	int mCountFightTime;
 	bool m_bFight;
 	bool m_bIsPlayingFight;
+	int mCountTimeRenderBash = 0;
 };
 
 #endif

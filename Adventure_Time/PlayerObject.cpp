@@ -13,22 +13,16 @@ const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
 const int UP_FORCE = -20;
 const int LANDING_TIME = 4;
-const int DASH_TIME = 12;
 const int HURT_TIME = 12;
 const int DYING_TIME = 29;
 
+const int COST_DASH = 5;
+const int COST_ATTACK = 12;
+
+const int STA_RECOVER_SPEED = 1;
+
 PlayerObject::PlayerObject()
-	//m_bOnAir(false)
 {
-	//TextureManager::getInstance()->load("assets/knight_player/Walking_KG_2.png", "run2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Jump_KG_2.png", "jump2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Fall_KG_2.png", "fall2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Attack_KG_1.png", "attack1", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Hurt_KG_2.png", "hurt2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Landing_KG_2.png", "landing2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Idle_KG_2.png", "idle2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Dashing_KG_2.png", "dash2", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/knight_player/Dying_KG_2.png", "dying2", GameManager::getInstance()->getRenderer());
 
 	ObjectParser::getInstance()->parserAction("MainCharacter.xml", mActions, mTextures);
 	for (const auto& ite : mTextures)
@@ -37,6 +31,7 @@ PlayerObject::PlayerObject()
 	}
 
 	mStatus.LUCK = 10;
+	mStatus.STA = 200;
 
 	animation = new Animation();
 
@@ -56,12 +51,11 @@ PlayerObject::PlayerObject()
 	animation->setSize(100, 64);
 	animation->setPosition(*mPosition);
 
-
-	m_bAttack = false;
 	mLandingTime = LANDING_TIME;
-	mTimeDash = DASH_TIME;
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
 	mCountTimeHurt = 0;
+
+	MaxStatus = mStatus;
 }
 
 PlayerObject::~PlayerObject()
@@ -86,7 +80,6 @@ void PlayerObject::processData()
 		completeUpdateMethod();
 		return;
 	}
-
 	if (m_bHurting == true)
 	{
 		mCurrentAction = HURT;
@@ -110,8 +103,10 @@ void PlayerObject::processData()
 
 		return;
 	}
-
-
+	if (mStatus.STA < MaxStatus.STA)
+	{
+		mStatus.STA += STA_RECOVER_SPEED;
+	}
 	if (m_bOnGround == true)
 	{
 		mVelocity->setY(0);
@@ -168,40 +163,61 @@ void PlayerObject::processData()
 				{
 					mCurrentAction = JUMP;
 				}
-	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_J) && m_bOnGround == true)
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_J) && m_bOnGround == true && mStatus.STA > COST_ATTACK * mActions["attack1"].numFrames * mActions["attack1"].speed && mCountTimeAttack1 == 0)
 	{
-		mVelocity->setX(0);
 		mCurrentAction = ATTACK1;
-		++mTimeAttack;
+		mCountTimeAttack1 = mActions["attack1"].numFrames * mActions["attack1"].speed;
 	}
-	else
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_I) && m_bOnGround == true)
 	{
-		mTimeAttack = 0;
+		mCurrentAction = CRIT;
+		mCountTimeCrit = mActions["crit"].numFrames * mActions["crit"].speed;
 	}
-	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_L) && m_bOnGround == true && mCooldownDash <= 0)
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_L) && m_bOnGround == true && mStatus.STA > COST_DASH * mActions["dash"].numFrames * mActions["dash"].speed && mCountTimeDash == 0)
 	{
 		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_A))
 		{
 			mVelocity->setX(-MOVE_SPEED * 2);
 			mFlip = SDL_FLIP_HORIZONTAL;
 			mCurrentAction = DASH;
-			mTimeDash = 0;
-			mCooldownDash = 20;
+			mCountTimeDash = mActions["dash"].numFrames * mActions["dash"].speed;
 		}
 		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_D))
 		{
 			mVelocity->setX(MOVE_SPEED * 2);
 			mFlip = SDL_FLIP_NONE;
 			mCurrentAction = DASH;
-			mTimeDash = 0;
-			mCooldownDash = 20;
+			mCountTimeDash = mActions["dash"].numFrames * mActions["dash"].speed;
 		}
 	}
-	--mCooldownDash;
-
-	if (mTimeDash < DASH_TIME)
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_U) && m_bOnGround == true && mCountTimeBash == 0)
 	{
-		++mTimeDash;
+		mCurrentAction = BASH;
+		mCountTimeBash = mActions["bash"].numFrames * mActions["bash"].speed;
+	}
+
+	if (mCountTimeBash > 0)
+	{
+		--mCountTimeBash;
+		mCurrentAction = BASH;
+		mVelocity->setX(0);
+	}
+	if (mCountTimeAttack1 > 0)
+	{
+		--mCountTimeAttack1;
+		mCurrentAction = ATTACK1;
+		mVelocity->setX(0);
+	}
+	if (mCountTimeCrit > 0)
+	{
+		--mCountTimeCrit;
+		mCurrentAction = CRIT;
+		mVelocity->setX(0);
+	}
+
+	if (mCountTimeDash > 0)
+	{
+		--mCountTimeDash;
 		mCurrentAction = DASH;
 		mVelocity->setX(mVelocity->getX() * 2);
 	}
@@ -241,6 +257,7 @@ void PlayerObject::AnimationProcess()
 		fall();
 		break;
 	case PlayerObject::ATTACK1:
+		mStatus.STA -= COST_ATTACK;
 		attack1();
 		break;
 	case PlayerObject::LANDING:
@@ -250,10 +267,17 @@ void PlayerObject::AnimationProcess()
 		hurt();
 		break;
 	case PlayerObject::DASH:
+		mStatus.STA -= COST_DASH;
 		dash();
 		break;
 	case PlayerObject::DYING:
 		dying();
+		break;
+	case PlayerObject::BASH:
+		bash();
+		break;
+	case PlayerObject::CRIT:
+		crit();
 		break;
 	default:
 		break;

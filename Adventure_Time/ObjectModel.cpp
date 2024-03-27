@@ -23,7 +23,6 @@ void ObjectModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 	mHeight = Info->getHeight();
 	mWidth = Info->getWidth();
 	mNumFrames = Info->getNumFrames();
-	mScope = Info->getScope();
 }
 
 void ObjectModel::processData()
@@ -41,7 +40,7 @@ void ObjectModel::renderObject() const
 	int y = static_cast<int>(mPosition->getY());
 
 	TextureManager::getInstance()->drawSpritePicByCol(mTextureID, x, y,
-		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, mScope, SDL_FLIP_NONE);
+		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, SDL_FLIP_NONE);
 }
 
 void ObjectModel::clearObject()

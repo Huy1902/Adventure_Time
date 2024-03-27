@@ -64,7 +64,6 @@ void FiniteStateMachine::pop()
 }
 void FiniteStateMachine::change()
 {
-	//std::cout << mStates.size();
 	if (mStates.empty() == false)
 	{
 		if (mStates.back()->getStateID() != pState->getStateID())

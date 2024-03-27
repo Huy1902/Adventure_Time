@@ -5,22 +5,36 @@
 
 #include "TextureManager.h"
 #include "GameManager.h"
-
 #include "FontManager.h"
+#include "ObjectParser.h"
+
 #include "GameVector.h"
+
 
 using namespace std;
 StatusManager* StatusManager::s_pInstance = nullptr;
 
 void StatusManager::updatePlayerStatus()
 {
-	mSrcPoint.w = mDestPoint.w = int( ( (*mPlayer->getStatus()).HP * 1.0 / mMaxPlayer.HP) * mLenPoint);
+	//mSrcPoint.w = mDestPoint.w = int( ( (*mPlayer->getStatus()).HP * 1.0 / mMaxPlayer.HP) * mLenPoint);
 }
 
 void StatusManager::renderPlayerStatus()
 {
-	SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("health_point"), &mSrcPoint, &mDestPoint);
-	SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("health_bar"), & mSrcHealth, &mDestHealth);
+	Bar temp = mBars["health_point"];
+	int w = (*mPlayer->getStatus()).HP * 1.0 / (*mPlayer->getMaxStatus()).HP * temp.w;
+	TextureManager::getInstance()->drawSinglePic( temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
+	//SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("health_point"), &mSrcPoint, &mDestPoint);
+
+	temp = mBars["health_bar"];
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
+
+	temp = mBars["sta_point"];
+	w = (*mPlayer->getStatus()).STA * 1.0 / (*mPlayer->getMaxStatus()).STA * temp.w;
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
+
+	temp = mBars["sta_bar"];
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)
@@ -91,14 +105,27 @@ void StatusManager::renderOnGamePause()
 	avatar->draw();
 }
 
+void StatusManager::renderEnemyStatus(EnemyObject* obj)
+{
+	Bar temp = mBars["greenbar"];
+	int w = obj->getStatus()->HP * 1.0 / obj->getMaxStatus()->HP * temp.w;
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, obj->getPosition()->getX() - obj->getMapPosition()->getX() + obj->getAnimation()->getWidth() / 2 - temp.w / 2, 
+		obj->getPosition()->getY() - obj->getMapPosition()->getY() - temp.w / 2, w, temp.h, GameManager::getInstance()->getRenderer());
+}
+
 StatusManager::StatusManager()
 {
-	TextureManager::getInstance()->load("assets/status/health_bar.png", "health_bar", GameManager::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("assets/status/health_point.png", "health_point", GameManager::getInstance()->getRenderer());
-	mSrcPoint = { 0, 0, 140, 10 }; // 0 0 w h
-	mDestPoint = { 47, 27, 140, 10 }; // x y w h
-	mSrcHealth = { 0, 0, 190, 57 }; // 0 0 w h
-	mDestHealth = { 0, 0, 190, 57 }; //x y w h
+	ObjectParser::getInstance()->parserBar("bar.xml", mBars, mTextures);
+
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
+	}
+
+	//mSrcPoint = { 0, 0, mBars["health_point"].w, mBars["health_point"].h}; // 0 0 w h
+	//mDestPoint = { mBars["health_point"].x, mBars["health_point"].y, mBars["health_point"].w, mBars["health_point"].h }; // x y w h
+	mSrcHealth = { 0, 0, mBars["health_bar"].w, mBars["health_bar"] .h}; // 0 0 w h
+	mDestHealth = { mBars["health_bar"].x, mBars["health_bar"].y, mBars["health_bar"].w, mBars["health_bar"].h }; //x y w h
 
 	mLenPoint = mSrcPoint.w;
 

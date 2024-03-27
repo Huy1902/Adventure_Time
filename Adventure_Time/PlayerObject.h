@@ -81,6 +81,14 @@ public:
 	{
 		return animation;
 	}
+	bool isBash() const
+	{
+		if (mCurrentAction == BASH && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 4))
+		{
+			return true;
+		}
+		return false;
+	}
 private:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	bool onGround();
@@ -90,13 +98,10 @@ private:
 
 	bool m_bHeadStuck;
 	bool m_bJump;
-	bool m_bRun;
 	bool m_bOnGround;
-	bool m_bAttack;
 	int mTimeAttack;
 	int mLandingTime;
-	int mTimeDash;
-	int mCooldownDash;
+
 
 	bool m_bHurting;
 

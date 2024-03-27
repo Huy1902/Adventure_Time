@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 
+
 class TextureManager
 {
 public:
@@ -30,13 +31,11 @@ public:
 	//c: { , } position on X,Y axis to rotate
 	//a: angle to rotate
 	//f: flag to flip
-	void drawSpritePicByCol(const std::string& id, int x, int y,
-		int w, int h, SDL_Renderer* pRenderer = nullptr, int indexFrame = 0, double scope = 1.0,
+	void drawSpritePicByCol(const std::string& id, const int& x, const int& y,
+		const int& w, const int& h, SDL_Renderer* pRenderer = nullptr, const int& indexFrame = 0,
 		SDL_RendererFlip f = SDL_FLIP_NONE, double a = 0.0, SDL_Point* c = NULL);
 
-	void drawSpriteByRow(const std::string& id, int x, int y,
-		int w, int h, SDL_Renderer* pRenderer = nullptr, int indexFrame = 0, double scope = 1.0,
-		SDL_RendererFlip f = SDL_FLIP_NONE, double a = 0.0, SDL_Point* c = NULL);
+	void drawSinglePic(const std::string& id, const int& x, const int& y, const int& w, const int& h, SDL_Renderer* pRenderer);
 
 	void clearFromTexture(const std::string & id);
 

@@ -8,14 +8,16 @@
 		<texture filePath="assets/barrel_knight/attack2.png" textureID="barrer_attack2"/>
 		<texture filePath="assets/barrel_knight/hit.png" textureID="barrer_hit"/>
 		<texture filePath="assets/barrel_knight/death.png" textureID="barrer_death"/>
+		<texture filePath="assets/barrel_knight/stun.png" textureID="barrer_stun"/>
 	</TEXTURES>
 	<ACTIONS>
 		<action name="run" textureID="barrer_run" numFrame="7" w="59" h="64"/>
-		<action name="none" textureID="barrer_none" numFrame="1" w="63" h="64"/>
+		<action name="none" textureID="barrer_none" numFrame="1" w="40" h="64"/>
 		<action name="wake" textureID="barrer_wake" numFrame="4" w="63" h="64" speed="2"/>
 		<action name="attack1" textureID="barrer_attack1" numFrame="5" w="120" h="64" speed="2"/>
 		<action name="attack2" textureID="barrer_attack2" numFrame="9" w="156" h="64" speed="1"/>
 		<action name="hit" textureID="barrer_hit" numFrame="2" w="120" h="64" speed="2"/>
 		<action name="dying" textureID="barrer_death" numFrame="6" w="312" h="64" speed="4"/>
+		<action name="stun" textureID="barrer_stun" numFrame="1" w="76" h="64" speed="1"/>
 	</ACTIONS>
 </CHARACTER>

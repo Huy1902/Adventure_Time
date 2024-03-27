@@ -16,6 +16,8 @@
 
 #include "DroidZapper.h"
 
+#include "FontManager.h"
+
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
 const int TILE_SIZE = 32;
@@ -30,10 +32,24 @@ Map::Map()
 {
 	mPosition = new GameVector(0, 0);
 	BarrerKnight* obj1 = new BarrerKnight();
+	obj1->setPosition({ 1400, 100 });
 	mEnemy.push_back(obj1);
+
+	//BarrerKnight* obj3 = new BarrerKnight();
+	//obj3->setPosition({ 300, 100 });
+	//mEnemy.push_back(obj3);
+
+	//BarrerKnight* obj4 = new BarrerKnight();
+	//obj4->setPosition({ 700, 100 });
+	//mEnemy.push_back(obj4);
+
+	//BarrerKnight* obj5 = new BarrerKnight();
+	//obj5->setPosition({ 1500, 100 });
+	//mEnemy.push_back(obj5);
 
 	DroidZapper* obj2 = new DroidZapper();
 	mEnemy.push_back(obj2);
+	obj2->setPosition({ 1000, 100 });
 
 	mBackGround = new Background();
 }
@@ -125,6 +141,7 @@ void Map::processEnemyAndPlayer()
 		vector<EnemyObject*>::iterator ite = mEnemy.begin();
 		while (ite != mEnemy.end())
 		{
+			(*ite)->processData();
 			bool increase_ite = false;
 			if (CollisionManager::getInstance()->checkEnemyNearPlayer(*ite) <= 400)
 			{
@@ -132,12 +149,26 @@ void Map::processEnemyAndPlayer()
 			}
 			if (CollisionManager::getInstance()->checkEnemyAttackPlayer(*ite) == true)
 			{
-				if (StatusManager::getInstance()->whenEnemyAttackPlayer(*ite) == true)
+				if (mPlayer->isBash() == true)
+				{
+					int origin_atk = mPlayer->getStatus()->ATK;
+					int origin_luck = (*ite)->getStatus()->LUCK;
+					mPlayer->getStatus()->ATK = origin_atk * 10;
+					(*ite)->getStatus()->LUCK = origin_luck / 10;
+					if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
+					{
+						(*ite)->getHurt();
+						std::cout << (*ite)->getStatus()->HP << '\n';
+						mCountTimeRenderBash = 10;
+					}
+					mPlayer->getStatus()->ATK = origin_atk;
+					(*ite)->getStatus()->LUCK = origin_luck;
+				}
+				else if (StatusManager::getInstance()->whenEnemyAttackPlayer(*ite) == true)
 				{
 					mPlayer->getHurt();
 				}
 			}
-			(*ite)->processData();
 			if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
 			{
 				if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
@@ -145,7 +176,6 @@ void Map::processEnemyAndPlayer()
 					std::cout << "Player is attack\n";
 					(*ite)->getHurt();
 					std::cout << (*ite)->getStatus()->HP << '\n';
-					//std::cout << (*ite)->isDying() << '\n';
 				}
 			}
 			else
@@ -197,7 +227,6 @@ void Map::processEnemyAndPlayer()
 
 void Map::updateMap()
 {
-
 	//std::cout << mPosition->getX() << '\n';
 	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / TILE_SIZE >= MAP_WIDTH)
 	{
@@ -237,7 +266,13 @@ void Map::renderMap()
 		{
 			mEnemy[i]->setMapPosition(*mPosition);
 			mEnemy[i]->renderObject();
+			StatusManager::getInstance()->renderEnemyStatus(mEnemy[i]);
 		}
 	}
 	mPlayer->renderObject();
+	if (mCountTimeRenderBash > 0)
+	{
+		FontManager::getInstance()->drawText("Bash successfully", mPlayer->getPosition()->getX(), mPlayer->getPosition()->getY());
+		--mCountTimeRenderBash;
+	}
 }

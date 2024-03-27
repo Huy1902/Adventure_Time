@@ -26,7 +26,6 @@ protected:
 	int mHeight;
 	int mIndexFrames;
 	int mNumFrames;
-	double mScope;
 };
 
 #endif

@@ -63,7 +63,10 @@ public:
 		}
 		return true;
 	}
-
+	virtual void setPosition(GameVector obj)
+	{
+		*mPosition = obj;
+	}
 	DroidZapper();
 	~DroidZapper();
 

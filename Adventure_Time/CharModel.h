@@ -20,6 +20,7 @@ struct Status
 	int EXP = 100;
 	bool isAlive = true;
 	bool isInvulnerable = false;
+	bool isStunned = false;
 };
 class CharModel :
 	public ObjectModel
@@ -49,6 +50,10 @@ public:
 		}
 		return true;
 	}
+	virtual void setPosition(GameVector obj)
+	{
+		*mPosition = obj;
+	}
 protected:
 
 	Status mStatus;
@@ -74,7 +79,10 @@ protected:
 		DYING = 8,
 		ATTACK2 = 9,
 		WAKE_UP = 10,
-		HIT = 11
+		HIT = 11,
+		BASH = 12,
+		CRIT = 13,
+		STUN = 14
 	};
 
 
@@ -91,6 +99,9 @@ protected:
 	void wake();
 	void hit();
 	void attack2();
+	void bash();
+	void crit();
+	void stun();
 	std::map<std::string, Info> mActions;
 	std::vector<Texture> mTextures;
 
@@ -99,4 +110,12 @@ protected:
 	SDL_RendererFlip mFlip;
 
 	int mDyingTime;
+
+	int mCountTimeHit = 0;
+	int mCountAttack1 = 0;
+	int mCountTimeAttack2 = 0;
+	int mCountTimeDash = 0;
+	int mCountTimeAttack1 = 0;
+	int mCountTimeBash = 0;
+	int mCountTimeCrit = 0;
 };
