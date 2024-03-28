@@ -29,7 +29,7 @@ void ButtonModel::processData()
 		mIndexFrames = MOUSE_OVER;
 		if (InputManager::getInstance()->getMouseButton(LEFT) && m_bReleased == true)
 		{
-			SoundManager::getInstance()->playSound("click_button", 0);
+			SoundManager::getInstance()->playSound("click_button", 0, -1);
 			//mIndexFrames = CLICKED;
 			mCallback();
 			m_bReleased = false;

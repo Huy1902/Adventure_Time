@@ -9,7 +9,7 @@
 const int TIME_TO_MOVE = 10;
 Background::Background()
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)) );
 
 	int i = rand() % 2;
 	if (i == 0)

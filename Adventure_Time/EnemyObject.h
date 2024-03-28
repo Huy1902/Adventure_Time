@@ -7,6 +7,8 @@
 
 #include "Animation.h"
 
+const int STUN_TIME = 20;
+
 class EnemyObject :
     public CharModel
 {
@@ -95,6 +97,12 @@ public:
 		}
 		return true;
 	}
+	virtual void setStun()
+	{
+		mStatus.isStunned = true;
+		mCountTimeStun = STUN_TIME;
+	}
+
 protected:
 	GameVector* mMapPosition;
 	bool m_bSleep = true;

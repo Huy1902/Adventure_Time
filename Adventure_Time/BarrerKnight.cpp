@@ -9,11 +9,9 @@
 const int MOVE_SPEED = 2;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
+const int TIME_RUN = 100;
 void BarrerKnight::getHurt()
 {
-	//std::
-	// 
-	//  << mStatus.HP << '\n';
 	if (mStatus.isInvulnerable == false)
 	{
 		mCountTimeHit = mActions["hit"].numFrames * mActions["hit"].speed;
@@ -49,17 +47,14 @@ BarrerKnight::BarrerKnight() :
 
 	mCurrentAction = IDLE;
 	animation->setPosition(*mPosition);
-
-	mTimeRun = 100;
-
 	mStatus.HP = 200;
 
 	mCountStamina = 0;
 
 	animation->setSize(0, 0);
 
-	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
-	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed;
+	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
+	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
 
 	MaxStatus = mStatus;
 
@@ -92,6 +87,28 @@ void BarrerKnight::processData()
 		AnimationProcess();
 		return;
 	}
+	else
+	{
+		mStatus.isStunned = false;
+	}
+	if (mStatus.isStunned = true)
+	{
+		if (mCountTimeStun > 0)
+		{
+			--mCountTimeStun;
+			mCurrentAction = STUN;
+			AnimationProcess();
+			return;
+		}
+		else
+		{
+			mStatus.isStunned = false;
+		}
+	}
+	else
+	{
+		mCountTimeStun = 0;
+	}
 
 	if (mCountTimeHit > 0)
 	{
@@ -100,6 +117,14 @@ void BarrerKnight::processData()
 		mStatus.isInvulnerable = true;
 		AnimationProcess();
 
+		return;
+	}
+
+	if (mCountTimeAttack1 > 0)
+	{
+		--mCountTimeAttack1;
+		mCurrentAction = ATTACK1;
+		completeUpdateMethod();
 		return;
 	}
 
@@ -122,13 +147,9 @@ void BarrerKnight::processData()
 		return;
 	}
 
-	static int count_run = 0;
 	static bool right = true;
 	mVelocity->setX(0);
 	m_bOnGround = onGround();
-	//m_bHeadStuck = headStuck();
-
-
 	if (m_bOnGround == true)
 	{
 		mVelocity->setY(0);
@@ -140,23 +161,22 @@ void BarrerKnight::processData()
 		mAcceleration->setY(GRAVITY);
 		mCurrentAction = FALL;
 	}
-
-
 	if (m_bOnGround == true)
 	{
 		mCurrentAction = RUN;
 		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
 		{
-			if (mCountStamina == mStatus.STA * 5)
+			if (mCountStamina == mStatus.STA * 3)
 			{
-				mCurrentAction = ATTACK2;
 				mCountStamina = 0;
+				mCurrentAction = ATTACK2;
 				mCountTimeAttack2 = mActions["attack2"].numFrames * mActions["attack2"].speed;
 			}
-			else if (mCountStamina > mStatus.STA * 0)
+			else if (mCountStamina == mStatus.STA * 1 || mCountStamina == mStatus.STA * 2)
 			{
+				std::cout << mActions["attack1"].textureID << ' ' << mActions["attack1"].numFrames * mActions["attack1"].speed << '\n';
 				mCurrentAction = ATTACK1;
-				mCountTimeAttack1 = mActions["attack1"].numFrames * mActions["attack1"].speed;
+				mCountTimeAttack1 = (mActions["attack1"].numFrames * mActions["attack1"].speed);
 			}
 			++mCountStamina;
 
@@ -175,32 +195,34 @@ void BarrerKnight::processData()
 		else
 		{
 			//mAttack1Time = 0;
-			if (count_run == mTimeRun)
+			if (mCountTimeRun == 0)
 			{
-				if (right == true)
+				mCountTimeRun = TIME_RUN;
+				if (mFlip == SDL_FLIP_NONE)
 				{
-					right = false;
+					mFlip = SDL_FLIP_HORIZONTAL;
+					mVelocity->setX(-MOVE_SPEED);
 				}
 				else
 				{
-					right = true;
+					mFlip = SDL_FLIP_NONE;
+					mVelocity->setX(MOVE_SPEED);
 				}
-				count_run = 0;
-			}
-			++count_run;
-			if (right == true)
-			{
-				mFlip = SDL_FLIP_NONE;
-				mVelocity->setX(MOVE_SPEED);
 			}
 			else
 			{
-				mFlip = SDL_FLIP_HORIZONTAL;
-				mVelocity->setX(-MOVE_SPEED);
+				--mCountTimeRun;
+				if (mFlip == SDL_FLIP_NONE)
+				{
+					mVelocity->setX(MOVE_SPEED);
+				}
+				else
+				{
+					mVelocity->setX(-MOVE_SPEED);
+				}
 			}
 		}
 	}
-
 	if (sideStuck(this) == true)
 	{
 		mVelocity->setX(0);
@@ -226,11 +248,7 @@ void BarrerKnight::processData()
 			mStatus.isInvulnerable = true;
 		}
 	}
-	AnimationProcess();
-	*mVelocity += *mAcceleration;
-	*mPosition += *mVelocity;
-
-	animation->setPosition(*mPosition);
+	completeUpdateMethod();
 }
 
 void BarrerKnight::AnimationProcess()
@@ -260,6 +278,9 @@ void BarrerKnight::AnimationProcess()
 		break;
 	case BarrerKnight::DYING:
 		dying();
+		break;
+	case BarrerKnight::STUN:
+		stun();
 		break;
 	default:
 		break;

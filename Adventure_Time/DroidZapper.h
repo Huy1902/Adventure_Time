@@ -67,30 +67,21 @@ public:
 	{
 		*mPosition = obj;
 	}
+	virtual void setStun()
+	{
+		mStatus.isStunned = true;
+		mCountTimeStun = STUN_TIME;
+	}
+
 	DroidZapper();
 	~DroidZapper();
 
 
 
 private:
-	GameVector mSavePosition;
-	int mAttackTine;
-
-	int mTimeRun;
-
 	bool onGround();
-	//int sideStuck();
-
-	bool m_bHeadStuck;
-	bool m_bRun;
-	bool m_bOnGround;
-	bool m_bHit;
-	int mCountHitTime;
-	int mCountStamina;
-
 	void AnimationProcess();
-
-	int HIT_TIME;
+	void completeUpdateMethod();
 };
 
 #endif

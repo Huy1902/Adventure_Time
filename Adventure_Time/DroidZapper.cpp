@@ -11,17 +11,20 @@
 const int MOVE_SPEED = 2;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
+const int TIME_RUN = 100;
 
 void DroidZapper::getHurt()
 {
 	if (mStatus.isInvulnerable == false)
 	{
-		m_bHit = true;
+		mCountTimeHit = mActions["hit"].numFrames * mActions["hit"].speed;
 	}
 
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
+		mPosition->setX(mPosition->getX() + animation->getWidth() / 2 - mActions["dying"].w / 2);
+		/*animation->setPosition({ m});*/
 	}
 }
 
@@ -46,18 +49,12 @@ DroidZapper::DroidZapper() :
 	mCurrentAction = IDLE;
 	animation->setPosition(*mPosition);
 
-	mTimeRun = 100;
-
 	mStatus.HP = 200;
-
-	mCountHitTime = 0;
 
 	mCountStamina = 0;
 
-	HIT_TIME = mActions["hit"].numFrames * mActions["hit"].speed;
-
-	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
-	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed;
+	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
+	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
 
 
 	animation->setSize(0, 0);
@@ -95,54 +92,72 @@ void DroidZapper::processData()
 		AnimationProcess();
 		return;
 	}
-	if (m_bHit == true)
+	else
+	{
+		mStatus.isStunned = false;
+	}
+	if (mStatus.isStunned = true)
+	{
+		if (mCountTimeStun > 0)
+		{
+			--mCountTimeStun;
+			mCurrentAction = STUN;
+			AnimationProcess();
+			return;
+		}
+		else
+		{
+			mStatus.isStunned = false;
+		}
+	}
+	else
+	{
+		mCountTimeStun = 0;
+	}
+
+	if (mCountTimeHit > 0)
 	{
 		mCurrentAction = HIT;
-		++mCountHitTime;
-		if (mCountHitTime >= HIT_TIME)
-		{
-			m_bHit = false;
-			mStatus.isInvulnerable = false;
-			mCountHitTime = 0;
-		}
+		--mCountTimeHit;
+		mStatus.isInvulnerable = true;
 		AnimationProcess();
 
 		return;
 	}
 
-	static int count_run = 0;
+	if (mCountTimeAttack1 > 0)
+	{
+		--mCountTimeAttack1;
+		mCurrentAction = ATTACK1;
+		completeUpdateMethod();
+		return;
+	}
+
 	static bool right = true;
-	static int countAttack2 = 9;
 	mVelocity->setX(0);
 	m_bOnGround = onGround();
-	//m_bHeadStuck = headStuck();
-
-
 	if (m_bOnGround == true)
 	{
 		mVelocity->setY(0);
 		mAcceleration->setY(0);
-		mCurrentAction = RUN;
+		mCurrentAction = IDLE;
 	}
 	else
 	{
 		mAcceleration->setY(GRAVITY);
 		mCurrentAction = FALL;
 	}
-
-
 	if (m_bOnGround == true)
 	{
 		mCurrentAction = RUN;
 		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
 		{
-			/*if (mCurrentAction != ATTACK1)
+			if (mCountStamina == mStatus.STA * 1)
 			{
-				mSavePosition = *mPosition;
-			}*/
-			if (mCountStamina > mStatus.STA * 2)
-			{
+				mCountStamina = 0;
+				std::cout << mActions["attack1"].textureID << ' ' << mActions["attack1"].numFrames * mActions["attack1"].speed << '\n';
 				mCurrentAction = ATTACK1;
+				mCountTimeAttack1 = (mActions["attack1"].numFrames * mActions["attack1"].speed);
 			}
 			++mCountStamina;
 
@@ -160,32 +175,22 @@ void DroidZapper::processData()
 		}
 		else
 		{
-			mCurrentAction = RUN;
-			if (count_run == mTimeRun)
+			//mAttack1Time = 0;
+			if (mCountTimeRun == 0)
 			{
-				if (right == true)
+				mCountTimeRun = TIME_RUN;
+				if (mFlip == SDL_FLIP_NONE)
 				{
-					right = false;
+					mFlip = SDL_FLIP_HORIZONTAL;
+					mVelocity->setX(-MOVE_SPEED);
 				}
 				else
 				{
-					right = true;
+					mFlip = SDL_FLIP_NONE;
+					mVelocity->setX(MOVE_SPEED);
 				}
-				count_run = 0;
-			}
-			++count_run;
-			if (right == true)
-			{
-				mFlip = SDL_FLIP_NONE;
-				mVelocity->setX(MOVE_SPEED);
-			}
-			else
-			{
-				mFlip = SDL_FLIP_HORIZONTAL;
-				mVelocity->setX(-MOVE_SPEED);
 			}
 		}
-
 	}
 	if (sideStuck(this) == true)
 	{
@@ -203,18 +208,16 @@ void DroidZapper::processData()
 	}
 	else
 	{
+		mStatus.isInvulnerable = false;
 		if (mWakeTime > 0)
 		{
 			mCountStamina = 0;
 			mCurrentAction = WAKE_UP;
 			--mWakeTime;
+			mStatus.isInvulnerable = true;
 		}
 	}
-	AnimationProcess();
-	*mVelocity += *mAcceleration;
-	*mPosition += *mVelocity;
-
-	animation->setPosition(*mPosition);
+	completeUpdateMethod();
 }
 
 void DroidZapper::AnimationProcess()
@@ -251,5 +254,15 @@ void DroidZapper::AnimationProcess()
 bool DroidZapper::onGround()
 {
 	return CollisionManager::getInstance()->checkEnemyOnGround(this);
+}
+
+void DroidZapper::completeUpdateMethod()
+{
+	AnimationProcess();
+
+	*mVelocity += *mAcceleration;
+	*mPosition += *mVelocity;
+
+	animation->setPosition(*mPosition);
 }
 

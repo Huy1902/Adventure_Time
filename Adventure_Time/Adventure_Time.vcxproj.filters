@@ -261,6 +261,7 @@
     <Xml Include="bar.xml">
       <Filter>Source Files\XML</Filter>
     </Xml>
+    <Xml Include="sound.xml" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">

@@ -15,7 +15,7 @@ const std::string  HomeState::m_sHomeID = "HOME";
 
 void HomeState::m_sHomeToPlay()
 {
-	SoundManager::getInstance()->playSound("play_button", 0);
+	SoundManager::getInstance()->playSound("play_button", 0, -1);
 	GameManager::getInstance()->getFSM()->changeState(new PlayingState());
 }
 

@@ -4,8 +4,8 @@
 enum sound_type
 {
 	NONE = -1,
-	MUSIC = 0,
-	SFX = 1
+	MUSIC_SOUND = 0,
+	SOUND_EFFECT = 1
 };
 
 SoundManager* SoundManager::s_pInstance = nullptr;
@@ -30,27 +30,27 @@ SoundManager::SoundManager()
 
 bool SoundManager::loadSound(std::string fileName, std::string id, sound_type type)
 {
-	if (type == MUSIC)
+	if (type == MUSIC_SOUND)
 	{
-		Mix_Music* pMusic = Mix_LoadMUS(fileName.c_str());
+		Mix_Music* pMUSIC_SOUND = Mix_LoadMUS(fileName.c_str());
 
-		if (pMusic == 0)
+		if (pMUSIC_SOUND == 0)
 		{
-			std::cout << "Could not load music\n";
+			std::cout << "Could not load MUSIC_SOUND\n";
 
 			return false;
 		}
 
-		mMusic[id] = pMusic;
+		mMusic[id] = pMUSIC_SOUND;
 		return true;
 	}
-	else if (type == SFX)
+	else if (type == SOUND_EFFECT)
 	{
 		Mix_Chunk* pChunk = Mix_LoadWAV(fileName.c_str());
 
 		if (pChunk == 0)
 		{
-			std::cout << "Could not load SFX\n";
+			std::cout << "Could not load SOUND_EFFECT\n";
 
 			return false;
 		}
@@ -61,16 +61,16 @@ bool SoundManager::loadSound(std::string fileName, std::string id, sound_type ty
 	return false;
 }
 
-void SoundManager::playMusic(std::string   id, int loop)
+void SoundManager::playMusic(std::string id, int loop)
 {
-	//Hàm Mix_PlayMusic được sử dụng để phát một đối tượng âm nhạc mới.
+	//Hàm Mix_PlayMUSIC_SOUND được sử dụng để phát một đối tượng âm nhạc mới.
 	Mix_PlayMusic(mMusic[id], loop);
 }
 
-void SoundManager::playSound(std::string   id, int loop)
+void SoundManager::playSound(std::string id, int loop, int channel)
 {
 	//Hàm Mix_PlayChannel trong SDL_mixer cho phép bạn phát một đoạn âm thanh(chunk) trên một kênh cụ thể
-	Mix_PlayChannel(-1, mSfxs[id], loop);
+	Mix_PlayChannel(channel, mSfxs[id], loop);
 }
 
 SoundManager::~SoundManager()

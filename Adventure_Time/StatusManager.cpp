@@ -22,7 +22,7 @@ void StatusManager::updatePlayerStatus()
 void StatusManager::renderPlayerStatus()
 {
 	Bar temp = mBars["health_point"];
-	int w = (*mPlayer->getStatus()).HP * 1.0 / (*mPlayer->getMaxStatus()).HP * temp.w;
+	int w = int( (*mPlayer->getStatus()).HP * 1.0 / (*mPlayer->getMaxStatus()).HP * temp.w );
 	TextureManager::getInstance()->drawSinglePic( temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
 	//SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("health_point"), &mSrcPoint, &mDestPoint);
 
@@ -30,7 +30,7 @@ void StatusManager::renderPlayerStatus()
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
 
 	temp = mBars["sta_point"];
-	w = (*mPlayer->getStatus()).STA * 1.0 / (*mPlayer->getMaxStatus()).STA * temp.w;
+	w = int( (*mPlayer->getStatus()).STA * 1.0 / (*mPlayer->getMaxStatus()).STA * temp.w );
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
 
 	temp = mBars["sta_bar"];
@@ -108,9 +108,9 @@ void StatusManager::renderOnGamePause()
 void StatusManager::renderEnemyStatus(EnemyObject* obj)
 {
 	Bar temp = mBars["greenbar"];
-	int w = obj->getStatus()->HP * 1.0 / obj->getMaxStatus()->HP * temp.w;
-	TextureManager::getInstance()->drawSinglePic(temp.textureID, obj->getPosition()->getX() - obj->getMapPosition()->getX() + obj->getAnimation()->getWidth() / 2 - temp.w / 2, 
-		obj->getPosition()->getY() - obj->getMapPosition()->getY() - temp.w / 2, w, temp.h, GameManager::getInstance()->getRenderer());
+	int w = int( obj->getStatus()->HP * 1.0 / obj->getMaxStatus()->HP * temp.w );
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, int( obj->getPosition()->getX() - obj->getMapPosition()->getX() + obj->getAnimation()->getWidth() / 2 - temp.w / 2 ), 
+		int( obj->getPosition()->getY() - obj->getMapPosition()->getY() - temp.w / 2 ), w, temp.h, GameManager::getInstance()->getRenderer());
 }
 
 StatusManager::StatusManager()

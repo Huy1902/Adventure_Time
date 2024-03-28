@@ -1,17 +1,14 @@
 #ifndef OBJECTPARSER_H_
 #define OBJECTPARSER_H_
 
-#include <map>
-#include<string>
-#include <vector>
 #include"XmlTree.h"
 
 struct Info;
 struct Texture;
-struct Sound;
 struct Bar;
+struct Music;
+struct SFX;
 class ObjectParser
-
 {
 public:
 	void parserAction(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector);
@@ -28,7 +25,7 @@ public:
 
 	void parserTexture(const std::string& filePath, std::vector<Texture>& textureVector);
 
-	void parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::vector<Sound>& soundVector);
+	void parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::map<std::string, SFX>& sfxMap);
 
 	void parserBar(const std::string& filePath, std::map<std::string, Bar>& barMap, std::vector<Texture>& textureVector);
 private:
@@ -41,8 +38,9 @@ private:
 	void loadAction(std::map<std::string, Info>& actionMap, XmlNode* actions);
 	void loadButton(std::vector<Info>& buttonMap, XmlNode* buttons);
 	void loadAnimation(std::vector<Info>& animMap, XmlNode* anims);
-	void loadSound(std::vector<Sound>& soundVector, XmlNode* sounds);
 	void loadBar(std::map<std::string, Bar>& barMap, XmlNode* bars);
+	void loadSFX(std::map<std::string, SFX>& sfxMap, XmlNode* sfxs);
+	void loadMusic(std::vector<Music>& musicVector, XmlNode* musics);
 };
 
 #endif

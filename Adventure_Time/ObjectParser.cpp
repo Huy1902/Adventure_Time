@@ -19,19 +19,6 @@ struct Texture
 	std::string filePath = "";
 	std::string textureID = "";
 };
-enum sound_type
-{
-	NONE = -1,
-	MUSIC = 0,
-	SFX = 1
-};
-
-struct Sound
-{
-	std::string filePath = "";
-	int type = -1;
-	std::string soundID = "";
-};
 
 struct Bar
 {
@@ -41,7 +28,17 @@ struct Bar
 	int h;
 	std::string textureID;
 };
-
+struct Music
+{
+	std::string filePath;
+	std::string MusicID;
+};
+struct SFX
+{
+	std::string filePath;
+	std::string sfxID;
+	int channel;
+};
 
 
 
@@ -64,9 +61,26 @@ void ObjectParser::parserTexture(const std::string& filePath, std::vector<Textur
 	loadTexture(textureVector, textures);
 }
 
-void ObjectParser::parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::vector<Sound>& soundVector)
+void ObjectParser::parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::map<std::string, SFX>& sfxMap)
 {
+	parserAction(filePath, actionMap, textureVector);
+	
+	XmlTree tree;
+	tree.parseXmlFile(filePath);
+	XmlNode* root = tree.getRoot();
+
+	XmlNode* sfxs = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == std::string("SFXS"))
+		{
+			sfxs = ite;
+			break;
+		}
+	}
+	loadSFX(sfxMap, sfxs);
 }
+
 
 void ObjectParser::parserBar(const std::string& filePath, std::map<std::string, Bar>& barMap, std::vector<Texture>& textureVector)
 {
@@ -198,16 +212,23 @@ void ObjectParser::loadAnimation(std::vector<Info>& animMap, XmlNode* anims)
 	}
 }
 
-void ObjectParser::loadSound(std::vector<Sound>& soundVector, XmlNode* sounds)
+void ObjectParser::loadMusic(std::vector<Music>& musicVector, XmlNode* musics)
 {
-	if (sounds != nullptr)
-	{
-		for (XmlNode* sound : sounds->child)
-		{
-			Sound obj;
+}
 
-			soundVector.push_back(obj);
-			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
+void ObjectParser::loadSFX(std::map<std::string, SFX>& sfxMap, XmlNode* sfxs)
+{
+	if (sfxs != nullptr)
+	{
+		for (XmlNode* sfx : sfxs->child)
+		{
+			SFX obj;
+			std::string name = "";
+			sfx->takeAttribute("name", &name);
+			sfx->takeAttribute("filePath", &obj.filePath);
+			sfx->takeAttribute("sfxID", &obj.sfxID);
+			sfx->takeAttribute("channel", &obj.channel);
+			sfxMap[name] = obj;
 		}
 	}
 }

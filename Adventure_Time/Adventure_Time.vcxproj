@@ -211,6 +211,7 @@
     <Xml Include="home_state.xml" />
     <Xml Include="MainCharacter.xml" />
     <Xml Include="pause_state.xml" />
+    <Xml Include="sound.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

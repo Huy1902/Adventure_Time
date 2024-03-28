@@ -12,11 +12,6 @@ TileSetManager::TileSetManager()
 	for (TileInfo* ite : *GameManager::getInstance()->getTileInfo())
 	{
 		Tileset* obj = new Tileset(ite->filePath, ite->fileName, ite->tileSize, ite->tileWidth, ite->tileHeight);
-		for (int& x : ite->ground)
-		{
-			--x;
-		}
-		obj->setGround(ite->ground);
 		mTileSetMap[ite->fileName] = obj;
 	}
 }

@@ -25,6 +25,8 @@ const int TILE_SIZE = 32;
 const int WIN_WIDTH = 1280;
 const int WIN_HEIGHT = 768;
 
+const int DEF_WHEN_CRIT = -10;
+const int BASH_RENDER_TIME = 10;
 
 using namespace std;
 
@@ -151,18 +153,9 @@ void Map::processEnemyAndPlayer()
 			{
 				if (mPlayer->isBash() == true)
 				{
-					int origin_atk = mPlayer->getStatus()->ATK;
-					int origin_luck = (*ite)->getStatus()->LUCK;
-					mPlayer->getStatus()->ATK = origin_atk * 10;
-					(*ite)->getStatus()->LUCK = origin_luck / 10;
-					if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
-					{
-						(*ite)->getHurt();
-						std::cout << (*ite)->getStatus()->HP << '\n';
-						mCountTimeRenderBash = 10;
-					}
-					mPlayer->getStatus()->ATK = origin_atk;
-					(*ite)->getStatus()->LUCK = origin_luck;
+					(*ite)->setStun();
+					mPlayer->setAbleToCrit();
+					mCountTimeRenderBash = BASH_RENDER_TIME;
 				}
 				else if (StatusManager::getInstance()->whenEnemyAttackPlayer(*ite) == true)
 				{
@@ -171,12 +164,21 @@ void Map::processEnemyAndPlayer()
 			}
 			if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
 			{
+				int origin = (*ite)->getStatus()->DEF;
+				int luck = (*ite)->getStatus()->LUCK;
+				if (mPlayer->isCrit() == true)
+				{
+					(*ite)->getStatus()->DEF = DEF_WHEN_CRIT;
+					(*ite)->getStatus()->LUCK = 0;
+				}
 				if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
 				{
 					std::cout << "Player is attack\n";
 					(*ite)->getHurt();
 					std::cout << (*ite)->getStatus()->HP << '\n';
 				}
+				(*ite)->getStatus()->DEF = origin;
+				(*ite)->getStatus()->LUCK = luck;
 			}
 			else
 			{
@@ -272,7 +274,7 @@ void Map::renderMap()
 	mPlayer->renderObject();
 	if (mCountTimeRenderBash > 0)
 	{
-		FontManager::getInstance()->drawText("Bash successfully", mPlayer->getPosition()->getX(), mPlayer->getPosition()->getY());
+		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY());
 		--mCountTimeRenderBash;
 	}
 }

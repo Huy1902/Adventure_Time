@@ -23,8 +23,9 @@ public:
 
 	bool loadSound(std::string  fileName, std::string  id, sound_type type);
 
-	void playSound(std::string  id, int loop);
 	void playMusic(std::string  id, int loop);
+
+	void playSound(std::string id, int loop, int channel);
 
 
 private:

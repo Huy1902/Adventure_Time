@@ -7,7 +7,7 @@
 #include "Animation.h"
 #include <vector>
 
-
+const int TIME_ABLE_CRIT = 10;
 class PlayerObject :
     public CharModel
 {
@@ -45,7 +45,15 @@ public:
 	}
 	virtual  bool isAttack() const
 	{
-		if (mCurrentAction == ATTACK1 && animation->getIndexFrame() >= 1 && animation->getIndexFrame() <= 3)
+		if ((mCurrentAction == ATTACK1 && animation->getIndexFrame() >= 1 && animation->getIndexFrame() <= 3) || mCurrentAction == CRIT)
+		{
+			return true;
+		}
+		return false;
+	}
+	virtual bool isCrit() const
+	{
+		if (mCurrentAction == CRIT)
 		{
 			return true;
 		}
@@ -83,33 +91,33 @@ public:
 	}
 	bool isBash() const
 	{
-		if (mCurrentAction == BASH && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 4))
+		if (mCurrentAction == BASH)
 		{
 			return true;
 		}
 		return false;
+	}
+	void setAbleToCrit()
+	{
+		mCountTimeAbleToCrit = TIME_ABLE_CRIT;
+		m_bAbleToCrit = true;
+	}
+	bool getAbleToCrit()
+	{
+		return m_bAbleToCrit;
 	}
 private:
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	bool onGround();
 	bool headStuck();
 	int sideStuck();
-
-
-	bool m_bHeadStuck;
 	bool m_bJump;
-	bool m_bOnGround;
-	int mTimeAttack;
-	int mLandingTime;
-
-
+	bool m_bAbleToCrit = false;
 	bool m_bHurting;
-
-	int mCountTimeHurt;
+	
 	void AnimationProcess();
 
 	void completeUpdateMethod();
-
 };
 
 #endif

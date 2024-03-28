@@ -69,6 +69,11 @@ public:
 	{
 		*mPosition = obj;
 	}
+	virtual void setStun()
+	{
+		mStatus.isStunned = true;
+		mCountTimeStun = STUN_TIME;
+	}
 
 	BarrerKnight();
 	~BarrerKnight();
@@ -76,28 +81,8 @@ public:
 
 
 private:
-	GameVector mSavePosition;
-	int mAttackTine;
-	int mAttack1Time;
-
-
-	int mCharHeight;
-	int mCharWidth;
-
-	int mTimeRun;
 
 	bool onGround();
-	//int sideStuck();
-
-	bool m_bHeadStuck;
-	bool m_bRun;
-	bool m_bOnGround;
-
-
-	int mCountStamina;
-
-
-
 	void AnimationProcess();
 	void completeUpdateMethod();
 

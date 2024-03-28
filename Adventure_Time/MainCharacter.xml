@@ -26,7 +26,11 @@
 		<action name="bash" textureID="bash" numFrame="5" w="100" h="64" speed="1"/>
 		<action name="crit" textureID="attack3" numFrame="9" w="100" h="64" speed="1"/>
 	</ACTIONS>
-	<SOUNDS>
-		<sound filePath="assets/sfx/dying_sfx.wav" soundID="dying" type="1"/>
-	</SOUNDS>
+	<SFXS>
+		<sfx filePath="assets/knight_player/dying.wav" sfxID="main_dying" name="dying" channel="0"/>
+		<sfx filePath="assets/knight_player/crit.wav" sfxID="main_crit" name="crit" channel="1"/>
+		<sfx filePath="assets/knight_player/bash.wav" sfxID="main_bash" name="bash" channel="2"/>
+		<sfx filePath="assets/knight_player/footsteps.wav" sfxID="main_footstep" name="run" channel="3"/>
+		<sfx filePath="assets/knight_player/attack1.wav" sfxID="main_attack1" name="attack1" channel="4"/>
+	</SFXS>
 </CHARACTER>

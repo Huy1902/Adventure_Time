@@ -23,7 +23,6 @@
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
-
 GameManager::GameManager() :
 	m_bRunning(false),
 	m_pWindow(nullptr),
@@ -35,15 +34,13 @@ GameManager::GameManager() :
 {
 	mTileSet.resize(1);
 	mTileSet[0] = new TileInfo("assets/Tileset1.png", "tileset1", 32, 512, 512);
-	mTileSet[0]->ground = { 65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,113 };
 
-	SoundManager::getInstance()->loadSound("assets/music/Twilight_Serenity.mp3", "home_theme", MUSIC);
-	SoundManager::getInstance()->loadSound("assets/music/Dream_Aria.mp3", "night_theme", MUSIC);
-	SoundManager::getInstance()->loadSound("assets/music/Knights_of_Favonius.mp3", "play_theme", MUSIC);
-	SoundManager::getInstance()->loadSound("assets/music/Make_Haste_Partner.mp3", "fight_theme", MUSIC);
-	SoundManager::getInstance()->loadSound("assets/sfx/join_game.wav", "play_button", SFX);
-	SoundManager::getInstance()->loadSound("assets/sfx/click_sfx.wav", "click_button", SFX);
-
+	SoundManager::getInstance()->loadSound("assets/music/Twilight_Serenity.mp3", "home_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Dream_Aria.mp3", "night_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Knights_of_Favonius.mp3", "play_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Make_Haste_Partner.mp3", "fight_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/sfx/join_game.wav", "play_button", SOUND_EFFECT);
+	SoundManager::getInstance()->loadSound("assets/sfx/click_sfx.wav", "click_button", SOUND_EFFECT);
 }
 
 GameManager::~GameManager()

@@ -288,6 +288,5 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 		}
 	}
 	return false;
-	return false;
 }
 

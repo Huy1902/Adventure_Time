@@ -18,7 +18,6 @@ struct TileInfo
 	int tileWidth;
 	int tileHeight;
 	std::string fileName;
-	std::vector<int> ground;
 
 	TileInfo(const std::string& filePath_, const std::string & fileName_, int tileSize_, int tileWidth_, int tileHeight_) :
 		filePath(filePath_),

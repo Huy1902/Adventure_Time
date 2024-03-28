@@ -1,13 +1,10 @@
-#pragma once
+#ifndef CHARMODEL_H_
+#define CHARMODEL_H_
+
 #include "ObjectModel.h"
-
 #include <vector>
-#include <map>
-
 #include <SDL.h>
-
 #include "Animation.h"
-
 
 struct Status
 {
@@ -22,6 +19,20 @@ struct Status
 	bool isInvulnerable = false;
 	bool isStunned = false;
 };
+
+struct SFX
+{
+	std::string filePath;
+	std::string sfxID;
+	int channel;
+};
+enum sound_type
+{
+	NONE = -1,
+	MUSIC_SOUND = 0,
+	SOUND_EFFECT = 1
+};
+
 class CharModel :
 	public ObjectModel
 {
@@ -104,18 +115,28 @@ protected:
 	void stun();
 	std::map<std::string, Info> mActions;
 	std::vector<Texture> mTextures;
+	std::map<std::string, SFX> mSFXs;
 
 	Animation* animation;
 	Action mCurrentAction;
 	SDL_RendererFlip mFlip;
 
 	int mDyingTime;
-
 	int mCountTimeHit = 0;
-	int mCountAttack1 = 0;
 	int mCountTimeAttack2 = 0;
 	int mCountTimeDash = 0;
 	int mCountTimeAttack1 = 0;
 	int mCountTimeBash = 0;
 	int mCountTimeCrit = 0;
+	int mCountTimeRun = 0;
+	int mCountTimeStun = 0;
+	int mCountTimeHurt = 0;
+	int mCountTimeAbleToCrit = 0;
+	int mCountTimeLanding = 0;
+	int mCountStamina = 00;
+
+	bool m_bHeadStuck = false;
+	bool m_bOnGround = false;
 };
+
+#endif //CHARMODEL_H_

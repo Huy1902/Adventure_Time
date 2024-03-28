@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<STATUS>
+	<TEXTURES>
+		<texture filePath="assets/status/sta_bar.png" textureID="sta_bar"/>
+		<texture filePath="assets/status/greenbar.png" textureID="greenbar"/>
+		<texture filePath="assets/status/health_bar.png" textureID="health_bar"/>
+		<texture filePath="assets/status/health_point.png" textureID="health_point"/>
+		<texture filePath="assets/status/sta_point.png" textureID="sta_point"/>
+	</TEXTURES>
+	<BARS>
+		<bar name="health_bar" textureID="health_bar" w="190" h="57" x="0" y="0"/>
+		<bar name="health_point" textureID="health_point" w="140" h="10" x="47" y="27"/>
+		<bar name="sta_bar" textureID="sta_bar" w="140" h="15" x="48" y="40"/>
+		<bar name="sta_point" textureID="sta_point" w="115" h="10" x="60" y="42"/>
+		<bar name="greenbar" textureID="greenbar" w="45" h="3" x="0" y="0"/>
+	</BARS>
+</STATUS>

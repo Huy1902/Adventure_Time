@@ -7,7 +7,7 @@
 using namespace std;
 
 const int FPS = 24;
-const int DELAY_TIME = 1000.0f / FPS;
+const int DELAY_TIME = static_cast<int>( 1000.0f / FPS );
 
 int main(int argc, char* args[])
 {

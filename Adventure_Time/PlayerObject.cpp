@@ -8,29 +8,34 @@
 #include "TextureManager.h"
 #include "CollisionManager.h"
 #include "ObjectParser.h"
+#include "SoundManager.h"
 const int HURT_MOVE_BACK = 2;
 const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
 const int UP_FORCE = -20;
-const int LANDING_TIME = 4;
-const int HURT_TIME = 12;
-const int DYING_TIME = 29;
 
 const int COST_DASH = 5;
 const int COST_ATTACK = 12;
 
 const int STA_RECOVER_SPEED = 1;
 
+std::string  last_sound = "";
+
+
 PlayerObject::PlayerObject()
 {
-
-	ObjectParser::getInstance()->parserAction("MainCharacter.xml", mActions, mTextures);
+	ObjectParser::getInstance()->parserCharacter("MainCharacter.xml", mActions, mTextures, mSFXs);
+	for (const auto& ite : mSFXs)
+	{
+		SoundManager::getInstance()->loadSound(ite.second.filePath, ite.second.sfxID, SOUND_EFFECT);
+	}
 	for (const auto& ite : mTextures)
 	{
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
 	}
 
-	mStatus.LUCK = 10;
+	Mix_Volume(mSFXs["run"].channel, 100);
+	mStatus.LUCK = 100;
 	mStatus.STA = 200;
 
 	animation = new Animation();
@@ -51,7 +56,6 @@ PlayerObject::PlayerObject()
 	animation->setSize(100, 64);
 	animation->setPosition(*mPosition);
 
-	mLandingTime = LANDING_TIME;
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
 	mCountTimeHurt = 0;
 
@@ -70,9 +74,10 @@ void PlayerObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 void PlayerObject::processData()
 {
 	static double start_jump_at_y = 0;
-	mVelocity->setX(0);
 	m_bOnGround = onGround();
 	m_bHeadStuck = headStuck();
+
+	//alive
 	if (mStatus.isAlive == false)
 	{
 		--mDyingTime;
@@ -80,16 +85,32 @@ void PlayerObject::processData()
 		completeUpdateMethod();
 		return;
 	}
-	if (m_bHurting == true)
+	//crit
+	if (mCountTimeCrit > 0)
+	{
+		mCurrentAction = CRIT;
+		--mCountTimeCrit;
+		AnimationProcess();
+		return;
+	}
+
+	//able to crit
+	if (mCountTimeAbleToCrit > 0)
+	{
+		--mCountTimeAbleToCrit;
+		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_J) && m_bOnGround == true)
+		{
+			mCountTimeCrit = mActions["crit"].numFrames * mActions["crit"].speed;
+			mCurrentAction = CRIT;
+			AnimationProcess();
+			return;
+		}
+	}
+	//hurt
+	if (mCountTimeHurt > 0)
 	{
 		mCurrentAction = HURT;
-		++mCountTimeHurt;
-		if (mCountTimeHurt >= HURT_TIME)
-		{
-			m_bHurting = false;
-			mStatus.isInvulnerable = false;
-			mCountTimeHurt = 0;
-		}
+		--mCountTimeHurt;
 		if (isRight() == true)
 		{
 			mVelocity->setX(-HURT_MOVE_BACK);
@@ -99,10 +120,50 @@ void PlayerObject::processData()
 			mVelocity->setX(HURT_MOVE_BACK);
 		}
 		completeUpdateMethod();
-
-
 		return;
 	}
+	else
+	{
+		mStatus.isInvulnerable = false;
+	}
+	mVelocity->setX(0);
+	//landing
+	if (mCountTimeLanding > 0)
+	{
+		--mCountTimeLanding;
+		mCurrentAction = LANDING;
+		completeUpdateMethod();
+		return;
+	}
+	//bash
+	if (mCountTimeBash > 0)
+	{
+		--mCountTimeBash;
+		mCurrentAction = BASH;
+		mVelocity->setX(0);
+		completeUpdateMethod();
+		return;
+	}
+	//attack1;
+	if (mCountTimeAttack1 > 0)
+	{
+		--mCountTimeAttack1;
+		mCurrentAction = ATTACK1;
+		mVelocity->setX(0);
+		completeUpdateMethod();
+		return;
+	}
+	//crit
+	if (mCountTimeCrit > 0)
+	{
+		--mCountTimeCrit;
+		mCurrentAction = CRIT;
+		mVelocity->setX(0);
+		completeUpdateMethod();
+		return;
+	}
+
+
 	if (mStatus.STA < MaxStatus.STA)
 	{
 		mStatus.STA += STA_RECOVER_SPEED;
@@ -114,7 +175,7 @@ void PlayerObject::processData()
 		if (mCurrentAction == FALL || (mCurrentAction == JUMP && start_jump_at_y < mPosition->getY()))
 		{
 			mCurrentAction = LANDING;
-			mLandingTime = 0;
+			mCountTimeLanding = mActions["landing"].numFrames * mActions["landing"].speed - 1;
 		}
 		else
 		{
@@ -126,7 +187,6 @@ void PlayerObject::processData()
 	{
 		mAcceleration->setY(GRAVITY);
 	}
-
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_A) == true)
 	{
 		mVelocity->setX(-MOVE_SPEED);
@@ -163,16 +223,14 @@ void PlayerObject::processData()
 				{
 					mCurrentAction = JUMP;
 				}
+
+	//attack1
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_J) && m_bOnGround == true && mStatus.STA > COST_ATTACK * mActions["attack1"].numFrames * mActions["attack1"].speed && mCountTimeAttack1 == 0)
 	{
 		mCurrentAction = ATTACK1;
-		mCountTimeAttack1 = mActions["attack1"].numFrames * mActions["attack1"].speed;
+		mCountTimeAttack1 = mActions["attack1"].numFrames * mActions["attack1"].speed - 1;
 	}
-	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_I) && m_bOnGround == true)
-	{
-		mCurrentAction = CRIT;
-		mCountTimeCrit = mActions["crit"].numFrames * mActions["crit"].speed;
-	}
+	//dash
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_L) && m_bOnGround == true && mStatus.STA > COST_DASH * mActions["dash"].numFrames * mActions["dash"].speed && mCountTimeDash == 0)
 	{
 		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_A))
@@ -180,48 +238,30 @@ void PlayerObject::processData()
 			mVelocity->setX(-MOVE_SPEED * 2);
 			mFlip = SDL_FLIP_HORIZONTAL;
 			mCurrentAction = DASH;
-			mCountTimeDash = mActions["dash"].numFrames * mActions["dash"].speed;
+			mCountTimeDash = mActions["dash"].numFrames * mActions["dash"].speed - 1;
 		}
 		if (InputManager::getInstance()->keyDown(SDL_SCANCODE_D))
 		{
 			mVelocity->setX(MOVE_SPEED * 2);
 			mFlip = SDL_FLIP_NONE;
 			mCurrentAction = DASH;
-			mCountTimeDash = mActions["dash"].numFrames * mActions["dash"].speed;
+			mCountTimeDash = mActions["dash"].numFrames * mActions["dash"].speed - 1;
 		}
 	}
+	//bash
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_U) && m_bOnGround == true && mCountTimeBash == 0)
 	{
 		mCurrentAction = BASH;
 		mCountTimeBash = mActions["bash"].numFrames * mActions["bash"].speed;
 	}
-
-	if (mCountTimeBash > 0)
-	{
-		--mCountTimeBash;
-		mCurrentAction = BASH;
-		mVelocity->setX(0);
-	}
-	if (mCountTimeAttack1 > 0)
-	{
-		--mCountTimeAttack1;
-		mCurrentAction = ATTACK1;
-		mVelocity->setX(0);
-	}
-	if (mCountTimeCrit > 0)
-	{
-		--mCountTimeCrit;
-		mCurrentAction = CRIT;
-		mVelocity->setX(0);
-	}
-
+	//dash
 	if (mCountTimeDash > 0)
 	{
 		--mCountTimeDash;
 		mCurrentAction = DASH;
 		mVelocity->setX(mVelocity->getX() * 2);
 	}
-
+	//side stuck
 	if (sideStuck() == 1 && mVelocity->getX() < 0)
 	{
 		mVelocity->setX(0);
@@ -230,21 +270,16 @@ void PlayerObject::processData()
 	{
 		mVelocity->setX(0);
 	}
-
-	if (mLandingTime < LANDING_TIME)
-	{
-		++mLandingTime;
-		mCurrentAction = LANDING;
-	}
-
 	completeUpdateMethod();
 }
 
 void PlayerObject::AnimationProcess()
 {
+	std::string current_sound = "";
 	switch (mCurrentAction)
 	{
 	case PlayerObject::RUN:
+		current_sound = "run";
 		run();
 		break;
 	case PlayerObject::JUMP:
@@ -258,6 +293,7 @@ void PlayerObject::AnimationProcess()
 		break;
 	case PlayerObject::ATTACK1:
 		mStatus.STA -= COST_ATTACK;
+		current_sound = "attack1";
 		attack1();
 		break;
 	case PlayerObject::LANDING:
@@ -271,16 +307,36 @@ void PlayerObject::AnimationProcess()
 		dash();
 		break;
 	case PlayerObject::DYING:
+		current_sound = "dying";
 		dying();
 		break;
 	case PlayerObject::BASH:
 		bash();
+		current_sound = "bash";
 		break;
 	case PlayerObject::CRIT:
+		current_sound = "crit";
 		crit();
 		break;
 	default:
 		break;
+	}
+
+	if (current_sound != last_sound)
+	{
+		if (last_sound == "run")
+		{
+			Mix_HaltChannel(mSFXs[last_sound].channel);
+		}
+		last_sound = current_sound;
+	}
+
+	if (Mix_Playing(mSFXs[current_sound].channel))
+	{
+	}
+	else
+	{
+		SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
 	}
 	animation->update();
 }
@@ -295,6 +351,7 @@ void PlayerObject::clearObject()
 	TextureManager::getInstance()->clearFromTexture("walk2");
 	TextureManager::getInstance()->clearFromTexture("jump2");
 }
+
 void PlayerObject::getHurt()
 {
 	if (mStatus.isInvulnerable == false)
@@ -310,8 +367,6 @@ void PlayerObject::getHurt()
 		m_bHurting = true;
 	}
 }
-
-
 
 bool PlayerObject::onGround()
 {
@@ -341,7 +396,6 @@ int PlayerObject::sideStuck()
 	return 0;
 }
 
-
 void PlayerObject::completeUpdateMethod()
 {
 	AnimationProcess();
@@ -351,4 +405,3 @@ void PlayerObject::completeUpdateMethod()
 
 	animation->setPosition(*mPosition);
 }
-
