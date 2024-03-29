@@ -108,22 +108,22 @@ void Map::processMapAndPlayer()
 			mPlayer->getPosition()->setX(0);
 		}
 	}
-	else if (mPosition->getX() > 0 && mPosition->getX() < MAP_WIDTH * TILE_SIZE - WIN_WIDTH)
+	else if (mPosition->getX() > 0 && mPosition->getX() < MAP_WIDTH * TILE_SIZE - WIN_WIDTH - 32)
 	{
 		mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 		*mPosition += *mPlayer->getVelocity();
 	}
 	else
 	{
-		mPosition->setX(MAP_WIDTH * TILE_SIZE - WIN_WIDTH);
+		mPosition->setX(MAP_WIDTH * TILE_SIZE - WIN_WIDTH - 32);
 		if (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPlayer->getVelocity()->getX() < 0)
 		{
 			mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 			*mPosition += *mPlayer->getVelocity();
 		}
-		else if (mPlayer->getPosition()->getX() > WIN_WIDTH)
+		else if (mPlayer->getPosition()->getX() + 100 > WIN_WIDTH)
 		{
-			mPlayer->getPosition()->setX(WIN_WIDTH);
+			mPlayer->getPosition()->setX(WIN_WIDTH - 100);
 		}
 	}
 	mPosition->setY(0);

@@ -36,7 +36,7 @@ PlayerObject::PlayerObject()
 
 
 	Mix_Volume(mSFXs["run"].channel, 100);
-	mStatus.LUCK = 100;
+	mStatus.LUCK = 10;
 	mStatus.STA = 200;
 
 	animation = new Animation();
