@@ -34,6 +34,7 @@ PlayerObject::PlayerObject()
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
 	}
 
+
 	Mix_Volume(mSFXs["run"].channel, 100);
 	mStatus.LUCK = 100;
 	mStatus.STA = 200;

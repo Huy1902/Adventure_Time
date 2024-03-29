@@ -2,6 +2,7 @@
 #define BARRERKNIGHT_H_
 #include "EnemyObject.h"
 
+#include "BaseGenerator.h"
 #include <SDL.h>
 
 
@@ -75,18 +76,26 @@ public:
 		mCountTimeStun = STUN_TIME;
 	}
 
-	BarrerKnight();
 	~BarrerKnight();
 
 
 
 private:
-
+	BarrerKnight();
 	bool onGround();
 	void AnimationProcess();
 	void completeUpdateMethod();
 
+	friend class BarrerKnightGenerator;
+};
 
+class BarrerKnightGenerator :
+	public BaseGenerator
+{
+	BaseObject* generateObject() const
+	{
+		return new BarrerKnight();
+	}
 };
 
 #endif

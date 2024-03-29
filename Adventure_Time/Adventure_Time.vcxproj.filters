@@ -54,6 +54,12 @@
     <Filter Include="Source Files\XML">
       <UniqueIdentifier>{7915e206-ea91-45dc-bf66-409b7bbcdfa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Generator">
+      <UniqueIdentifier>{b571f83f-74fd-48f9-81fe-fbe65831ed1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generator">
+      <UniqueIdentifier>{b128e70a-dd16-4768-aaf8-faa8e9a3eed4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -141,6 +147,12 @@
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratorManager.cpp">
+      <Filter>Source Files\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,6 +248,15 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="FontManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGenerator.h">
+      <Filter>Header Files\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratorManager.h">
+      <Filter>Header Files\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>

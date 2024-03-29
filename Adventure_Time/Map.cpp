@@ -7,16 +7,14 @@
 #include "TileSetManager.h"
 #include "GameManager.h"
 #include "CollisionManager.h"
+#include "GeneratorManager.h"
+#include "SoundManager.h"
+#include "StatusManager.h"
+#include "FontManager.h"
 
 #include "BarrerKnight.h"
-
-#include "SoundManager.h"
-
-#include "StatusManager.h"
-
 #include "DroidZapper.h"
 
-#include "FontManager.h"
 
 const int MAP_WIDTH = 120;
 const int MAP_HEIGHT = 24;
@@ -32,8 +30,9 @@ using namespace std;
 
 Map::Map()
 {
+	GeneratorManager::getInstance()->addGenerator("BarrerKnight", new BarrerKnightGenerator());
 	mPosition = new GameVector(0, 0);
-	BarrerKnight* obj1 = new BarrerKnight();
+	BarrerKnight* obj1 = dynamic_cast<BarrerKnight*>( GeneratorManager::getInstance()->generatorObject("BarrerKnight"));
 	obj1->setPosition({ 1400, 100 });
 	mEnemy.push_back(obj1);
 

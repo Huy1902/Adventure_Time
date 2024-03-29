@@ -148,11 +148,13 @@
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="GeneratorManager.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectParser.cpp" />
@@ -171,6 +173,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BarrerKnight.h" />
+    <ClInclude Include="BaseGenerator.h" />
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CharModel.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -179,12 +182,14 @@
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="GeneratorManager.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameVector.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapManager.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="ObjectParser.h" />
