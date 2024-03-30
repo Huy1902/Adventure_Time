@@ -2,20 +2,17 @@
 
 #include "GameManager.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include "InputManager.h"
-
-#include "PlayerObject.h"
-
-#include "PauseState.h"
-#include "HomeState.h"
-
-#include "ButtonModel.h"
-
 #include "StatusManager.h"
 
+#include "PauseState.h"
 #include "GameOverState.h"
 
-#include "SoundManager.h"
+#include "MapParser.h"
+
+#include "ButtonModel.h"
+#include "PlayerObject.h"
 
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
@@ -28,11 +25,6 @@ void PlayingState::m_sPlayingToGameOver()
 {
 	GameManager::getInstance()->getFSM()->changeState(new GameOverState());
 }
-
-//void PlayingState::m_sPlayingToHome()
-//{
-//	GameManager::getInstance()->getFSM()->changeState(new HomeState());
-//}
 
 void PlayingState::processData()
 {
@@ -87,8 +79,8 @@ void PlayingState::renderState()
 
 bool PlayingState::startState()
 {
-	mMap = new Map();
-	mMap->loadMap("map1.txt", "tileset1");
+	mMap = MapParser::getInstance()->parseMap("map1.tmx");
+	//mMap->loadMap("map1.txt", "tileset1");
 
 	mPlayer = new PlayerObject();
 	mMap->setPlayer(mPlayer);

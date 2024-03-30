@@ -43,6 +43,44 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 	mPosition = new GameVector(0, 0);
 }
 
+Layer::Layer(const std::string& layerString, const int& numRow, const int& numCol) :
+	mNumRow(numRow),
+	mNumCol(numCol),
+	m_pTileset(nullptr)
+{
+	mGrid.resize(numRow);
+	for (int i = 0; i < numRow; ++i)
+	{
+		mGrid[i].resize(numCol);
+	}
+	int k = 0;
+	for (int i = 0; i < numRow; ++i)
+	{
+		for (int j = 0; j < numCol; ++j)
+		{
+			if (k < layerString.size() && layerString[k] >= '0' && layerString[k] <= '9')
+			{
+				std::string temp = "";
+				while (layerString[k] >= '0' && layerString[k] <= '9')
+				{
+					temp += layerString[k];
+					++k;
+				}
+				mGrid[i][j] = std::stoi(temp) - 1;
+				//std::cout << mGrid[i][j] << ' ';
+			}
+			else
+			{
+				++k;
+				--j;
+			}
+		}
+		//std::cout << '\n';
+	}
+	//mVelocity = new GameVector(0, 0);
+	mPosition = new GameVector(0, 0);
+}
+
 void Layer::updateLayer()
 {
 	//if ( (mPosition->getX() / mTileSize + WINDOWS_COL >= mNumCol && mVelocity->getX() > 0) || (mPosition->getX() <= 0 && mVelocity->getX() < 0))
@@ -58,7 +96,7 @@ void Layer::updateLayer()
 
 int Layer::getID(const double& x, const double& y) const
 {
-	
+
 	//std::cout << x << ' ' << y << '\n';
 	//std::cout << x / mTileSize << ' ' << y / mTileSize << ' ';
 	int x_p = (mPosition->getX() / mTileSize) + (x / mTileSize);

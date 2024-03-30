@@ -23,8 +23,24 @@ public:
 		}
 		return mTileSetMap[id];
 	}
-	void 
-		clearTileSetMap();
+	bool isTileSetExist(const std::string& id)
+	{
+		if (mTileSetMap.find(id) == mTileSetMap.end())
+		{
+			return false;
+		}
+		return true;
+	}
+	bool addTileSet(Tileset* obj, const std::string id)
+	{
+		if (mTileSetMap.find(id) != mTileSetMap.end())
+		{
+			return false;
+		}
+		mTileSetMap[id] = obj;
+		return true;
+	}
+	void clearTileSetMap();
 
 private:
 	std::map<std::string, Tileset*> mTileSetMap;

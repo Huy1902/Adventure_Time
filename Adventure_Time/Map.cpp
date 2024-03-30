@@ -16,9 +16,9 @@
 #include "DroidZapper.h"
 
 
-const int MAP_WIDTH = 120;
-const int MAP_HEIGHT = 24;
-const int TILE_SIZE = 32;
+const int mMapWidth = 120;
+const int mMapHeight = 24;
+const int mTileSize = 32;
 
 const int WIN_WIDTH = 1280;
 const int WIN_HEIGHT = 768;
@@ -55,42 +55,64 @@ Map::Map()
 	mBackGround = new Background();
 }
 
-void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
+Map::Map(int width, int height, int tileSize) :
+	mTileSize(tileSize),
+	mMapWidth(width),
+	mMapHeight(height)
 {
-	Tileset* mTileSet = TileSetManager::getInstance()->getTileseByID(tileSetID);
+	GeneratorManager::getInstance()->addGenerator("BarrerKnight", new BarrerKnightGenerator());
+	mPosition = new GameVector(0, 0);
+	BarrerKnight* obj1 = dynamic_cast<BarrerKnight*>(GeneratorManager::getInstance()->generatorObject("BarrerKnight"));
+	obj1->setPosition({ 1400, 100 });
+	mEnemy.push_back(obj1);
 
-	ifstream fin(fileMap);
+	DroidZapper* obj2 = new DroidZapper();
+	mEnemy.push_back(obj2);
+	obj2->setPosition({ 1000, 100 });
 
-	if (fin.is_open())
-	{
-		string temp;
-		while (fin.eof() == false)
-		{
-			string decode_map = "";
-			while (fin >> temp)
-			{
-				if (temp == "/")
-				{
-					break;
-				}
-				decode_map += temp;
-			}
-			Layer* layer = new Layer(decode_map, MAP_HEIGHT, MAP_WIDTH, TILE_SIZE);
-			layer->setTileset(mTileSet);
-			mLayer.push_back(layer);
-		}
-	}
-	else
-	{
-		cout << "Cannot open file map";
-	}
-	CollisionManager::getInstance()->setGround(mLayer.back());
+	mBackGround = new Background();
 }
+
+//void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
+//{
+//	Tileset* mTileSet = TileSetManager::getInstance()->getTileseByID(tileSetID);
+//
+//	ifstream fin(fileMap);
+//
+//	if (fin.is_open())
+//	{
+//		string temp;
+//		while (fin.eof() == false)
+//		{
+//			string decode_map = "";
+//			while (fin >> temp)
+//			{
+//				if (temp == "/")
+//				{
+//					break;
+//				}
+//				decode_map += temp;
+//			}
+//			Layer* layer = new Layer(decode_map, mMapHeight, mMapWidth, mTileSize);
+//			layer->setTileset(mTileSet);
+//			mLayer.push_back(layer);
+//		}
+//	}
+//	else
+//	{
+//		cout << "Cannot open file map";
+//	}
+//}
 
 void Map::setPlayer(PlayerObject* obj)
 {
 	CollisionManager::getInstance()->setPlayer(obj);
 	mPlayer = obj;
+}
+
+void Map::initGround()
+{
+	CollisionManager::getInstance()->setGround(mLayer.back());
 }
 
 void Map::processMapAndPlayer()
@@ -108,14 +130,14 @@ void Map::processMapAndPlayer()
 			mPlayer->getPosition()->setX(0);
 		}
 	}
-	else if (mPosition->getX() > 0 && mPosition->getX() < MAP_WIDTH * TILE_SIZE - WIN_WIDTH - 32)
+	else if (mPosition->getX() > 0 && mPosition->getX() < mMapWidth * mTileSize - WIN_WIDTH - 32)
 	{
 		mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
 		*mPosition += *mPlayer->getVelocity();
 	}
 	else
 	{
-		mPosition->setX(MAP_WIDTH * TILE_SIZE - WIN_WIDTH - 32);
+		mPosition->setX(mMapWidth * mTileSize - WIN_WIDTH - 32);
 		if (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPlayer->getVelocity()->getX() < 0)
 		{
 			mPlayer->getPosition()->setX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
@@ -229,11 +251,11 @@ void Map::processEnemyAndPlayer()
 void Map::updateMap()
 {
 	//std::cout << mPosition->getX() << '\n';
-	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / TILE_SIZE >= MAP_WIDTH)
+	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / mTileSize >= mMapWidth)
 	{
 		*mPosition += *mPlayer->getVelocity() / 2;
 	}
-	else if( (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 && (mPosition->getX() + mPlayer->getVelocity()->getX() + WIN_WIDTH) / TILE_SIZE < MAP_WIDTH)
+	else if( (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 && (mPosition->getX() + mPlayer->getVelocity()->getX() + WIN_WIDTH) / mTileSize < mMapWidth)
 		|| (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPosition->getX() > 0)
 		)
 	{

@@ -45,6 +45,15 @@ void XmlTree::parse(const char* file_name)
 		string temp = xml[i];
 		temp.erase(remove(temp.begin(), temp.end(), '	'), temp.end());
 		temp.erase(remove(temp.begin(), temp.end(), '>'), temp.end());
+		if (temp.front() == ' ')
+		{
+			string::iterator ite = temp.begin();
+			while (*ite == ' ')
+			{
+				++ite;
+			}
+			temp.erase(remove(temp.begin(), ite, ' '), temp.end());
+		}
 		//cout << temp << '\n';
 
 		if (temp.substr(0, 2) != "</")
@@ -57,6 +66,7 @@ void XmlTree::parse(const char* file_name)
 				ss >> c >> t;
 
 				XmlNode* p_new_XmlNode = new XmlNode(t);
+
 				if (stack_XmlNode.size() > 0)
 				{
 					XmlNode* parent = stack_XmlNode.top();
@@ -82,8 +92,10 @@ void XmlTree::parse(const char* file_name)
 					while (ss >> attribute)
 					{
 						string::iterator ite = find(attribute.begin(), attribute.end(), '=');
+
 						string property = string(attribute.begin(), ite);
 						string value = string(++ite, attribute.end());
+
 						value.erase(remove(value.begin(), value.end(), '"'), value.end());
 						if (value.back() == '/')
 						{
@@ -103,7 +115,14 @@ void XmlTree::parse(const char* file_name)
 			else
 			{
 				XmlNode* element = stack_XmlNode.top();
-				element->text = temp;
+
+				element->text ="";
+				while (xml[i].front() != '<')
+				{
+					element->text += xml[i];
+					++i;
+				}
+				--i;
 			}
 
 		}

@@ -155,6 +155,7 @@
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="MapParser.cpp" />
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectParser.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="MapParser.h" />
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="ObjectParser.h" />

@@ -10,13 +10,15 @@
 class Layer
 {
 public:
-	Layer(const std::string& layerString, const int& row, const int& col, const int& tileSize);
+	Layer(const std::string& layerString, const int& numRow, const int& numCol, const int& tileSize);
+	Layer(const std::string& layerString, const int& numRow, const int& numCol);
 	~Layer();
 
 	void renderLayer();
 	void setTileset(Tileset* pTileSet)
 	{
 		m_pTileset = pTileSet;
+		mTileSize = pTileSet->getTileSize();
 	}
 	void updateLayer();
 
