@@ -28,10 +28,6 @@ const int WIN_HEIGHT = 768;
 const int DEF_WHEN_CRIT = -10;
 const int BASH_RENDER_TIME = 10;
 
-bool g_bRenderInteractText = false;
-double g_save_point_x;
-double g_save_point_y;
-
 using namespace std;
 
 Map::Map(int width, int height, int tileSize) :
@@ -215,39 +211,34 @@ void Map::processEnemyAndMap()
 	}
 }
 
+void Map::processInteractObjectAndPlayer()
+{
+	for (InteractObject* ite : mSavePoint)
+	{
+		ite->processData();
+		ite->setMapPosition(*mPosition);
+		double obj_x = ite->getPosition()->getX() - mPosition->getX();
+		double obj_y = ite->getPosition()->getY() - mPosition->getY();
+		if (obj_x < mPlayer->getPosition()->getX() + mPlayer->getAnimation()->getWidth()
+			&& obj_x + ite->getWidth() > mPlayer->getPosition()->getX() && abs(mPlayer->getPosition()->getY() - obj_y) < 30)
+		{
+			InteractManager::getInstance()->takeInteract(ite, mPlayer);
+		}
 
+	}
+}
 void Map::updateMap()
 {
 	processEnemyAndPlayer();
 	processMapAndPlayer();
 	processEnemyAndMap();
+	processInteractObjectAndPlayer();
 
 	for (Layer* ite : mLayer)
 	{
 		//ite->setVelocity(*mPlayer->getVelocity());
 		ite->setPosition(*mPosition);
 		ite->updateLayer();
-	}
-
-	g_bRenderInteractText = false;
-	for (BonFire* ite : mSavePoint)
-	{
-		ite->processData();
-		ite->setMapPosition(*mPosition);
-		double save_point_x = ite->getPosition()->getX() - mPosition->getX();
-		double save_point_y = ite->getPosition()->getY() - mPosition->getY();
-		if (save_point_x < mPlayer->getPosition()->getX() + mPlayer->getAnimation()->getWidth()
-			&& save_point_x + ite->getWidth() > mPlayer->getPosition()->getX())
-		{
-			g_bRenderInteractText = true;
-			g_save_point_x = save_point_x;
-			g_save_point_y = save_point_y;
-			if (InputManager::getInstance()->keyDown(SDL_SCANCODE_F))
-			{
-				InteractManager::getInstance()->setSavedPos(*mPosition, *mPlayer->getPosition());
-			}
-		}
-
 	}
 	mBackGround->updateBackground();
 }
@@ -268,7 +259,7 @@ void Map::renderMap()
 			StatusManager::getInstance()->renderEnemyStatus(mEnemy[i]);
 		}
 	}
-	for (BonFire* ite : mSavePoint)
+	for (InteractObject* ite : mSavePoint)
 	{
 		ite->renderObject();
 	}
@@ -277,9 +268,5 @@ void Map::renderMap()
 	{
 		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY());
 		--mCountTimeRenderBash;
-	}
-	if (g_bRenderInteractText == true)
-	{
-		FontManager::getInstance()->drawText("Press F to Interact", g_save_point_x, g_save_point_y);
 	}
 }

@@ -1,10 +1,11 @@
 #ifndef BONFIRE_H_
 #define BONFIRE_H_
-#include "ObjectModel.h"
+#include "InteractObject.h"
 #include "BaseGenerator.h"
 
+
 class BonFire :
-	public ObjectModel
+	public InteractObject
 {
 public:
 	virtual void processData();
@@ -15,24 +16,31 @@ public:
 	{
 		return mPosition;
 	}
-	void setPosition(const GameVector& obj)
+	virtual void setPosition(const GameVector& obj)
 	{
 		*mPosition = obj;
 	}
-	void setMapPosition(const GameVector& obj)
+	virtual void setMapPosition(const GameVector& obj)
 	{
 		*mMapPosition = obj;
 	}
-	int getWidth() const
+	virtual int getWidth() const
 	{
 		return mWidth;
+	}
+	virtual bool interactItem();
+	virtual Interact_Type getType() const
+	{
+		return mType;
+	}
+	virtual GameVector* getMapPosition()
+	{
+		return mMapPosition;
 	}
 	~BonFire();
 private:
 	BonFire();
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
-
-	GameVector* mMapPosition;
 
 	friend class BonFireGenerator;
 };

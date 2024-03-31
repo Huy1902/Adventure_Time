@@ -6,6 +6,7 @@
 
 #include "Animation.h"
 #include <vector>
+#include "BaseGenerator.h"
 
 const int TIME_ABLE_CRIT = 10;
 class PlayerObject :

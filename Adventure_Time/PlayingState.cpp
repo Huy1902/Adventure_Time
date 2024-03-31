@@ -47,17 +47,17 @@ void PlayingState::processData()
 		mPlayer->processData();
 		return;
 	}
-	if (mObjects.empty() == false)
-	{
-		for (int i = 0; i < mObjects.size(); ++i)
-		{
-			mObjects[i]->processData();
-			if (mObjects.empty())
-			{
-				break;
-			}
-		}
-	}
+	//if (mObjects.empty() == false)
+	//{
+	//	for (int i = 0; i < mObjects.size(); ++i)
+	//	{
+	//		mObjects[i]->processData();
+	//		if (mObjects.empty())
+	//		{
+	//			break;
+	//		}
+	//	}
+	//}
 	if (m_bSetupRevive == true)
 	{
 		mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
@@ -75,13 +75,13 @@ void PlayingState::renderState()
 		mPlayer->renderObject();
 		return;
 	}
-	if (mObjects.empty() == false)
-	{
-		for (size_t i = 0; i < mObjects.size(); ++i)
-		{
-			mObjects[i]->renderObject();
-		}
-	}
+	//if (mObjects.empty() == false)
+	//{
+	//	for (size_t i = 0; i < mObjects.size(); ++i)
+	//	{
+	//		mObjects[i]->renderObject();
+	//	}
+	//}
 	mMap->renderMap();
 	StatusManager::getInstance()->renderPlayerStatus();
 }
@@ -103,11 +103,11 @@ bool PlayingState::startState()
 }
 bool PlayingState::exitState()
 {
-	for (size_t i = 0; i < mObjects.size(); ++i)
-	{
-		mObjects[i]->clearObject();
-		delete mObjects[i];
-	}
+	//for (size_t i = 0; i < mObjects.size(); ++i)
+	//{
+	//	mObjects[i]->clearObject();
+	//	delete mObjects[i];
+	//}
 	mTextureID.clear();
 	mObjects.clear();
 	delete mMap;

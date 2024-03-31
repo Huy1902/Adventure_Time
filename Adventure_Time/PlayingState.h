@@ -4,7 +4,6 @@
 
 #include <vector>
 
-#include "ObjectModel.h"
 #include "Map.h"
 
 class PlayingState :

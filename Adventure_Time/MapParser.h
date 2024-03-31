@@ -3,7 +3,7 @@
 #include "ObjectParser.h"
 #include "Map.h"
 #include "EnemyObject.h"
-#include "BonFire.h"
+#include "InteractObject.h"
 
 class MapParser
 {
@@ -25,7 +25,7 @@ private:
 
 	void loadLayer(XmlNode* layers, std::vector<Layer*>& mLayer, Tileset* tileset);
 	void loadEnemy(XmlNode* enemies, std::vector<EnemyObject*>& mEnemies);
-	void loadSavePoint(XmlNode* save_points, std::vector<BonFire*>& mSavePoint);
+	void loadSavePoint(XmlNode* save_points, std::vector<InteractObject*>& mSavePoint);
 
 	MapParser() {};
 	~MapParser() {};

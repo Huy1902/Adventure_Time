@@ -11,7 +11,7 @@
 
 #include "Background.h"
 
-#include "BonFire.h"
+#include "InteractObject.h"
 class Map
 {
 public:
@@ -29,7 +29,7 @@ public:
 	{
 		mLayer = obj;
 	}
-	void setSavePoint(const std::vector<BonFire*>& savepoint)
+	void setSavePoint(const std::vector<InteractObject*>& savepoint)
 	{
 		mSavePoint = savepoint;
 	}
@@ -53,6 +53,7 @@ private:
 	void processMapAndPlayer();
 	void processEnemyAndPlayer();
 	void processEnemyAndMap();
+	void processInteractObjectAndPlayer();
 
 	int mCountFightTime;
 	bool m_bFight;
@@ -65,7 +66,7 @@ private:
 
 	GameVector mSavedMapPosition;
 	GameVector mSavedPlayerPosition;
-	std::vector<BonFire*> mSavePoint;
+	std::vector<InteractObject*> mSavePoint;
 };
 
 #endif

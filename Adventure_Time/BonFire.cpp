@@ -2,6 +2,8 @@
 
 #include "TextureManager.h"
 #include "GameManager.h"
+#include "InputManager.h"
+#include "FontManager.h"
 
 BonFire::BonFire()
 {
@@ -12,8 +14,19 @@ BonFire::BonFire()
 	mHeight = 60;
 	mWidth = 40;
 	mNumFrames = 9;
+	mType = SAVE_POINT;
 }
 
+
+bool BonFire::interactItem()
+{
+	m_bAbleToInteract = true;
+	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_F))
+	{
+		return true;
+	}
+	return false;
+}
 
 BonFire::~BonFire()
 {
@@ -36,6 +49,7 @@ void BonFire::processData()
 	{
 		mIndexFrames = 0;
 	}
+	m_bAbleToInteract = false;
 }
 
 void BonFire::renderObject() const
@@ -45,6 +59,11 @@ void BonFire::renderObject() const
 
 	TextureManager::getInstance()->drawSpritePicByCol(mTextureID, x, y,
 		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, SDL_FLIP_NONE);
+
+	if (m_bAbleToInteract == true)
+	{
+		FontManager::getInstance()->drawText("Press F to Interact", x, y);
+	}
 }
 
 void BonFire::clearObject()

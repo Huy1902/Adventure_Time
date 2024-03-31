@@ -1,5 +1,9 @@
-#pragma once
+#ifndef INTERACTMANAGER_H_
+#define INTERACTMANAGER_H_
 #include "GameVector.h"
+#include "PlayerObject.h"
+#include "InteractObject.h"
+
 class InteractManager
 {
 public:
@@ -24,12 +28,16 @@ public:
 	{
 		return mSavedMapPos;
 	}
+	void takeInteract(InteractObject* obj, PlayerObject* player);
 private:
 	static InteractManager* s_pIntance;
-
+	void savePoint(InteractObject* obj, PlayerObject* player);
+	void takeCoin();
 	InteractManager();
 	~InteractManager();
 	GameVector* mSavedPlayerPos;
 	GameVector* mSavedMapPos;
 };
+
+#endif
 

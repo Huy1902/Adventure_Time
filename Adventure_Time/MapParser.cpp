@@ -90,7 +90,7 @@ Map* MapParser::parseMap(const string& filePath)
 			}
 		}
 	}
-	vector<BonFire*> mSavePoint;
+	vector<InteractObject*> mSavePoint;
 	loadSavePoint(save_point, mSavePoint);
 	newMap->setSavePoint(mSavePoint);
 
@@ -167,7 +167,7 @@ void MapParser::loadEnemy(XmlNode* enemies, vector<EnemyObject*>& mEnemies)
 	}
 }
 
-void MapParser::loadSavePoint(XmlNode* save_points, std::vector<BonFire*>& mSavePoint)
+void MapParser::loadSavePoint(XmlNode* save_points, std::vector<InteractObject*>& mSavePoint)
 {
 	for (XmlNode* ite : save_points->child)
 	{
@@ -178,7 +178,7 @@ void MapParser::loadSavePoint(XmlNode* save_points, std::vector<BonFire*>& mSave
 			ite->takeAttribute("name", &name);
 			ite->takeAttribute("x", &x);
 			ite->takeAttribute("y", &y);
-			BonFire* obj = dynamic_cast<BonFire*>(GeneratorManager::getInstance()->generatorObject(name));
+			InteractObject* obj = dynamic_cast<InteractObject*>(GeneratorManager::getInstance()->generatorObject(name));
 			obj->setPosition({ x, y });
 			mSavePoint.push_back(obj);
 		}
