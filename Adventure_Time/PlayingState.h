@@ -28,6 +28,8 @@ private:
     PlayerObject* mPlayer;
 
     bool m_bSetupDying = false;
+
+    bool m_bSetupRevive = true;
 };
 
 

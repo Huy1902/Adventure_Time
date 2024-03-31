@@ -32,16 +32,12 @@ DroidZapper::DroidZapper() :
 	EnemyObject()
 {
 
-	ObjectParser::getInstance()->parserAction("droid_zapper.xml", mActions, mTextures);
-	for (const auto& ite : mTextures)
-	{
-		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
-	}
+	ObjectParser::getInstance()->parserAction("droid_zapper.xml", mActions);
 
 	animation = new Animation();
 
 
-	mPosition = new GameVector(1200, 600);
+	mPosition = new GameVector();
 	mVelocity = new GameVector(0, 0);
 	mAcceleration = new GameVector(0, 0);
 	mMapPosition = new GameVector(0, 0);
@@ -66,10 +62,7 @@ DroidZapper::DroidZapper() :
 }
 DroidZapper::~DroidZapper()
 {
-	for (const auto& ite : mTextures)
-	{
-		TextureManager::getInstance()->clearFromTexture(ite.textureID);
-	}
+
 }
 
 void DroidZapper::renderObject() const
@@ -80,7 +73,10 @@ void DroidZapper::renderObject() const
 
 void DroidZapper::clearObject()
 {
-
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->clearFromTexture(ite.textureID);
+	}
 }
 
 void DroidZapper::processData()
@@ -155,7 +151,6 @@ void DroidZapper::processData()
 			if (mCountStamina == mStatus.STA * 1)
 			{
 				mCountStamina = 0;
-				std::cout << mActions["attack1"].textureID << ' ' << mActions["attack1"].numFrames * mActions["attack1"].speed << '\n';
 				mCurrentAction = ATTACK1;
 				mCountTimeAttack1 = (mActions["attack1"].numFrames * mActions["attack1"].speed);
 			}

@@ -127,6 +127,7 @@ bool CollisionManager::checkEnemySideRight(EnemyObject* enemy)
 {
 	double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth();
 	double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
+	//system("pause");
 	if (mGround->getID(e_x, e_y) != -1)
 	{
 		return true;

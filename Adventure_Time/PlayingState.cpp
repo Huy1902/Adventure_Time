@@ -14,6 +14,8 @@
 #include "ButtonModel.h"
 #include "PlayerObject.h"
 
+#include "InteractManager.h"
+
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
 void PlayingState::m_sPlayingToPause()
@@ -56,6 +58,13 @@ void PlayingState::processData()
 			}
 		}
 	}
+	if (m_bSetupRevive == true)
+	{
+		mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
+		mPlayer->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
+		m_bSetupRevive = false;
+	}
+
 	mMap->updateMap();
 	StatusManager::getInstance()->updatePlayerStatus();
 }
@@ -80,7 +89,6 @@ void PlayingState::renderState()
 bool PlayingState::startState()
 {
 	mMap = MapParser::getInstance()->parseMap("map1.tmx");
-	//mMap->loadMap("map1.txt", "tileset1");
 
 	mPlayer = new PlayerObject();
 	mMap->setPlayer(mPlayer);
@@ -89,7 +97,8 @@ bool PlayingState::startState()
 
 	SoundManager::getInstance()->playMusic("play_theme", -1);
 
-	//mObjects.push_back(player);
+	m_bSetupRevive = true;
+
 	return true;
 }
 bool PlayingState::exitState()

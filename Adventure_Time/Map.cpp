@@ -11,6 +11,8 @@
 #include "SoundManager.h"
 #include "StatusManager.h"
 #include "FontManager.h"
+#include "InputManager.h"
+#include "InteractManager.h"
 
 #include "BarrerKnight.h"
 #include "DroidZapper.h"
@@ -26,83 +28,20 @@ const int WIN_HEIGHT = 768;
 const int DEF_WHEN_CRIT = -10;
 const int BASH_RENDER_TIME = 10;
 
+bool g_bRenderInteractText = false;
+double g_save_point_x;
+double g_save_point_y;
+
 using namespace std;
-
-Map::Map()
-{
-	GeneratorManager::getInstance()->addGenerator("BarrerKnight", new BarrerKnightGenerator());
-	mPosition = new GameVector(0, 0);
-	BarrerKnight* obj1 = dynamic_cast<BarrerKnight*>( GeneratorManager::getInstance()->generatorObject("BarrerKnight"));
-	obj1->setPosition({ 1400, 100 });
-	mEnemy.push_back(obj1);
-
-	//BarrerKnight* obj3 = new BarrerKnight();
-	//obj3->setPosition({ 300, 100 });
-	//mEnemy.push_back(obj3);
-
-	//BarrerKnight* obj4 = new BarrerKnight();
-	//obj4->setPosition({ 700, 100 });
-	//mEnemy.push_back(obj4);
-
-	//BarrerKnight* obj5 = new BarrerKnight();
-	//obj5->setPosition({ 1500, 100 });
-	//mEnemy.push_back(obj5);
-
-	DroidZapper* obj2 = new DroidZapper();
-	mEnemy.push_back(obj2);
-	obj2->setPosition({ 1000, 100 });
-
-	mBackGround = new Background();
-}
 
 Map::Map(int width, int height, int tileSize) :
 	mTileSize(tileSize),
 	mMapWidth(width),
 	mMapHeight(height)
 {
-	GeneratorManager::getInstance()->addGenerator("BarrerKnight", new BarrerKnightGenerator());
-	mPosition = new GameVector(0, 0);
-	BarrerKnight* obj1 = dynamic_cast<BarrerKnight*>(GeneratorManager::getInstance()->generatorObject("BarrerKnight"));
-	obj1->setPosition({ 1400, 100 });
-	mEnemy.push_back(obj1);
-
-	DroidZapper* obj2 = new DroidZapper();
-	mEnemy.push_back(obj2);
-	obj2->setPosition({ 1000, 100 });
-
 	mBackGround = new Background();
+	mPosition = new GameVector(0, 0);
 }
-
-//void Map::loadMap(const std::string& fileMap, const std::string& tileSetID)
-//{
-//	Tileset* mTileSet = TileSetManager::getInstance()->getTileseByID(tileSetID);
-//
-//	ifstream fin(fileMap);
-//
-//	if (fin.is_open())
-//	{
-//		string temp;
-//		while (fin.eof() == false)
-//		{
-//			string decode_map = "";
-//			while (fin >> temp)
-//			{
-//				if (temp == "/")
-//				{
-//					break;
-//				}
-//				decode_map += temp;
-//			}
-//			Layer* layer = new Layer(decode_map, mMapHeight, mMapWidth, mTileSize);
-//			layer->setTileset(mTileSet);
-//			mLayer.push_back(layer);
-//		}
-//	}
-//	else
-//	{
-//		cout << "Cannot open file map";
-//	}
-//}
 
 void Map::setPlayer(PlayerObject* obj)
 {
@@ -114,6 +53,12 @@ void Map::initGround()
 {
 	CollisionManager::getInstance()->setGround(mLayer.back());
 }
+
+//void Map::reviveCharAtBonFire()
+//{
+//	mPlayer->setPosition(mSavedPlayerPosition);
+//	*mPosition = mSavedMapPosition;
+//}
 
 void Map::processMapAndPlayer()
 {
@@ -154,6 +99,7 @@ void Map::processMapAndPlayer()
 void Map::processEnemyAndPlayer()
 {
 	mPlayer->processData();
+
 	if (mEnemy.empty() == true)
 	{
 		m_bFight = false;
@@ -194,9 +140,7 @@ void Map::processEnemyAndPlayer()
 				}
 				if (StatusManager::getInstance()->whenPlayerAttackEnemy(*ite) == true)
 				{
-					std::cout << "Player is attack\n";
 					(*ite)->getHurt();
-					std::cout << (*ite)->getStatus()->HP << '\n';
 				}
 				(*ite)->getStatus()->DEF = origin;
 				(*ite)->getStatus()->LUCK = luck;
@@ -247,30 +191,63 @@ void Map::processEnemyAndPlayer()
 	}
 }
 
+void Map::processEnemyAndMap()
+{
+	if (mEnemy.empty() == true)
+	{
+		m_bFight = false;
+	}
+	else
+	{
+		vector<EnemyObject*>::iterator ite = mEnemy.begin();
+		while (ite != mEnemy.end())
+		{
+			if ((*ite)->getPosition()->getX() <= 0)
+			{
+				(*ite)->getPosition()->setX(0);
+			}
+			else if ((*ite)->getPosition()->getX() + (*ite)->getAnimation()->getWidth() > mMapWidth * mTileSize)
+			{
+				(*ite)->getPosition()->setX(mMapWidth * mTileSize - (*ite)->getAnimation()->getWidth() * 2);
+			}
+			++ite;
+		}
+	}
+}
+
 
 void Map::updateMap()
 {
-	//std::cout << mPosition->getX() << '\n';
-	/*if (mPosition->getX() == 0 || (mPosition->getX() + WIN_WIDTH) / mTileSize >= mMapWidth)
-	{
-		*mPosition += *mPlayer->getVelocity() / 2;
-	}
-	else if( (mPlayer->getPosition()->getX() > WIN_WIDTH / 2 && (mPosition->getX() + mPlayer->getVelocity()->getX() + WIN_WIDTH) / mTileSize < mMapWidth)
-		|| (mPlayer->getPosition()->getX() < WIN_WIDTH / 2 && mPosition->getX() > 0)
-		)
-	{
-		mPlayer->setPositionX(mPlayer->getPosition()->getX() - mPlayer->getVelocity()->getX());
-		*mPosition += *mPlayer->getVelocity();
-	}*/
-
 	processEnemyAndPlayer();
 	processMapAndPlayer();
+	processEnemyAndMap();
 
 	for (Layer* ite : mLayer)
 	{
 		//ite->setVelocity(*mPlayer->getVelocity());
 		ite->setPosition(*mPosition);
 		ite->updateLayer();
+	}
+
+	g_bRenderInteractText = false;
+	for (BonFire* ite : mSavePoint)
+	{
+		ite->processData();
+		ite->setMapPosition(*mPosition);
+		double save_point_x = ite->getPosition()->getX() - mPosition->getX();
+		double save_point_y = ite->getPosition()->getY() - mPosition->getY();
+		if (save_point_x < mPlayer->getPosition()->getX() + mPlayer->getAnimation()->getWidth()
+			&& save_point_x + ite->getWidth() > mPlayer->getPosition()->getX())
+		{
+			g_bRenderInteractText = true;
+			g_save_point_x = save_point_x;
+			g_save_point_y = save_point_y;
+			if (InputManager::getInstance()->keyDown(SDL_SCANCODE_F))
+			{
+				InteractManager::getInstance()->setSavedPos(*mPosition, *mPlayer->getPosition());
+			}
+		}
+
 	}
 	mBackGround->updateBackground();
 }
@@ -284,18 +261,25 @@ void Map::renderMap()
 	}
 	for (size_t i = 0; i < mEnemy.size(); ++i)
 	{
-		//std::cout << mEnemy[i]->getPosition()->getX() << ' ' << mPosition->getX() << ' ' << mEnemy[i]->getPosition()->getX() << ' ' << mPosition->getX() + WIN_WIDTH << '\n';
+		mEnemy[i]->setMapPosition(*mPosition);
 		if (mEnemy[i]->getPosition()->getX() >= mPosition->getX() && mEnemy[i]->getPosition()->getX() < mPosition->getX() + WIN_WIDTH)
 		{
-			mEnemy[i]->setMapPosition(*mPosition);
 			mEnemy[i]->renderObject();
 			StatusManager::getInstance()->renderEnemyStatus(mEnemy[i]);
 		}
+	}
+	for (BonFire* ite : mSavePoint)
+	{
+		ite->renderObject();
 	}
 	mPlayer->renderObject();
 	if (mCountTimeRenderBash > 0)
 	{
 		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY());
 		--mCountTimeRenderBash;
+	}
+	if (g_bRenderInteractText == true)
+	{
+		FontManager::getInstance()->drawText("Press F to Interact", g_save_point_x, g_save_point_y);
 	}
 }

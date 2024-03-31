@@ -8,27 +8,8 @@
 #include <SDL.h>
 
 //project file
-#include "BaseObject.h"
 #include "FiniteStateMachine.h"
-
-struct TileInfo
-{
-	std::string filePath;
-	int tileSize;
-	int tileWidth;
-	int tileHeight;
-	std::string fileName;
-
-	TileInfo(const std::string& filePath_, const std::string & fileName_, int tileSize_, int tileWidth_, int tileHeight_) :
-		filePath(filePath_),
-		fileName(fileName_),
-		tileSize(tileSize_),
-		tileWidth(tileWidth_),
-		tileHeight(tileHeight_)
-	{
-
-	}
-};
+//#include "ObjectParser.h"
 
 class GameManager
 {
@@ -63,11 +44,6 @@ public:
 
 	FiniteStateMachine* getFSM() { return mFSM; }
 
-	std::vector<TileInfo*>* getTileInfo()
-	{
-		return &mTileSet;
-	}
-
 private:
 	static GameManager* s_pInstance;
 	bool m_bRunning;
@@ -76,11 +52,10 @@ private:
 	SDL_Renderer* m_pRenderer;
 	SDL_Texture* m_pTexture;
 
+	std::vector<Texture> mTextures;
+
 	int mWidthWindows;
 	int mHeightWindows;
-
-	std::vector<BaseObject*> mBaseObject;
-	std::vector<TileInfo*> mTileSet;
 
 	FiniteStateMachine* mFSM;
 

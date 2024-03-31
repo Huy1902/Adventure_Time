@@ -2,9 +2,7 @@
 
 #include "MapParser.h"
 #include "ObjectParser.h"
-//#include "TileSetManager.h"
-//#include "Layer.h"
-#include <sstream>
+#include "GeneratorManager.h"
 
 using namespace std;
 
@@ -37,7 +35,6 @@ Map* MapParser::parseMap(const string& filePath)
 	XmlTree tree;
 	tree.parseXmlFile(filePath);
 	XmlNode* root = tree.getRoot();
-	std::cout << 1;
 	int w, h, tile_size;
 	root->takeAttribute("width", &w);
 	root->takeAttribute("height", &h);
@@ -54,12 +51,49 @@ Map* MapParser::parseMap(const string& filePath)
 			break;
 		}
 	}
-	Tileset * tileset = loadTileSet(tile_set);
+	Tileset* tileset = loadTileSet(tile_set);
 
 	vector<Layer*> mLayer;
 	loadLayer(root, mLayer, tileset);
 	newMap->setLayer(mLayer);
 	newMap->initGround();
+
+	XmlNode* enemies = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == string("objectgroup"))
+		{
+			string type;
+			ite->takeAttribute("name", &type);
+			if (type == "Enemy")
+			{
+				enemies = ite;
+				break;
+			}
+		}
+	}
+	vector<EnemyObject*> mEnemy;
+	loadEnemy(enemies, mEnemy);
+	newMap->setEnemy(mEnemy);
+
+	XmlNode* save_point = nullptr;
+	for (XmlNode* ite : root->child)
+	{
+		if (ite->element == string("objectgroup"))
+		{
+			string type;
+			ite->takeAttribute("name", &type);
+			if (type == "SavePoint")
+			{
+				save_point = ite;
+
+			}
+		}
+	}
+	vector<BonFire*> mSavePoint;
+	loadSavePoint(save_point, mSavePoint);
+	newMap->setSavePoint(mSavePoint);
+
 	return newMap;
 }
 
@@ -67,11 +101,6 @@ Tileset* MapParser::loadTileSet(XmlNode* tileset)
 {
 	TileInfo info;
 	tileset->takeAttribute("name", &info.fileName);
-	//if (TileSetManager::getInstance()->isTileSetExist(info.fileName) == true)
-	//{
-	//	cout << "Tileset exist\n";
-	//	return;
-	//}
 	tileset->takeAttribute("tilewidth", &info.tileSize);
 
 	XmlNode* image = nullptr;
@@ -88,14 +117,6 @@ Tileset* MapParser::loadTileSet(XmlNode* tileset)
 	image->takeAttribute("height", &info.tileHeight);
 
 	Tileset* newTile = new Tileset(info.filePath, info.fileName, info.tileSize, info.tileWidth, info.tileHeight);
-	//if (TileSetManager::getInstance()->addTileSet(newTile, info.fileName))
-	//{
-	//	cout << "Add tileset\n";
-	//}
-	//else
-	//{
-	//	cout << "Cannot add\n";
-	//}
 	return newTile;
 }
 
@@ -124,6 +145,42 @@ void MapParser::loadLayer(XmlNode* layers, vector<Layer*>& mLayer, Tileset* tile
 			Layer* newLayer = new Layer(layerString, h, w);
 			newLayer->setTileset(tileset);
 			mLayer.push_back(newLayer);
+		}
+	}
+}
+
+void MapParser::loadEnemy(XmlNode* enemies, vector<EnemyObject*>& mEnemies)
+{
+	for (XmlNode* ite : enemies->child)
+	{
+		if (ite->element == "object")
+		{
+			string name;
+			double x, y;
+			ite->takeAttribute("name", &name);
+			ite->takeAttribute("x", &x);
+			ite->takeAttribute("y", &y);
+			EnemyObject* obj = dynamic_cast<EnemyObject*>(GeneratorManager::getInstance()->generatorObject(name));
+			obj->setPosition({ x, y });
+			mEnemies.push_back(obj);
+		}
+	}
+}
+
+void MapParser::loadSavePoint(XmlNode* save_points, std::vector<BonFire*>& mSavePoint)
+{
+	for (XmlNode* ite : save_points->child)
+	{
+		if (ite->element == "object")
+		{
+			string name;
+			double x, y;
+			ite->takeAttribute("name", &name);
+			ite->takeAttribute("x", &x);
+			ite->takeAttribute("y", &y);
+			BonFire* obj = dynamic_cast<BonFire*>(GeneratorManager::getInstance()->generatorObject(name));
+			obj->setPosition({ x, y });
+			mSavePoint.push_back(obj);
 		}
 	}
 }

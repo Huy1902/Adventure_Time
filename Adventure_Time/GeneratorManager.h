@@ -7,7 +7,7 @@
 class GeneratorManager
 {
 public:
-	bool addGenerator(const std::string generatorID, BaseGenerator* generator)
+	bool addGenerator(const std::string & generatorID, BaseGenerator* generator)
 	{
 		if (mGeneratorMap.find(generatorID) != mGeneratorMap.end())
 		{
@@ -17,7 +17,7 @@ public:
 		mGeneratorMap[generatorID] = generator;
 		return true;
 	}
-	BaseObject* generatorObject(const std::string generatorID)
+	BaseObject* generatorObject(const std::string & generatorID)
 	{
 		auto ite = mGeneratorMap.find(generatorID);
 
@@ -38,6 +38,9 @@ public:
 private:
 	static GeneratorManager* s_pInstance;
 	std::map<std::string, BaseGenerator*> mGeneratorMap;
+
+	GeneratorManager() {};
+	~GeneratorManager() {};
 };
 
 #endif

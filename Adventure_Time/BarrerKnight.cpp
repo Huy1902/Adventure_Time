@@ -29,16 +29,12 @@ BarrerKnight::BarrerKnight() :
 	EnemyObject()
 {
 
-	ObjectParser::getInstance()->parserAction("BarerKnight.xml", mActions, mTextures);
-	for (const auto& ite : mTextures)
-	{
-		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
-	}
+	ObjectParser::getInstance()->parserAction("BarerKnight.xml", mActions);
 
 	animation = new Animation();
 
 
-	mPosition = new GameVector(1400, 600);
+	mPosition = new GameVector();
 	mVelocity = new GameVector(0, 0);
 	mAcceleration = new GameVector(0, 0);
 	mMapPosition = new GameVector(0, 0);
@@ -61,10 +57,7 @@ BarrerKnight::BarrerKnight() :
 }
 BarrerKnight::~BarrerKnight()
 {
-	for (const auto& ite : mTextures)
-	{
-		TextureManager::getInstance()->clearFromTexture(ite.textureID);
-	}
+
 }
 
 void BarrerKnight::renderObject() const
@@ -75,7 +68,10 @@ void BarrerKnight::renderObject() const
 
 void BarrerKnight::clearObject()
 {
-
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->clearFromTexture(ite.textureID);
+	}
 }
 
 void BarrerKnight::processData()
@@ -174,7 +170,6 @@ void BarrerKnight::processData()
 			}
 			else if (mCountStamina == mStatus.STA * 1 || mCountStamina == mStatus.STA * 2)
 			{
-				std::cout << mActions["attack1"].textureID << ' ' << mActions["attack1"].numFrames * mActions["attack1"].speed << '\n';
 				mCurrentAction = ATTACK1;
 				mCountTimeAttack1 = (mActions["attack1"].numFrames * mActions["attack1"].speed);
 			}

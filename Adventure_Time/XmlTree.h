@@ -17,6 +17,7 @@ public:
 		parent = nullptr;
 	}
 	bool takeAttribute(const std::string& property, int* x);
+	bool takeAttribute(const std::string& property, double* x);
 	bool takeAttribute(const std::string& property, std::string* s);
 	bool takeText(std::string* s)
 	{

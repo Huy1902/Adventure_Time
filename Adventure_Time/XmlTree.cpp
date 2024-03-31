@@ -43,6 +43,10 @@ void XmlTree::parse(const char* file_name)
 	for (size_t i = 0; i < xml.size(); ++i)
 	{
 		string temp = xml[i];
+		if (temp.empty() == true)
+		{
+			continue;
+		}
 		temp.erase(remove(temp.begin(), temp.end(), '	'), temp.end());
 		temp.erase(remove(temp.begin(), temp.end(), '>'), temp.end());
 		if (temp.front() == ' ')
@@ -54,8 +58,6 @@ void XmlTree::parse(const char* file_name)
 			}
 			temp.erase(remove(temp.begin(), ite, ' '), temp.end());
 		}
-		//cout << temp << '\n';
-
 		if (temp.substr(0, 2) != "</")
 		{
 			if (temp.front() == '<')
@@ -103,7 +105,6 @@ void XmlTree::parse(const char* file_name)
 							value.pop_back();
 						}
 
-						//cout << property << ' ' << value << '\n';
 						p_new_XmlNode->attribute_set[property] = value;
 					}
 				}
@@ -138,6 +139,18 @@ bool XmlNode::takeAttribute(const string& property, int* x)
 	if (attribute_set.find(property) != attribute_set.end())
 	{
 		*x = stoi(attribute_set[property]);
+	}
+	else
+	{
+		return false;
+	}
+	return true;
+}
+bool XmlNode::takeAttribute(const string& property, double* x)
+{
+	if (attribute_set.find(property) != attribute_set.end())
+	{
+		*x = stod(attribute_set[property]);
 	}
 	else
 	{

@@ -2,6 +2,8 @@
 
 #include "ObjectParser.h"
 #include "Map.h"
+#include "EnemyObject.h"
+#include "BonFire.h"
 
 class MapParser
 {
@@ -22,6 +24,8 @@ private:
 	Tileset* loadTileSet(XmlNode * tileset);
 
 	void loadLayer(XmlNode* layers, std::vector<Layer*>& mLayer, Tileset* tileset);
+	void loadEnemy(XmlNode* enemies, std::vector<EnemyObject*>& mEnemies);
+	void loadSavePoint(XmlNode* save_points, std::vector<BonFire*>& mSavePoint);
 
 	MapParser() {};
 	~MapParser() {};

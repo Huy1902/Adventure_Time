@@ -20,6 +20,12 @@
 #include "InputManager.h"
 #include "SoundManager.h"
 #include "FontManager.h"
+
+#include "BarrerKnight.h"
+#include "DroidZapper.h"
+#include "GeneratorManager.h"
+#include "BonFire.h"
+#include "ObjectParser.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -32,15 +38,6 @@ GameManager::GameManager() :
 	mWidthWindows(0),
 	mFSM(nullptr)
 {
-	mTileSet.resize(1);
-	mTileSet[0] = new TileInfo("assets/Tileset1.png", "tileset1", 32, 512, 512);
-
-	SoundManager::getInstance()->loadSound("assets/music/Twilight_Serenity.mp3", "home_theme", MUSIC_SOUND);
-	SoundManager::getInstance()->loadSound("assets/music/Dream_Aria.mp3", "night_theme", MUSIC_SOUND);
-	SoundManager::getInstance()->loadSound("assets/music/Knights_of_Favonius.mp3", "play_theme", MUSIC_SOUND);
-	SoundManager::getInstance()->loadSound("assets/music/Make_Haste_Partner.mp3", "fight_theme", MUSIC_SOUND);
-	SoundManager::getInstance()->loadSound("assets/sfx/join_game.wav", "play_button", SOUND_EFFECT);
-	SoundManager::getInstance()->loadSound("assets/sfx/click_sfx.wav", "click_button", SOUND_EFFECT);
 }
 
 GameManager::~GameManager()
@@ -104,7 +101,22 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	m_bRunning = true;
 
 	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 24, m_pRenderer);
+	SoundManager::getInstance()->loadSound("assets/music/Twilight_Serenity.mp3", "home_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Dream_Aria.mp3", "night_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Knights_of_Favonius.mp3", "play_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Make_Haste_Partner.mp3", "fight_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/sfx/join_game.wav", "play_button", SOUND_EFFECT);
+	SoundManager::getInstance()->loadSound("assets/sfx/click_sfx.wav", "click_button", SOUND_EFFECT);
 
+	GeneratorManager::getInstance()->addGenerator("BarrerKnight", new BarrerKnightGenerator());
+	GeneratorManager::getInstance()->addGenerator("DroidZapper", new DroidZapperGenerator());
+	GeneratorManager::getInstance()->addGenerator("BonFire", new BonFireGenerator());
+
+	ObjectParser::getInstance()->parserTexture("texture.xml", mTextures);
+	for (Texture& ite : mTextures)
+	{
+		TextureManager::getInstance()->load(ite.filePath, ite.textureID, m_pRenderer);
+	}
 }
 
 void GameManager::takeInput()
@@ -147,10 +159,7 @@ void GameManager::quitGame()
 void GameManager::clearGame()
 {
 	std::cout << "clearing game...\n";
-	for (BaseObject* obj : mBaseObject)
-	{
-		obj->clearObject();
-	}
+
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

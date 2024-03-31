@@ -63,8 +63,9 @@ void ObjectParser::parserTexture(const std::string& filePath, std::vector<Textur
 
 void ObjectParser::parserCharacter(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector, std::map<std::string, SFX>& sfxMap)
 {
-	parserAction(filePath, actionMap, textureVector);
-	
+	parserTexture(filePath, textureVector);
+	parserAction(filePath, actionMap);
+
 	XmlTree tree;
 	tree.parseXmlFile(filePath);
 	XmlNode* root = tree.getRoot();
@@ -133,7 +134,6 @@ void ObjectParser::loadTexture(std::vector<Texture>& textureVector, XmlNode* tex
 			texture->takeAttribute("filePath", &obj.filePath);
 			texture->takeAttribute("textureID", &obj.textureID);
 			textureVector.push_back(obj);
-			//cout << obj.filePath << ' ' << obj.textureID << '\n';
 		}
 	}
 }
@@ -156,7 +156,6 @@ void ObjectParser::loadAction(std::map<std::string, Info>& actionMap, XmlNode* a
 				obj.speed = 1;
 			}
 			actionMap[name] = obj;
-			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
 		}
 	}
 }
@@ -182,7 +181,6 @@ void ObjectParser::loadButton(std::vector<Info>& buttonMap, XmlNode* buttons)
 				obj.speed = 1;
 			}
 			buttonMap.push_back(obj);
-			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
 		}
 	}
 }
@@ -207,7 +205,6 @@ void ObjectParser::loadAnimation(std::vector<Info>& animMap, XmlNode* anims)
 				obj.speed = 1;
 			}
 			animMap.push_back(obj);
-			//cout << name << ' ' << obj.w << ' ' << obj.h << ' ' << obj.textureID << ' ' << obj.numFrames << ' ' << obj.speed << '\n';
 		}
 	}
 }
@@ -253,24 +250,11 @@ void ObjectParser::loadBar(std::map<std::string, Bar>& barMap, XmlNode* bars)
 	}
 }
 
-void ObjectParser::parserAction(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector)
+void ObjectParser::parserAction(const std::string& filePath, std::map<std::string, Info>& actionMap)
 {
 	XmlTree tree;
 	tree.parseXmlFile(filePath);
 	XmlNode* root = tree.getRoot();
-
-	XmlNode* textures = nullptr;
-	for (XmlNode* ite : root->child)
-	{
-		if (ite->element == std::string("TEXTURES"))
-		{
-			textures = ite;
-			break;
-		}
-	}
-
-	loadTexture(textureVector, textures);
-	
 
 	XmlNode* actions = nullptr;
 	for (XmlNode* ite : root->child)

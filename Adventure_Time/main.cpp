@@ -12,7 +12,7 @@ const int DELAY_TIME = static_cast<int>( 1000.0f / FPS );
 int main(int argc, char* args[])
 {
 	int begin_frame, time_frame;
-	GameManager::getInstance()->initGame("Test", 300, 300, 1280, 768);
+	GameManager::getInstance()->initGame("Adventure Time", 300, 300, 1280, 768);
 
 	//fout << layerstring;
 	//Map* new_map = new Map();

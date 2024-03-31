@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<LOADER>
+	<TEXTURES>
+		<texture filePath="assets/barrel_knight/run.png" textureID="barrer_run"/>
+		<texture filePath="assets/barrel_knight/wake.png" textureID="barrer_wake"/>
+		<texture filePath="assets/barrel_knight/none.png" textureID="barrer_none"/>
+		<texture filePath="assets/barrel_knight/attack1.png" textureID="barrer_attack1"/>
+		<texture filePath="assets/barrel_knight/attack2.png" textureID="barrer_attack2"/>
+		<texture filePath="assets/barrel_knight/hit.png" textureID="barrer_hit"/>
+		<texture filePath="assets/barrel_knight/death.png" textureID="barrer_death"/>
+		<texture filePath="assets/barrel_knight/stun.png" textureID="barrer_stun"/>
+		<texture filePath="assets/droid_zapper/run.png" textureID="droid_zapper_run"/>
+		<texture filePath="assets/droid_zapper/wake.png" textureID="droid_zapper_wake"/>
+		<texture filePath="assets/droid_zapper/none.png" textureID="droid_zapper_none"/>
+		<texture filePath="assets/droid_zapper/attack.png" textureID="droid_zapper_attack1"/>
+		<texture filePath="assets/droid_zapper/damaged.png" textureID="droid_zapper_hit"/>
+		<texture filePath="assets/droid_zapper/death.png" textureID="droid_zapper_death"/>
+		<texture filePath="assets/save_point/bonfire.png" textureID="bonfire"/>
+	</TEXTURES>
+</LOADER>

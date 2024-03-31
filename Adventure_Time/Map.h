@@ -11,12 +11,11 @@
 
 #include "Background.h"
 
+#include "BonFire.h"
 class Map
 {
 public:
-	Map();
 	Map(int width, int height, int tileSize);
-	void loadMap(const std::string& fileMap, const std::string& tileSetID);
 
 	void updateMap();
 	void renderMap();
@@ -30,8 +29,15 @@ public:
 	{
 		mLayer = obj;
 	}
+	void setSavePoint(const std::vector<BonFire*>& savepoint)
+	{
+		mSavePoint = savepoint;
+	}
+	void setPosition(const GameVector& obj)
+	{
+		*mPosition = obj;
+	}
 	void initGround();
-
 
 private:
 	std::vector<Layer*> mLayer;
@@ -46,6 +52,7 @@ private:
 	Background* mBackGround;
 	void processMapAndPlayer();
 	void processEnemyAndPlayer();
+	void processEnemyAndMap();
 
 	int mCountFightTime;
 	bool m_bFight;
@@ -55,6 +62,10 @@ private:
 	int mMapWidth = 120;
 	int mMapHeight = 24;
 	int mTileSize = 32;
+
+	GameVector mSavedMapPosition;
+	GameVector mSavedPlayerPosition;
+	std::vector<BonFire*> mSavePoint;
 };
 
 #endif

@@ -29,7 +29,6 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 					++k;
 				}
 				mGrid[i][j] = std::stoi(temp) - 1;
-				//std::cout << mGrid[i][j] << ' ';
 			}
 			else
 			{
@@ -37,9 +36,7 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 				--j;
 			}
 		}
-		//std::cout << '\n';
 	}
-	//mVelocity = new GameVector(0, 0);
 	mPosition = new GameVector(0, 0);
 }
 
@@ -67,7 +64,6 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 					++k;
 				}
 				mGrid[i][j] = std::stoi(temp) - 1;
-				//std::cout << mGrid[i][j] << ' ';
 			}
 			else
 			{
@@ -75,9 +71,7 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 				--j;
 			}
 		}
-		//std::cout << '\n';
 	}
-	//mVelocity = new GameVector(0, 0);
 	mPosition = new GameVector(0, 0);
 }
 
@@ -96,12 +90,8 @@ void Layer::updateLayer()
 
 int Layer::getID(const double& x, const double& y) const
 {
-
-	//std::cout << x << ' ' << y << '\n';
-	//std::cout << x / mTileSize << ' ' << y / mTileSize << ' ';
 	int x_p = (mPosition->getX() / mTileSize) + (x / mTileSize);
 	int y_p = (mPosition->getY() / mTileSize) + (y / mTileSize);
-	//std::cout << mPosition->getX() / mTileSize << ' ' << y_p << mPosition->getY() / mTileSize << '\n';
 
 	return mGrid[y_p][x_p];
 }

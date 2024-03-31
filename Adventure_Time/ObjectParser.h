@@ -11,7 +11,7 @@ struct SFX;
 class ObjectParser
 {
 public:
-	void parserAction(const std::string& filePath, std::map<std::string, Info>& actionMap, std::vector<Texture>& textureVector);
+	void parserAction(const std::string& filePath, std::map<std::string, Info>& actionMap);
 
 	void parserButton(const std::string& filePath, std::vector<Info>& buttonMap, std::vector<Texture>& textureVector);
 	static ObjectParser* getInstance()

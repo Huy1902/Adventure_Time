@@ -1,13 +1,5 @@
 <?xml version="1.0" ?>
 <CHARACTER>
-	<TEXTURES>
-		<texture filePath="assets/droid_zapper/run.png" textureID="droid_zapper_run"/>
-		<texture filePath="assets/droid_zapper/wake.png" textureID="droid_zapper_wake"/>
-		<texture filePath="assets/droid_zapper/none.png" textureID="droid_zapper_none"/>
-		<texture filePath="assets/droid_zapper/attack.png" textureID="droid_zapper_attack1"/>
-		<texture filePath="assets/droid_zapper/damaged.png" textureID="droid_zapper_hit"/>
-		<texture filePath="assets/droid_zapper/death.png" textureID="droid_zapper_death"/>
-	</TEXTURES>
 	<ACTIONS>
 		<action name="run" textureID="droid_zapper_run" numFrame="6" w="190" h="64"/>
 		<action name="none" textureID="droid_zapper_none" numFrame="1" w="190" h="64"/>

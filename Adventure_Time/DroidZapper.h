@@ -4,6 +4,8 @@
 #include "EnemyObject.h"
 
 #include <SDL.h>
+#include "BaseGenerator.h"
+
 class DroidZapper :
     public EnemyObject
 {
@@ -73,15 +75,26 @@ public:
 		mCountTimeStun = STUN_TIME;
 	}
 
-	DroidZapper();
 	~DroidZapper();
 
 
 
 private:
+	DroidZapper();
 	bool onGround();
 	void AnimationProcess();
 	void completeUpdateMethod();
+
+	friend class DroidZapperGenerator;
+};
+
+class DroidZapperGenerator :
+	public BaseGenerator
+{
+	BaseObject* generateObject() const
+	{
+		return new DroidZapper();
+	}
 };
 
 #endif
