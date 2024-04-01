@@ -9,6 +9,7 @@
 #include "CollisionManager.h"
 #include "ObjectParser.h"
 #include "SoundManager.h"
+#include "StatusManager.h"
 const int HURT_MOVE_BACK = 2;
 const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
@@ -362,10 +363,12 @@ void PlayerObject::getHurt()
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
+		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() / 2);
 	}
 	else
 	{
 		m_bHurting = true;
+		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() - 5);
 	}
 }
 

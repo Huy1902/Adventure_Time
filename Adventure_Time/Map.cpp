@@ -50,12 +50,6 @@ void Map::initGround()
 	CollisionManager::getInstance()->setGround(mLayer.back());
 }
 
-//void Map::reviveCharAtBonFire()
-//{
-//	mPlayer->setPosition(mSavedPlayerPosition);
-//	*mPosition = mSavedMapPosition;
-//}
-
 void Map::processMapAndPlayer()
 {
 	if (mPosition->getX() <= mPlayer->getCharWidth())
@@ -213,18 +207,27 @@ void Map::processEnemyAndMap()
 
 void Map::processInteractObjectAndPlayer()
 {
-	for (InteractObject* ite : mSavePoint)
+	vector<InteractObject*>::iterator ite = mInteractItem.begin();
+	while (ite != mInteractItem.end())
 	{
-		ite->processData();
-		ite->setMapPosition(*mPosition);
-		double obj_x = ite->getPosition()->getX() - mPosition->getX();
-		double obj_y = ite->getPosition()->getY() - mPosition->getY();
+		bool m_bIncrease = true;
+		(*ite)->processData();
+		(*ite)->setMapPosition(*mPosition);
+		double obj_x = (*ite)->getPosition()->getX() - mPosition->getX();
+		double obj_y = (*ite)->getPosition()->getY() - mPosition->getY();
 		if (obj_x < mPlayer->getPosition()->getX() + mPlayer->getAnimation()->getWidth()
-			&& obj_x + ite->getWidth() > mPlayer->getPosition()->getX() && abs(mPlayer->getPosition()->getY() - obj_y) < 30)
+			&& obj_x + (*ite)->getWidth() > mPlayer->getPosition()->getX() && abs(mPlayer->getPosition()->getY() - obj_y) < 30)
 		{
-			InteractManager::getInstance()->takeInteract(ite, mPlayer);
+			if (InteractManager::getInstance()->takeInteract((*ite), mPlayer))
+			{
+				ite = mInteractItem.erase(ite);
+				m_bIncrease = false;
+			}
 		}
-
+		if (m_bIncrease == true)
+		{
+			++ite;
+		}
 	}
 }
 void Map::updateMap()
@@ -259,7 +262,7 @@ void Map::renderMap()
 			StatusManager::getInstance()->renderEnemyStatus(mEnemy[i]);
 		}
 	}
-	for (InteractObject* ite : mSavePoint)
+	for (InteractObject* ite : mInteractItem)
 	{
 		ite->renderObject();
 	}

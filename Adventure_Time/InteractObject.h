@@ -40,10 +40,10 @@ public:
 	{
 		return mType;
 	}
-protected:
-	Interact_Type mType;
 	InteractObject();
 	virtual ~InteractObject();
+protected:
+	Interact_Type mType;
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 
 	GameVector* mMapPosition;

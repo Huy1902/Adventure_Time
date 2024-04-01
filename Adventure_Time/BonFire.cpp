@@ -31,6 +31,7 @@ bool BonFire::interactItem()
 BonFire::~BonFire()
 {
 	delete mPosition;
+	delete mMapPosition;
 }
 
 void BonFire::loadTexture(std::unique_ptr<TextureLoader> Info)

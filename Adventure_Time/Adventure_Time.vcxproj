@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\SDL2\include;C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\Adventure_Time;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\SDL2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\SDL2\include;C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\Adventure_Time;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\SDL2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -112,6 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\Adventure_Time;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,6 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\lymst\source\Game_learning\SDL_project\Adventure_Time\Adventure_Time;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,10 +142,10 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BarrerKnight.cpp" />
-    <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="BonFire.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="CharModel.cpp" />
+    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DroidZapper.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
@@ -178,10 +180,10 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BarrerKnight.h" />
     <ClInclude Include="BaseGenerator.h" />
-    <ClInclude Include="Behavior.h" />
     <ClInclude Include="BonFire.h" />
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CharModel.h" />
+    <ClInclude Include="Coin.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="DroidZapper.h" />
     <ClInclude Include="EnemyObject.h" />

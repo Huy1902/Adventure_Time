@@ -29,9 +29,9 @@ public:
 	{
 		mLayer = obj;
 	}
-	void setSavePoint(const std::vector<InteractObject*>& savepoint)
+	void setInteract(const std::vector<InteractObject*>& interacts)
 	{
-		mSavePoint = savepoint;
+		mInteractItem = interacts;
 	}
 	void setPosition(const GameVector& obj)
 	{
@@ -66,7 +66,7 @@ private:
 
 	GameVector mSavedMapPosition;
 	GameVector mSavedPlayerPosition;
-	std::vector<InteractObject*> mSavePoint;
+	std::vector<InteractObject*> mInteractItem;
 };
 
 #endif

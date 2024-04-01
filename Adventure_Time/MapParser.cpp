@@ -76,23 +76,23 @@ Map* MapParser::parseMap(const string& filePath)
 	loadEnemy(enemies, mEnemy);
 	newMap->setEnemy(mEnemy);
 
-	XmlNode* save_point = nullptr;
+	XmlNode* interact_items = nullptr;
 	for (XmlNode* ite : root->child)
 	{
 		if (ite->element == string("objectgroup"))
 		{
 			string type;
 			ite->takeAttribute("name", &type);
-			if (type == "SavePoint")
+			if (type == "InteractItem")
 			{
-				save_point = ite;
-
+				interact_items = ite;
+				break;
 			}
 		}
 	}
-	vector<InteractObject*> mSavePoint;
-	loadSavePoint(save_point, mSavePoint);
-	newMap->setSavePoint(mSavePoint);
+	vector<InteractObject*> mInteracts;
+	loadInteractItem(interact_items, mInteracts);
+	newMap->setInteract(mInteracts);
 
 	return newMap;
 }
@@ -167,7 +167,7 @@ void MapParser::loadEnemy(XmlNode* enemies, vector<EnemyObject*>& mEnemies)
 	}
 }
 
-void MapParser::loadSavePoint(XmlNode* save_points, std::vector<InteractObject*>& mSavePoint)
+void MapParser::loadInteractItem(XmlNode* save_points, std::vector<InteractObject*>& mInteracts)
 {
 	for (XmlNode* ite : save_points->child)
 	{
@@ -180,7 +180,7 @@ void MapParser::loadSavePoint(XmlNode* save_points, std::vector<InteractObject*>
 			ite->takeAttribute("y", &y);
 			InteractObject* obj = dynamic_cast<InteractObject*>(GeneratorManager::getInstance()->generatorObject(name));
 			obj->setPosition({ x, y });
-			mSavePoint.push_back(obj);
+			mInteracts.push_back(obj);
 		}
 	}
 }

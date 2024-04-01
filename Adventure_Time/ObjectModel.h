@@ -5,6 +5,7 @@
 
 #include "BaseObject.h"
 #include "GameVector.h"
+#include "BaseGenerator.h"
 
 struct Info
 {

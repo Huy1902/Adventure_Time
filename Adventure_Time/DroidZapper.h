@@ -75,7 +75,7 @@ public:
 		mCountTimeStun = STUN_TIME;
 	}
 
-	~DroidZapper();
+	virtual ~DroidZapper();
 
 
 

@@ -1,9 +1,9 @@
 #include "InteractManager.h"
 
-
+#include "StatusManager.h"
 InteractManager* InteractManager::s_pIntance = nullptr;
 
-void InteractManager::takeInteract(InteractObject* obj, PlayerObject* player)
+bool InteractManager::takeInteract(InteractObject* obj, PlayerObject* player)
 {
 	switch (obj->getType())
 	{
@@ -13,11 +13,13 @@ void InteractManager::takeInteract(InteractObject* obj, PlayerObject* player)
 		savePoint(obj, player);
 		break;
 	case COIN:
-		takeCoin();
+		takeCoin(obj);
+		return true;
 		break;
 	default:
 		break;
 	}
+	return false;
 }
 
 void InteractManager::savePoint(InteractObject* obj, PlayerObject* player)
@@ -29,8 +31,10 @@ void InteractManager::savePoint(InteractObject* obj, PlayerObject* player)
 	}
 }
 
-void InteractManager::takeCoin()
+void InteractManager::takeCoin(InteractObject* obj)
 {
+	StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() + 1);
+	delete obj;
 }
 
 InteractManager::InteractManager()

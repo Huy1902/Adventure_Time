@@ -26,6 +26,7 @@
 #include "GeneratorManager.h"
 #include "BonFire.h"
 #include "ObjectParser.h"
+#include "Coin.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -111,6 +112,7 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	GeneratorManager::getInstance()->addGenerator("BarrerKnight", new BarrerKnightGenerator());
 	GeneratorManager::getInstance()->addGenerator("DroidZapper", new DroidZapperGenerator());
 	GeneratorManager::getInstance()->addGenerator("BonFire", new BonFireGenerator());
+	GeneratorManager::getInstance()->addGenerator("Coin", new CoinGenerator());
 
 	ObjectParser::getInstance()->parserTexture("texture.xml", mTextures);
 	for (Texture& ite : mTextures)

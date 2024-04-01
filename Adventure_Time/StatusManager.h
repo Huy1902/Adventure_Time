@@ -37,6 +37,14 @@ public:
 		}
 		return s_pInstance;
 	}
+	void setScore(int score)
+	{
+		mScore = score;
+	}
+	int getScore() const
+	{
+		return mScore;
+	}
 private:
 	static StatusManager* s_pInstance;
 	int HP;
@@ -61,6 +69,8 @@ private:
 
 	std::vector<Texture> mTextures;
 	std::map<std::string, Bar> mBars;
+
+	int mScore;
 };
 
 #endif //STATUSMANAGER_H_

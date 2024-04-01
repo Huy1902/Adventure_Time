@@ -25,7 +25,7 @@ private:
 
 	void loadLayer(XmlNode* layers, std::vector<Layer*>& mLayer, Tileset* tileset);
 	void loadEnemy(XmlNode* enemies, std::vector<EnemyObject*>& mEnemies);
-	void loadSavePoint(XmlNode* save_points, std::vector<InteractObject*>& mSavePoint);
+	void loadInteractItem(XmlNode* save_points, std::vector<InteractObject*>& mInteracts);
 
 	MapParser() {};
 	~MapParser() {};

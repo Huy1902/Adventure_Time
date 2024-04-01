@@ -35,6 +35,18 @@ void StatusManager::renderPlayerStatus()
 
 	temp = mBars["sta_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
+
+	temp = mBars["score"];
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
+
+	string score = to_string(mScore);
+	while (score.size() < 5)
+	{
+		score = "0" + score;
+	}
+	score = "Score:" + score;
+	FontManager::getInstance()->drawText(score.c_str(), temp.x + 47, temp.y + 9);
+
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)

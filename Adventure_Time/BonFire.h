@@ -1,7 +1,6 @@
 #ifndef BONFIRE_H_
 #define BONFIRE_H_
 #include "InteractObject.h"
-#include "BaseGenerator.h"
 
 
 class BonFire :

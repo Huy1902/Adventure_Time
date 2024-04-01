@@ -74,6 +74,7 @@ void CharModel::dash()
 
 void CharModel::dying()
 {
+	mVelocity->setX(0);
 	Info temp = mActions["dying"];
 	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }

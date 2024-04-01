@@ -76,7 +76,7 @@ public:
 		mCountTimeStun = STUN_TIME;
 	}
 
-	~BarrerKnight();
+	virtual ~BarrerKnight();
 
 
 

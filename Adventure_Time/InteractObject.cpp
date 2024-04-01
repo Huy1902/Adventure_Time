@@ -31,7 +31,7 @@ bool InteractObject::interactItem()
 
 InteractObject::~InteractObject()
 {
-	//delete mPosition;
+	delete mMapPosition;
 }
 
 void InteractObject::loadTexture(std::unique_ptr<TextureLoader> Info)

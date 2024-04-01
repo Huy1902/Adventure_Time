@@ -16,5 +16,6 @@
 		<texture filePath="assets/droid_zapper/damaged.png" textureID="droid_zapper_hit"/>
 		<texture filePath="assets/droid_zapper/death.png" textureID="droid_zapper_death"/>
 		<texture filePath="assets/save_point/bonfire.png" textureID="bonfire"/>
+		<texture filePath="assets/Coin/MonedaD.png" textureID="MonedaD"/>
 	</TEXTURES>
 </LOADER>

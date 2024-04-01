@@ -4,13 +4,16 @@
 
 #include "CollisionManager.h"
 
+#include "StatusManager.h"
+
 EnemyObject::EnemyObject()
 {
 }
 
 EnemyObject::~EnemyObject()
 {
-
+	StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() + 10);
+	delete mMapPosition;
 }
 
 void EnemyObject::loadTexture(std::unique_ptr<TextureLoader> Info)

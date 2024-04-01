@@ -14,7 +14,7 @@ class EnemyObject :
 {
 public:
 	EnemyObject();
-	~EnemyObject();
+	virtual ~EnemyObject();
 
 	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();

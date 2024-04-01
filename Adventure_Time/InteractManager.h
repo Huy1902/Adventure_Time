@@ -28,11 +28,11 @@ public:
 	{
 		return mSavedMapPos;
 	}
-	void takeInteract(InteractObject* obj, PlayerObject* player);
+	bool takeInteract(InteractObject* obj, PlayerObject* player);
 private:
 	static InteractManager* s_pIntance;
 	void savePoint(InteractObject* obj, PlayerObject* player);
-	void takeCoin();
+	void takeCoin(InteractObject* obj);
 	InteractManager();
 	~InteractManager();
 	GameVector* mSavedPlayerPos;
