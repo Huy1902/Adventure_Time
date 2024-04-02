@@ -42,7 +42,7 @@ PlayerObject::PlayerObject()
 
 	animation = new Animation();
 
-	mPosition = new GameVector(100, 100);
+	mPosition = new GameVector(0, 0);
 	mVelocity = new GameVector(0, 0);
 	mAcceleration = new GameVector(0, 0);
 

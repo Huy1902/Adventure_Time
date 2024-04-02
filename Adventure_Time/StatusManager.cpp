@@ -39,6 +39,10 @@ void StatusManager::renderPlayerStatus()
 	temp = mBars["score"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
 
+	if (mScore < 0)
+	{
+		mScore = 0;
+	}
 	string score = to_string(mScore);
 	while (score.size() < 5)
 	{

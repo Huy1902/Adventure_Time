@@ -249,6 +249,7 @@ void Map::updateMap()
 void Map::renderMap()
 {
 	mBackGround->drawBackground();
+	//cout << mLayer.size() << '\n';
 	for (Layer* ite : mLayer)
 	{
 		ite->renderLayer();

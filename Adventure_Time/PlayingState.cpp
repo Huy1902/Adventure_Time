@@ -15,6 +15,7 @@
 #include "PlayerObject.h"
 
 #include "InteractManager.h"
+#include "MapManager.h"
 
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
@@ -88,7 +89,8 @@ void PlayingState::renderState()
 
 bool PlayingState::startState()
 {
-	mMap = MapParser::getInstance()->parseMap("map1.tmx");
+	MapManager::getInstance()->beginFirstMap();
+	mMap = MapManager::getInstance()->getCurrentMap();
 
 	mPlayer = new PlayerObject();
 	mMap->setPlayer(mPlayer);

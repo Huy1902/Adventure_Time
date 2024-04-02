@@ -122,6 +122,10 @@ Tileset* MapParser::loadTileSet(XmlNode* tileset)
 
 void MapParser::loadLayer(XmlNode* layers, vector<Layer*>& mLayer, Tileset* tileset)
 {
+	if (layers == nullptr)
+	{
+		return;
+	}
 	for (XmlNode* layer : layers->child)
 	{
 		if (layer->element == "layer")
@@ -151,6 +155,10 @@ void MapParser::loadLayer(XmlNode* layers, vector<Layer*>& mLayer, Tileset* tile
 
 void MapParser::loadEnemy(XmlNode* enemies, vector<EnemyObject*>& mEnemies)
 {
+	if (enemies == nullptr)
+	{
+		return;
+	}
 	for (XmlNode* ite : enemies->child)
 	{
 		if (ite->element == "object")
@@ -167,9 +175,13 @@ void MapParser::loadEnemy(XmlNode* enemies, vector<EnemyObject*>& mEnemies)
 	}
 }
 
-void MapParser::loadInteractItem(XmlNode* save_points, std::vector<InteractObject*>& mInteracts)
+void MapParser::loadInteractItem(XmlNode* interacts, std::vector<InteractObject*>& mInteracts)
 {
-	for (XmlNode* ite : save_points->child)
+	if (interacts == nullptr)
+	{
+		return;
+	}
+	for (XmlNode* ite : interacts->child)
 	{
 		if (ite->element == "object")
 		{

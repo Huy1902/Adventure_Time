@@ -40,7 +40,7 @@ void InteractManager::takeCoin(InteractObject* obj)
 InteractManager::InteractManager()
 {
 	mSavedMapPos = new GameVector(0, 0);
-	mSavedPlayerPos = new GameVector(200, 100);
+	mSavedPlayerPos = new GameVector(0, 0);
 }
 
 InteractManager::~InteractManager()

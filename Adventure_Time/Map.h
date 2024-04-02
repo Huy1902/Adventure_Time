@@ -38,7 +38,10 @@ public:
 		*mPosition = obj;
 	}
 	void initGround();
-
+	PlayerObject* getPlayer() const
+	{
+		return mPlayer;
+	}
 private:
 	std::vector<Layer*> mLayer;
 	//Tileset* mTileSet;
