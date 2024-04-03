@@ -17,6 +17,8 @@
 #include "BarrerKnight.h"
 #include "DroidZapper.h"
 
+#include "MapManager.h"
+
 
 const int mMapWidth = 120;
 const int mMapHeight = 24;
@@ -52,6 +54,7 @@ void Map::initGround()
 
 void Map::processMapAndPlayer()
 {
+	m_bSwitchMap = false;
 	if (mPosition->getX() <= mPlayer->getCharWidth())
 	{
 		mPosition->setX(mPlayer->getCharWidth());
@@ -62,7 +65,14 @@ void Map::processMapAndPlayer()
 		}
 		else if (mPlayer->getPosition()->getX() < 0)
 		{
-			mPlayer->getPosition()->setX(0);
+			if (MapManager::getInstance()->previousMap() == false)
+			{
+				mPlayer->getPosition()->setX(0);
+			}
+			else
+			{
+				m_bSwitchMap = true;
+			}
 		}
 	}
 	else if (mPosition->getX() > 0 && mPosition->getX() < mMapWidth * mTileSize - WIN_WIDTH - 32)
@@ -80,7 +90,14 @@ void Map::processMapAndPlayer()
 		}
 		else if (mPlayer->getPosition()->getX() + 100 > WIN_WIDTH)
 		{
-			mPlayer->getPosition()->setX(WIN_WIDTH - 100);
+			if (MapManager::getInstance()->nextMap() == false)
+			{
+				mPlayer->getPosition()->setX(WIN_WIDTH - 100);
+			}
+			else
+			{
+				m_bSwitchMap = true;
+			}
 		}
 	}
 	mPosition->setY(0);
@@ -232,8 +249,12 @@ void Map::processInteractObjectAndPlayer()
 }
 void Map::updateMap()
 {
-	processEnemyAndPlayer();
 	processMapAndPlayer();
+	if (m_bSwitchMap == true)
+	{
+		return;
+	}
+	processEnemyAndPlayer();
 	processEnemyAndMap();
 	processInteractObjectAndPlayer();
 
@@ -248,6 +269,10 @@ void Map::updateMap()
 
 void Map::renderMap()
 {
+	if (m_bSwitchMap == true)
+	{
+		return;
+	}
 	mBackGround->drawBackground();
 	//cout << mLayer.size() << '\n';
 	for (Layer* ite : mLayer)

@@ -7,8 +7,10 @@ bool MapManager::nextMap()
 {
 	if (mCurrentMap != mMap.size() - 1)
 	{
+		mMap[mCurrentMap + 1]->setPlayer(mMap[mCurrentMap]->getPlayer());
 		++mCurrentMap;
 		mMap[mCurrentMap]->getPlayer()->setPosition({0, 0});
+		mMap[mCurrentMap]->initGround();
 		return true;
 	}
 	return false;
@@ -20,6 +22,7 @@ bool MapManager::previousMap()
 	{
 		--mCurrentMap;
 		mMap[mCurrentMap]->getPlayer()->setPosition({1000, 0});
+		mMap[mCurrentMap]->initGround();
 		return true;
 	}
 	return false;
@@ -28,14 +31,15 @@ bool MapManager::previousMap()
 bool MapManager::beginFirstMap()
 {
 	mCurrentMap = 0;
+	mMap[mCurrentMap]->initGround();
 	return true;
 }
 
 MapManager::MapManager()
 {
-	Map* temp = MapParser::getInstance()->parseMap("map2.tmx");
-	mMap.push_back(temp);
-	Map* temp2 = MapParser::getInstance()->parseMap("map1.tmx");
+	Map* temp1 = MapParser::getInstance()->parseMap("map1.tmx");
+	Map* temp2 = MapParser::getInstance()->parseMap("map2.tmx");
+	mMap.push_back(temp1);
 	mMap.push_back(temp2);
 }
 

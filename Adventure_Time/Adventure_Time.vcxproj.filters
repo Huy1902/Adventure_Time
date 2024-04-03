@@ -167,6 +167,9 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Vagabond.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -283,6 +286,9 @@
     <ClInclude Include="MapManager.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
+    <ClInclude Include="Vagabond.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="droid_zapper.xml">
@@ -308,6 +314,7 @@
     </Xml>
     <Xml Include="sound.xml" />
     <Xml Include="texture.xml" />
+    <Xml Include="vagabond.xml" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">

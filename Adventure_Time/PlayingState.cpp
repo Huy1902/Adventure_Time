@@ -31,6 +31,7 @@ void PlayingState::m_sPlayingToGameOver()
 
 void PlayingState::processData()
 {
+	mMap = MapManager::getInstance()->getCurrentMap();
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_ESCAPE) == true)
 	{
 		m_sPlayingToPause();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="54">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="56">
  <tileset firstgid="1" name="Desert" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="assets/Tileset1.png" width="512" height="512"/>
  </tileset>
@@ -96,6 +96,7 @@
   <object id="17" name="BarrerKnight" x="2584.85" y="551.515"/>
   <object id="23" name="BarrerKnight" x="2964" y="532"/>
   <object id="24" name="DroidZapper" x="3160" y="528"/>
+  <object id="55" name="Vagabond" x="1944.03" y="293.379" width="10" height="22.5303"/>
  </objectgroup>
  <objectgroup id="11" name="InteractItem">
   <object id="25" name="BonFire" x="1772.48" y="400.485" width="40" height="46.6667"/>

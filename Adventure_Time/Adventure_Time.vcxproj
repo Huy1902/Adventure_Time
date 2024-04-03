@@ -173,6 +173,7 @@
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tileset.cpp" />
+    <ClCompile Include="Vagabond.cpp" />
     <ClCompile Include="XmlTree.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +214,7 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tileset.h" />
+    <ClInclude Include="Vagabond.h" />
     <ClInclude Include="XmlTree.h" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +230,7 @@
     <Xml Include="pause_state.xml" />
     <Xml Include="sound.xml" />
     <Xml Include="texture.xml" />
+    <Xml Include="vagabond.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

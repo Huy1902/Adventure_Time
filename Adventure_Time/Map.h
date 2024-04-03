@@ -70,6 +70,7 @@ private:
 	GameVector mSavedMapPosition;
 	GameVector mSavedPlayerPosition;
 	std::vector<InteractObject*> mInteractItem;
+	bool m_bSwitchMap = false;
 };
 
 #endif

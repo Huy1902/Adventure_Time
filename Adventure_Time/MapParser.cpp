@@ -56,7 +56,6 @@ Map* MapParser::parseMap(const string& filePath)
 	vector<Layer*> mLayer;
 	loadLayer(root, mLayer, tileset);
 	newMap->setLayer(mLayer);
-	newMap->initGround();
 
 	XmlNode* enemies = nullptr;
 	for (XmlNode* ite : root->child)
