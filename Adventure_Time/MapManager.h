@@ -3,6 +3,13 @@
 
 #include "Map.h"
 
+#include "PlayerObject.h"
+struct Drive
+{
+	int to;
+	int x;
+	int y;
+};
 class MapManager
 {
 public:
@@ -17,18 +24,31 @@ public:
 	bool nextMap();
 	bool previousMap();
 	bool beginFirstMap();
-
+	GameVector changeMapFromTo(int from, int to);
 	Map* getCurrentMap() const
 	{
-		return mMap[mCurrentMap];
+		return mMap[mIndexMap];
 	}
+	int getIndexMap() const
+	{
+		return mIndexMap;
+	}
+	PlayerObject* getPlayer()
+	{
+		return mPlayer;
+	}
+
+	void revivePlayer();
 
 private:
 	MapManager();
 	~MapManager();
 	static MapManager* s_pInstance;
+	int mIndexMap = 0;
 	std::vector<Map*> mMap;
-	int mCurrentMap;
+	std::vector<std::vector<Drive>> mDriven;
+
+	PlayerObject* mPlayer;
 };
 
 #endif;

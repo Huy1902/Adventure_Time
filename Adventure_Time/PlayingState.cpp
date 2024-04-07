@@ -12,7 +12,6 @@
 #include "MapParser.h"
 
 #include "ButtonModel.h"
-#include "PlayerObject.h"
 
 #include "InteractManager.h"
 #include "MapManager.h"
@@ -31,14 +30,13 @@ void PlayingState::m_sPlayingToGameOver()
 
 void PlayingState::processData()
 {
-	mMap = MapManager::getInstance()->getCurrentMap();
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_ESCAPE) == true)
 	{
 		m_sPlayingToPause();
 	}
-	if (mPlayer->getStatus()->isAlive == false)
+	if (MapManager::getInstance()->getPlayer()->getStatus()->isAlive == false)
 	{
-		if (mPlayer->isDying() == true)
+		if (MapManager::getInstance()->getPlayer()->isDying() == true)
 		{
 			m_bSetupDying = true;
 		}
@@ -46,24 +44,13 @@ void PlayingState::processData()
 		{
 			m_sPlayingToGameOver();
 		}
-		mPlayer->processData();
+		MapManager::getInstance()->getPlayer()->processData();
 		return;
 	}
-	//if (mObjects.empty() == false)
-	//{
-	//	for (int i = 0; i < mObjects.size(); ++i)
-	//	{
-	//		mObjects[i]->processData();
-	//		if (mObjects.empty())
-	//		{
-	//			break;
-	//		}
-	//	}
-	//}
 	if (m_bSetupRevive == true)
 	{
 		mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
-		mPlayer->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
+		MapManager::getInstance()->getPlayer()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
 		m_bSetupRevive = false;
 	}
 
@@ -74,30 +61,24 @@ void PlayingState::renderState()
 {
 	if (m_bSetupDying == true)
 	{
-		mPlayer->renderObject();
+		MapManager::getInstance()->getPlayer()->renderObject();
 		return;
 	}
-	//if (mObjects.empty() == false)
-	//{
-	//	for (size_t i = 0; i < mObjects.size(); ++i)
-	//	{
-	//		mObjects[i]->renderObject();
-	//	}
-	//}
 	mMap->renderMap();
 	StatusManager::getInstance()->renderPlayerStatus();
 }
 
 bool PlayingState::startState()
 {
-	MapManager::getInstance()->beginFirstMap();
 	mMap = MapManager::getInstance()->getCurrentMap();
+	mMap->initGround();
+	mMap->setPlayer(MapManager::getInstance()->getPlayer());
 
-	mPlayer = new PlayerObject();
-	mMap->setPlayer(mPlayer);
-
-	StatusManager::getInstance()->setPlayer(mPlayer);
-
+	StatusManager::getInstance()->setPlayer(MapManager::getInstance()->getPlayer());
+	//if (MapManager::getInstance()->getPlayer()->getPosition()->getX() > 1000)
+	//{
+	//	std::cout << MapManager::getInstance()->getPlayer()->getPosition()->getX() << '\n';
+	//}
 	SoundManager::getInstance()->playMusic("play_theme", -1);
 
 	m_bSetupRevive = true;
@@ -106,14 +87,8 @@ bool PlayingState::startState()
 }
 bool PlayingState::exitState()
 {
-	//for (size_t i = 0; i < mObjects.size(); ++i)
-	//{
-	//	mObjects[i]->clearObject();
-	//	delete mObjects[i];
-	//}
 	mTextureID.clear();
 	mObjects.clear();
-	delete mMap;
-	delete mPlayer;
+	//delete mMap;
 	return true;
 }

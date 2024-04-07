@@ -8,7 +8,8 @@ class TextureLoader
 public:
 	TextureLoader(const std::string& textureID, int x, int y, int w, int h,
 		int numFrames, int callback = 0);
-
+	TextureLoader(const std::string& textureID, int x, int y, int w, int h,
+		int numFrames, int from, int to);
 	int getX() const { return mXPos; }
 	int getY() const { return mYPos; }
 	int getWidth() const { return mWidth; }
@@ -25,6 +26,8 @@ private:
 	int mNumFrames;
 	std::string mTextureID;
 	int mCallbackID;
+	int mFrom;
+	int mTo;
 };
 
 #endif TextureLoader_H_

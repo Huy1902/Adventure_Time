@@ -77,7 +77,10 @@ public:
 	{
 		return &mStatus;
 	}
-
+	virtual Status* getMaxStatus()
+	{
+		return &MaxStatus;
+	}
 	virtual bool isDying() const
 	{
 		if (mDyingTime == 1)

@@ -13,6 +13,8 @@
 #include "HomeState.h"
 #include "PlayingState.h"
 
+#include "MapManager.h"
+
 const std::string  GameOverState::m_sGameOverID = "GAME_OVER";
 
 
@@ -30,6 +32,7 @@ GameOverState::GameOverState()
 
 GameOverState::~GameOverState()
 {
+	delete background;
 	TextureManager::getInstance()->clearFromTexture("game_over_font");
 }
 
@@ -96,10 +99,12 @@ bool GameOverState::exitState()
 
 void GameOverState::m_sGameOverToPlay()
 {
+	MapManager::getInstance()->revivePlayer();
 	GameManager::getInstance()->getFSM()->changeState(new PlayingState());
 }
 
 void GameOverState::m_sGameOverToHome()
 {
+	MapManager::getInstance()->revivePlayer();
 	GameManager::getInstance()->getFSM()->changeState(new HomeState());
 }

@@ -1,5 +1,5 @@
 #ifndef PLAYINGSTATE_H_
-#define  PLAYINGSTATE_H_
+#define PLAYINGSTATE_H_
 #include "BaseState.h"
 
 #include <vector>
@@ -24,7 +24,6 @@ private:
     static void m_sPlayingToPause();
     static void m_sPlayingToGameOver();
     Map* mMap;
-    PlayerObject* mPlayer;
 
     bool m_bSetupDying = false;
 

@@ -19,6 +19,8 @@
 
 #include "MapManager.h"
 
+#include "LoadingState.h"
+
 
 const int mMapWidth = 120;
 const int mMapHeight = 24;
@@ -45,6 +47,7 @@ void Map::setPlayer(PlayerObject* obj)
 {
 	CollisionManager::getInstance()->setPlayer(obj);
 	mPlayer = obj;
+	//std::cout << mPlayer->getPosition()->getX();
 }
 
 void Map::initGround()
@@ -65,14 +68,17 @@ void Map::processMapAndPlayer()
 		}
 		else if (mPlayer->getPosition()->getX() < 0)
 		{
-			if (MapManager::getInstance()->previousMap() == false)
+			MapManager::getInstance()->changeMapFromTo(1, 0);
+			GameManager::getInstance()->getFSM()->changeState(new LoadingState());
+			/*if (MapManager::getInstance()->previousMap() == false)
 			{
 				mPlayer->getPosition()->setX(0);
 			}
 			else
 			{
+				GameManager::getInstance()->getFSM()->changeState(new LoadingState());
 				m_bSwitchMap = true;
-			}
+			}*/
 		}
 	}
 	else if (mPosition->getX() > 0 && mPosition->getX() < mMapWidth * mTileSize - WIN_WIDTH - 32)
@@ -90,14 +96,16 @@ void Map::processMapAndPlayer()
 		}
 		else if (mPlayer->getPosition()->getX() + 100 > WIN_WIDTH)
 		{
-			if (MapManager::getInstance()->nextMap() == false)
+			MapManager::getInstance()->changeMapFromTo(0, 1);
+			GameManager::getInstance()->getFSM()->changeState(new LoadingState());
+			/*if (MapManager::getInstance()->nextMap() == false)
 			{
 				mPlayer->getPosition()->setX(WIN_WIDTH - 100);
 			}
 			else
 			{
 				m_bSwitchMap = true;
-			}
+			}*/
 		}
 	}
 	mPosition->setY(0);
@@ -249,6 +257,7 @@ void Map::processInteractObjectAndPlayer()
 }
 void Map::updateMap()
 {
+	//std::cout << mPosition->getX() << '\n';
 	processMapAndPlayer();
 	if (m_bSwitchMap == true)
 	{

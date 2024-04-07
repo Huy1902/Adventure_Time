@@ -96,6 +96,13 @@ int Layer::getID(const double& x, const double& y) const
 	return mGrid[y_p][x_p];
 }
 
+int Layer::getIDNoBaseOnMap(const double& x, const double& y) const
+{
+	int x_p = x / mTileSize;
+	int y_p = y / mTileSize;
+	return mGrid[y_p][x_p];
+}
+
 void Layer::optimizePositionY(double& y)
 {
 	y = floor(y / mTileSize);

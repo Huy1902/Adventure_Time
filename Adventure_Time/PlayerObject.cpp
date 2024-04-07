@@ -75,6 +75,7 @@ void PlayerObject::loadTexture(std::unique_ptr<TextureLoader> Info)
 
 void PlayerObject::processData()
 {
+
 	static double start_jump_at_y = 0;
 	m_bOnGround = onGround();
 	m_bHeadStuck = headStuck();

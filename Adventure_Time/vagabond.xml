@@ -3,7 +3,7 @@
 	<TEXTURES>
 		<texture filePath="assets/vagabond/run.png" textureID="vagabond_run"/>
 		<texture filePath="assets/vagabond/wake.png" textureID="vagabond_wake"/>
-		<texture filePath="assets/vagabond/idle.png" textureID="vagabond_none"/>
+		<texture filePath="assets/vagabond/idle.png" textureID="vagabond_idle"/>
 		<texture filePath="assets/vagabond/attack1.png" textureID="vagabond_attack1"/>
 		<texture filePath="assets/vagabond/attack2.png" textureID="vagabond_attack2"/>
 		<texture filePath="assets/vagabond/hit.png" textureID="vagabond_hit"/>

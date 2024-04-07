@@ -159,6 +159,7 @@
     <ClCompile Include="InteractManager.cpp" />
     <ClCompile Include="InteractObject.cpp" />
     <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="LoadingState.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="MapParser.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StatusManager.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
@@ -199,6 +201,7 @@
     <ClInclude Include="InteractManager.h" />
     <ClInclude Include="InteractObject.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="LoadingState.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="MapParser.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StatusManager.h" />
     <ClInclude Include="TextureLoader.h" />
@@ -229,6 +233,7 @@
     <Xml Include="MainCharacter.xml" />
     <Xml Include="pause_state.xml" />
     <Xml Include="sound.xml" />
+    <Xml Include="switch_map_driven.xml" />
     <Xml Include="texture.xml" />
     <Xml Include="vagabond.xml" />
   </ItemGroup>

@@ -114,9 +114,9 @@ bool CollisionManager::checkPlayerSideRight()
 
 bool CollisionManager::checkEnemySideLeft(EnemyObject* enemy)
 {
-	double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX();
-	double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
-	if (mGround->getID(e_x, e_y) != -1)
+	double e_x = enemy->getPosition()->getX() - 10;
+	double e_y = enemy->getPosition()->getY();
+	if (mGround->getIDNoBaseOnMap(e_x, e_y) != -1)
 	{
 		return true;
 	}
@@ -125,10 +125,10 @@ bool CollisionManager::checkEnemySideLeft(EnemyObject* enemy)
 
 bool CollisionManager::checkEnemySideRight(EnemyObject* enemy)
 {
-	double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth();
-	double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
+	double e_x = enemy->getPosition()->getX() + enemy->getAnimation()->getWidth() + 10; 
+	double e_y = enemy->getPosition()->getY();
 	//system("pause");
-	if (mGround->getID(e_x, e_y) != -1)
+	if (mGround->getIDNoBaseOnMap(e_x, e_y) != -1)
 	{
 		return true;
 	}
@@ -137,16 +137,17 @@ bool CollisionManager::checkEnemySideRight(EnemyObject* enemy)
 
 bool CollisionManager::checkEnemyOnGround(EnemyObject* enemy)
 {
-	double x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth() / 2;
-	double y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
-	if (mGround->getID(x, y + 32) != -1)
+	double x = enemy->getPosition()->getX() + enemy->getAnimation()->getWidth() / 2;
+	//std::cout << enemy->getPosition()->getX() << ' ' << enemy->getMapPosition()->getX() << '\n';
+	double y = enemy->getPosition()->getY() ;
+	if (mGround->getIDNoBaseOnMap(x, y + 32) != -1)
 	{
 		mGround->optimizePositionY(y);
 		enemy->getPosition()->setY(y - 32);
 		return true;
 	}
 	y += enemy->getAnimation()->getHeight();
-	if (mGround->getID(x, y) != -1)
+	if (mGround->getIDNoBaseOnMap(x, y) != -1)
 	{
 		mGround->optimizePositionY(y);
 		enemy->getPosition()->setY(y - enemy->getAnimation()->getHeight());

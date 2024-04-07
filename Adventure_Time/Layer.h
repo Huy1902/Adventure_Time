@@ -31,6 +31,7 @@ public:
 		return mPosition;
 	}
 	int getID(const double &x, const double& y) const;
+	int getIDNoBaseOnMap(const double& x, const double& y) const;
 	void optimizePositionY(double& y);
 private:
 	std::vector<std::vector<int>> mGrid;

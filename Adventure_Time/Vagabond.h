@@ -69,11 +69,7 @@ public:
 		mStatus.isStunned = true;
 		mCountTimeStun = STUN_TIME;
 	}
-
 	virtual ~Vagabond();
-
-
-
 private:
 	Vagabond();
 	bool onGround();
