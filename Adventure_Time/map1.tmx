@@ -123,8 +123,8 @@
   <object id="53" name="Coin" x="3729.33" y="80" width="16" height="16"/>
   <object id="56" name="Portal" x="87" y="150" width="80" height="80">
    <properties>
-    <property name="From" value="0"/>
-    <property name="To" value="1"/>
+    <property name="From" value="1"/>
+    <property name="To" value="0"/>
    </properties>
   </object>
   <object id="58" name="Portal" x="3694.5" y="631" width="80" height="80">

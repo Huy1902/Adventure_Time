@@ -114,7 +114,7 @@ void Map::processMapAndPlayer()
 	}
 	mPosition->setY(0);
 
-	std::cout << mPosition->getX() << '\n';
+	//std::cout << mPosition->getX() << '\n';
 }
 
 void Map::processEnemyAndPlayer()

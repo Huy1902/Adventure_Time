@@ -37,6 +37,10 @@ public:
 	{
 		return mIndexFrame;
 	}
+	GameVector* getPosition()
+	{
+		return &mPosition;
+	}
 	/*static Animation* getInstance()
 	{
 		if (s_pInstance == nullptr)

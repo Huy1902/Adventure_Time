@@ -34,6 +34,14 @@ void PlayingState::processData()
 	{
 		m_sPlayingToPause();
 	}
+	if (m_bSetupRevive == true)
+	{
+		mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
+		MapManager::getInstance()->getPlayer()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
+		MapManager::getInstance()->getPlayer()->getAnimation()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
+	//	std::cout << MapManager::getInstance()->getPlayer()->getPosition()->getX() << '\n';
+		m_bSetupRevive = false;
+	}
 	if (MapManager::getInstance()->getPlayer()->getStatus()->isAlive == false)
 	{
 		if (MapManager::getInstance()->getPlayer()->isDying() == true)
@@ -46,12 +54,6 @@ void PlayingState::processData()
 		}
 		MapManager::getInstance()->getPlayer()->processData();
 		return;
-	}
-	if (m_bSetupRevive == true)
-	{
-		mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
-		MapManager::getInstance()->getPlayer()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
-		m_bSetupRevive = false;
 	}
 
 	mMap->updateMap();
@@ -79,9 +81,12 @@ bool PlayingState::startState()
 	//{
 	//	std::cout << MapManager::getInstance()->getPlayer()->getPosition()->getX() << '\n';
 	//}
+	mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
+	MapManager::getInstance()->getPlayer()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
+	MapManager::getInstance()->getPlayer()->getAnimation()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
 	SoundManager::getInstance()->playMusic("play_theme", -1);
 
-	m_bSetupRevive = true;
+	m_bSetupRevive = false;
 
 	return true;
 }

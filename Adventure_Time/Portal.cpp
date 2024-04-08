@@ -29,6 +29,7 @@ bool Portal::interactItem()
 	{
 		MapManager::getInstance()->changeMapFromTo(mFrom, mTo);
 		GameManager::getInstance()->getFSM()->changeState(new LoadingState());
+		return true;
 	}
 	return false;
 }

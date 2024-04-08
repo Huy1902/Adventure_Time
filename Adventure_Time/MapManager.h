@@ -9,6 +9,8 @@ struct Drive
 	int to;
 	int x;
 	int y;
+	int map_x;
+	int map_y;
 };
 class MapManager
 {
@@ -24,7 +26,7 @@ public:
 	bool nextMap();
 	bool previousMap();
 	bool beginFirstMap();
-	GameVector changeMapFromTo(int from, int to);
+	void changeMapFromTo(int from, int to);
 	Map* getCurrentMap() const
 	{
 		return mMap[mIndexMap];

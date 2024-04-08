@@ -32,19 +32,16 @@ bool MapManager::beginFirstMap()
 	return true;
 }
 
-GameVector MapManager::changeMapFromTo(int from, int to)
+void MapManager::changeMapFromTo(int from, int to)
 {
 	for (Drive& ite : mDriven[from])
 	{
 		if (ite.to == to)
 		{
 			mIndexMap = to;
-			InteractManager::getInstance()->setSavedPos(GameVector( 0, 0 ), GameVector( ite.x, ite.y ));
-			//std::cout << mPlayer->getPosition()->getX() << '\n';
-			return GameVector(ite.x, ite.y);
+			InteractManager::getInstance()->setSavedPos(GameVector(ite.map_x, ite.map_y), GameVector( ite.x - ite.map_x, ite.y - ite.map_y));
 		}
 	}
-	return GameVector(0, 0);
 }
 
 void MapManager::revivePlayer()
@@ -88,6 +85,8 @@ MapManager::MapManager()
 				ite->takeAttribute("x", &temp.x);
 				ite->takeAttribute("y", &temp.y);
 				ite->takeAttribute("to", &temp.to);
+				ite->takeAttribute("map_x", &temp.map_x);
+				ite->takeAttribute("map_y", &temp.map_y);
 				ite->takeAttribute("from", &from);
 				mDriven[from].push_back(temp);
 			}
