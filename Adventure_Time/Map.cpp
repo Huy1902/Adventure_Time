@@ -21,6 +21,7 @@
 
 #include "LoadingState.h"
 
+#include "ArrowManager.h"
 
 const int mMapWidth = 120;
 const int mMapHeight = 24;
@@ -263,7 +264,9 @@ void Map::processInteractObjectAndPlayer()
 }
 void Map::updateMap()
 {
+	ArrowManager::getInstance()->updateArrow();
 	//std::cout << mPosition->getX() << '\n';
+
 	processMapAndPlayer();
 	if (m_bSwitchMap == true)
 	{
@@ -313,4 +316,7 @@ void Map::renderMap()
 		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY());
 		--mCountTimeRenderBash;
 	}
+
+
+	ArrowManager::getInstance()->renderArrow();
 }

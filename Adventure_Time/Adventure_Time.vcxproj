@@ -140,8 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="ArrowManager.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BarrerKnight.cpp" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="BonFire.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
     <ClCompile Include="CharModel.cpp" />
@@ -180,9 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Arrow.h" />
+    <ClInclude Include="ArrowManager.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BarrerKnight.h" />
     <ClInclude Include="BaseGenerator.h" />
+    <ClInclude Include="Bat.h" />
     <ClInclude Include="BonFire.h" />
     <ClInclude Include="ButtonModel.h" />
     <ClInclude Include="CharModel.h" />
@@ -226,6 +232,7 @@
     <Text Include="PortalData.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="arrow.xml" />
     <Xml Include="bar.xml" />
     <Xml Include="BarerKnight.xml" />
     <Xml Include="droid_zapper.xml" />

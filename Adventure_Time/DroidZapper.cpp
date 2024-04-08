@@ -260,4 +260,3 @@ void DroidZapper::completeUpdateMethod()
 
 	animation->setPosition(*mPosition);
 }
-

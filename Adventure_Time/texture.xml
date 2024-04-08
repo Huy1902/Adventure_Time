@@ -18,5 +18,6 @@
 		<texture filePath="assets/save_point/bonfire.png" textureID="bonfire"/>
 		<texture filePath="assets/Coin/MonedaD.png" textureID="MonedaD"/>
 		<texture filePath="assets/portal/portal2.png" textureID="Portal"/>
+		<texture filePath="assets/archer/arrow.png" textureID="arrow_flying"/>
 	</TEXTURES>
 </LOADER>

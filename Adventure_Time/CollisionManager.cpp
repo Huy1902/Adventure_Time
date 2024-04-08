@@ -94,7 +94,7 @@ bool CollisionManager::checkPlayerSideLeft()
 
 bool CollisionManager::checkPlayerSideRight()
 {
-	double x = mPlayer->getPosition()->getX() + 76;
+	double x = mPlayer->getPosition()->getX() + 100;
 	for (double y = mPlayer->getPosition()->getY(), range = y + mPlayer->getHeight(); y < range; y += 32)
 	{
 		if (mGround->getID(x, y) != -1)

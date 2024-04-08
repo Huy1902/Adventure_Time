@@ -93,7 +93,8 @@ protected:
 		HIT = 11,
 		BASH = 12,
 		CRIT = 13,
-		STUN = 14
+		STUN = 14,
+		FLY = 15
 	};
 
 
@@ -133,7 +134,7 @@ protected:
 	int mCountTimeHurt = 0;
 	int mCountTimeAbleToCrit = 0;
 	int mCountTimeLanding = 0;
-	int mCountStamina = 00;
+	int mCountStamina = 0;
 
 	bool m_bHeadStuck = false;
 	bool m_bOnGround = false;
