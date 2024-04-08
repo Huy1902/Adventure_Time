@@ -28,6 +28,7 @@
 #include "ObjectParser.h"
 #include "Coin.h"
 #include "Vagabond.h"
+#include "Portal.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -115,6 +116,7 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	GeneratorManager::getInstance()->addGenerator("BonFire", new BonFireGenerator());
 	GeneratorManager::getInstance()->addGenerator("Coin", new CoinGenerator());
 	GeneratorManager::getInstance()->addGenerator("Vagabond", new VagabondGenerator());
+	GeneratorManager::getInstance()->addGenerator("Portal", new PortalGenerator());
 
 	ObjectParser::getInstance()->parserTexture("texture.xml", mTextures);
 	for (Texture& ite : mTextures)

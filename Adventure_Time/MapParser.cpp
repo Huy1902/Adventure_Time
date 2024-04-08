@@ -3,7 +3,9 @@
 #include "MapParser.h"
 #include "ObjectParser.h"
 #include "GeneratorManager.h"
+#include "fstream"
 
+#include "Portal.h"
 using namespace std;
 
 MapParser* MapParser::s_pInstance = nullptr;
@@ -180,6 +182,8 @@ void MapParser::loadInteractItem(XmlNode* interacts, std::vector<InteractObject*
 	{
 		return;
 	}
+	int k = 0;
+	//ofstream fout("PortalData.txt");
 	for (XmlNode* ite : interacts->child)
 	{
 		if (ite->element == "object")
@@ -192,6 +196,27 @@ void MapParser::loadInteractItem(XmlNode* interacts, std::vector<InteractObject*
 			InteractObject* obj = dynamic_cast<InteractObject*>(GeneratorManager::getInstance()->generatorObject(name));
 			obj->setPosition({ x, y });
 			mInteracts.push_back(obj);
+			++k;
+			if (name == "Portal")
+			{
+				int from = -1, to = -1;
+				XmlNode* properties = ite->child[0];
+				for (XmlNode* property : properties->child)
+				{
+					string name;
+					property->takeAttribute("name", &name);
+					if (name == "From")
+					{
+						property->takeAttribute("value", &from);
+					}
+					else
+						if (name == "To")
+						{
+							property->takeAttribute("value", &to);
+						}
+				}
+				obj->setFromTo(from, to);
+			}
 		}
 	}
 }

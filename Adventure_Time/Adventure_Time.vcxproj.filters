@@ -333,5 +333,6 @@
     <Text Include="map1.txt">
       <Filter>Resource Files\XML</Filter>
     </Text>
+    <Text Include="PortalData.txt" />
   </ItemGroup>
 </Project>

@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt" />
+    <Text Include="PortalData.txt" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="bar.xml" />

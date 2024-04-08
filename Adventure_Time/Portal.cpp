@@ -4,8 +4,10 @@
 #include "GameManager.h"
 #include "InputManager.h"
 #include "FontManager.h"
-
 #include "MapManager.h"
+#include "GameManager.h"
+
+#include "LoadingState.h"
 
 Portal::Portal()
 {
@@ -13,10 +15,10 @@ Portal::Portal()
 	mMapPosition = new GameVector();
 
 	mTextureID = "Portal";
-	mHeight = 60;
-	mWidth = 40;
-	mNumFrames = 9;
-	mType = SAVE_POINT;
+	mHeight = 80;
+	mWidth = 80;
+	mNumFrames = 6;
+	mType = PORTAL;
 }
 
 
@@ -25,7 +27,8 @@ bool Portal::interactItem()
 	m_bAbleToInteract = true;
 	if (InputManager::getInstance()->keyDown(SDL_SCANCODE_F))
 	{
-		
+		MapManager::getInstance()->changeMapFromTo(mFrom, mTo);
+		GameManager::getInstance()->getFSM()->changeState(new LoadingState());
 	}
 	return false;
 }
@@ -43,12 +46,14 @@ void Portal::loadTexture(std::unique_ptr<TextureLoader> Info)
 	mHeight = Info->getHeight();
 	mWidth = Info->getWidth();
 	mNumFrames = Info->getNumFrames();
+	mFrom = Info->getFrom();
+	mTo = Info->getTo();
 }
 
 void Portal::processData()
 {
 	++mIndexFrames;
-	if (mIndexFrames == mNumFrames)
+	if (mIndexFrames == mNumFrames * 5)
 	{
 		mIndexFrames = 0;
 	}
@@ -61,7 +66,7 @@ void Portal::renderObject() const
 	int y = static_cast<int>(mPosition->getY() - mMapPosition->getY());
 
 	TextureManager::getInstance()->drawSpritePicByCol(mTextureID, x, y,
-		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames, SDL_FLIP_NONE);
+		mWidth, mHeight, GameManager::getInstance()->getRenderer(), mIndexFrames / 5, SDL_FLIP_NONE);
 
 	if (m_bAbleToInteract == true)
 	{

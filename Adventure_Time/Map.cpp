@@ -68,8 +68,10 @@ void Map::processMapAndPlayer()
 		}
 		else if (mPlayer->getPosition()->getX() < 0)
 		{
-			MapManager::getInstance()->changeMapFromTo(1, 0);
-			GameManager::getInstance()->getFSM()->changeState(new LoadingState());
+			mPlayer->getPosition()->setX(0);
+
+			//MapManager::getInstance()->changeMapFromTo(1, 0);
+			//GameManager::getInstance()->getFSM()->changeState(new LoadingState());
 			/*if (MapManager::getInstance()->previousMap() == false)
 			{
 				mPlayer->getPosition()->setX(0);
@@ -96,8 +98,10 @@ void Map::processMapAndPlayer()
 		}
 		else if (mPlayer->getPosition()->getX() + 100 > WIN_WIDTH)
 		{
-			MapManager::getInstance()->changeMapFromTo(0, 1);
-			GameManager::getInstance()->getFSM()->changeState(new LoadingState());
+			mPlayer->getPosition()->setX(WIN_WIDTH - 100);
+
+			//MapManager::getInstance()->changeMapFromTo(0, 1);
+			//GameManager::getInstance()->getFSM()->changeState(new LoadingState());
 			/*if (MapManager::getInstance()->nextMap() == false)
 			{
 				mPlayer->getPosition()->setX(WIN_WIDTH - 100);
@@ -109,6 +113,8 @@ void Map::processMapAndPlayer()
 		}
 	}
 	mPosition->setY(0);
+
+	std::cout << mPosition->getX() << '\n';
 }
 
 void Map::processEnemyAndPlayer()

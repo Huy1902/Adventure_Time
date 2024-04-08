@@ -16,6 +16,9 @@ bool InteractManager::takeInteract(InteractObject* obj, PlayerObject* player)
 		takeCoin(obj);
 		return true;
 		break;
+	case PORTAL:
+		portal(obj);
+		break;
 	default:
 		break;
 	}
@@ -35,6 +38,14 @@ void InteractManager::takeCoin(InteractObject* obj)
 {
 	StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() + 1);
 	delete obj;
+}
+
+void InteractManager::portal(InteractObject* obj)
+{
+	if (obj->interactItem())
+	{
+
+	}
 }
 
 InteractManager::InteractManager()

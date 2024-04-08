@@ -33,6 +33,7 @@ private:
 	static InteractManager* s_pIntance;
 	void savePoint(InteractObject* obj, PlayerObject* player);
 	void takeCoin(InteractObject* obj);
+	void portal(InteractObject* obj);
 	InteractManager();
 	~InteractManager();
 	GameVector* mSavedPlayerPos;

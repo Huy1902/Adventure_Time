@@ -35,6 +35,11 @@ public:
 	{
 		return mMapPosition;
 	}
+	virtual void setFromTo(int from, int to)
+	{
+		mFrom = from;
+		mTo = to;
+	}
 	~Portal();
 private:
 	Portal();

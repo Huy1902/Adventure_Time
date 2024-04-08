@@ -5,7 +5,8 @@ enum Interact_Type
 {
 	NOTHING = -1,
 	SAVE_POINT = 0,
-	COIN = 1
+	COIN = 1,
+	PORTAL = 2
 };
 class InteractObject :
 	public ObjectModel
@@ -40,6 +41,11 @@ public:
 	{
 		return mType;
 	}
+	virtual void setFromTo(int from, int to)
+	{
+		mFrom = from;
+		mTo = to;
+	}
 	InteractObject();
 	virtual ~InteractObject();
 protected:
@@ -49,5 +55,8 @@ protected:
 	GameVector* mMapPosition;
 
 	bool m_bAbleToInteract;
+
+	int mFrom;
+	int mTo;
 };
 
