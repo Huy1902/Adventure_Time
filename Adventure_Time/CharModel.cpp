@@ -6,6 +6,9 @@ CharModel::CharModel()
 
 CharModel::~CharModel()
 {
+	delete mVelocity;
+	delete mAcceleration;
+	delete animation;
 }
 
 void CharModel::loadTexture(std::unique_ptr<TextureLoader> Info)

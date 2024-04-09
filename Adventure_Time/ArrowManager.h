@@ -14,7 +14,7 @@ public:
 		}
 		return s_pInstance;
 	}
-	void addEnemyArrow(int x, int y);
+	void addEnemyArrow(const GameVector& pos, const GameVector& mapPos, bool isRight);
 	const std::vector<Arrow*> getEnemyArrow() { return mEnemyArrows; }
 
 	void updateArrow();

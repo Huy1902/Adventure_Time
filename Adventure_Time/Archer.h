@@ -1,7 +1,7 @@
-#ifndef ARROW_H_
-#define ARROW_H_
+#ifndef ARCHER_H_
+#define ARCHER_H_
 #include "EnemyObject.h"
-class Arrow :
+class Archer :
     public EnemyObject
 {
 public:
@@ -12,6 +12,8 @@ public:
 	{
 		*mMapPosition = pos;
 	}
+
+
 	virtual bool isRight() const
 	{
 		if (mFlip == SDL_FLIP_NONE)
@@ -22,7 +24,11 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		return true;
+		if (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 6))
+		{
+			return true;
+		}
+		return false;
 	}
 	virtual Animation* getAnimation()
 	{
@@ -32,13 +38,10 @@ public:
 	{
 		return mStatus.ATK;
 	}
+	virtual void getHurt();
 	virtual bool isAlive()
 	{
-		if (mFlyingTime == 0)
-		{
-			return false;
-		}
-		return true;
+		return mStatus.isAlive;
 	}
 
 	virtual int getHeight()const
@@ -49,35 +52,45 @@ public:
 	{
 		return mCharWidth;
 	}
-	virtual void setPosition(const GameVector& obj)
+	virtual bool isDying() const
+	{
+		if (mDyingTime == 1)
+		{
+			return false;
+		}
+		return true;
+	}
+	virtual void setPosition(GameVector obj)
 	{
 		*mPosition = obj;
 	}
-	void setDirection(bool isRight);
-	virtual ~Arrow();
+	virtual void setStun()
+	{
+		mStatus.isStunned = true;
+		mCountTimeStun = STUN_TIME;
+	}
+
+	virtual ~Archer();
 
 
 
 private:
-	Arrow();
+	Archer();
 	bool onGround();
 	void AnimationProcess();
 	void completeUpdateMethod();
 
-	friend class ArrowGenerator;
-	friend class ArrowManager;
-	void fly();
-
-	int mFlyingTime;
+	friend class ArcherGenerator;
 };
 
-class ArrowGenerator :
+class ArcherGenerator :
 	public BaseGenerator
 {
 	BaseObject* generateObject() const
 	{
-		return new Arrow();
+		return new Archer();
 	}
 };
 
-#endif // ARROW_H_
+
+#endif //ARCHER_H_

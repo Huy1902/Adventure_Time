@@ -2,11 +2,29 @@
 
 ArrowManager* ArrowManager::s_pInstance = nullptr;
 
+using namespace std;
+void ArrowManager::addEnemyArrow(const GameVector& pos, const GameVector& mapPos, bool isRight)
+{
+	Arrow* newArrow = new Arrow();
+	newArrow->setDirection(isRight);
+	newArrow->setMapPosition(mapPos);
+	newArrow->setPosition(pos);
+}
+
 void ArrowManager::updateArrow()
 {
-	for (Arrow* ite : mEnemyArrows)
+	vector<Arrow*>::iterator ite = mEnemyArrows.begin();
+	while (ite != mEnemyArrows.end())
 	{
-		ite->processData();
+		if ((*ite)->isAlive() == false)
+		{
+			ite = mEnemyArrows.erase(ite);
+		}
+		else
+		{
+			(*ite)->processData();
+			++ite;
+		}
 	}
 }
 
