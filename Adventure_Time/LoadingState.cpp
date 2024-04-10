@@ -13,6 +13,7 @@ const std::string LoadingState::m_sGameLoading = "GAME_LOADING";
 
 LoadingState::LoadingState()
 {
+	TextureManager::getInstance()->load("assets/background4.png", "background4", GameManager::getInstance()->getRenderer());
 	//TextureManager::getInstance()->load("assets/button/game_over_font.png", "game_over_font", GameManager::getInstance()->getRenderer());
 	//font = new ObjectModel();
 	//font->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("game_over_font", 0, 0, 1280, 768, 1)));
@@ -33,7 +34,7 @@ void LoadingState::processData()
 }
 void LoadingState::renderState()
 {
-
+	TextureManager::getInstance()->drawSinglePic("background4", 0, 0, 1280, 768, GameManager::getInstance()->getRenderer());
 }
 
 bool LoadingState::startState()
@@ -50,8 +51,6 @@ bool LoadingState::startState()
 	//	obj->setCallback(mCallback[ite.callbackID]);
 	//	mObjects.push_back(obj);
 	//}
-
-
 	return true;
 }
 bool LoadingState::exitState()

@@ -18,5 +18,5 @@ public:
 private:
     static const std::string m_sGameLoading;
 
-    int mCountToPlay = 10;
+    int mCountToPlay = 40;
 };

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="14">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="25">
  <tileset firstgid="1" name="tileset2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="assets/tileset2.png" width="512" height="512"/>
  </tileset>
@@ -101,5 +101,14 @@
     <property name="To" value="0"/>
    </properties>
   </object>
+  <object id="14" name="Coin" x="1004" y="368" width="16" height="16"/>
+  <object id="15" name="Coin" x="1094" y="366" width="16" height="16"/>
+  <object id="16" name="Coin" x="1194" y="372" width="16" height="16"/>
+  <object id="17" name="Coin" x="1276" y="364" width="16" height="16"/>
+  <object id="18" name="Coin" x="1434" y="370" width="16" height="16"/>
+  <object id="19" name="Coin" x="1358" y="374" width="16" height="16"/>
+  <object id="21" name="Coin" x="1694" y="546" width="16" height="16"/>
+  <object id="22" name="Coin" x="1798" y="556" width="16" height="16"/>
+  <object id="24" name="Coin" x="2064" y="492" width="16" height="16"/>
  </objectgroup>
 </map>
