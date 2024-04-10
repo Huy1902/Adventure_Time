@@ -262,9 +262,13 @@ void Map::processInteractObjectAndPlayer()
 		}
 	}
 }
+void Map::processPlayerAndArrow()
+{
+	ArrowManager::getInstance()->checkCollision(mPlayer);
+	ArrowManager::getInstance()->updateArrow();
+}
 void Map::updateMap()
 {
-	ArrowManager::getInstance()->updateArrow();
 	//std::cout << mPosition->getX() << '\n';
 
 	processMapAndPlayer();
@@ -273,6 +277,7 @@ void Map::updateMap()
 		return;
 	}
 	processEnemyAndPlayer();
+	processPlayerAndArrow();
 	processEnemyAndMap();
 	processInteractObjectAndPlayer();
 

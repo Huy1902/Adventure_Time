@@ -29,6 +29,8 @@
 #include "Coin.h"
 #include "Vagabond.h"
 #include "Portal.h"
+#include "Archer.h"
+#include "Arrow.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -117,6 +119,8 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	GeneratorManager::getInstance()->addGenerator("Coin", new CoinGenerator());
 	GeneratorManager::getInstance()->addGenerator("Vagabond", new VagabondGenerator());
 	GeneratorManager::getInstance()->addGenerator("Portal", new PortalGenerator());
+	GeneratorManager::getInstance()->addGenerator("Archer", new ArcherGenerator());
+	GeneratorManager::getInstance()->addGenerator("Arrow", new ArrowGenerator());
 
 	ObjectParser::getInstance()->parserTexture("texture.xml", mTextures);
 	for (Texture& ite : mTextures)

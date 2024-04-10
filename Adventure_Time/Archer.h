@@ -24,10 +24,10 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		if (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 6))
-		{
-			return true;
-		}
+		//if (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 6))
+		//{
+		//	return true;
+		//}
 		return false;
 	}
 	virtual Animation* getAnimation()
@@ -60,7 +60,7 @@ public:
 		}
 		return true;
 	}
-	virtual void setPosition(GameVector obj)
+	virtual void setPosition(const GameVector& obj)
 	{
 		*mPosition = obj;
 	}

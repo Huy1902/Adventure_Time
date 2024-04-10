@@ -19,5 +19,11 @@
 		<texture filePath="assets/Coin/MonedaD.png" textureID="MonedaD"/>
 		<texture filePath="assets/portal/portal2.png" textureID="Portal"/>
 		<texture filePath="assets/archer/arrow.png" textureID="arrow_flying"/>
+		<texture filePath="assets/archer/run.png" textureID="archer_run"/>
+		<texture filePath="assets/archer/idle.png" textureID="archer_idle"/>
+		<texture filePath="assets/archer/hit.png" textureID="archer_hit"/>
+		<texture filePath="assets/archer/attack.png" textureID="archer_attack"/>
+		<texture filePath="assets/archer/fall.png" textureID="archer_fall"/>
+		<texture filePath="assets/archer/death.png" textureID="archer_death"/>
 	</TEXTURES>
 </LOADER>

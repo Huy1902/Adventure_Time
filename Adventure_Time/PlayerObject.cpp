@@ -364,6 +364,10 @@ void PlayerObject::getHurt()
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
+		mVelocity->setX(0);
+		mVelocity->setY(0);
+		mAcceleration->setX(0);
+		mAcceleration->setY(0);
 		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() / 2);
 	}
 	else

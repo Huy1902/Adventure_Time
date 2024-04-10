@@ -353,6 +353,7 @@
     <Xml Include="vagabond.xml" />
     <Xml Include="switch_map_driven.xml" />
     <Xml Include="arrow.xml" />
+    <Xml Include="archer.xml" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">

@@ -6,9 +6,9 @@
 
 #include "ObjectParser.h"
 
-const int MOVE_SPEED = 20;
+const int MOVE_SPEED = 40;
 const int GRAVITY = 1;
-const int UP_FORCE = -5;
+const int UP_FORCE = -10;
 const int TIME_RUN = 100;
 
 Arrow::Arrow() :
@@ -24,12 +24,9 @@ Arrow::Arrow() :
 	mVelocity = new GameVector(0, 0);
 	mAcceleration = new GameVector(0, 0);
 	mMapPosition = new GameVector(0, 0);
+	mStatus.ATK = 20;
 
 	animation->setPosition(*mPosition);
-
-	mFlyingTime = mActions["flying"].numFrames * mActions["flying"].speed - 1;
-	Info temp = mActions["flying"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 void Arrow::setDirection(bool isRight)
 {
@@ -45,6 +42,10 @@ void Arrow::setDirection(bool isRight)
 		mFlip = SDL_FLIP_HORIZONTAL;
 		mVelocity->setX(-MOVE_SPEED);
 	}
+
+	mFlyingTime = mActions["flying"].numFrames * mActions["flying"].speed - 1;
+	Info temp = mActions["flying"];
+	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 Arrow::~Arrow()

@@ -3,6 +3,7 @@
 #include <vector>
 #include "Arrow.h"
 
+#include "PlayerObject.h"
 class ArrowManager
 {
 public:
@@ -16,6 +17,7 @@ public:
 	}
 	void addEnemyArrow(const GameVector& pos, const GameVector& mapPos, bool isRight);
 	const std::vector<Arrow*> getEnemyArrow() { return mEnemyArrows; }
+	bool checkCollision(PlayerObject* player);
 
 	void updateArrow();
 	void renderArrow();

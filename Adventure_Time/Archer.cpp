@@ -7,11 +7,14 @@
 
 #include "ObjectParser.h"
 
+#include "ArrowManager.h"
+
 const int MOVE_SPEED = 2;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
 const int TIME_RUN = 100;
-
+const int ARROW_POS_X = 200;
+const int ARROW_POS_Y = 30;
 void Archer::getHurt()
 {
 	if (mStatus.isInvulnerable == false)
@@ -49,7 +52,7 @@ Archer::Archer() :
 	mCountStamina = 0;
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
-	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
+	mWakeTime = mActions["idle"].numFrames * mActions["idle"].speed - 1;
 
 
 	animation->setSize(0, 0);
@@ -145,26 +148,42 @@ void Archer::processData()
 	if (m_bOnGround == true)
 	{
 		mCurrentAction = RUN;
-		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
+		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 600)
 		{
+
+			if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
+			{
+				mFlip = SDL_FLIP_HORIZONTAL;
+				if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) >= 200)
+				{
+					mVelocity->setX(-MOVE_SPEED * 2);
+				}
+			}
+			else 
+			{
+				mFlip = SDL_FLIP_NONE;
+				if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) >= 200 + animation->getWidth())
+				{
+					mVelocity->setX(MOVE_SPEED * 2);
+				}
+			}
+
 			if (mCountStamina == mStatus.STA * 1)
 			{
 				mCountStamina = 0;
 				mCurrentAction = ATTACK1;
 				mCountTimeAttack1 = (mActions["attack1"].numFrames * mActions["attack1"].speed);
+				if (mFlip == SDL_FLIP_HORIZONTAL)
+				{
+					ArrowManager::getInstance()->addEnemyArrow(GameVector(mPosition->getX() + animation->getWidth() - ARROW_POS_X, mPosition->getY() + ARROW_POS_Y), *mMapPosition, false);
+				}
+				else
+				{
+					ArrowManager::getInstance()->addEnemyArrow(GameVector(mPosition->getX() + ARROW_POS_X, mPosition->getY() + ARROW_POS_Y), *mMapPosition, true);
+				}
 			}
 			++mCountStamina;
 
-			if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
-			{
-				mFlip = SDL_FLIP_HORIZONTAL;
-				mVelocity->setX(-MOVE_SPEED * 2);
-			}
-			else
-			{
-				mFlip = SDL_FLIP_NONE;
-				mVelocity->setX(MOVE_SPEED * 2);
-			}
 
 		}
 		else
@@ -195,7 +214,7 @@ void Archer::processData()
 		mCountStamina = 0;
 		mCurrentAction = IDLE;
 		mVelocity->setX(0);
-		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 100)
+		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 300)
 		{
 			m_bSleep = false;
 		}
@@ -222,13 +241,13 @@ void Archer::AnimationProcess()
 		run();
 		break;
 	case Archer::WAKE_UP:
-		wake();
+		idle();
 		break;
 	case Archer::FALL:
-		none();
+		fall();
 		break;
 	case Archer::IDLE:
-		none();
+		idle();
 		break;
 	case Archer::ATTACK1:
 		attack1();

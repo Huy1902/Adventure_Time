@@ -234,6 +234,7 @@
     <Text Include="PortalData.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="archer.xml" />
     <Xml Include="arrow.xml" />
     <Xml Include="bar.xml" />
     <Xml Include="BarerKnight.xml" />

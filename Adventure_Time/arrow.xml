@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <CHARACTER>
 	<ACTIONS>
-		<action name="flying" textureID="arrow_flying" numFrame="3" w="40" h="12" speed="3"/>
+		<action name="flying" textureID="arrow_flying" numFrame="15" w="64" h="32" speed="1"/>
 	</ACTIONS>
 </CHARACTER>

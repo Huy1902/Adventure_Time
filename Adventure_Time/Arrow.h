@@ -34,7 +34,7 @@ public:
 	}
 	virtual bool isAlive()
 	{
-		if (mFlyingTime == 0)
+		if (mFlyingTime == 0 || mStatus.isAlive == false)
 		{
 			return false;
 		}
@@ -54,6 +54,10 @@ public:
 		*mPosition = obj;
 	}
 	void setDirection(bool isRight);
+	void setDying()
+	{
+		mStatus.isAlive = false;
+	}
 	virtual ~Arrow();
 
 

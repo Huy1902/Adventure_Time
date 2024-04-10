@@ -1,5 +1,7 @@
 #include "ArrowManager.h"
 
+#include "CollisionManager.h"
+#include "StatusManager.h"
 ArrowManager* ArrowManager::s_pInstance = nullptr;
 
 using namespace std;
@@ -9,7 +11,29 @@ void ArrowManager::addEnemyArrow(const GameVector& pos, const GameVector& mapPos
 	newArrow->setDirection(isRight);
 	newArrow->setMapPosition(mapPos);
 	newArrow->setPosition(pos);
+	mEnemyArrows.push_back(newArrow);
 }
+
+bool ArrowManager::checkCollision(PlayerObject* player)
+{
+	for (Arrow* ite : mEnemyArrows)
+	{
+		SDL_Rect arrowRect{ ite->getPosition()->getX() - ite->getMapPosition()->getX(), ite->getPosition()->getY() - ite->getMapPosition()->getY(),
+					ite->getAnimation()->getWidth(), ite->getAnimation()->getHeight() };
+		SDL_Rect playerRect{ player->getPosition()->getX(), player->getPosition()->getY(), player->getAnimation()->getWidth(), player->getAnimation()->getHeight() };
+		if (SDL_HasIntersection(&arrowRect, &playerRect))
+		{
+			ite->setDying();
+				if (player->isBash() == false && StatusManager::getInstance()->whenEnemyAttackPlayer(ite) == true)
+				{
+					player->getHurt();
+				}
+		}
+	}
+
+	return false;
+}
+
 
 void ArrowManager::updateArrow()
 {
@@ -38,9 +62,9 @@ void ArrowManager::renderArrow()
 
 ArrowManager::ArrowManager()
 {
-	Arrow* newArrow = new Arrow();
-	newArrow->setMapPosition(GameVector(0, 0));
-	newArrow->setPosition(GameVector(100, 100));
-	//newArrow->setDirection(GameVector(-20, 20));
-	mEnemyArrows.push_back(newArrow);
+	//Arrow* newArrow = new Arrow();
+	//newArrow->setMapPosition(GameVector(0, 0));
+	//newArrow->setPosition(GameVector(100, 100));
+	////newArrow->setDirection(GameVector(-20, 20));
+	//mEnemyArrows.push_back(newArrow);
 }

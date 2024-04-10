@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<CHARACTER>
+	<ACTIONS>
+		<action name="run" textureID="archer_run" numFrame="6" w="344" h="64"/>
+		<action name="fall" textureID="archer_none" numFrame="1" w="322" h="64"/>
+		<action name="idle" textureID="archer_idle" numFrame="6" w="322" h="64" speed="2"/>
+		<action name="attack1" textureID="archer_attack" numFrame="6" w="322" h="64" speed="2"/>
+		<action name="dying" textureID="archer_death" numFrame="5" w="322" h="64" speed="2"/>
+		<action name="hit" textureID="archer_hit" numFrame="2" w="322" h="64" speed="2"/>
+	</ACTIONS>
+</CHARACTER>
