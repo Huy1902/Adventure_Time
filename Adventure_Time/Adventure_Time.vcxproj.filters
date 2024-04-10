@@ -60,6 +60,12 @@
     <Filter Include="Resource Files\XML">
       <UniqueIdentifier>{7915e206-ea91-45dc-bf66-409b7bbcdfa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\InteractObject">
+      <UniqueIdentifier>{bb020bd9-aae8-4637-8e78-b82a8089207c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InteractObject">
+      <UniqueIdentifier>{6abcfa56-e9ff-4868-a508-f81d8c884413}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,20 +149,8 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="BonFire.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InteractManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InteractObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MapParser.cpp">
       <Filter>Source Files\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Coin.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MapManager.cpp">
       <Filter>Source Files\Map</Filter>
@@ -170,23 +164,35 @@
     <ClCompile Include="Vagabond.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LoadingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bat.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Arrow.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Archer.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ArrowManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Archer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BonFire.cpp">
+      <Filter>Source Files\InteractObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files\InteractObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractManager.cpp">
+      <Filter>Source Files\InteractObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractObject.cpp">
+      <Filter>Source Files\InteractObject</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingState.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Source Files\InteractObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,23 +289,11 @@
     <ClInclude Include="BaseGenerator.h">
       <Filter>Header Files\Generator</Filter>
     </ClInclude>
-    <ClInclude Include="BonFire.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InteractManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InteractObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MapParser.h">
       <Filter>Header Files\Parser</Filter>
     </ClInclude>
     <ClInclude Include="GeneratorManager.h">
       <Filter>Header Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Coin.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MapManager.h">
       <Filter>Header Files\Map</Filter>
@@ -307,23 +301,35 @@
     <ClInclude Include="Vagabond.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadingState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Arrow.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Coin.h">
+      <Filter>Header Files\InteractObject</Filter>
     </ClInclude>
     <ClInclude Include="ArrowManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Archer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractManager.h">
+      <Filter>Header Files\InteractObject</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractObject.h">
+      <Filter>Header Files\InteractObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Header Files\InteractObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BonFire.h">
+      <Filter>Header Files\InteractObject</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingState.h">
+      <Filter>Header Files\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -348,17 +354,31 @@
     <Xml Include="bar.xml">
       <Filter>Resource Files\XML</Filter>
     </Xml>
-    <Xml Include="sound.xml" />
-    <Xml Include="texture.xml" />
-    <Xml Include="vagabond.xml" />
-    <Xml Include="switch_map_driven.xml" />
-    <Xml Include="arrow.xml" />
-    <Xml Include="archer.xml" />
+    <Xml Include="archer.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
+    <Xml Include="arrow.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
+    <Xml Include="sound.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
+    <Xml Include="switch_map_driven.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
+    <Xml Include="vagabond.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
+    <Xml Include="texture.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">
       <Filter>Resource Files\XML</Filter>
     </Text>
-    <Text Include="PortalData.txt" />
+    <Text Include="PortalData.txt">
+      <Filter>Resource Files\XML</Filter>
+    </Text>
   </ItemGroup>
 </Project>
