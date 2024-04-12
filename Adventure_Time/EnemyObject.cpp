@@ -8,6 +8,8 @@
 
 EnemyObject::EnemyObject()
 {
+	mCharHeight = 0;
+	mAttackRange = 0;
 }
 
 EnemyObject::~EnemyObject()

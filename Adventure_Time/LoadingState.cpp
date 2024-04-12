@@ -16,9 +16,9 @@ LoadingState::LoadingState()
 	TextureManager::getInstance()->load("assets/background4.png", "background4", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/loading.png", "loading_anime", GameManager::getInstance()->getRenderer());
 	load = new Animation();
-	load->changeAnim("loading_anime", 14, SDL_FLIP_NONE, 172, 64, 4);
+	load->changeAnim("loading_anime", 14, SDL_FLIP_NONE, 172, 64, 2);
 	load->setPosition(GameVector{ 1100, 700 });
-	mCountToPlay = 14 * 4;
+	mCountToPlay = 14 * 2;
 }
 
 LoadingState::~LoadingState()

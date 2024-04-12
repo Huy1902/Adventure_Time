@@ -33,6 +33,7 @@ GameOverState::GameOverState()
 GameOverState::~GameOverState()
 {
 	delete background;
+	delete font;
 	TextureManager::getInstance()->clearFromTexture("game_over_font");
 }
 

@@ -305,7 +305,7 @@ void Map::renderMap()
 	for (size_t i = 0; i < mEnemy.size(); ++i)
 	{
 		mEnemy[i]->setMapPosition(*mPosition);
-		if (mEnemy[i]->getPosition()->getX() >= mPosition->getX() && mEnemy[i]->getPosition()->getX() < mPosition->getX() + WIN_WIDTH)
+		if (mEnemy[i]->getPosition()->getX() + mEnemy[i]->getAnimation()->getWidth() >= mPosition->getX() && mEnemy[i]->getPosition()->getX() < mPosition->getX() + WIN_WIDTH)
 		{
 			mEnemy[i]->renderObject();
 			StatusManager::getInstance()->renderEnemyStatus(mEnemy[i]);

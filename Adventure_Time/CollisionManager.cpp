@@ -168,11 +168,11 @@ bool CollisionManager::checkEnemyAttackPlayer(EnemyObject* enemy)
 	if (enemy->isAttack() == true)
 	{
 		double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth() / 2;
-		double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
+		double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY() + enemy->getHeight();
 		double p_x = mPlayer->getPosition()->getX() + mPlayer->getAnimation()->getWidth() / 2;
 		double p_y = mPlayer->getPosition()->getY();
 		//right
-		if (abs(p_y - e_y) > 0)
+		if (abs(p_y - e_y ) > 0)
 		{
 			return false;
 		}
@@ -192,7 +192,7 @@ bool CollisionManager::checkEnemyAttackPlayer(EnemyObject* enemy)
 					return true;
 				}
 			}*/
-			if (e_x + enemy->getAnimation()->getWidth() / 2 > p_x - mPlayer->getAnimation()->getWidth() / 2)
+			if (e_x + enemy->getAnimation()->getWidth() / 2 - enemy->getAttackRange() > p_x - mPlayer->getAnimation()->getWidth() / 2)
 			{
 				return true;
 			}
@@ -213,7 +213,7 @@ bool CollisionManager::checkEnemyAttackPlayer(EnemyObject* enemy)
 					return true;
 				}
 			}*/
-			if (e_x - enemy->getAnimation()->getWidth() / 2 < p_x + mPlayer->getAnimation()->getWidth() / 2)
+			if (e_x - enemy->getAnimation()->getWidth() / 2 + enemy->getAttackRange() < p_x + mPlayer->getAnimation()->getWidth() / 2)
 			{
 				return true;
 			}
@@ -238,7 +238,7 @@ bool CollisionManager::checkPlayerAttackEnemy(EnemyObject* enemy)
 	if (mPlayer->isAttack() == true)
 	{
 		double e_x = enemy->getPosition()->getX() - enemy->getMapPosition()->getX() + enemy->getAnimation()->getWidth() / 2;
-		double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY();
+		double e_y = enemy->getPosition()->getY() - enemy->getMapPosition()->getY() + enemy->getHeight();
 		double p_x = mPlayer->getPosition()->getX() + mPlayer->getAnimation()->getWidth() / 2;
 		double p_y = mPlayer->getPosition()->getY();
 		//right

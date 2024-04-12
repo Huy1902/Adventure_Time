@@ -24,7 +24,6 @@ void StatusManager::renderPlayerStatus()
 	Bar temp = mBars["health_point"];
 	int w = int( (*mPlayer->getStatus()).HP * 1.0 / (*mPlayer->getMaxStatus()).HP * temp.w );
 	TextureManager::getInstance()->drawSinglePic( temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
-	//SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("health_point"), &mSrcPoint, &mDestPoint);
 
 	temp = mBars["health_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
@@ -51,6 +50,15 @@ void StatusManager::renderPlayerStatus()
 	score = "Score:" + score;
 	FontManager::getInstance()->drawText(score.c_str(), temp.x + 47, temp.y + 9);
 
+}
+void StatusManager::renderBossStatus()
+{
+	Bar temp = mBars["boss_point"];
+	int w = int((*mBoss->getStatus()).HP * 1.0 / (*mBoss->getMaxStatus()).HP * temp.w);
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
+
+	temp = mBars["boss_bar"];
+	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)

@@ -102,11 +102,16 @@ public:
 		mStatus.isStunned = true;
 		mCountTimeStun = STUN_TIME;
 	}
+	int getAttackRange()
+	{
+		return mAttackRange;
+	}
 
 protected:
 	GameVector* mMapPosition;
 	bool m_bSleep = true;
 	int mWakeTime;
+	int mAttackRange;
 
 	bool sideStuck(EnemyObject* obj);
 

@@ -56,8 +56,10 @@ MapManager::MapManager()
 {
 	Map* temp1 = MapParser::getInstance()->parseMap("map1.tmx");
 	Map* temp2 = MapParser::getInstance()->parseMap("map2.tmx");
+	Map* temp3 = MapParser::getInstance()->parseMap("map3.tmx");
 	mMap.push_back(temp1);
 	mMap.push_back(temp2);
+	mMap.push_back(temp3);
 
 	XmlTree tree;
 	tree.parseXmlFile("switch_map_driven.xml");

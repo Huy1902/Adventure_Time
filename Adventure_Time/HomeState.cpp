@@ -104,6 +104,7 @@ bool HomeState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
-
+	delete font;
+	delete background;
 	return true;
 }

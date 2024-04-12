@@ -33,6 +33,7 @@ PauseState::PauseState()
 PauseState::~PauseState()
 {
 	delete background;
+	delete font;
 	TextureManager::getInstance()->clearFromTexture("pause_game_font");
 }
 
@@ -93,7 +94,6 @@ bool PauseState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
-
 	return true;
 }
 

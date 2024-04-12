@@ -5,10 +5,19 @@
 
 #include "ObjectParser.h"
 
-const int MOVE_SPEED = 2;
+const int MOVE_SPEED = 5;
 const int GRAVITY = 4;
 const int UP_FORCE = -20;
 const int TIME_RUN = 100;
+bool Vagabond::isAttack() const
+{
+	if ((mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 2 || animation->getIndexFrame() == 7 || animation->getIndexFrame() == 13))
+		|| (mCurrentAction == ATTACK2 && animation->getIndexFrame() == 9 || animation->getIndexFrame() == 10 || animation->getIndexFrame() == 11))
+	{
+		return true;
+	}
+	return false;
+}
 void Vagabond::getHurt()
 {
 	if (mStatus.isInvulnerable == false)
@@ -43,12 +52,14 @@ Vagabond::Vagabond() :
 	mMapPosition = new GameVector(0, 0);
 
 	mCharWidth = 40;
+	mCharHeight = 128;
 
 	mCurrentAction = IDLE;
 	animation->setPosition(*mPosition);
 	mStatus.HP = 200;
 
 	mCountStamina = 0;
+	mAttackRange = 20;
 
 	animation->setSize(0, 0);
 
@@ -166,7 +177,7 @@ void Vagabond::processData()
 	if (m_bOnGround == true)
 	{
 		mCurrentAction = RUN;
-		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 400)
+		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 800)
 		{
 			if (mCountStamina == mStatus.STA * 3)
 			{
@@ -184,12 +195,12 @@ void Vagabond::processData()
 			if (CollisionManager::getInstance()->checkPlayerIsRightSideWithEnemy(this) == false)
 			{
 				mFlip = SDL_FLIP_HORIZONTAL;
-				mVelocity->setX(-MOVE_SPEED * 2);
+				mVelocity->setX(-MOVE_SPEED);
 			}
 			else
 			{
 				mFlip = SDL_FLIP_NONE;
-				mVelocity->setX(MOVE_SPEED * 2);
+				mVelocity->setX(MOVE_SPEED);
 			}
 
 		}
@@ -233,7 +244,7 @@ void Vagabond::processData()
 		mCountStamina = 0;
 		mCurrentAction = IDLE;
 		mVelocity->setX(0);
-		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 100)
+		if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) <= 1000)
 		{
 			m_bSleep = false;
 		}
@@ -254,6 +265,7 @@ void Vagabond::processData()
 
 void Vagabond::AnimationProcess()
 {
+	mPosition->setX(mPosition->getX() + animation->getWidth() / 2);
 	switch (mCurrentAction)
 	{
 	case Vagabond::RUN:
@@ -287,6 +299,7 @@ void Vagabond::AnimationProcess()
 		break;
 	}
 	animation->update();
+	mPosition->setX(mPosition->getX() - animation->getWidth() / 2);
 }
 
 bool Vagabond::onGround()

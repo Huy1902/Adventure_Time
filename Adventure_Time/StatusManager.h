@@ -29,6 +29,8 @@ public:
 
 	void renderEnemyStatus(EnemyObject* obj);
 
+	void renderBossStatus();
+
 	static StatusManager* getInstance()
 	{
 		if (s_pInstance == nullptr)
@@ -49,6 +51,7 @@ private:
 	static StatusManager* s_pInstance;
 	int HP;
 	PlayerObject* mPlayer;
+	EnemyObject* mBoss;
 
 	SDL_Rect mSrcPoint;
 	SDL_Rect mDestPoint;

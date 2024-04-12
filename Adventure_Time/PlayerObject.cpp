@@ -371,6 +371,7 @@ void PlayerObject::getHurt()
 		mAcceleration->setY(0);
 		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() / 2);
 		current_sound = "dying" + std::to_string(rand() % 3);
+		SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
 	}
 	else
 	{
@@ -381,13 +382,13 @@ void PlayerObject::getHurt()
 			mCountTimeHurt = mActions["hurt"].numFrames * mActions["hurt"].speed;
 		}
 		current_sound = "hurt" + std::to_string(rand() % 2);
-	}
-	if (Mix_Playing(mSFXs[current_sound].channel))
-	{
-	}
-	else
-	{
-		SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
+		if (Mix_Playing(mSFXs[current_sound].channel))
+		{
+		}
+		else
+		{
+			SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
+		}
 	}
 }
 
