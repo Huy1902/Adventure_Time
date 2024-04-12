@@ -14,27 +14,34 @@ const std::string LoadingState::m_sGameLoading = "GAME_LOADING";
 LoadingState::LoadingState()
 {
 	TextureManager::getInstance()->load("assets/background4.png", "background4", GameManager::getInstance()->getRenderer());
-	//TextureManager::getInstance()->load("assets/button/game_over_font.png", "game_over_font", GameManager::getInstance()->getRenderer());
-	//font = new ObjectModel();
-	//font->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("game_over_font", 0, 0, 1280, 768, 1)));
+	TextureManager::getInstance()->load("assets/loading.png", "loading_anime", GameManager::getInstance()->getRenderer());
+	load = new Animation();
+	load->changeAnim("loading_anime", 14, SDL_FLIP_NONE, 172, 64, 4);
+	load->setPosition(GameVector{ 1100, 700 });
+	mCountToPlay = 14 * 4;
 }
 
 LoadingState::~LoadingState()
 {
-	//TextureManager::getInstance()->clearFromTexture("game_over_font");
+	TextureManager::getInstance()->clearFromTexture("background4");
+	TextureManager::getInstance()->clearFromTexture("loading_anime");
+	delete load;
 }
 
 void LoadingState::processData()
 {
 	--mCountToPlay;
+	load->update();
 	if (mCountToPlay == 0)
 	{
 		GameManager::getInstance()->getFSM()->changeState(new PlayingState());
+		
 	}
 }
 void LoadingState::renderState()
 {
 	TextureManager::getInstance()->drawSinglePic("background4", 0, 0, 1280, 768, GameManager::getInstance()->getRenderer());
+	load->draw();
 }
 
 bool LoadingState::startState()

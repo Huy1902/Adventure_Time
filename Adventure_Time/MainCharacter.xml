@@ -32,5 +32,10 @@
 		<sfx filePath="assets/knight_player/bash.wav" sfxID="main_bash" name="bash" channel="2"/>
 		<sfx filePath="assets/knight_player/footsteps.wav" sfxID="main_footstep" name="run" channel="3"/>
 		<sfx filePath="assets/knight_player/attack1.wav" sfxID="main_attack1" name="attack1" channel="4"/>
+		<sfx filePath="assets/knight_player/light_hit_taken.wav" sfxID="main_hurt1" name="hurt0" channel="5"/>
+		<sfx filePath="assets/knight_player/heavy_attack_taken.wav" sfxID="main_hurt2" name="hurt1" channel="5"/>
+		<sfx filePath="assets/knight_player/dying0.wav" sfxID="main_dying0" name="dying0" channel="6"/>
+		<sfx filePath="assets/knight_player/dying1.wav" sfxID="main_dying1" name="dying1" channel="6"/>
+		<sfx filePath="assets/knight_player/dying2.wav" sfxID="main_dying2" name="dying2" channel="6"/>
 	</SFXS>
 </CHARACTER>

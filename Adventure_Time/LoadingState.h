@@ -2,6 +2,7 @@
 #include "BaseState.h"
 
 #include "Background.h"
+#include "Animation.h"
 class LoadingState :
     public BaseState
 {
@@ -19,4 +20,5 @@ private:
     static const std::string m_sGameLoading;
 
     int mCountToPlay = 40;
+    Animation* load;
 };

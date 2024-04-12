@@ -25,6 +25,7 @@ std::string  last_sound = "";
 
 PlayerObject::PlayerObject()
 {
+	srand(static_cast<time_t>(time(NULL)));
 	ObjectParser::getInstance()->parserCharacter("MainCharacter.xml", mActions, mTextures, mSFXs);
 	for (const auto& ite : mSFXs)
 	{
@@ -79,7 +80,6 @@ void PlayerObject::processData()
 	static double start_jump_at_y = 0;
 	m_bOnGround = onGround();
 	m_bHeadStuck = headStuck();
-
 	//alive
 	if (mStatus.isAlive == false)
 	{
@@ -357,6 +357,7 @@ void PlayerObject::clearObject()
 
 void PlayerObject::getHurt()
 {
+	std::string current_sound = "";
 	if (mStatus.isInvulnerable == false)
 	{
 		mStatus.isInvulnerable = true;
@@ -369,11 +370,24 @@ void PlayerObject::getHurt()
 		mAcceleration->setX(0);
 		mAcceleration->setY(0);
 		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() / 2);
+		current_sound = "dying" + std::to_string(rand() % 3);
 	}
 	else
 	{
 		m_bHurting = true;
 		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() - 5);
+		if (m_bOnGround == true)
+		{
+			mCountTimeHurt = mActions["hurt"].numFrames * mActions["hurt"].speed;
+		}
+		current_sound = "hurt" + std::to_string(rand() % 2);
+	}
+	if (Mix_Playing(mSFXs[current_sound].channel))
+	{
+	}
+	else
+	{
+		SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
 	}
 }
 
