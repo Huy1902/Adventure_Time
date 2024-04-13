@@ -51,7 +51,7 @@ void StatusManager::renderPlayerStatus()
 	FontManager::getInstance()->drawText(score.c_str(), temp.x + 47, temp.y + 9);
 
 }
-void StatusManager::renderBossStatus()
+void StatusManager::renderBossStatus(EnemyObject* mBoss)
 {
 	Bar temp = mBars["boss_point"];
 	int w = int((*mBoss->getStatus()).HP * 1.0 / (*mBoss->getMaxStatus()).HP * temp.w);
@@ -59,6 +59,13 @@ void StatusManager::renderBossStatus()
 
 	temp = mBars["boss_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
+	FontManager::getInstance()->drawText(mBoss->getNameBoss().c_str(), 215, 698);
+
+	if (mBoss->isAlive() == false)
+	{
+		archieve->update();
+		archieve->draw();
+	}
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)
@@ -131,6 +138,11 @@ void StatusManager::renderOnGamePause()
 
 void StatusManager::renderEnemyStatus(EnemyObject* obj)
 {
+	if (obj->isBoss() == true)
+	{
+		renderBossStatus(obj);
+		return;
+	}
 	Bar temp = mBars["greenbar"];
 	int w = int( obj->getStatus()->HP * 1.0 / obj->getMaxStatus()->HP * temp.w );
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, int( obj->getPosition()->getX() - obj->getMapPosition()->getX() + obj->getAnimation()->getWidth() / 2 - temp.w / 2 ), 
@@ -155,14 +167,17 @@ StatusManager::StatusManager()
 
 	avatar = new Animation();
 	avatar->changeAnim("run2", 7, SDL_FLIP_NONE, 100, 64, 2);
+	avatar->setPosition(GameVector{ 380, 225 });;
 
-	GameVector temp({ 380, 225 });
-	avatar->setPosition(temp);
+	archieve = new Animation();
+	archieve->changeAnim("boss_destroyed", 10, SDL_FLIP_NONE, 1280, 768, 4);
+	archieve->setPosition(GameVector(0, 0));
 }
 
 StatusManager::~StatusManager()
 {
 	delete avatar;
+	delete archieve;
 }
 
 double StatusManager::getDMGtaken(const int& luck, const int& atk, const int& def)

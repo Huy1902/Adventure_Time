@@ -29,7 +29,7 @@ public:
 
 	void renderEnemyStatus(EnemyObject* obj);
 
-	void renderBossStatus();
+	void renderBossStatus(EnemyObject * mBoss);
 
 	static StatusManager* getInstance()
 	{
@@ -51,7 +51,6 @@ private:
 	static StatusManager* s_pInstance;
 	int HP;
 	PlayerObject* mPlayer;
-	EnemyObject* mBoss;
 
 	SDL_Rect mSrcPoint;
 	SDL_Rect mDestPoint;
@@ -61,7 +60,7 @@ private:
 	Status mMaxPlayer;
 
 	Animation* avatar;
-
+	Animation* archieve;
 	int mDecreasePoint;
 	int mLenPoint;
 

@@ -194,6 +194,9 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files\InteractObject</Filter>
     </ClCompile>
+    <ClCompile Include="ArchieveManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -330,6 +333,9 @@
     </ClInclude>
     <ClInclude Include="LoadingState.h">
       <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="ArchieveManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -106,15 +106,23 @@ public:
 	{
 		return mAttackRange;
 	}
+	bool isBoss()
+	{
+		return m_bIsBoss;
+	}
+	std::string getNameBoss()
+	{
+		return nameBoss;
+	}
 
 protected:
 	GameVector* mMapPosition;
 	bool m_bSleep = true;
 	int mWakeTime;
 	int mAttackRange;
-
+	bool m_bIsBoss = false;
+	std::string nameBoss;
 	bool sideStuck(EnemyObject* obj);
-
 };
 
 #endif

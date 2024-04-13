@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <STATUS>
 	<TEXTURES>
 		<texture filePath="assets/status/sta_bar.png" textureID="sta_bar"/>
@@ -9,6 +9,7 @@
 		<texture filePath="assets/status/score.png" textureID="score"/>
 		<texture filePath="assets/status/boss_health.png" textureID="boss_bar"/>
 		<texture filePath="assets/status/boss_health_point.png" textureID="boss_point"/>
+		<texture filePath="assets/status/destroyed.png" textureID="boss_destroyed"/>
 	</TEXTURES>
 	<BARS>
 		<bar name="health_bar" textureID="health_bar" w="190" h="57" x="0" y="0"/>
@@ -17,7 +18,8 @@
 		<bar name="sta_point" textureID="sta_point" w="115" h="10" x="60" y="42"/>
 		<bar name="greenbar" textureID="greenbar" w="45" h="3" x="0" y="0"/>
 		<bar name="score" textureID="score" w="225" h="50" x="1050" y="10"/>
-		<bar name="boss_bar" textureID="boss_bar" w="961" h="22" x="1050" y="10"/>
-		<bar name="boss_point" textureID="boss_point" w="931" h="9" x="1050" y="10"/>
+		<bar name="boss_bar" textureID="boss_bar" w="961" h="22" x="180" y="720"/>
+		<bar name="boss_point" textureID="boss_point" w="931" h="9" x="205" y="728"/>
+		<bar name="boss_destroyed" textureID="boss_destroyed" w="1280" h="720" x="0" y="0"/>
 	</BARS>
 </STATUS>
