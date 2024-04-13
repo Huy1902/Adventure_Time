@@ -3,7 +3,7 @@
 
 InputManager* InputManager::s_pInstance = nullptr;
 
-InputManager::InputManager(): mKeyButton(nullptr)
+InputManager::InputManager() : mKeyButton(nullptr)
 {
 	mMousePosition = new GameVector();
 	mMouseButton.resize(3, false);
@@ -108,6 +108,17 @@ void InputManager::isMouseUp(SDL_Event& event)
 void InputManager::clearInput()
 {
 
+}
+
+void InputManager::takeCursor()
+{
+	SDL_Event event;
+	SDL_PollEvent(&event);
+	if (event.type == SDL_MOUSEMOTION)
+	{
+		mMousePosition->setX(event.motion.x);
+		mMousePosition->setY(event.motion.y);
+	}
 }
 
 void InputManager::resetState()

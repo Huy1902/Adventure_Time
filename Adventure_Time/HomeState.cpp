@@ -9,6 +9,7 @@
 #include "ObjectParser.h"
 
 #include "SoundManager.h"
+#include "Cursor.h"
 
 
 const std::string  HomeState::m_sHomeID = "HOME";
@@ -69,6 +70,7 @@ void HomeState::renderState()
 			mObjects[i]->renderObject();
 		}
 	}
+	Cursor::getInstance()->render();
 }
 
 bool HomeState::startState()

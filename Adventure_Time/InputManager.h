@@ -19,6 +19,7 @@ class InputManager
 public:
 	void takeInput();
 	void clearInput();
+	void takeCursor();
 
 	bool getMouseButton(int button) { return mMouseButton[button]; }
 	GameVector* getMousePosition() const { return mMousePosition; }

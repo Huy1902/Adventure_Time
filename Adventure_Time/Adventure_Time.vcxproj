@@ -152,6 +152,7 @@
     <ClCompile Include="CharModel.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DroidZapper.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="CharModel.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="DroidZapper.h" />
     <ClInclude Include="EnemyObject.h" />
     <ClInclude Include="FiniteStateMachine.h" />

@@ -14,6 +14,7 @@
 #include "PlayingState.h"
 
 #include "MapManager.h"
+#include "Cursor.h"
 
 const std::string  GameOverState::m_sGameOverID = "GAME_OVER";
 
@@ -60,7 +61,7 @@ void GameOverState::renderState()
 			mObjects[i]->renderObject();
 		}
 	}
-
+	Cursor::getInstance()->render();
 }
 
 bool GameOverState::startState()

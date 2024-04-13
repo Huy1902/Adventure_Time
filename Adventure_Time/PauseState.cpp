@@ -14,6 +14,7 @@
 #include "PlayingState.h"
 
 #include "StatusManager.h"
+#include "Cursor.h"
 
 const std::string PauseState::m_sPauseID = "Pause";
 
@@ -61,6 +62,7 @@ void PauseState::renderState()
 		}
 	}
 	StatusManager::getInstance()->renderOnGamePause();
+	Cursor::getInstance()->render();
 }
 
 bool PauseState::startState()
@@ -77,7 +79,7 @@ bool PauseState::startState()
 		obj->setCallback(mCallback[ite.callbackID]);
 		mObjects.push_back(obj);
 	}
-	SDL_ShowCursor(SDL_ENABLE);
+	//SDL_ShowCursor(SDL_ENABLE);
 
 	return true;
 }
@@ -94,7 +96,7 @@ bool PauseState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
-	SDL_ShowCursor(SDL_DISABLE);
+	//SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 

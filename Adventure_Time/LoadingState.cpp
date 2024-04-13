@@ -6,6 +6,7 @@
 
 #include "PlayingState.h"
 #include "GameManager.h"
+#include "Cursor.h"
 
 const std::string LoadingState::m_sGameLoading = "GAME_LOADING";
 
@@ -42,6 +43,7 @@ void LoadingState::renderState()
 {
 	TextureManager::getInstance()->drawSinglePic("background4", 0, 0, 1280, 768, GameManager::getInstance()->getRenderer());
 	load->draw();
+	Cursor::getInstance()->renderLoading();
 }
 
 bool LoadingState::startState()

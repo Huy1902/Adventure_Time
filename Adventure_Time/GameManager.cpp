@@ -129,6 +129,8 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	{
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, m_pRenderer);
 	}
+
+	SDL_ShowCursor(SDL_DISABLE);
 }
 
 void GameManager::takeInput()

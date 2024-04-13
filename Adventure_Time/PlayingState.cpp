@@ -88,12 +88,12 @@ bool PlayingState::startState()
 
 	mBackground = new Background();
 
-	SDL_ShowCursor(SDL_DISABLE);
+	//SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 bool PlayingState::exitState()
 {
-	SDL_ShowCursor(SDL_ENABLE);
+	//SDL_ShowCursor(SDL_ENABLE);
 	mTextureID.clear();
 	mObjects.clear();
 	delete mBackground;
