@@ -12,7 +12,8 @@ enum Achieve_type
 	BOSS_DESTROYED = 0,
 	BONFIRE_LIT = 1,
 	BONFIRE_REVIVAL = 2,
-	MAIN_DEATH = 3
+	MAIN_DEATH = 3,
+	NEW_AREA = 4
 };
 struct Info;
 struct Texture;
@@ -34,6 +35,9 @@ public:
 private:
 	static AchieveManager* s_pInstance;
 	void startAchieve(const std::string& name);
+	void loadTexture(int i);
+	void clearTexture(int i);
+	void endAchieve();
 	Achieve_type mCurrentAchieve;
 	Animation* mAnimation;
 	std::map<std::string, Info> mAchieve;

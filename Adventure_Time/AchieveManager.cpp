@@ -6,6 +6,10 @@
 AchieveManager* AchieveManager::s_pInstance = nullptr;
 void AchieveManager::takeAchieve(Achieve_type archive)
 {
+	if (mCountTimeAnimation != 0)
+	{
+		endAchieve();
+	}
 	mCurrentAchieve = archive;
 	switch (archive)
 	{
@@ -20,6 +24,8 @@ void AchieveManager::takeAchieve(Achieve_type archive)
 		break;
 	case MAIN_DEATH:
 		startAchieve("death");
+	case NEW_AREA:
+		startAchieve("new_area");
 		break;
 	}
 }
@@ -36,6 +42,7 @@ void AchieveManager::updateAchieve()
 {
 	if (mCountTimeAnimation == 0)
 	{
+		endAchieve();
 		mCurrentAchieve = NONE_ARCHIEVE;
 	}
 	else
@@ -47,8 +54,58 @@ void AchieveManager::updateAchieve()
 
 void AchieveManager::startAchieve(const std::string& name)
 {
+	switch (mCurrentAchieve)
+	{
+	case BOSS_DESTROYED:
+		loadTexture(0);
+		break;
+	case BONFIRE_LIT:
+		loadTexture(1);
+		break;
+	case BONFIRE_REVIVAL:
+		loadTexture(2);
+		break;
+	case MAIN_DEATH:
+		loadTexture(3);
+		break;
+	case NEW_AREA:
+		loadTexture(4);
+		break;
+	}
 	mCountTimeAnimation = mAchieve[name].numFrames * mAchieve[name].speed - 1;
 	mAnimation->changeAnim(mAchieve[name].textureID, mAchieve[name].numFrames, SDL_FLIP_NONE, 1280, 768, mAchieve[name].speed);
+}
+
+void AchieveManager::loadTexture(int i)
+{
+	TextureManager::getInstance()->load(mTexture[i].filePath, mTexture[i].textureID, GameManager::getInstance()->getRenderer());
+}
+
+void AchieveManager::clearTexture(int i)
+{
+	TextureManager::getInstance()->clearFromTexture(mTexture[i].textureID);
+}
+
+void AchieveManager::endAchieve()
+{
+	switch (mCurrentAchieve)
+	{
+	case BOSS_DESTROYED:
+		clearTexture(0);
+		break;
+	case BONFIRE_LIT:
+		clearTexture(1);
+		break;
+	case BONFIRE_REVIVAL:
+		clearTexture(2);
+		break;
+	case MAIN_DEATH:
+		clearTexture(3);
+		break;
+	case NEW_AREA:
+		clearTexture(4);
+		break;
+	}
 }
 
 AchieveManager::AchieveManager()
@@ -57,20 +114,12 @@ AchieveManager::AchieveManager()
 	mAnimation = new Animation();
 	mAnimation->setPosition(GameVector(0, 0));
 	ObjectParser::getInstance()->parserTexture("Achieve.xml", mTexture);
-	for (auto& ite : mTexture)
-	{
-		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
-	}
 	ObjectParser::getInstance()->parserAction("Achieve.xml", mAchieve);
 	mCurrentAchieve = NONE_ARCHIEVE;
 }
 
 AchieveManager::~AchieveManager()
 {
-	for (const auto& ite : mTexture)
-	{
-		TextureManager::getInstance()->clearFromTexture(ite.textureID);
-	}
 	mTexture.clear();
 	mAchieve.clear();
 	delete mAnimation;

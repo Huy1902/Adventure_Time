@@ -90,12 +90,14 @@ bool PauseState::exitState()
 		mObjects[i]->clearObject();
 		delete mObjects[i];
 	}
+	mObjects.clear();
 	for (size_t i = 0; i < mTexture.size(); ++i)
 	{
 		TextureManager::getInstance()->clearFromTexture(mTexture[i].textureID);
 	}
 	mTextureID.clear();
-	mObjects.clear();
+	mCallback.clear();
+	mButton.clear();
 	//SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }

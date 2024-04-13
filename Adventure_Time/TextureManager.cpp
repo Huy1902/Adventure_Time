@@ -46,8 +46,8 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 		{
 			mTexture[id] = pTexture;
 		}
-		SDL_FreeSurface(pSurface);
 	}
+	SDL_FreeSurface(pSurface);
 }
 
 void TextureManager::drawSpritePicByCol(const std::string& id, const int& x, const int& y,
@@ -62,5 +62,6 @@ void TextureManager::drawSpritePicByCol(const std::string& id, const int& x, con
 
 void TextureManager::clearFromTexture(const std::string& id)
 {
+	SDL_DestroyTexture(mTexture[id]);
 	mTexture.erase(id);
 }
