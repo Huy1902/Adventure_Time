@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Map.h"
+#include "Background.h"
 
 class PlayingState :
     public BaseState
@@ -24,7 +25,7 @@ private:
     static void m_sPlayingToPause();
     static void m_sPlayingToGameOver();
     Map* mMap;
-
+    Background* mBackground;
     bool m_bSetupDying = false;
 
     bool m_bSetupRevive = true;

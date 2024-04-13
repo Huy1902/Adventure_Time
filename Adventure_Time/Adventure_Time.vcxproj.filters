@@ -194,7 +194,7 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files\InteractObject</Filter>
     </ClCompile>
-    <ClCompile Include="ArchieveManager.cpp">
+    <ClCompile Include="AchieveManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -334,7 +334,7 @@
     <ClInclude Include="LoadingState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="ArchieveManager.h">
+    <ClInclude Include="AchieveManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -378,6 +378,7 @@
     <Xml Include="texture.xml">
       <Filter>Resource Files\XML</Filter>
     </Xml>
+    <Xml Include="Achieve.xml" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">
@@ -386,5 +387,6 @@
     <Text Include="PortalData.txt">
       <Filter>Resource Files\XML</Filter>
     </Text>
+    <Text Include="list_of_map.txt" />
   </ItemGroup>
 </Project>

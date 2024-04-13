@@ -1,6 +1,6 @@
 #include "InteractManager.h"
-
 #include "StatusManager.h"
+#include "AchieveManager.h"
 InteractManager* InteractManager::s_pIntance = nullptr;
 
 bool InteractManager::takeInteract(InteractObject* obj, PlayerObject* player)
@@ -31,6 +31,7 @@ void InteractManager::savePoint(InteractObject* obj, PlayerObject* player)
 	{
 		*mSavedMapPos = *obj->getMapPosition();
 		*mSavedPlayerPos = *player->getPosition();
+		AchieveManager::getInstance()->takeAchieve(BONFIRE_LIT);
 	}
 }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<ACHIEVE>
+	<TEXTURES>
+		<texture filePath="assets/achieve/destroyed.png" textureID="boss_destroyed"/>
+		<texture filePath="assets/achieve/bonfire_lit.png" textureID="bonfire_lit"/>
+		<texture filePath="assets/achieve/revival.png" textureID="bonfire_revival"/>
+		<texture filePath="assets/achieve/death.png" textureID="character_death"/>
+	</TEXTURES>
+	<ACTIONS>
+		<action name="boss" textureID="boss_destroyed" numFrame="10" w="1280" h="768" speed="3"/>
+		<action name="bonfire" textureID="bonfire_lit" numFrame="10" w="1280" h="768" speed="2"/>
+		<action name="revival" textureID="bonfire_revival" numFrame="10" w="1280" h="768" speed="2"/>
+		<action name="death" textureID="character_death" numFrame="13" w="1280" h="768" speed="4"/>
+	</ACTIONS>
+</ACHIEVE>

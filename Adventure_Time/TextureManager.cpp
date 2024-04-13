@@ -48,7 +48,6 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 		}
 		SDL_FreeSurface(pSurface);
 	}
-	std::cout << fileName << ' ' << id << ' ' << pRenderer;
 }
 
 void TextureManager::drawSpritePicByCol(const std::string& id, const int& x, const int& y,

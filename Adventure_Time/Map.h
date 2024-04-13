@@ -42,6 +42,7 @@ public:
 	{
 		return mPlayer;
 	}
+	~Map();
 private:
 	std::vector<Layer*> mLayer;
 	//Tileset* mTileSet;
@@ -52,7 +53,6 @@ private:
 
 	std::vector<EnemyObject*> mEnemy;
 
-	Background* mBackGround;
 	void processMapAndPlayer();
 	void processEnemyAndPlayer();
 	void processEnemyAndMap();

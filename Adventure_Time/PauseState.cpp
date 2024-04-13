@@ -77,7 +77,7 @@ bool PauseState::startState()
 		obj->setCallback(mCallback[ite.callbackID]);
 		mObjects.push_back(obj);
 	}
-
+	SDL_ShowCursor(SDL_ENABLE);
 
 	return true;
 }
@@ -94,6 +94,7 @@ bool PauseState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
+	SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 

@@ -10,6 +10,7 @@
 #include "ObjectParser.h"
 #include "SoundManager.h"
 #include "StatusManager.h"
+#include "AchieveManager.h"
 const int HURT_MOVE_BACK = 2;
 const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
@@ -372,6 +373,8 @@ void PlayerObject::getHurt()
 		StatusManager::getInstance()->setScore(StatusManager::getInstance()->getScore() / 2);
 		current_sound = "dying" + std::to_string(rand() % 3);
 		SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
+
+		AchieveManager::getInstance()->takeAchieve(MAIN_DEATH);
 	}
 	else
 	{

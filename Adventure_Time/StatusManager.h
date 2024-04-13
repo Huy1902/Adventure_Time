@@ -52,17 +52,7 @@ private:
 	int HP;
 	PlayerObject* mPlayer;
 
-	SDL_Rect mSrcPoint;
-	SDL_Rect mDestPoint;
-	SDL_Rect mSrcHealth;
-	SDL_Rect mDestHealth;
-	Status mCurrentPlayer;
-	Status mMaxPlayer;
-
 	Animation* avatar;
-	Animation* archieve;
-	int mDecreasePoint;
-	int mLenPoint;
 
 	StatusManager();
 	~StatusManager();

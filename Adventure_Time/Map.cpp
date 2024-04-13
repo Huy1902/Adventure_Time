@@ -40,8 +40,25 @@ Map::Map(int width, int height, int tileSize) :
 	mMapWidth(width),
 	mMapHeight(height)
 {
-	mBackGround = new Background();
 	mPosition = new GameVector(0, 0);
+}
+Map::~Map()
+{
+	for (auto& ite : mLayer)
+	{
+		delete ite;
+	}
+	mLayer.clear();
+	for (auto& ite : mEnemy)
+	{
+		delete ite;
+	}
+	mEnemy.clear();
+	for (auto& ite : mInteractItem)
+	{
+		delete ite;
+	}
+	mInteractItem.clear();
 }
 
 void Map::setPlayer(PlayerObject* obj)
@@ -55,6 +72,7 @@ void Map::initGround()
 {
 	CollisionManager::getInstance()->setGround(mLayer.back());
 }
+
 
 void Map::processMapAndPlayer()
 {
@@ -287,7 +305,6 @@ void Map::updateMap()
 		ite->setPosition(*mPosition);
 		ite->updateLayer();
 	}
-	mBackGround->updateBackground();
 }
 
 void Map::renderMap()
@@ -296,7 +313,6 @@ void Map::renderMap()
 	{
 		return;
 	}
-	mBackGround->drawBackground();
 	//cout << mLayer.size() << '\n';
 	for (Layer* ite : mLayer)
 	{
@@ -316,12 +332,10 @@ void Map::renderMap()
 		ite->renderObject();
 	}
 	mPlayer->renderObject();
+	ArrowManager::getInstance()->renderArrow();
 	if (mCountTimeRenderBash > 0)
 	{
 		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY());
 		--mCountTimeRenderBash;
 	}
-
-
-	ArrowManager::getInstance()->renderArrow();
 }

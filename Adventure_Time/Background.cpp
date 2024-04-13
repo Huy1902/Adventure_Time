@@ -33,7 +33,6 @@ Background::Background()
 
 Background::~Background()
 {
-	TextureManager::getInstance()->clearFromTexture("background1");
 }
 
 void Background::drawBackground()

@@ -24,10 +24,10 @@ GameOverState::GameOverState()
 	mCallback.push_back(m_sGameOverToPlay);
 	mCallback.push_back(m_sGameOverToHome);
 
-	background = new Background();
 	TextureManager::getInstance()->load("assets/button/game_over_font.png", "game_over_font", GameManager::getInstance()->getRenderer());
 	font = new ObjectModel();
 	font->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("game_over_font", 0, 0, 1280, 768, 1)));
+	background = new Background();
 }
 
 GameOverState::~GameOverState()
@@ -77,8 +77,6 @@ bool GameOverState::startState()
 		obj->setCallback(mCallback[ite.callbackID]);
 		mObjects.push_back(obj);
 	}
-
-
 	return true;
 }
 bool GameOverState::exitState()
@@ -94,7 +92,6 @@ bool GameOverState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
-
 	return true;
 }
 

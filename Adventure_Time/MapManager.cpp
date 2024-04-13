@@ -1,11 +1,15 @@
 #include "MapManager.h"
+
+#include <fstream>
+
 #include "MapParser.h"
-
 #include "XmlTree.h"
-
 #include "InteractManager.h"
+#include "AchieveManager.h"
 
 MapManager* MapManager::s_pInstance = nullptr;
+
+using namespace std;
 
 bool MapManager::nextMap()
 {
@@ -50,16 +54,19 @@ void MapManager::revivePlayer()
 	delete mPlayer;
 	mPlayer = new PlayerObject;
 	mPlayer->setPosition(pos);
+	AchieveManager::getInstance()->takeAchieve(BONFIRE_REVIVAL);
 }
 
 MapManager::MapManager()
 {
-	Map* temp1 = MapParser::getInstance()->parseMap("map1.tmx");
-	Map* temp2 = MapParser::getInstance()->parseMap("map2.tmx");
-	Map* temp3 = MapParser::getInstance()->parseMap("map3.tmx");
-	mMap.push_back(temp1);
-	mMap.push_back(temp2);
-	mMap.push_back(temp3);
+	ifstream fin("list_of_map.txt");
+	string mapName;
+	while (fin.eof() == false)
+	{
+		fin >> mapName;
+		Map* temp = MapParser::getInstance()->parseMap(mapName);
+		mMap.push_back(temp);
+	}
 
 	XmlTree tree;
 	tree.parseXmlFile("switch_map_driven.xml");
@@ -101,6 +108,7 @@ MapManager::MapManager()
 
 MapManager::~MapManager()
 {
+	delete mPlayer;
 	mMap.clear();
 }
 

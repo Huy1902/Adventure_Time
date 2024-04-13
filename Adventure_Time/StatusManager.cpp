@@ -60,18 +60,11 @@ void StatusManager::renderBossStatus(EnemyObject* mBoss)
 	temp = mBars["boss_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
 	FontManager::getInstance()->drawText(mBoss->getNameBoss().c_str(), 215, 698);
-
-	if (mBoss->isAlive() == false)
-	{
-		archieve->update();
-		archieve->draw();
-	}
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)
 {
 	mPlayer = obj;
-	mMaxPlayer = *obj->getStatus();
 }
 
 bool StatusManager::whenPlayerAttackEnemy(EnemyObject* obj)
@@ -96,7 +89,8 @@ bool StatusManager::whenEnemyAttackPlayer(EnemyObject* obj)
 
 void StatusManager::renderOnGamePause()
 {
-	mCurrentPlayer = *mPlayer->getStatus();
+	Status mCurrentPlayer = *mPlayer->getStatus();
+	Status mMaxPlayer = *mPlayer->getMaxStatus();
 
 	string hp = to_string(mCurrentPlayer.HP);
 	hp += " / ";
@@ -160,24 +154,25 @@ StatusManager::StatusManager()
 
 	//mSrcPoint = { 0, 0, mBars["health_point"].w, mBars["health_point"].h}; // 0 0 w h
 	//mDestPoint = { mBars["health_point"].x, mBars["health_point"].y, mBars["health_point"].w, mBars["health_point"].h }; // x y w h
-	mSrcHealth = { 0, 0, mBars["health_bar"].w, mBars["health_bar"] .h}; // 0 0 w h
-	mDestHealth = { mBars["health_bar"].x, mBars["health_bar"].y, mBars["health_bar"].w, mBars["health_bar"].h }; //x y w h
+	//mSrcHealth = { 0, 0, mBars["health_bar"].w, mBars["health_bar"] .h}; // 0 0 w h
+	//mDestHealth = { mBars["health_bar"].x, mBars["health_bar"].y, mBars["health_bar"].w, mBars["health_bar"].h }; //x y w h
 
-	mLenPoint = mSrcPoint.w;
+	//mLenPoint = mSrcPoint.w;
 
 	avatar = new Animation();
 	avatar->changeAnim("run2", 7, SDL_FLIP_NONE, 100, 64, 2);
 	avatar->setPosition(GameVector{ 380, 225 });;
-
-	archieve = new Animation();
-	archieve->changeAnim("boss_destroyed", 10, SDL_FLIP_NONE, 1280, 768, 4);
-	archieve->setPosition(GameVector(0, 0));
 }
 
 StatusManager::~StatusManager()
 {
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->clearFromTexture(ite.textureID);
+	}
+	mTextures.clear();
+	mBars.clear();
 	delete avatar;
-	delete archieve;
 }
 
 double StatusManager::getDMGtaken(const int& luck, const int& atk, const int& def)

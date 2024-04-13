@@ -9,12 +9,9 @@
 #include "PauseState.h"
 #include "GameOverState.h"
 
-#include "MapParser.h"
-
-#include "ButtonModel.h"
-
 #include "InteractManager.h"
 #include "MapManager.h"
+#include "AchieveManager.h"
 
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
@@ -34,6 +31,7 @@ void PlayingState::processData()
 	{
 		m_sPlayingToPause();
 	}
+	AchieveManager::getInstance()->updateAchieve();
 	if (m_bSetupRevive == true)
 	{
 		mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
@@ -57,17 +55,21 @@ void PlayingState::processData()
 	}
 
 	mMap->updateMap();
+	mBackground->updateBackground();
 	StatusManager::getInstance()->updatePlayerStatus();
 }
+
 void PlayingState::renderState()
 {
-	if (m_bSetupDying == true)
-	{
-		MapManager::getInstance()->getPlayer()->renderObject();
-		return;
-	}
+	mBackground->drawBackground();
+	//if (m_bSetupDying == true)
+	//{
+	//	MapManager::getInstance()->getPlayer()->renderObject();
+	//	return;
+	//}
 	mMap->renderMap();
 	StatusManager::getInstance()->renderPlayerStatus();
+	AchieveManager::getInstance()->renderAchieve();
 }
 
 bool PlayingState::startState()
@@ -77,10 +79,6 @@ bool PlayingState::startState()
 	mMap->setPlayer(MapManager::getInstance()->getPlayer());
 
 	StatusManager::getInstance()->setPlayer(MapManager::getInstance()->getPlayer());
-	//if (MapManager::getInstance()->getPlayer()->getPosition()->getX() > 1000)
-	//{
-	//	std::cout << MapManager::getInstance()->getPlayer()->getPosition()->getX() << '\n';
-	//}
 	mMap->setPosition(*InteractManager::getInstance()->getSavedMapPos());
 	MapManager::getInstance()->getPlayer()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
 	MapManager::getInstance()->getPlayer()->getAnimation()->setPosition(*InteractManager::getInstance()->getSavedPlayerPos());
@@ -88,12 +86,17 @@ bool PlayingState::startState()
 
 	m_bSetupRevive = false;
 
+	mBackground = new Background();
+
+	SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 bool PlayingState::exitState()
 {
+	SDL_ShowCursor(SDL_ENABLE);
 	mTextureID.clear();
 	mObjects.clear();
+	delete mBackground;
 	//delete mMap;
 	return true;
 }

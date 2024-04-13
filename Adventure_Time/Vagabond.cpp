@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include "GameManager.h"
 #include "CollisionManager.h"
+#include "AchieveManager.h"
 
 #include "ObjectParser.h"
 
@@ -29,6 +30,7 @@ void Vagabond::getHurt()
 	{
 		mStatus.isAlive = false;
 		mPosition->setX(mPosition->getX() + animation->getWidth() / 2 - mActions["dying"].w / 2);
+		AchieveManager::getInstance()->takeAchieve(BOSS_DESTROYED);
 		/*animation->setPosition({ m});*/
 	}
 }

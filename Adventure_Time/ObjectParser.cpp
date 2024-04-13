@@ -2,23 +2,6 @@
 #include <iostream>
 
 ObjectParser* ObjectParser::s_pInstance = nullptr;
-struct Info
-{
-	int w = 0;
-	int h = 0;
-	int numFrames = 0;
-	int speed = 1;
-	std::string textureID = "";
-	int callbackID = -1;
-	int x = 0;
-	int y = 0;
-};
-
-struct Texture
-{
-	std::string filePath = "";
-	std::string textureID = "";
-};
 
 struct Bar
 {
@@ -39,9 +22,23 @@ struct SFX
 	std::string sfxID;
 	int channel;
 };
+struct Info
+{
+	int w = 0;
+	int h = 0;
+	int numFrames = 0;
+	int speed = 1;
+	std::string textureID = "";
+	int callbackID = -1;
+	int x = 0;
+	int y = 0;
+};
 
-
-
+struct Texture
+{
+	std::string filePath = "";
+	std::string textureID = "";
+};
 void ObjectParser::parserTexture(const std::string& filePath, std::vector<Texture>& textureVector)
 {
 	XmlTree tree;
