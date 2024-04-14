@@ -46,6 +46,7 @@ void MapManager::changeMapFromTo(int from, int to)
 			InteractManager::getInstance()->setSavedPos(GameVector(ite.map_x, ite.map_y), GameVector( ite.x - ite.map_x, ite.y - ite.map_y));
 		}
 	}
+	AchieveManager::getInstance()->takeAchieve(NEW_AREA);
 }
 
 void MapManager::revivePlayer()

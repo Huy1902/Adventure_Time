@@ -87,9 +87,6 @@ bool PlayingState::startState()
 	m_bSetupRevive = false;
 
 	mBackground = new Background();
-
-	AchieveManager::getInstance()->takeAchieve(NEW_AREA);
-	//SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 bool PlayingState::exitState()

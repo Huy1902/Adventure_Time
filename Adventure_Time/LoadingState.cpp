@@ -7,15 +7,16 @@
 #include "PlayingState.h"
 #include "GameManager.h"
 #include "Cursor.h"
-
+#include "Tips.h"
 const std::string LoadingState::m_sGameLoading = "GAME_LOADING";
 
-
+ 
 
 LoadingState::LoadingState()
 {
 	TextureManager::getInstance()->load("assets/background4.png", "background4", GameManager::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("assets/loading.png", "loading_anime", GameManager::getInstance()->getRenderer());
+	Tips::getInstance()->loadTip();
 	load = new Animation();
 	load->changeAnim("loading_anime", 14, SDL_FLIP_NONE, 172, 64, 2);
 	load->setPosition(GameVector{ 1100, 700 });
@@ -26,6 +27,7 @@ LoadingState::~LoadingState()
 {
 	TextureManager::getInstance()->clearFromTexture("background4");
 	TextureManager::getInstance()->clearFromTexture("loading_anime");
+	Tips::getInstance()->exitTip();
 	delete load;
 }
 
@@ -43,6 +45,7 @@ void LoadingState::renderState()
 {
 	TextureManager::getInstance()->drawSinglePic("background4", 0, 0, 1280, 768, GameManager::getInstance()->getRenderer());
 	load->draw();
+	Tips::getInstance()->renderTip(50, 700);
 	Cursor::getInstance()->renderLoading();
 }
 
@@ -75,6 +78,5 @@ bool LoadingState::exitState()
 	//}
 	//mTextureID.clear();
 	//mObjects.clear();
-
 	return true;
 }

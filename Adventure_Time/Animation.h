@@ -11,6 +11,10 @@ public:
 	void draw();
 	void changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip);
 	void changeAnim(const std::string& textureID, const int& numFrame, SDL_RendererFlip flip, const int& w, const int&h, const int & speed);
+	void resetIndexFrame()
+	{
+		mIndexFrame = 0;
+	}
 
 	void setPosition(const GameVector& position)
 	{

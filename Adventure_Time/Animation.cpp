@@ -42,7 +42,6 @@ void Animation::changeAnim(const std::string& textureID, const int& numFrame, SD
 		mH = h;
 	}
 	mFlip = flip;
-
 }
 
 Animation::Animation()

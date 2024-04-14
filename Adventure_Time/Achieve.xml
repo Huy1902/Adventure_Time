@@ -12,6 +12,6 @@
 		<action name="bonfire" textureID="bonfire_lit" numFrame="10" w="1280" h="768" speed="2"/>
 		<action name="revival" textureID="bonfire_revival" numFrame="10" w="1280" h="768" speed="2"/>
 		<action name="death" textureID="character_death" numFrame="13" w="1280" h="768" speed="4"/>
-		<action name="new_area" textureID="new_area" numFrame="7" w="1280" h="768" speed="4"/>
+		<action name="new_area" textureID="new_area" numFrame="7" w="1280" h="768" speed="3"/>
 	</ACTIONS>
 </ACHIEVE>
