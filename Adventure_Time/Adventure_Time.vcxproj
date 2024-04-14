@@ -181,6 +181,7 @@
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tileset.cpp" />
+    <ClCompile Include="Tips.cpp" />
     <ClCompile Include="Vagabond.cpp" />
     <ClCompile Include="XmlTree.cpp" />
   </ItemGroup>
@@ -230,6 +231,7 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tileset.h" />
+    <ClInclude Include="Tips.h" />
     <ClInclude Include="Vagabond.h" />
     <ClInclude Include="XmlTree.h" />
   </ItemGroup>

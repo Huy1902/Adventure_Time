@@ -12,14 +12,13 @@ Background::Background()
 	srand(static_cast<unsigned int>(time(NULL)) );
 
 	int i = rand() % 2;
+	mID = "background" + std::to_string(i);
 	if (i == 0)
 	{
-		TextureManager::getInstance()->load("assets/background1.png", "background1", GameManager::getInstance()->getRenderer());
 		SoundManager::getInstance()->playMusic("home_theme", -1);
 	}
 	else
 	{
-		TextureManager::getInstance()->load("assets/background3.png", "background1", GameManager::getInstance()->getRenderer());
 		SoundManager::getInstance()->playMusic("night_theme", -1);
 	}
 
@@ -38,8 +37,8 @@ Background::~Background()
 void Background::drawBackground()
 {
 
-	SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("background1"), &mSrc1, &mDest1);
-	SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture("background1"), &mSrc2, &mDest2);
+	SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture(mID), &mSrc1, &mDest1);
+	SDL_RenderCopy(GameManager::getInstance()->getRenderer(), TextureManager::getInstance()->getTexture(mID), &mSrc2, &mDest2);
 }
 
 void Background::updateBackground()

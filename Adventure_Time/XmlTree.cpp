@@ -183,6 +183,7 @@ void travel(XmlNode* parent)
 	{
 		travel(ite);
 	}
+	parent->child.clear();
 	delete parent;
 }
 

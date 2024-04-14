@@ -25,5 +25,7 @@
 		<texture filePath="assets/archer/attack.png" textureID="archer_attack"/>
 		<texture filePath="assets/archer/fall.png" textureID="archer_fall"/>
 		<texture filePath="assets/archer/death.png" textureID="archer_death"/>
+		<texture filePath="assets/background1.png" textureID="background0"/>
+		<texture filePath="assets/background3.png" textureID="background1"/>
 	</TEXTURES>
 </LOADER>

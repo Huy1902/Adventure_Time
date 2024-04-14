@@ -1,6 +1,8 @@
-#pragma once
+#ifndef BACKGROUND_H_
+#define BACKGROUND_H_
 
 #include <SDL.h>
+#include <string>
 class Background
 {
 public:
@@ -20,6 +22,9 @@ private:
     int mWindowsHeight;
     int mScrollSpeed;
     int mCountTime;
-
+    std::string mID;
+    
     void reset();
 };
+
+#endif // BACKGROUND_H_

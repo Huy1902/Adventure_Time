@@ -19,6 +19,7 @@ public:
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
+	virtual ~ButtonModel();
 
 private:
 	enum button_state

@@ -11,6 +11,10 @@ ButtonModel::ButtonModel() :
 	mIndexFrames = MOUSE_OUT;
 }
 
+ButtonModel::~ButtonModel()
+{
+}
+
 void ButtonModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mCallbackID = Info->getCallbackID();
@@ -52,3 +56,5 @@ void ButtonModel::clearObject()
 {
 	ObjectModel::clearObject();
 }
+
+
