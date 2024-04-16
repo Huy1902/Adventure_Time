@@ -16,6 +16,7 @@ InputManager::~InputManager()
 
 void InputManager::takeInput()
 {
+	m_bPressKey = false;
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -23,6 +24,7 @@ void InputManager::takeInput()
 		{
 		case SDL_KEYDOWN:
 			isKeyDown();
+			m_bPressKey = true;
 			break;
 		case SDL_KEYUP:
 			isKeyUp();

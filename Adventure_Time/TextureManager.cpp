@@ -28,7 +28,7 @@ TextureManager::~TextureManager()
 
 void TextureManager::load(const std::string& fileName, const std::string& id, SDL_Renderer* pRenderer)
 {
-	cout << "Load surface...\n";
+	//cout << "Load surface...\n";
 	SDL_Surface* pSurface = IMG_Load(fileName.c_str());
 	if (pSurface == NULL)
 	{
@@ -36,7 +36,7 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 	}
 	else
 	{
-		cout << "Create texture...\n";
+		//cout << "Create texture...\n";
 		SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
 		if (pTexture == NULL)
 		{

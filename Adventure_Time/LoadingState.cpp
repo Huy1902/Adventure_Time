@@ -67,16 +67,5 @@ bool LoadingState::startState()
 }
 bool LoadingState::exitState()
 {
-	//for (size_t i = 0; i < mObjects.size(); ++i)
-	//{
-	//	mObjects[i]->clearObject();
-	//	delete mObjects[i];
-	//}
-	//for (size_t i = 0; i < mTexture.size(); ++i)
-	//{
-	//	TextureManager::getInstance()->clearFromTexture(mTexture[i].textureID);
-	//}
-	//mTextureID.clear();
-	//mObjects.clear();
 	return true;
 }

@@ -25,7 +25,10 @@ public:
 	GameVector* getMousePosition() const { return mMousePosition; }
 
 	bool keyDown(SDL_Scancode key);
-
+	bool isPressAnyKey()
+	{
+		return m_bPressKey;
+	}
 	static InputManager* getInstance()
 	{
 		if (s_pInstance == nullptr)
@@ -42,6 +45,8 @@ private:
 	std::vector<bool> mMouseButton;
 	GameVector* mMousePosition;
 	const Uint8* mKeyButton;
+
+	bool m_bPressKey = false;
 
 	void isKeyDown();
 	void isKeyUp();

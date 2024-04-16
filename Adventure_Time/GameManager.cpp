@@ -16,7 +16,7 @@
 #include "TextureLoader.h"
 #include "EnemyObject.h"
 #include "PlayerObject.h"
-#include "HomeState.h"
+#include "IntroState.h"
 #include "InputManager.h"
 #include "SoundManager.h"
 #include "FontManager.h"
@@ -102,7 +102,7 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 
 
 	mFSM = new FiniteStateMachine();
-	mFSM->pushState(new HomeState());
+	mFSM->pushState(new IntroState());
 
 	m_bRunning = true;
 	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 12, m_pRenderer);

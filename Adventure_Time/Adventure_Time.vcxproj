@@ -164,6 +164,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InteractManager.cpp" />
     <ClCompile Include="InteractObject.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LoadingState.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="Tips.cpp" />
     <ClCompile Include="Vagabond.cpp" />
+    <ClCompile Include="VideoPlayer.cpp" />
     <ClCompile Include="XmlTree.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +217,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InteractManager.h" />
     <ClInclude Include="InteractObject.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LoadingState.h" />
     <ClInclude Include="Map.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="Tips.h" />
     <ClInclude Include="Vagabond.h" />
+    <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="XmlTree.h" />
   </ItemGroup>
   <ItemGroup>
