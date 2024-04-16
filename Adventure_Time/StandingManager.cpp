@@ -8,7 +8,6 @@ StandingManager* StandingManager::s_pInstance = nullptr;
 
 void StandingManager::resetStanding()
 {
-	mStanding.clear();
 	vector<int> output = getStandingPrivate();
 	ofstream fout("score.txt");
 	for (int i = 0; i < output.size(); ++i)
@@ -46,6 +45,7 @@ void StandingManager::takeStanding(const string& fileName)
 	while (fin >> i)
 	{
 		mStanding.insert(i);
+		cout << i << '\n';
 	}
 	fin.close();
 }
@@ -53,7 +53,6 @@ void StandingManager::takeStanding(const string& fileName)
 vector<int> StandingManager::getStandingPrivate()
 {
 	vector<int> ans;
-	set<int>::iterator ite = mStanding.begin();
 	if (mStanding.size() < 3)
 	{
 		for (const int& ite : mStanding)
@@ -68,12 +67,13 @@ vector<int> StandingManager::getStandingPrivate()
 	}
 	else
 	{
+		set<int>::iterator ite = mStanding.end();
+		--ite;
 		while (ans.size() < 3)
 		{
 			ans.push_back(*ite);
-			++ite;
+			--ite;
 		}
-		reverse(ans.begin(), ans.end());
 	}
 	return ans;
 }
