@@ -194,13 +194,19 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files\InteractObject</Filter>
     </ClCompile>
-    <ClCompile Include="AchieveManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tips.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AchieveManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -349,6 +355,12 @@
     <ClInclude Include="Tips.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="droid_zapper.xml">
@@ -391,6 +403,7 @@
       <Filter>Resource Files\XML</Filter>
     </Xml>
     <Xml Include="Achieve.xml" />
+    <Xml Include="score_state.xml" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">
@@ -400,5 +413,7 @@
       <Filter>Resource Files\XML</Filter>
     </Text>
     <Text Include="list_of_map.txt" />
+    <Text Include="score.txt" />
+    <Text Include="score_buffer.txt" />
   </ItemGroup>
 </Project>

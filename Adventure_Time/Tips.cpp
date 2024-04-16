@@ -33,7 +33,7 @@ void Tips::exitTip()
 
 void Tips::renderTip(int x, int y)
 {
-	FontManager::getInstance()->drawText(mTip.c_str(), x, y);
+	FontManager::getInstance()->drawText(mTip.c_str(), x, y, 24);
 	TextureManager::getInstance()->drawSinglePic("tip", x - 30, y, 25, 25, GameManager::getInstance()->getRenderer());
 }
 Tips* Tips::s_pInstance = nullptr;

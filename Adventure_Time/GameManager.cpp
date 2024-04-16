@@ -105,8 +105,12 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	mFSM->pushState(new HomeState());
 
 	m_bRunning = true;
-
+	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 12, m_pRenderer);
+	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 18, m_pRenderer);
 	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 24, m_pRenderer);
+	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 36, m_pRenderer);
+	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 48, m_pRenderer);
+
 	SoundManager::getInstance()->loadSound("assets/music/Twilight_Serenity.mp3", "home_theme", MUSIC_SOUND);
 	SoundManager::getInstance()->loadSound("assets/music/Dream_Aria.mp3", "night_theme", MUSIC_SOUND);
 	SoundManager::getInstance()->loadSound("assets/music/Knights_of_Favonius.mp3", "play_theme", MUSIC_SOUND);

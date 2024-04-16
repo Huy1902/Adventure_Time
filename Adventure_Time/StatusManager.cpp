@@ -48,7 +48,7 @@ void StatusManager::renderPlayerStatus()
 		score = "0" + score;
 	}
 	score = "Score:" + score;
-	FontManager::getInstance()->drawText(score.c_str(), temp.x + 47, temp.y + 9);
+	FontManager::getInstance()->drawText(score.c_str(), temp.x + 47, temp.y + 9, 24);
 
 }
 void StatusManager::renderBossStatus(EnemyObject* mBoss)
@@ -59,7 +59,7 @@ void StatusManager::renderBossStatus(EnemyObject* mBoss)
 
 	temp = mBars["boss_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
-	FontManager::getInstance()->drawText(mBoss->getNameBoss().c_str(), 215, 698);
+	FontManager::getInstance()->drawText(mBoss->getNameBoss().c_str(), 215, 698, 24);
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)
@@ -95,37 +95,37 @@ void StatusManager::renderOnGamePause()
 	string hp = to_string(mCurrentPlayer.HP);
 	hp += " / ";
 	hp += to_string(mMaxPlayer.HP);
-	FontManager::getInstance()->drawText(hp.c_str(), 500, 330);
+	FontManager::getInstance()->drawText(hp.c_str(), 500, 330, 24);
 
 	string sta = to_string(mCurrentPlayer.STA);
 	sta += " / ";
 	sta += to_string(mMaxPlayer.STA);
-	FontManager::getInstance()->drawText(sta.c_str(), 500, 397);
+	FontManager::getInstance()->drawText(sta.c_str(), 500, 397, 24);
 
 	string atk = to_string(mCurrentPlayer.ATK);
 	atk += " / ";
 	atk += to_string(mMaxPlayer.ATK);
-	FontManager::getInstance()->drawText(atk.c_str(), 500, 467);
+	FontManager::getInstance()->drawText(atk.c_str(), 500, 467, 24);
 
 	string def = to_string(mCurrentPlayer.DEF);
 	def += " / ";
 	def += to_string(mMaxPlayer.DEF);
-	FontManager::getInstance()->drawText(def.c_str(), 835, 330);
+	FontManager::getInstance()->drawText(def.c_str(), 835, 330, 24);
 
 	string iq = to_string(mCurrentPlayer.IQ);
 	iq += " / ";
 	iq += to_string(mMaxPlayer.IQ);
-	FontManager::getInstance()->drawText(iq.c_str(), 835, 397);
+	FontManager::getInstance()->drawText(iq.c_str(), 835, 397, 24);
 
 	string luck = to_string(mCurrentPlayer.LUCK);
 	luck += " / ";
 	luck += to_string(mMaxPlayer.LUCK);
-	FontManager::getInstance()->drawText(luck.c_str(), 835, 467);
+	FontManager::getInstance()->drawText(luck.c_str(), 835, 467, 24);
 
 	string exp = to_string(mCurrentPlayer.EXP);
 	exp += " / ";
 	exp += to_string(mMaxPlayer.EXP);
-	FontManager::getInstance()->drawText(hp.c_str(), 630, 206);
+	FontManager::getInstance()->drawText(hp.c_str(), 630, 206, 24);
 	avatar->update();
 	avatar->draw();
 }

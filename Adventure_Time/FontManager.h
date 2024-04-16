@@ -4,6 +4,9 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
+
+
+#include <map>
 class FontManager
 {
 public:
@@ -20,13 +23,14 @@ public:
 	void loadText(const std::string& fileName, int size, SDL_Renderer* pRenderer);
 
 
-	void drawText(const char* text, int x, int y);
+	void drawText(const char* text, int x, int y, int size = 24);
 private:
 	static FontManager* s_pInstance;
 
 	SDL_Color mColor;
-	TTF_Font* mFont;
 	SDL_Renderer* mRenderer;
+
+	std::map<int, TTF_Font*> mFontMap;
 
 	FontManager();
 	~FontManager();

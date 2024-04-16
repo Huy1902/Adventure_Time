@@ -71,7 +71,7 @@ void Portal::renderObject() const
 
 	if (m_bAbleToInteract == true)
 	{
-		FontManager::getInstance()->drawText("Press F to Interact", x, y);
+		FontManager::getInstance()->drawText("Press F to Interact", x, y, 24);
 	}
 }
 

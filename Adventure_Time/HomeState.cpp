@@ -1,18 +1,24 @@
 #include "HomeState.h"
 
+#include <fstream>
+
 #include "GameManager.h"
 #include "ObjectModel.h"
 #include "TextureManager.h"
 #include "ButtonModel.h"
 #include "LoadingState.h"
+#include "ScoreState.h"
 
 #include "ObjectParser.h"
 
 #include "SoundManager.h"
+#include "StatusManager.h"
 #include "Cursor.h"
 
+#include "StandingManager.h"
 
-const std::string  HomeState::m_sHomeID = "HOME";
+using namespace std;
+const string  HomeState::m_sHomeID = "HOME";
 
 void HomeState::m_sHomeToPlay()
 {
@@ -22,12 +28,13 @@ void HomeState::m_sHomeToPlay()
 
 void HomeState::m_sExitHome()
 {
+	StandingManager::getInstance()->resetStanding();
 	GameManager::getInstance()->quitGame();
 }
 
 void HomeState::m_sHomeToScore()
 {
-	std::cout << "enter Score\n";
+	GameManager::getInstance()->getFSM()->changeState(new ScoreState());
 }
 
 HomeState::HomeState()
@@ -39,7 +46,7 @@ HomeState::HomeState()
 	background = new Background();
 	TextureManager::getInstance()->load("assets/button/menu_font.png", "font", GameManager::getInstance()->getRenderer());
 	font = new ObjectModel();
-	font->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader("font", 0, 0, 1280, 768, 1)));
+	font->loadTexture(unique_ptr<TextureLoader>(new TextureLoader("font", 0, 0, 1280, 768, 1)));
 }
 
 HomeState::~HomeState()
@@ -85,12 +92,10 @@ bool HomeState::startState()
 	for (const auto& ite : mButton)
 	{
 		ButtonModel* obj = new ButtonModel();
-		obj->loadTexture(std::unique_ptr<TextureLoader>(new TextureLoader(ite.textureID, ite.x, ite.y, ite.w, ite.h, ite.numFrames, ite.callbackID)));
+		obj->loadTexture(unique_ptr<TextureLoader>(new TextureLoader(ite.textureID, ite.x, ite.y, ite.w, ite.h, ite.numFrames, ite.callbackID)));
 		obj->setCallback(mCallback[ite.callbackID]);
 		mObjects.push_back(obj);
 	}
-
-
 	return true;
 }
 bool HomeState::exitState()
@@ -106,6 +111,13 @@ bool HomeState::exitState()
 	}
 	mTextureID.clear();
 	mObjects.clear();
+	mButton.clear();
+
+	ofstream fout("score_buffer.txt");
+
+	fout << StatusManager::getInstance()->getScore() << '\n';
+
+	fout.close();
 	delete font;
 	delete background;
 	return true;

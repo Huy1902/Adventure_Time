@@ -176,7 +176,9 @@
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="ScoreState.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="StandingManager.cpp" />
     <ClCompile Include="StatusManager.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -226,7 +228,9 @@
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="ScoreState.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="StandingManager.h" />
     <ClInclude Include="StatusManager.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureManager.h" />
@@ -239,6 +243,8 @@
     <Text Include="list_of_map.txt" />
     <Text Include="map1.txt" />
     <Text Include="PortalData.txt" />
+    <Text Include="score.txt" />
+    <Text Include="score_buffer.txt" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Achieve.xml" />
@@ -251,6 +257,7 @@
     <Xml Include="home_state.xml" />
     <Xml Include="MainCharacter.xml" />
     <Xml Include="pause_state.xml" />
+    <Xml Include="score_state.xml" />
     <Xml Include="sound.xml" />
     <Xml Include="switch_map_driven.xml" />
     <Xml Include="texture.xml" />

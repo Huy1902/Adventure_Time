@@ -335,7 +335,7 @@ void Map::renderMap()
 	ArrowManager::getInstance()->renderArrow();
 	if (mCountTimeRenderBash > 0)
 	{
-		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY());
+		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY(), 24);
 		--mCountTimeRenderBash;
 	}
 }

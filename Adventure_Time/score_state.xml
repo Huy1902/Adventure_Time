@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<STATES>
+	<TEXTURES>
+		<texture filePath="assets/button/return_button.png" textureID="return_button"/>
+	</TEXTURES>
+	<BUTTONS>
+		<action name="return_button" textureID="return_button" numFrame="2" w="183" h="171" callbackID="0" x="1085" y="590"/>
+	</BUTTONS>
+</STATES>

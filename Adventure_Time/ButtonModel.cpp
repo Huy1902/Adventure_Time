@@ -13,6 +13,7 @@ ButtonModel::ButtonModel() :
 
 ButtonModel::~ButtonModel()
 {
+
 }
 
 void ButtonModel::loadTexture(std::unique_ptr<TextureLoader> Info)

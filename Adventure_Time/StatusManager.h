@@ -62,7 +62,7 @@ private:
 	std::vector<Texture> mTextures;
 	std::map<std::string, Bar> mBars;
 
-	int mScore;
+	int mScore = 0;
 };
 
 #endif //STATUSMANAGER_H_
