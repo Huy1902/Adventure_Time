@@ -101,8 +101,6 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	cout << "Load image...\n";
 
 
-	mFSM = new FiniteStateMachine();
-	mFSM->pushState(new IntroState());
 
 	m_bRunning = true;
 	FontManager::getInstance()->loadText("assets/font/PixeloidMono.ttf", 12, m_pRenderer);
@@ -115,6 +113,7 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	SoundManager::getInstance()->loadSound("assets/music/Dream_Aria.mp3", "night_theme", MUSIC_SOUND);
 	SoundManager::getInstance()->loadSound("assets/music/Knights_of_Favonius.mp3", "play_theme", MUSIC_SOUND);
 	SoundManager::getInstance()->loadSound("assets/music/Make_Haste_Partner.mp3", "fight_theme", MUSIC_SOUND);
+	SoundManager::getInstance()->loadSound("assets/music/Intro.mp3", "intro", MUSIC_SOUND);
 	SoundManager::getInstance()->loadSound("assets/sfx/join_game.wav", "play_button", SOUND_EFFECT);
 	SoundManager::getInstance()->loadSound("assets/sfx/click_sfx.wav", "click_button", SOUND_EFFECT);
 
@@ -133,8 +132,10 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	{
 		TextureManager::getInstance()->load(ite.filePath, ite.textureID, m_pRenderer);
 	}
-
 	SDL_ShowCursor(SDL_DISABLE);
+
+	mFSM = new FiniteStateMachine();
+	mFSM->pushState(new IntroState());
 }
 
 void GameManager::takeInput()

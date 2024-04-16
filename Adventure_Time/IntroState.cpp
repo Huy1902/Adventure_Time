@@ -4,6 +4,8 @@
 #include "VideoPlayer.h"
 #include "GameManager.h"
 #include "HomeState.h"
+#include "FontManager.h"
+#include "Cursor.h"
 const std::string IntroState::m_sGameLoading = "INTRO";
 
 
@@ -18,7 +20,7 @@ IntroState::~IntroState()
 
 void IntroState::processData()
 {
-	if (InputManager::getInstance()->isPressAnyKey())
+	if (InputManager::getInstance()->isPressAnyKey() == true || InputManager::getInstance()->getMouseButton(LEFT) == true)
 	{
 		fromIntroToHome();
 	}
@@ -27,6 +29,7 @@ void IntroState::processData()
 void IntroState::renderState()
 {
 	VideoPlayer::getInstance()->renderFrame();
+	FontManager::getInstance()->drawText("Press any key to continue", 440, 690, 24);
 }
 
 bool IntroState::startState()
@@ -43,7 +46,8 @@ bool IntroState::startState()
 	//	obj->setCallback(mCallback[ite.callbackID]);
 	//	mObjects.push_back(obj);
 	//}
-	VideoPlayer::getInstance()->setFilePath("assets/Intro/intro", 349);
+	VideoPlayer::getInstance()->setFilePath("assets/Intro/intro", 1049, "intro");
+	Cursor::getInstance()->render();
 	return true;
 }
 bool IntroState::exitState()

@@ -23,10 +23,9 @@ public:
 
 	bool loadSound(std::string  fileName, std::string  id, sound_type type);
 
-	void playMusic(std::string  id, int loop);
+	void playMusic(const std::string& id, int loop);
 
-	void playSound(std::string id, int loop, int channel);
-
+	void playSound(const std::string& id, int loop, int channel);
 
 private:
 	static SoundManager* s_pInstance;
