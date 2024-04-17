@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimModel.cpp" />
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="AchieveManager.cpp" />
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="ArrowManager.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BarrerKnight.cpp" />
+    <ClCompile Include="BaseModel.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="BonFire.cpp" />
     <ClCompile Include="ButtonModel.cpp" />
@@ -173,11 +175,13 @@
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectParser.cpp" />
+    <ClCompile Include="ObjectSingleTexture.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="ScoreState.cpp" />
+    <ClCompile Include="Scourge.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpellObject.cpp" />
     <ClCompile Include="StandingManager.cpp" />
@@ -192,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimModel.h" />
     <ClInclude Include="Archer.h" />
     <ClInclude Include="AchieveManager.h" />
     <ClInclude Include="Arrow.h" />
@@ -199,6 +204,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BarrerKnight.h" />
     <ClInclude Include="BaseGenerator.h" />
+    <ClInclude Include="BaseModel.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="BonFire.h" />
     <ClInclude Include="ButtonModel.h" />
@@ -227,12 +233,14 @@
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="ObjectParser.h" />
+    <ClInclude Include="ObjectSingleTexture.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="ScoreState.h" />
+    <ClInclude Include="Scourge.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpellObject.h" />
     <ClInclude Include="StandingManager.h" />

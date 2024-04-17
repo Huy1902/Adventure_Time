@@ -10,6 +10,7 @@ EnemyObject::EnemyObject()
 {
 	mCharHeight = 0;
 	mAttackRange = 0;
+	mMapPosition = new GameVector();
 }
 
 EnemyObject::~EnemyObject()
@@ -18,23 +19,14 @@ EnemyObject::~EnemyObject()
 	delete mMapPosition;
 }
 
-void EnemyObject::loadTexture(std::unique_ptr<TextureLoader> Info)
-{
-	ObjectModel::loadTexture(std::move(Info));
-}
 
 void EnemyObject::processData()
 {
-	++mIndexFrames;
-	if (mIndexFrames == mNumFrames)
-	{
-		mIndexFrames = 0;
-	} 
 }
 
 void EnemyObject::renderObject() const
 {
-	ObjectModel::renderObject();
+	AnimModel::renderObject();
 }
 
 void EnemyObject::clearObject()

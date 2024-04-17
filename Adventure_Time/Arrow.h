@@ -26,7 +26,7 @@ public:
 	}
 	virtual Animation* getAnimation()
 	{
-		return animation;
+		return mAnimation;
 	}
 	virtual int getDamage() const
 	{

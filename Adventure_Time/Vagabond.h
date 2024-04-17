@@ -26,7 +26,7 @@ public:
 	virtual bool isAttack() const;
 	virtual Animation* getAnimation()
 	{
-		return animation;
+		return mAnimation;
 	}
 	virtual int getDamage() const
 	{

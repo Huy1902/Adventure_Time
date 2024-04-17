@@ -24,7 +24,7 @@ public:
 	}
 	virtual bool isAttack() const
 	{
-		//if (mCurrentAction == ATTACK1 && (animation->getIndexFrame() == 3 || animation->getIndexFrame() == 6))
+		//if (mCurrentAction == ATTACK1 && (mAnimation->getIndexFrame() == 3 || mAnimation->getIndexFrame() == 6))
 		//{
 		//	return true;
 		//}
@@ -32,7 +32,7 @@ public:
 	}
 	virtual Animation* getAnimation()
 	{
-		return animation;
+		return mAnimation;
 	}
 	virtual int getDamage() const
 	{

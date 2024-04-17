@@ -20,8 +20,8 @@ void BarrerKnight::getHurt()
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
-		mPosition->setX(mPosition->getX() + animation->getWidth() / 2 - mActions["dying"].w / 2);
-		/*animation->setPosition({ m});*/
+		mPosition->setX(mPosition->getX() + mAnimation->getWidth() / 2 - mActions["dying"].w / 2);
+		/*mAnimation->setPosition({ m});*/
 	}
 }
 
@@ -31,23 +31,23 @@ BarrerKnight::BarrerKnight() :
 
 	ObjectParser::getInstance()->parserAction("BarerKnight.xml", mActions);
 
-	animation = new Animation();
+	//animation = new Animation();
 
 
-	mPosition = new GameVector();
-	mVelocity = new GameVector(0, 0);
-	mAcceleration = new GameVector(0, 0);
-	mMapPosition = new GameVector(0, 0);
+	//mPosition = new GameVector();
+	//mVelocity = new GameVector(0, 0);
+	//mAcceleration = new GameVector(0, 0);
+	//mMapPosition = new GameVector(0, 0);
 
 	mCharWidth = 40;
 
 	mCurrentAction = IDLE;
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 	mStatus.HP = 200;
 
 	mCountStamina = 0;
 
-	animation->setSize(0, 0);
+	mAnimation->setSize(0, 0);
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
@@ -62,8 +62,8 @@ BarrerKnight::~BarrerKnight()
 
 void BarrerKnight::renderObject() const
 {
-	animation->setPosition(*mPosition - *mMapPosition);
-	animation->draw();
+	mAnimation->setPosition(*mPosition - *mMapPosition);
+	mAnimation->draw();
 }
 
 void BarrerKnight::clearObject()
@@ -128,7 +128,7 @@ void BarrerKnight::processData()
 	{
 		mCurrentAction = ATTACK2;
 		--mCountTimeAttack2;
-		if (animation->getIndexFrame() == 4)
+		if (mAnimation->getIndexFrame() == 4)
 		{
 			if (mFlip == SDL_FLIP_HORIZONTAL)
 			{
@@ -280,7 +280,7 @@ void BarrerKnight::AnimationProcess()
 	default:
 		break;
 	}
-	animation->update();
+	mAnimation->update();
 }
 
 bool BarrerKnight::onGround()
@@ -295,6 +295,6 @@ void BarrerKnight::completeUpdateMethod()
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
 
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 }
 

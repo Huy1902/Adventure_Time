@@ -1,15 +1,15 @@
-#ifndef SPELLOBJECT_H_
-#define SPELLOBJECT_H_
+#ifndef SCOURGE_H_
+#define SCOURGE_H_
+#include "SpellObject.h"
 
-#include "AnimModel.h"
 
-
-class SpellObject :
-	public AnimModel
+class Scourge :
+	public SpellObject
 {
 public:
-	SpellObject();
-	virtual ~SpellObject();
+	Scourge();
+	virtual ~Scourge();
+
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
@@ -59,17 +59,7 @@ public:
 		return ATK;
 	}
 protected:
-	GameVector* mMapPosition;
-	GameVector* mVelocity;
-	GameVector* mAcceleration;
-
-	Animation* mAnimation;
-
-	SDL_RendererFlip mFlip;
-
-	int mAttackRange;
-	int ATK;
 };
 
 
-#endif
+#endif //SCOURGE_H_

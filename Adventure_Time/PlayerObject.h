@@ -46,7 +46,7 @@ public:
 	}
 	virtual  bool isAttack() const
 	{
-		if ((mCurrentAction == ATTACK1 && animation->getIndexFrame() >= 1 && animation->getIndexFrame() <= 3) || mCurrentAction == CRIT)
+		if ((mCurrentAction == ATTACK1 && mAnimation->getIndexFrame() >= 1 && mAnimation->getIndexFrame() <= 3) || mCurrentAction == CRIT)
 		{
 			return true;
 		}
@@ -89,10 +89,6 @@ public:
 		}
 		return true;
 	}
-	Animation* getAnimation()
-	{
-		return animation;
-	}
 	bool isBash() const
 	{
 		if (mCurrentAction == BASH)
@@ -111,7 +107,7 @@ public:
 		return m_bAbleToCrit;
 	}
 private:
-	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
+	//virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	bool onGround();
 	bool headStuck();
 	int sideStuck();

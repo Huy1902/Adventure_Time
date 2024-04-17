@@ -32,32 +32,37 @@ bool SoundManager::loadSound(std::string fileName, std::string id, sound_type ty
 {
 	if (type == MUSIC_SOUND)
 	{
-		Mix_Music* pMUSIC_SOUND = Mix_LoadMUS(fileName.c_str());
-
-		if (pMUSIC_SOUND == 0)
+		if (mMusic.find(id) == mMusic.end())
 		{
-			std::cout << "Could not load MUSIC_SOUND\n";
+			Mix_Music* pMUSIC_SOUND = Mix_LoadMUS(fileName.c_str());
 
-			return false;
+			if (pMUSIC_SOUND == 0)
+			{
+				std::cout << "Could not load MUSIC_SOUND\n";
+
+				return false;
+			}
+
+			mMusic[id] = pMUSIC_SOUND;
 		}
-
-		mMusic[id] = pMUSIC_SOUND;
 		return true;
 	}
 	else if (type == SOUND_EFFECT)
 	{
-		Mix_Chunk* pChunk = Mix_LoadWAV(fileName.c_str());
-
-		if (pChunk == 0)
+		if (mSfxs.find(id) == mSfxs.end())
 		{
-			std::cout << "Could not load SOUND_EFFECT\n";
+			Mix_Chunk* pChunk = Mix_LoadWAV(fileName.c_str());
 
-			return false;
+			if (pChunk == 0)
+			{
+				std::cout << "Could not load SOUND_EFFECT\n";
+
+				return false;
+			}
+			mSfxs[id] = pChunk;
+			return true;
 		}
-		mSfxs[id] = pChunk;
-		return true;
 	}
-
 	return false;
 }
 
@@ -67,10 +72,22 @@ void SoundManager::playMusic(const std::string& id, int loop)
 	Mix_PlayMusic(mMusic[id], loop);
 }
 
-void SoundManager::playSound(const std::string & id, int loop, int channel)
+void SoundManager::playSound(const std::string& id, int loop, int channel)
 {
 	//Hàm Mix_PlayChannel trong SDL_mixer cho phép bạn phát một đoạn âm thanh(chunk) trên một kênh cụ thể
 	Mix_PlayChannel(channel, mSfxs[id], loop);
+}
+
+void SoundManager::clearMusic(const std::string& id)
+{
+	Mix_FreeMusic(mMusic[id]);
+	mMusic.erase(id);
+}
+
+void SoundManager::clearSFX(const std::string& id)
+{
+	Mix_FreeChunk(mSfxs[id]);
+	mSfxs.erase(id);
 }
 
 SoundManager::~SoundManager()

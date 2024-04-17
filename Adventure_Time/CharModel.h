@@ -1,10 +1,9 @@
 #ifndef CHARMODEL_H_
 #define CHARMODEL_H_
 
-#include "ObjectModel.h"
-#include <vector>
-#include <SDL.h>
-#include "Animation.h"
+#include "AnimModel.h"
+
+
 
 struct Status
 {
@@ -20,27 +19,15 @@ struct Status
 	bool isStunned = false;
 };
 
-struct SFX
-{
-	std::string filePath;
-	std::string sfxID;
-	int channel;
-};
-enum sound_type
-{
-	NONE = -1,
-	MUSIC_SOUND = 0,
-	SOUND_EFFECT = 1
-};
+
 
 class CharModel :
-	public ObjectModel
+	public AnimModel
 {
 public:
 	CharModel();
 	virtual  ~CharModel();
 
-	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
@@ -114,11 +101,8 @@ protected:
 	void bash();
 	void crit();
 	void stun();
-	std::map<std::string, Info> mActions;
-	std::vector<Texture> mTextures;
-	std::map<std::string, SFX> mSFXs;
 
-	Animation* animation;
+
 	Action mCurrentAction;
 	SDL_RendererFlip mFlip;
 

@@ -25,8 +25,8 @@ void Archer::getHurt()
 	if (mStatus.HP <= 0)
 	{
 		mStatus.isAlive = false;
-		mPosition->setX(mPosition->getX() + animation->getWidth() / 2 - mActions["dying"].w / 2);
-		/*animation->setPosition({ m});*/
+		mPosition->setX(mPosition->getX() + mAnimation->getWidth() / 2 - mActions["dying"].w / 2);
+		/*mAnimation->setPosition({ m});*/
 	}
 }
 
@@ -36,16 +36,16 @@ Archer::Archer() :
 
 	ObjectParser::getInstance()->parserAction("archer.xml", mActions);
 
-	animation = new Animation();
+	//animation = new Animation();
 
 
-	mPosition = new GameVector();
-	mVelocity = new GameVector(0, 0);
-	mAcceleration = new GameVector(0, 0);
-	mMapPosition = new GameVector(0, 0);
+	//mPosition = new GameVector();
+	//mVelocity = new GameVector(0, 0);
+	//mAcceleration = new GameVector(0, 0);
+	//mMapPosition = new GameVector(0, 0);
 
 	mCurrentAction = IDLE;
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 
 	mStatus.HP = 200;
 
@@ -55,7 +55,7 @@ Archer::Archer() :
 	mWakeTime = mActions["idle"].numFrames * mActions["idle"].speed - 1;
 
 
-	animation->setSize(0, 0);
+	mAnimation->setSize(0, 0);
 
 	mCharWidth = 40;
 
@@ -69,8 +69,8 @@ Archer::~Archer()
 
 void Archer::renderObject() const
 {
-	animation->setPosition(*mPosition - *mMapPosition);
-	animation->draw();
+	mAnimation->setPosition(*mPosition - *mMapPosition);
+	mAnimation->draw();
 }
 
 void Archer::clearObject()
@@ -162,7 +162,7 @@ void Archer::processData()
 			else 
 			{
 				mFlip = SDL_FLIP_NONE;
-				if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) >= 200 + animation->getWidth())
+				if (CollisionManager::getInstance()->checkEnemyNearPlayer(this) >= 200 + mAnimation->getWidth())
 				{
 					mVelocity->setX(MOVE_SPEED * 2);
 				}
@@ -175,7 +175,7 @@ void Archer::processData()
 				mCountTimeAttack1 = (mActions["attack1"].numFrames * mActions["attack1"].speed);
 				if (mFlip == SDL_FLIP_HORIZONTAL)
 				{
-					ArrowManager::getInstance()->addEnemyArrow(GameVector(mPosition->getX() + animation->getWidth() - ARROW_POS_X, mPosition->getY() + ARROW_POS_Y), *mMapPosition, false);
+					ArrowManager::getInstance()->addEnemyArrow(GameVector(mPosition->getX() + mAnimation->getWidth() - ARROW_POS_X, mPosition->getY() + ARROW_POS_Y), *mMapPosition, false);
 				}
 				else
 				{
@@ -261,7 +261,7 @@ void Archer::AnimationProcess()
 	default:
 		break;
 	}
-	animation->update();
+	mAnimation->update();
 }
 
 bool Archer::onGround()
@@ -276,5 +276,5 @@ void Archer::completeUpdateMethod()
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
 
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 }

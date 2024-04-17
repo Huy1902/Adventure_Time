@@ -16,7 +16,7 @@ public:
 	EnemyObject();
 	virtual ~EnemyObject();
 
-	virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
+	//virtual void loadTexture(std::unique_ptr<TextureLoader> Info);
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
@@ -67,7 +67,7 @@ public:
 	}
 	virtual Animation* getAnimation()
 	{
-		return animation;
+		return mAnimation;
 	}
 	virtual int getDamage() const
 	{

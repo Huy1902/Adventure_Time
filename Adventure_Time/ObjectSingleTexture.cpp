@@ -1,0 +1,1 @@
+#include "ObjectSingleTexture.h"

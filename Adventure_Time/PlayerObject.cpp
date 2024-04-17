@@ -24,7 +24,8 @@ const int STA_RECOVER_SPEED = 1;
 std::string  last_sound = "";
 
 
-PlayerObject::PlayerObject()
+PlayerObject::PlayerObject():
+	CharModel()
 {
 	srand(static_cast<time_t>(time(NULL)));
 	ObjectParser::getInstance()->parserCharacter("MainCharacter.xml", mActions, mTextures, mSFXs);
@@ -42,23 +43,15 @@ PlayerObject::PlayerObject()
 	mStatus.LUCK = 10;
 	mStatus.STA = 200;
 
-	animation = new Animation();
-
-	mPosition = new GameVector(0, 0);
-	mVelocity = new GameVector(0, 0);
-	mAcceleration = new GameVector(0, 0);
-
-	animation = new Animation();
-
 	mCharHeight = 64;
 	mCharWidth = 64;
 	mCurrentAction = IDLE;
 	mFlip = SDL_FLIP_NONE;
-	animation->changeAnim("idle2", 4, mFlip);
+	mAnimation->changeAnim("idle2", 4, mFlip);
 
 
-	animation->setSize(100, 64);
-	animation->setPosition(*mPosition);
+	mAnimation->setSize(100, 64);
+	mAnimation->setPosition(*mPosition);
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
 	mCountTimeHurt = 0;
@@ -68,11 +61,14 @@ PlayerObject::PlayerObject()
 
 PlayerObject::~PlayerObject()
 {
-
-}
-void PlayerObject::loadTexture(std::unique_ptr<TextureLoader> Info)
-{
-	ObjectModel::loadTexture(std::move(Info));
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->clearFromTexture(ite.textureID);
+	}
+	for(const auto&ite : mSFXs)
+	{
+		SoundManager::getInstance()->clearSFX(ite.second.sfxID);
+	}
 }
 
 void PlayerObject::processData()
@@ -342,18 +338,16 @@ void PlayerObject::AnimationProcess()
 	{
 		SoundManager::getInstance()->playSound(mSFXs[current_sound].sfxID, 0, mSFXs[current_sound].channel);
 	}
-	animation->update();
+	mAnimation->update();
 }
 
 void PlayerObject::renderObject() const
 {
-	animation->draw();
+	mAnimation->draw();
 }
 
 void PlayerObject::clearObject()
 {
-	TextureManager::getInstance()->clearFromTexture("walk2");
-	TextureManager::getInstance()->clearFromTexture("jump2");
 }
 
 void PlayerObject::getHurt()
@@ -430,5 +424,5 @@ void PlayerObject::completeUpdateMethod()
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
 
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 }

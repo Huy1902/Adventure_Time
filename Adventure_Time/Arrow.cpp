@@ -17,16 +17,9 @@ Arrow::Arrow() :
 
 	ObjectParser::getInstance()->parserAction("arrow.xml", mActions);
 
-	animation = new Animation();
-
-
-	mPosition = new GameVector();
-	mVelocity = new GameVector(0, 0);
-	mAcceleration = new GameVector(0, 0);
-	mMapPosition = new GameVector(0, 0);
 	mStatus.ATK = 20;
 
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 }
 void Arrow::setDirection(bool isRight)
 {
@@ -45,7 +38,7 @@ void Arrow::setDirection(bool isRight)
 
 	mFlyingTime = mActions["flying"].numFrames * mActions["flying"].speed - 1;
 	Info temp = mActions["flying"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+	mAnimation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
 
 Arrow::~Arrow()
@@ -54,8 +47,8 @@ Arrow::~Arrow()
 
 void Arrow::renderObject() const
 {
-	animation->setPosition(*mPosition - *mMapPosition);
-	animation->draw();
+	mAnimation->setPosition(*mPosition - *mMapPosition);
+	mAnimation->draw();
 }
 
 void Arrow::clearObject()
@@ -78,7 +71,7 @@ void Arrow::processData()
 void Arrow::AnimationProcess()
 {
 	fly();
-	animation->update();
+	mAnimation->update();
 }
 
 bool Arrow::onGround()
@@ -93,11 +86,11 @@ void Arrow::completeUpdateMethod()
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
 
-	animation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition);
 }
 
 void Arrow::fly()
 {
 	Info temp = mActions["flying"];
-	animation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+	mAnimation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }

@@ -27,6 +27,9 @@ public:
 
 	void playSound(const std::string& id, int loop, int channel);
 
+	void clearMusic(const std::string& id);
+	void clearSFX(const std::string& id);
+
 private:
 	static SoundManager* s_pInstance;
 

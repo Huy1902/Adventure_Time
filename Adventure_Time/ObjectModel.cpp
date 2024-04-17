@@ -6,20 +6,21 @@
 #include "GameManager.h"
 
 ObjectModel::ObjectModel() :
-	BaseObject()
+	BaseModel()
 {
 
 }
 
 ObjectModel::~ObjectModel()
 {
-	delete mPosition;
 }
+
 
 void ObjectModel::loadTexture(std::unique_ptr<TextureLoader> Info)
 {
 	mTextureID = Info->getTextureID();
-	mPosition = new GameVector(Info->getX() , Info->getY());
+	mPosition->setX(Info->getX());
+	mPosition->setY(Info->getY());
 	mHeight = Info->getHeight();
 	mWidth = Info->getWidth();
 	mNumFrames = Info->getNumFrames();
