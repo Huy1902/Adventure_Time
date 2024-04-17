@@ -183,6 +183,7 @@
     <ClCompile Include="ScoreState.cpp" />
     <ClCompile Include="Scourge.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SpellManager.cpp" />
     <ClCompile Include="SpellObject.cpp" />
     <ClCompile Include="StandingManager.cpp" />
     <ClCompile Include="StatusManager.cpp" />
@@ -242,6 +243,7 @@
     <ClInclude Include="ScoreState.h" />
     <ClInclude Include="Scourge.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SpellManager.h" />
     <ClInclude Include="SpellObject.h" />
     <ClInclude Include="StandingManager.h" />
     <ClInclude Include="StatusManager.h" />

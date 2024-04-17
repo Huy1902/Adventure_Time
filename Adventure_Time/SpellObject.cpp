@@ -19,3 +19,9 @@ void SpellObject::renderObject() const
 void SpellObject::clearObject()
 {
 }
+
+void SpellObject::cast()
+{
+	Info temp = mActions["cast"];
+	mAnimation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}

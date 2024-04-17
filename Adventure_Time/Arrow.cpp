@@ -53,10 +53,6 @@ void Arrow::renderObject() const
 
 void Arrow::clearObject()
 {
-	//for (const auto& ite : mTextures)
-	//{
-	//	TextureManager::getInstance()->clearFromTexture(ite.textureID);
-	//}
 }
 
 void Arrow::processData()

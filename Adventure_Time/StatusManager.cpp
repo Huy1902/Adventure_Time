@@ -71,7 +71,10 @@ bool StatusManager::whenPlayerAttackEnemy(EnemyObject* obj)
 {
 	Status* taken = obj->getStatus();
 	Status* cause = mPlayer->getStatus();
-
+	if (taken->isInvulnerable == true)
+	{
+		return false;
+	}
 	int dmg	= int(getDMGtaken(taken->LUCK, cause->ATK, taken->DEF));
 	taken->HP -= dmg;
 	return (dmg != 0);
@@ -81,8 +84,23 @@ bool StatusManager::whenEnemyAttackPlayer(EnemyObject* obj)
 {
 	Status* taken = mPlayer->getStatus();
 	Status* cause = obj->getStatus();
-
+	if (taken->isInvulnerable == true)
+	{
+		return false;
+	}
 	int dmg = int(getDMGtaken(taken->LUCK, cause->ATK, taken->DEF));
+	taken->HP -= dmg;
+	return (dmg != 0);
+}
+
+bool StatusManager::whenSpellAttackEnemy(SpellObject* spell, EnemyObject* obj)
+{
+	Status* taken = obj->getStatus();
+	if (taken->isInvulnerable == true)
+	{
+		return false;
+	}
+	int dmg = int(getDMGtaken(taken->LUCK, spell->getDamage(), taken->DEF));
 	taken->HP -= dmg;
 	return (dmg != 0);
 }

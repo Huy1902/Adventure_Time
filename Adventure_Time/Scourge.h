@@ -34,10 +34,6 @@ public:
 	{
 		*mMapPosition = pos;
 	}
-	virtual GameVector* getMapPosition()
-	{
-		return mMapPosition;
-	}
 	virtual bool isRight() const
 	{
 		if (mFlip == SDL_FLIP_NONE)

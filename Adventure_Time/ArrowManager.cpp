@@ -62,9 +62,4 @@ void ArrowManager::renderArrow()
 
 ArrowManager::ArrowManager()
 {
-	//Arrow* newArrow = new Arrow();
-	//newArrow->setMapPosition(GameVector(0, 0));
-	//newArrow->setPosition(GameVector(100, 100));
-	////newArrow->setDirection(GameVector(-20, 20));
-	//mEnemyArrows.push_back(newArrow);
 }

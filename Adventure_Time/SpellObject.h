@@ -30,15 +30,26 @@ public:
 	{
 		*mVelocity = obj;
 	}
-	virtual void setMapPosition(const GameVector& pos)
+	void setMapPosition(const GameVector& obj)
 	{
-		*mMapPosition = pos;
+		*mMapPosition = obj;
 	}
-	virtual GameVector* getMapPosition()
+	GameVector* getMapPosition()
 	{
 		return mMapPosition;
 	}
-	virtual bool isRight() const
+	void setDitection(bool isRight)
+	{
+		if (isRight == false)
+		{
+			mFlip = SDL_FLIP_HORIZONTAL;
+		}
+		else
+		{
+			mFlip = SDL_FLIP_NONE;
+		}
+	}
+	bool isRight() const
 	{
 		if (mFlip == SDL_FLIP_NONE)
 		{
@@ -50,25 +61,35 @@ public:
 	{
 		return false;
 	}
-	virtual Animation* getAnimation()
-	{
-		return mAnimation;
-	}
-	virtual int getDamage() const
+	int getDamage() const
 	{
 		return ATK;
+	}
+	bool isExist()
+	{
+		if (mCountTimeExist > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 protected:
 	GameVector* mMapPosition;
 	GameVector* mVelocity;
-	GameVector* mAcceleration;
-
-	Animation* mAnimation;
+	//GameVector* mAcceleration;
 
 	SDL_RendererFlip mFlip;
-
 	int mAttackRange;
 	int ATK;
+	int mCooldown;
+
+	int mCountTimeExist;
+
+	enum Action
+	{
+		CAST = 0,
+	};
+	void cast();
 };
 
 

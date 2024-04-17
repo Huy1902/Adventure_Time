@@ -3,6 +3,7 @@
 
 #include "PlayerObject.h"
 #include "EnemyObject.h"
+#include "SpellObject.h"
 
 #include "Animation.h"
 
@@ -24,7 +25,7 @@ public:
 
 	bool whenPlayerAttackEnemy(EnemyObject* obj);
 	bool whenEnemyAttackPlayer(EnemyObject* obj);
-
+	bool whenSpellAttackEnemy(SpellObject* spell, EnemyObject* obj);
 	void renderOnGamePause();
 
 	void renderEnemyStatus(EnemyObject* obj);
