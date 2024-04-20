@@ -32,6 +32,14 @@ public:
 	virtual void renderObject() const;
 	virtual void clearObject();
 
+	GameVector* getPosition()
+	{
+		return mPosition;
+	}
+	void setPosition(const GameVector& pos)
+	{
+		*mPosition = pos;
+	}
 protected:
 	GameVector* mPosition;
 };

@@ -8,11 +8,19 @@ using namespace std;
 
 
 
-void SpellManager::addPlayerSpell(const std::string nameSpell, const GameVector& pos, const GameVector& mapPos, bool isRight)
+void SpellManager::addPlayerSpell(const std::string nameSpell, const GameVector& pos, bool isRight)
 {
 	SpellObject* obj = dynamic_cast<SpellObject*>(GeneratorManager::getInstance()->generatorObject(nameSpell));
-	obj->setPosition(pos);
-	obj->setMapPosition(mapPos);
+	obj->setMapPosition(mMapPosition);
+	obj->setDirection(isRight);
+	if (isRight == true)
+	{
+		obj->setPosition({mMapPosition.getX() + pos.getX() + obj->getCastDistance(), mMapPosition.getY() + pos.getY()});
+	}
+	else
+	{
+		obj->setPosition({ mMapPosition.getX() + pos.getX() - obj->getCastDistance(), mMapPosition.getY() + pos.getY()});
+	}
 	mPlayerSpell.push_back(obj);
 }
 
@@ -31,15 +39,7 @@ bool SpellManager::checkCollisionWithPlayerSpell(EnemyObject* enemy)
 				enemy->getHurt();
 			}
 		}
-		if ((*ite)->isExist() == false)
-		{
-			ite = mPlayerSpell.erase(ite);
-		}
-		else
-		{
-			(*ite)->processData();
-			++ite;
-		}
+		++ite;
 	}
 	return false;
 }
@@ -69,6 +69,17 @@ void SpellManager::renderSpell()
 	}
 }
 
-SpellManager::SpellManager()
+SpellManager::SpellManager() :
+	mMapPosition(0, 0)
 {
+}
+
+SpellManager::~SpellManager()
+{
+	for (const auto& ite : mPlayerSpell)
+	{
+		delete ite;
+	}
+	mPlayerSpell.clear();
+
 }

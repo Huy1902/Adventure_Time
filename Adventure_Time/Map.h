@@ -58,6 +58,7 @@ private:
 	void processEnemyAndMap();
 	void processInteractObjectAndPlayer();
 	void processPlayerAndArrow();
+	void processEnemyAndSpell();
 
 	int mCountFightTime;
 	bool m_bFight;

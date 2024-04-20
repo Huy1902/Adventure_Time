@@ -18,10 +18,14 @@ public:
 		}
 		return s_pInstance;
 	}
-	void addPlayerSpell(const std::string nameSpell, const GameVector& pos, const GameVector& mapPos, bool isRight);
+	void addPlayerSpell(const std::string nameSpell, const GameVector& pos, bool isRight);
 	/*const std::vector<SpellObject*> getEnemyArrow() { return mEnemyArrows; }*/
-	bool checkCollisionWithPlayerSpell(EnemyObject* player);
+	bool checkCollisionWithPlayerSpell(EnemyObject* enemy);
 
+	void setMapPosition(const GameVector& pos)
+	{
+		mMapPosition = pos;
+	}
 	void updateSpell();
 	void renderSpell();
 private:
@@ -29,6 +33,8 @@ private:
 	~SpellManager();
 	static SpellManager* s_pInstance;
 	std::vector<SpellObject*> mPlayerSpell;
+
+	GameVector mMapPosition;
 };
 
 #endif //SPELLMANAGER_H_

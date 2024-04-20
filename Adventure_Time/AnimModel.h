@@ -1,5 +1,5 @@
 #ifndef ANIMODEL_H_
-#define ANIMMODE_H
+#define ANIMODEL_H_
 #include "BaseModel.h"
 
 #include <vector>

@@ -13,32 +13,28 @@ public:
 	virtual void processData();
 	virtual void renderObject() const;
 	virtual void clearObject();
+	virtual bool isAttack() const
+	{
+		return false;
+	}
 
 	GameVector* getVelocity()
 	{
 		return mVelocity;
 	}
-	GameVector* getPosition()
-	{
-		return mPosition;
-	}
-	void setPosition(const GameVector& obj)
-	{
-		*mPosition = obj;
-	}
 	void setVelocity(const GameVector& obj)
 	{
 		*mVelocity = obj;
-	}
-	void setMapPosition(const GameVector& obj)
-	{
-		*mMapPosition = obj;
 	}
 	GameVector* getMapPosition()
 	{
 		return mMapPosition;
 	}
-	void setDitection(bool isRight)
+	void setMapPosition(const GameVector& obj)
+	{
+		*mMapPosition = obj;
+	}
+	void setDirection(bool isRight)
 	{
 		if (isRight == false)
 		{
@@ -57,15 +53,11 @@ public:
 		}
 		return false;
 	}
-	virtual bool isAttack() const
-	{
-		return false;
-	}
 	int getDamage() const
 	{
 		return ATK;
 	}
-	bool isExist()
+	bool isExist() const
 	{
 		if (mCountTimeExist > 0)
 		{
@@ -73,13 +65,17 @@ public:
 		}
 		return false;
 	}
+	int getCastDistance() const
+	{
+		return mCastDistance;
+	}
 protected:
 	GameVector* mMapPosition;
 	GameVector* mVelocity;
-	//GameVector* mAcceleration;
 
 	SDL_RendererFlip mFlip;
 	int mAttackRange;
+	int mCastDistance;
 	int ATK;
 	int mCooldown;
 
@@ -89,7 +85,11 @@ protected:
 	{
 		CAST = 0,
 	};
+	Action mCurrentAction;
+	void completeUpdateMethod();
+	void AnimationProcess();
 	void cast();
+	
 };
 
 

@@ -46,6 +46,7 @@ void ArrowManager::updateArrow()
 		}
 		else
 		{
+			(*ite)->setMapPosition(mMapPosition);
 			(*ite)->processData();
 			++ite;
 		}

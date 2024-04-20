@@ -23,7 +23,7 @@ void Animation::changeAnim(const std::string& textureID, const int& numFrame, SD
 {
 	if (textureID != mTextureID)
 	{
-		mIndexFrame = 0;
+		mIndexFrame = -1;
 		mTextureID = textureID;
 		mNumFrame = numFrame;
 		mSpeed = 1;
@@ -34,7 +34,7 @@ void Animation::changeAnim(const std::string& textureID, const int& numFrame, SD
 {
 	if (textureID != mTextureID)
 	{
-		mIndexFrame = 0;
+		mIndexFrame = -1;
 		mTextureID = textureID;
 		mNumFrame = numFrame;
 		mSpeed = speed;

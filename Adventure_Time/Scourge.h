@@ -1,13 +1,13 @@
 #ifndef SCOURGE_H_
 #define SCOURGE_H_
 #include "SpellObject.h"
-
+#include "BaseGenerator.h"
 
 class Scourge :
 	public SpellObject
 {
 public:
-	Scourge();
+	
 	virtual ~Scourge();
 
 	virtual void processData();
@@ -55,7 +55,19 @@ public:
 		return ATK;
 	}
 protected:
+
+private:
+	Scourge();
+	friend class ScourgeGenerator;
 };
 
+class ScourgeGenerator :
+	public BaseGenerator
+{
+	BaseObject* generateObject() const
+	{
+		return new Scourge();
+	}
+};
 
 #endif //SCOURGE_H_

@@ -185,6 +185,7 @@
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpellManager.cpp" />
     <ClCompile Include="SpellObject.cpp" />
+    <ClCompile Include="SpellStream.cpp" />
     <ClCompile Include="StandingManager.cpp" />
     <ClCompile Include="StatusManager.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpellManager.h" />
     <ClInclude Include="SpellObject.h" />
+    <ClInclude Include="SpellStream.h" />
     <ClInclude Include="StandingManager.h" />
     <ClInclude Include="StatusManager.h" />
     <ClInclude Include="TextureLoader.h" />
@@ -274,6 +276,7 @@
     <Xml Include="MainCharacter.xml" />
     <Xml Include="pause_state.xml" />
     <Xml Include="score_state.xml" />
+    <Xml Include="scourge.xml" />
     <Xml Include="sound.xml" />
     <Xml Include="switch_map_driven.xml" />
     <Xml Include="texture.xml" />

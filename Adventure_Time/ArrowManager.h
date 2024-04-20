@@ -19,6 +19,10 @@ public:
 	const std::vector<Arrow*> getEnemyArrow() { return mEnemyArrows; }
 	bool checkCollision(PlayerObject* player);
 
+	void setMapPosition(const GameVector& obj)
+	{
+		mMapPosition = obj;
+	}
 	void updateArrow();
 	void renderArrow();
 private:
@@ -26,6 +30,7 @@ private:
 	~ArrowManager();
 	static ArrowManager* s_pInstance;
 	std::vector<Arrow*> mEnemyArrows;
+	GameVector mMapPosition;
 };
 
 #endif //ARROWMANAGER_H_

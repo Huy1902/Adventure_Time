@@ -25,7 +25,7 @@ public:
 	GameVector* getMousePosition() const { return mMousePosition; }
 
 	bool keyDown(SDL_Scancode key);
-	bool isPressAnyKey()
+	bool isPressAnyKey() const
 	{
 		return m_bPressKey;
 	}

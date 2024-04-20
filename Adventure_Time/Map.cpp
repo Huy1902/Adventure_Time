@@ -22,6 +22,7 @@
 #include "LoadingState.h"
 
 #include "ArrowManager.h"
+#include "SpellManager.h"
 
 const int mMapWidth = 120;
 const int mMapHeight = 24;
@@ -282,20 +283,41 @@ void Map::processInteractObjectAndPlayer()
 }
 void Map::processPlayerAndArrow()
 {
+	ArrowManager::getInstance()->setMapPosition(*mPosition);
 	ArrowManager::getInstance()->checkCollision(mPlayer);
 	ArrowManager::getInstance()->updateArrow();
+}
+void Map::processEnemyAndSpell()
+{
+	SpellManager::getInstance()->setMapPosition(*mPosition);
+	vector<EnemyObject*>::iterator ite = mEnemy.begin();
+	while (ite != mEnemy.end())
+	{
+		SpellManager::getInstance()->checkCollisionWithPlayerSpell(*ite);
+		if ((*ite)->isAlive() == false && (*ite)->isDying() == false)
+		{
+			delete* ite;
+			ite = mEnemy.erase(ite);
+		}
+		else
+		{
+			++ite;
+		}
+	}
+	SpellManager::getInstance()->updateSpell();
 }
 void Map::updateMap()
 {
 	//std::cout << mPosition->getX() << '\n';
 
+	processEnemyAndSpell();
+	processPlayerAndArrow();
 	processMapAndPlayer();
 	if (m_bSwitchMap == true)
 	{
 		return;
 	}
 	processEnemyAndPlayer();
-	processPlayerAndArrow();
 	processEnemyAndMap();
 	processInteractObjectAndPlayer();
 
@@ -333,6 +355,7 @@ void Map::renderMap()
 	}
 	mPlayer->renderObject();
 	ArrowManager::getInstance()->renderArrow();
+	SpellManager::getInstance()->renderSpell();
 	if (mCountTimeRenderBash > 0)
 	{
 		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY(), 24);

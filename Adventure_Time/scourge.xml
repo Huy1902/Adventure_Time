@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<CHARACTER>
+	<TEXTURES>
+		<texture filePath="assets/Spell/Scourge/cast.png" textureID="scourge_cast"/>
+	</TEXTURES>
+	<ACTIONS>
+		<action name="cast" textureID="scourge_cast" numFrame="12" w="64" h="64"/>
+	</ACTIONS>
+	<SFXS>
+		<sfx filePath="assets/knight_player/dying.wav" sfxID="main_dying" name="dying" channel="0"/>
+	</SFXS>
+</CHARACTER>

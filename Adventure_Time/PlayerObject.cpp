@@ -11,6 +11,8 @@
 #include "SoundManager.h"
 #include "StatusManager.h"
 #include "AchieveManager.h"
+
+#include "SpellStream.h"
 const int HURT_MOVE_BACK = 2;
 const int MOVE_SPEED = 10;
 const int GRAVITY = 2;
@@ -57,6 +59,9 @@ PlayerObject::PlayerObject():
 	mCountTimeHurt = 0;
 
 	MaxStatus = mStatus;
+
+	SpellStream::getInstance()->addSkill("Scourge", SDL_SCANCODE_Q, 20);
+	SpellStream::getInstance()->update();
 }
 
 PlayerObject::~PlayerObject()
@@ -270,6 +275,9 @@ void PlayerObject::processData()
 	{
 		mVelocity->setX(0);
 	}
+
+	//spell cast
+	SpellStream::getInstance()->skillStreamer(*mPosition, this->isRight());
 	completeUpdateMethod();
 }
 

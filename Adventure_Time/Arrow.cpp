@@ -47,7 +47,6 @@ Arrow::~Arrow()
 
 void Arrow::renderObject() const
 {
-	mAnimation->setPosition(*mPosition - *mMapPosition);
 	mAnimation->draw();
 }
 
@@ -81,8 +80,7 @@ void Arrow::completeUpdateMethod()
 
 	*mVelocity += *mAcceleration;
 	*mPosition += *mVelocity;
-
-	mAnimation->setPosition(*mPosition);
+	mAnimation->setPosition(*mPosition - *mMapPosition);
 }
 
 void Arrow::fly()
