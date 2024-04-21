@@ -7,19 +7,25 @@
 
 SpellStream* SpellStream::s_pInstance = nullptr;
 
+using namespace std;
+
 void SpellStream::update()
 {
+	vector<string> needErase;
 	for (auto& ite : mSkillOnCooldown)
 	{
-		std::cout << ite.second << '\n';
 		if (ite.second > 0)
 		{
 			--ite.second;
 		}
 		else
 		{
-			mSkillOnCooldown.erase(ite.first);
+			needErase.push_back(ite.first);
 		}
+	}
+	for (const auto& ite : needErase)
+	{
+		mSkillOnCooldown.erase(ite);
 	}
 }
 
@@ -61,7 +67,6 @@ void SpellStream::skillStreamer(const GameVector& pos, const bool& isRight)
 		{
 			mSkillOnCooldown[ite.second] = mSkillCooldown[ite.second];
 			SpellManager::getInstance()->addPlayerSpell(ite.second, pos, isRight);
-			std::cout << mSkillOnCooldown[ite.second] << '\n';
 		}
 	}
 }

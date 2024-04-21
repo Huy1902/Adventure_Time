@@ -17,7 +17,7 @@ Scourge::Scourge() :
 
 	mVelocity->setX(0);
 	mVelocity->setY(0);
-	mCastDistance = 100;
+	mCastDistance = 300;
 }
 
 Scourge::~Scourge()

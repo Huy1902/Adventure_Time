@@ -4,7 +4,7 @@
 		<texture filePath="assets/Spell/Scourge/cast.png" textureID="scourge_cast"/>
 	</TEXTURES>
 	<ACTIONS>
-		<action name="cast" textureID="scourge_cast" numFrame="12" w="64" h="64"/>
+		<action name="cast" textureID="scourge_cast" numFrame="16" w="48" h="64" speed="2"/>
 	</ACTIONS>
 	<SFXS>
 		<sfx filePath="assets/knight_player/dying.wav" sfxID="main_dying" name="dying" channel="0"/>

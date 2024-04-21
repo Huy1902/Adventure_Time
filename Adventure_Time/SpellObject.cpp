@@ -6,6 +6,7 @@ SpellObject::SpellObject() :
 	mMapPosition = new GameVector();
 	mVelocity = new GameVector();
 	mCastDistance = 0;
+	ATK = 10;
 }
 
 SpellObject::~SpellObject()
@@ -47,7 +48,6 @@ void SpellObject::AnimationProcess()
 	default:
 		break;
 	}
-	mAnimation->update();
 }
 
 void SpellObject::cast()

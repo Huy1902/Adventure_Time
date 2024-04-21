@@ -23,7 +23,7 @@
 
 #include "ArrowManager.h"
 #include "SpellManager.h"
-
+#include "SpellStream.h"
 const int mMapWidth = 120;
 const int mMapHeight = 24;
 const int mTileSize = 32;
@@ -305,6 +305,7 @@ void Map::processEnemyAndSpell()
 		}
 	}
 	SpellManager::getInstance()->updateSpell();
+	SpellStream::getInstance()->update();
 }
 void Map::updateMap()
 {
