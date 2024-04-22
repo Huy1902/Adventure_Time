@@ -7,15 +7,6 @@
 
 #include "Animation.h"
 
-struct Bar
-{
-	int x;
-	int y;
-	int w;
-	int h;
-	std::string textureID;
-};
-
 class StatusManager
 {
 public:

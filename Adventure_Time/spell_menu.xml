@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<STATUS>
+	<TEXTURES>
+		<texture filePath="assets/Spell/spell_menu.png" textureID="spell_menu"/>
+		<texture filePath="assets/Spell/layer.png" textureID="spell_layer"/>
+	</TEXTURES>
+	<BARS>
+		<bar name="Scourge" textureID="spell_layer" w="67" h="73" x="52" y="652"/>
+	</BARS>
+</STATUS>

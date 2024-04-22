@@ -1,8 +1,6 @@
 #include "PlayerObject.h"
 
 #include "GameManager.h"
-#include "RunAction.h"
-#include "JumpAction.h"
 
 #include "InputManager.h"
 #include "TextureManager.h"

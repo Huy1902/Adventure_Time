@@ -16,7 +16,6 @@ StatusManager* StatusManager::s_pInstance = nullptr;
 
 void StatusManager::updatePlayerStatus()
 {
-	//mSrcPoint.w = mDestPoint.w = int( ( (*mPlayer->getStatus()).HP * 1.0 / mMaxPlayer.HP) * mLenPoint);
 }
 
 void StatusManager::renderPlayerStatus()

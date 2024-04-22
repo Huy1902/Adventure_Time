@@ -4,28 +4,24 @@
 
 #include "SpellManager.h"
 #include "InputManager.h"
-
+#include "TextureManager.h"
+#include "GameManager.h"
+#include "ObjectParser.h"
 SpellStream* SpellStream::s_pInstance = nullptr;
 
 using namespace std;
 
+const int W_LAYER = 67;
+const int H_LAYER = 73;
+
 void SpellStream::update()
 {
-	vector<string> needErase;
 	for (auto& ite : mSkillOnCooldown)
 	{
 		if (ite.second > 0)
 		{
 			--ite.second;
 		}
-		else
-		{
-			needErase.push_back(ite.first);
-		}
-	}
-	for (const auto& ite : needErase)
-	{
-		mSkillOnCooldown.erase(ite);
 	}
 }
 
@@ -63,7 +59,7 @@ void SpellStream::skillStreamer(const GameVector& pos, const bool& isRight)
 {
 	for (const auto& ite : mKeyToSkill)
 	{
-		if (InputManager::getInstance()->keyDown(ite.first) == true && mSkillOnCooldown.find(ite.second) == mSkillOnCooldown.end())
+		if (InputManager::getInstance()->keyDown(ite.first) == true && mSkillOnCooldown[ite.second] == 0)
 		{
 			mSkillOnCooldown[ite.second] = mSkillCooldown[ite.second];
 			SpellManager::getInstance()->addPlayerSpell(ite.second, pos, isRight);
@@ -75,5 +71,28 @@ void SpellStream::addSkill(const std::string& skillName, SDL_Scancode key, const
 {
 	mKeyToSkill[key] = skillName;
 	mSkillCooldown[skillName] = cooldownTime;
+	mSkillOnCooldown[skillName] = 0;
+}
+
+void SpellStream::renderSpellMenu()
+{
+	TextureManager::getInstance()->drawSinglePic("spell_menu", 50, 650, 210, 100, GameManager::getInstance()->getRenderer());
+	for (const auto& ite : mSkill)
+	{
+		Bar temp = ite.second;
+		int w = int(1.0 * mSkillOnCooldown[ite.first] / mSkillCooldown[ite.first] * temp.w);
+		TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
+	}
+}
+
+SpellStream::SpellStream()
+{
+	ObjectParser::getInstance()->parserBar("spell_menu.xml", mSkill, mTextures);
+
+	for (const auto& ite : mTextures)
+	{
+		TextureManager::getInstance()->load(ite.filePath, ite.textureID, GameManager::getInstance()->getRenderer());
+	}
+
 }
 

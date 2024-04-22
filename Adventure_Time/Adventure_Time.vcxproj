@@ -155,6 +155,7 @@
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Defination.h" />
     <ClCompile Include="DroidZapper.cpp" />
     <ClCompile Include="EnemyObject.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
@@ -175,7 +176,6 @@
     <ClCompile Include="ObjectModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectParser.cpp" />
-    <ClCompile Include="ObjectSingleTexture.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayingState.cpp" />
@@ -235,7 +235,6 @@
     <ClInclude Include="ObjectModel.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="ObjectParser.h" />
-    <ClInclude Include="ObjectSingleTexture.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayingState.h" />
@@ -278,6 +277,7 @@
     <Xml Include="score_state.xml" />
     <Xml Include="scourge.xml" />
     <Xml Include="sound.xml" />
+    <Xml Include="spell_menu.xml" />
     <Xml Include="switch_map_driven.xml" />
     <Xml Include="texture.xml" />
     <Xml Include="vagabond.xml" />

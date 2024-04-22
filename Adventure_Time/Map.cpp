@@ -357,6 +357,7 @@ void Map::renderMap()
 	mPlayer->renderObject();
 	ArrowManager::getInstance()->renderArrow();
 	SpellManager::getInstance()->renderSpell();
+	SpellStream::getInstance()->renderSpellMenu();
 	if (mCountTimeRenderBash > 0)
 	{
 		FontManager::getInstance()->drawText("Bash successfully", (int)mPlayer->getPosition()->getX(), (int)mPlayer->getPosition()->getY(), 24);
