@@ -24,6 +24,8 @@
 #include "ArrowManager.h"
 #include "SpellManager.h"
 #include "SpellStream.h"
+
+#include "Observe.h"
 const int mMapWidth = 120;
 const int mMapHeight = 24;
 const int mTileSize = 32;
@@ -169,6 +171,10 @@ void Map::processEnemyAndPlayer()
 				{
 					mPlayer->getHurt();
 				}
+				else
+				{
+					Observe::getInstance()->takeCommand(new MissCommand());
+				}
 			}
 			if (CollisionManager::getInstance()->checkPlayerAttackEnemy(*ite) == true)
 			{
@@ -183,6 +189,10 @@ void Map::processEnemyAndPlayer()
 				{
 					(*ite)->getHurt();
 				}
+				else
+				{
+					Observe::getInstance()->takeCommand(new MissCommand());
+				}
 				(*ite)->getStatus()->DEF = origin;
 				(*ite)->getStatus()->LUCK = luck;
 			}
@@ -194,6 +204,7 @@ void Map::processEnemyAndPlayer()
 			{
 				delete* ite;
 				ite = mEnemy.erase(ite);
+				Observe::getInstance()->takeCommand(new DefeatEnemyCommand());
 			}
 			else
 			{

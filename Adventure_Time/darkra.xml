@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<CHARACTER>
+	<TEXTURES>
+		<texture filePath="assets/Spell/Darkra/cast.png" textureID="darkra_cast"/>
+		<texture filePath="assets/Spell/Darkra/collision.png" textureID="darkra_collision"/>
+	</TEXTURES>
+	<ACTIONS>
+		<action name="cast" textureID="darkra_cast" numFrame="10" w="80" h="64" speed="5"/>
+		<action name="collision" textureID="darkra_collision" numFrame="6" w="80" h="64" speed="2"/>
+	</ACTIONS>
+</CHARACTER>

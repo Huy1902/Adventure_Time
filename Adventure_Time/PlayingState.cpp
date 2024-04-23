@@ -12,6 +12,7 @@
 #include "InteractManager.h"
 #include "MapManager.h"
 #include "AchieveManager.h"
+#include "MissHitManager.h"
 
 const std::string  PlayingState::m_sPlaying = "PLAYING";
 
@@ -62,13 +63,11 @@ void PlayingState::processData()
 void PlayingState::renderState()
 {
 	mBackground->drawBackground();
-	//if (m_bSetupDying == true)
-	//{
-	//	MapManager::getInstance()->getPlayer()->renderObject();
-	//	return;
-	//}
+
 	mMap->renderMap();
+
 	StatusManager::getInstance()->renderPlayerStatus();
+	MissHitManager::getInstance()->renderMissHit();
 	AchieveManager::getInstance()->renderAchieve();
 }
 

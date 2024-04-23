@@ -14,23 +14,6 @@ int main(int argc, char* args[])
 	int begin_frame, time_frame;
 	GameManager::getInstance()->initGame("Adventure Time", 300, 300, 1280, 768);
 
-	//fout << layerstring;
-	//Map* new_map = new Map();
-	//new_map->loadMap("map1.txt", "tileset1");
-	//while (1)
-	//{
-	//	SDL_RenderClear(GameManager::getInstance()->getRenderer()); // clear the renderer to the draw color
-	//	new_map->updateMap();
-	//	new_map->renderMap();
-
-	//	SDL_RenderPresent(GameManager::getInstance()->getRenderer()); // draw to the screen
-	//	SDL_Delay(10);
-	//}
-
-
-	//system("pause");
-
-
 	while (GameManager::getInstance()->getRunning() == true)
 	{
 		begin_frame = SDL_GetTicks();

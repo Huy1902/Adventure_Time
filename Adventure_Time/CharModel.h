@@ -3,24 +3,6 @@
 
 #include "AnimModel.h"
 
-
-
-struct Status
-{
-	int HP = 100;
-	int STA = 20;
-	int ATK = 20;
-	int DEF = 10;
-	int IQ = 10;
-	int LUCK = 10;
-	int EXP = 100;
-	bool isAlive = true;
-	bool isInvulnerable = false;
-	bool isStunned = false;
-};
-
-
-
 class CharModel :
 	public AnimModel
 {

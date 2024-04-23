@@ -27,7 +27,31 @@ struct Texture
 	std::string textureID = "";
 };
 
+struct SFX
+{
+	std::string filePath;
+	std::string sfxID;
+	int channel;
+};
+enum sound_type
+{
+	NONE = -1,
+	MUSIC_SOUND = 0,
+	SOUND_EFFECT = 1
+};
 
-
+struct Status
+{
+	int HP = 100;
+	int STA = 20;
+	int ATK = 20;
+	int DEF = 10;
+	int IQ = 10;
+	int LUCK = 10;
+	int EXP = 100;
+	bool isAlive = true;
+	bool isInvulnerable = false;
+	bool isStunned = false;
+};
 
 #endif // ! DEFINATION_H_

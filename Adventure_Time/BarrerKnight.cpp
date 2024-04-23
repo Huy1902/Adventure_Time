@@ -54,6 +54,7 @@ BarrerKnight::BarrerKnight() :
 
 	MaxStatus = mStatus;
 
+	mStatus.LUCK = 100;
 }
 BarrerKnight::~BarrerKnight()
 {

@@ -33,6 +33,7 @@
 #include "Arrow.h"
 #include "Vagabond.h"
 #include "Scourge.h"
+#include "Darkra.h"
 using namespace std;
 
 GameManager* GameManager::s_pInstance = nullptr;
@@ -128,6 +129,7 @@ void GameManager::initGame(const char* t, int x, int y, int w, int h)
 	GeneratorManager::getInstance()->addGenerator("Arrow", new ArrowGenerator());
 	GeneratorManager::getInstance()->addGenerator("Vagabond", new VagabondGenerator());
 	GeneratorManager::getInstance()->addGenerator("Scourge", new ScourgeGenerator());
+	GeneratorManager::getInstance()->addGenerator("Darkra", new DarkraGenerator());
 
 	ObjectParser::getInstance()->parserTexture("texture.xml", mTextures);
 	for (Texture& ite : mTextures)

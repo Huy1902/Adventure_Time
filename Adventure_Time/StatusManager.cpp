@@ -101,7 +101,8 @@ bool StatusManager::whenSpellAttackEnemy(SpellObject* spell, EnemyObject* obj)
 	}
 	int dmg = int(getDMGtaken(taken->LUCK, spell->getDamage(), taken->DEF));
 	taken->HP -= dmg;
-	return (dmg != 0);
+	cout << (dmg > 0) << '\n';
+	return (dmg > 0);
 }
 
 void StatusManager::renderOnGamePause()

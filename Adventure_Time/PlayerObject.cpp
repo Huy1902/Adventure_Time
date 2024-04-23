@@ -58,7 +58,8 @@ PlayerObject::PlayerObject():
 
 	MaxStatus = mStatus;
 
-	SpellStream::getInstance()->addSkill("Scourge", SDL_SCANCODE_Q, 50);
+	SpellStream::getInstance()->addSkill("Scourge", SDL_SCANCODE_Q, 20);
+	SpellStream::getInstance()->addSkill("Darkra", SDL_SCANCODE_E, 20);
 }
 
 PlayerObject::~PlayerObject()

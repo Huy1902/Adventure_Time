@@ -8,18 +8,7 @@
 
 #include "Animation.h"
 
-struct SFX
-{
-	std::string filePath;
-	std::string sfxID;
-	int channel;
-};
-enum sound_type
-{
-	NONE = -1,
-	MUSIC_SOUND = 0,
-	SOUND_EFFECT = 1
-};
+
 class AnimModel :
     public BaseModel
 {

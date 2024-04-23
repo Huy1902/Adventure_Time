@@ -1,14 +1,11 @@
-#ifndef SCOURGE_H_
-#define SCOURGE_H_
-#include "SpellObject.h"
-#include "BaseGenerator.h"
+#pragma once
 
-class Scourge :
-	public SpellObject
+#include "SpellObject.h"
+class Darkra :
+    public SpellObject
 {
 public:
-	
-	virtual ~Scourge();
+	virtual ~Darkra();
 
 	virtual void processData();
 	virtual void renderObject() const;
@@ -61,17 +58,15 @@ public:
 protected:
 
 private:
-	Scourge();
-	friend class ScourgeGenerator;
+	Darkra();
+	friend class DarkraGenerator;
 };
 
-class ScourgeGenerator :
+class DarkraGenerator :
 	public BaseGenerator
 {
 	BaseObject* generateObject() const
 	{
-		return new Scourge();
+		return new Darkra();
 	}
 };
-
-#endif //SCOURGE_H_

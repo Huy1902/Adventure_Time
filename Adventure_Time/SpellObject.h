@@ -69,6 +69,11 @@ public:
 	{
 		return mCastDistance;
 	}
+	void isCollision()
+	{
+		m_bHaveCollision = true;
+		mCountTimeExist = mActions["collision"].numFrames * mActions["collision"].speed;
+	}
 protected:
 	GameVector* mMapPosition;
 	GameVector* mVelocity;
@@ -81,15 +86,18 @@ protected:
 
 	int mCountTimeExist;
 
+	bool m_bHaveCollision = false;
+
 	enum Action
 	{
 		CAST = 0,
+		COLLISION = 1
 	};
 	Action mCurrentAction;
 	void completeUpdateMethod();
 	void AnimationProcess();
 	void cast();
-	
+	void collision();
 };
 
 

@@ -45,6 +45,9 @@ void SpellObject::AnimationProcess()
 	case SpellObject::CAST:
 		cast();
 		break;
+	case SpellObject::COLLISION:
+		collision();
+		break;
 	default:
 		break;
 	}
@@ -53,5 +56,11 @@ void SpellObject::AnimationProcess()
 void SpellObject::cast()
 {
 	Info temp = mActions["cast"];
+	mAnimation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
+}
+
+void SpellObject::collision()
+{
+	Info temp = mActions["collision"];
 	mAnimation->changeAnim(temp.textureID, temp.numFrames, mFlip, temp.w, temp.h, temp.speed);
 }
