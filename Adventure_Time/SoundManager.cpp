@@ -69,13 +69,40 @@ bool SoundManager::loadSound(std::string fileName, std::string id, sound_type ty
 void SoundManager::playMusic(const std::string& id, int loop)
 {
 	//Hàm Mix_PlayMUSIC_SOUND được sử dụng để phát một đối tượng âm nhạc mới.
-	Mix_PlayMusic(mMusic[id], loop);
+	if (m_bMuteMusic == false)
+	{
+		Mix_PlayMusic(mMusic[id], loop);
+	}
+	else
+	{
+		Mix_PlayMusic(mMusic[id], loop);
+		Mix_PauseMusic();
+	}
 }
 
 void SoundManager::playSound(const std::string& id, int loop, int channel)
 {
 	//Hàm Mix_PlayChannel trong SDL_mixer cho phép bạn phát một đoạn âm thanh(chunk) trên một kênh cụ thể
-	Mix_PlayChannel(channel, mSfxs[id], loop);
+	if (m_bMuteSFX == false)
+	{
+		Mix_PlayChannel(channel, mSfxs[id], loop);
+	}
+	else
+	{
+		Mix_HaltChannel(channel);
+	}
+}
+
+void SoundManager::muteMusic()
+{
+	m_bMuteMusic = true;
+	Mix_PauseMusic();
+}
+
+void SoundManager::muteSFX()
+{
+	m_bMuteSFX = true;
+	Mix_HaltChannel(-1);
 }
 
 void SoundManager::clearMusic(const std::string& id)

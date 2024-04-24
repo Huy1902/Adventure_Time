@@ -67,7 +67,7 @@ Vagabond::Vagabond() :
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
-
+	mStatus.HP = 1000;
 	MaxStatus = mStatus;
 	m_bIsBoss = true;
 	nameBoss = "Vagabond";
@@ -152,11 +152,11 @@ void Vagabond::processData()
 		{
 			if (mFlip == SDL_FLIP_HORIZONTAL)
 			{
-				mVelocity->setX(-50);
+				mVelocity->setX(-20);
 			}
 			else
 			{
-				mVelocity->setX(50);
+				mVelocity->setX(20);
 			}
 		}
 		completeUpdateMethod();

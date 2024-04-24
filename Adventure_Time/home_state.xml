@@ -4,10 +4,16 @@
 		<texture filePath="assets/button/play_button.png" textureID="play_button"/>
 		<texture filePath="assets/button/exit_button.png" textureID="exit_button"/>
 		<texture filePath="assets/button/score_button.png" textureID="score_button"/>
+		<texture filePath="assets/button/menu_font.png" textureID="font"/>
+		<texture filePath="assets/button/music.png" textureID="music_button"/>
+		<texture filePath="assets/button/sfx.png" textureID="sfx_button"/>
+
 	</TEXTURES>
 	<BUTTONS>
 		<action name="play" textureID="play_button" numFrame="2" w="388" h="125" callbackID="0" x="450" y="350"/>
 		<action name="score" textureID="score_button" numFrame="2" w="390" h="125" callbackID="1" x="450" y="480"/>
 		<action name="exit" textureID="exit_button" numFrame="2" w="383" h="125" callbackID="2" x="450" y="600"/>
+		<action name="music" textureID="music_button" numFrame="2" w="77" h="78" callbackID="3" x="1100" y="20"/>
+		<action name="sfx" textureID="sfx_button" numFrame="2" w="82" h="78" callbackID="4" x="1180" y="20"/>
 	</BUTTONS>
 </STATES>

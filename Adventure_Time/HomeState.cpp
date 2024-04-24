@@ -37,21 +37,46 @@ void HomeState::m_sHomeToScore()
 	GameManager::getInstance()->getFSM()->changeState(new ScoreState());
 }
 
+void HomeState::m_sMusicControl()
+{
+	if (SoundManager::getInstance()->isMutedMusic() == true)
+	{
+		SoundManager::getInstance()->enableMusic();
+	}
+	else
+	{
+		SoundManager::getInstance()->muteMusic();
+	}
+}
+
+void HomeState::m_sSFXControl()
+{
+	if (SoundManager::getInstance()->isMutedSFX() == true)
+	{
+		SoundManager::getInstance()->enableSFX();
+	}
+	else
+	{
+		SoundManager::getInstance()->muteSFX();
+	}
+}
+
 HomeState::HomeState()
 {
 	mCallback.push_back(m_sHomeToPlay);
 	mCallback.push_back(m_sHomeToScore);
 	mCallback.push_back(m_sExitHome);
+	mCallback.push_back(m_sMusicControl);
+	mCallback.push_back(m_sSFXControl);
 
 	background = new Background();
-	TextureManager::getInstance()->load("assets/button/menu_font.png", "font", GameManager::getInstance()->getRenderer());
 	font = new ObjectModel();
-	font->loadTexture(unique_ptr<TextureLoader>(new TextureLoader("font", 0, 0, 1280, 768, 1)));
 }
 
 HomeState::~HomeState()
 {
-	TextureManager::getInstance()->clearFromTexture("font");
+	delete font;
+	delete background;
 }
 
 void HomeState::processData()
@@ -93,9 +118,26 @@ bool HomeState::startState()
 	{
 		ButtonModel* obj = new ButtonModel();
 		obj->loadTexture(unique_ptr<TextureLoader>(new TextureLoader(ite.textureID, ite.x, ite.y, ite.w, ite.h, ite.numFrames, ite.callbackID)));
-		obj->setCallback(mCallback[ite.callbackID]);
+		if (ite.callbackID >= 3)
+		{
+			obj->setSwift();
+			obj->setCallback(mCallback[ite.callbackID]);
+			if (ite.callbackID == 3)
+			{
+				obj->setIndexFrame(SoundManager::getInstance()->isMutedMusic());//music
+			}
+			else
+			{
+				obj->setIndexFrame(SoundManager::getInstance()->isMutedSFX());
+			}
+		}
+		else
+		{
+			obj->setCallback(mCallback[ite.callbackID]);
+		}
 		mObjects.push_back(obj);
 	}
+	font->loadTexture(unique_ptr<TextureLoader>(new TextureLoader("font", 0, 0, 1280, 768, 1)));
 	return true;
 }
 bool HomeState::exitState()

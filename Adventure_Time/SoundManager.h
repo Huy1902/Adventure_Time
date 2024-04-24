@@ -27,14 +27,42 @@ public:
 
 	void playSound(const std::string& id, int loop, int channel);
 
+	bool isMutedMusic()
+	{
+		return m_bMuteMusic;
+	}
+	bool isMutedSFX()
+	{
+		return m_bMuteSFX;
+	}
+
+	void muteMusic();
+	void muteSFX();
+
+	void enableMusic()
+	{
+		if (Mix_PausedMusic() == true)
+		{
+			Mix_ResumeMusic();
+		}
+		m_bMuteMusic = false;
+	}
+	void enableSFX()
+	{
+		m_bMuteSFX = false;
+	}
+
 	void clearMusic(const std::string& id);
 	void clearSFX(const std::string& id);
 
 private:
 	static SoundManager* s_pInstance;
 
-	std::map<std::string , Mix_Chunk*> mSfxs;
-	std::map<std::string , Mix_Music*> mMusic;
+	std::map<std::string, Mix_Chunk*> mSfxs;
+	std::map<std::string, Mix_Music*> mMusic;
+
+	int m_bMuteMusic = false;
+	int m_bMuteSFX = false;
 
 	SoundManager();
 	~SoundManager();

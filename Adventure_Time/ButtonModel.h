@@ -15,6 +15,15 @@ public:
 	{
 		return mCallbackID;
 	}
+	void setSwift()
+	{
+		m_bIsSwift = true;
+	}
+
+	void setIndexFrame(int i)
+	{
+		mIndexFrames = i;
+	}
 
 	virtual void processData();
 	virtual void renderObject() const;
@@ -32,6 +41,7 @@ private:
 	void(*mCallback)();
 	bool m_bReleased;
 	int mCallbackID;
+	bool m_bIsSwift;
 };
 
 #endif //BUTTONMODEL_H_

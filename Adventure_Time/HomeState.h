@@ -30,6 +30,8 @@ private:
     static void m_sHomeToPlay();
     static void m_sExitHome();
     static void m_sHomeToScore();
+    static void m_sMusicControl();
+    static void m_sSFXControl();
 };
 
 #endif //HOMESTATE_H_
