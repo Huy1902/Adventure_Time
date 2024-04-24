@@ -58,7 +58,7 @@ void StatusManager::renderBossStatus(EnemyObject* mBoss)
 
 	temp = mBars["boss_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
-	FontManager::getInstance()->drawText(mBoss->getNameBoss().c_str(), 215, 698, 24);
+	FontManager::getInstance()->drawText(mBoss->getNameBoss().c_str(), 275, 698, 24);
 }
 
 void StatusManager::setPlayer(PlayerObject* obj)

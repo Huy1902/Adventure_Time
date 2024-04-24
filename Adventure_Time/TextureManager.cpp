@@ -32,7 +32,7 @@ void TextureManager::load(const std::string& fileName, const std::string& id, SD
 	SDL_Surface* pSurface = IMG_Load(fileName.c_str());
 	if (pSurface == NULL)
 	{
-		cout << "failed";
+		//cout << "failed";
 	}
 	else
 	{
