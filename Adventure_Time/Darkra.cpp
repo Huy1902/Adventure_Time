@@ -14,7 +14,7 @@ Darkra::Darkra() :
 	}
 	mCountTimeExist = mActions["cast"].numFrames * mActions["cast"].speed;
 
-	mVelocity->setX(10);
+	mVelocity->setX(6);
 	mVelocity->setY(0);
 	mCastDistance = 100;
 	mCurrentAction = CAST;

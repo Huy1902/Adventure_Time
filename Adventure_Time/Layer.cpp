@@ -77,15 +77,6 @@ Layer::Layer(const std::string& layerString, const int& numRow, const int& numCo
 
 void Layer::updateLayer()
 {
-	//if ( (mPosition->getX() / mTileSize + WINDOWS_COL >= mNumCol && mVelocity->getX() > 0) || (mPosition->getX() <= 0 && mVelocity->getX() < 0))
-	//{
-	//	mVelocity->setX(0);
-	//}
-	//if (mPosition->getY() / mTileSize + WINDOWS_ROW >= mNumRow )
-	//{
-	//	mVelocity->setY(0);
-	//}
-	//*mPosition += *mVelocity;
 }
 
 int Layer::getID(const double& x, const double& y) const
@@ -118,14 +109,6 @@ void Layer::renderLayer()
 	int edge_start_width = mTileSize - edge_end_witdth;
 	int w2 = edge_end_witdth;
 	int w1 = edge_start_width;
-
-	//for (int i = 0; i < WINDOWS_ROW; ++i)
-	//{
-	//	if (mGrid[i + y][j + x] != -1)
-	//	{
-	//		m_pTileset->renderTile(mGrid[i + y][j + x], j * mTileSize, i * mTileSize);
-	//	}
-	//}
 	for (int i = 0; i < WINDOWS_ROW; ++i)
 	{
 		if (mGrid[i + y][0 + x] != -1)
@@ -143,13 +126,6 @@ void Layer::renderLayer()
 			}
 		}
 	}
-	//for (int i = 0; i < WINDOWS_ROW; ++i)
-	//{
-	//	if (mGrid[i + y][WINDOWS_COL+ x] != -1)
-	//	{
-	//		m_pTileset->renderPartOfTile(mGrid[i + y][WINDOWS_COL + x], (WINDOWS_COL) * mTileSize - w2, i * mTileSize, w1, w2);
-	//	}
-	//}
 }
 
 Layer::~Layer()
