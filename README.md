@@ -1,3 +1,5 @@
+[[English]](README_en.md)
+
 # Adventure Time - Huy1902
 
 # Lời đầu
@@ -110,6 +112,9 @@
 
 - Khi hạ gục boss, thành tựu sẽ hiện ra. Bạn đã trở nên mạnh mẽ hơn rồi.
 ![image](demo_resources/boss_fallen.png)
+
+- Nhân vật và kẻ địch đều có chỉ số LUCK riêng, sẽ có khả năng né đón tấn công. 
+![image](demo_resources/miss.png)
 
 - Sử dụng các đòn tấn công thường hay lướt sẽ tiêu tốn thể lực. Ngược lại, khi dùng skill, bạn không tiêu tốn thể lực nhưng sẽ có thời gian hồi và gây ít sát thương hơn. Đòn crit không tiêu hao gì cả.
 
