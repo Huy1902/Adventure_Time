@@ -1,12 +1,15 @@
-# Adventure_Time
+# Adventure Time - Huy1902
 
-# Naming convention: https://www.geeksforgeeks.org/naming-convention-in-c/
+# Lời đầu
 
-# Environment code
-  - OS: Windows 11
-  - IDE: Visual Studio 2022
-  - Need to set up before run. To have more detail, you can check: https://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/msvc2019/index.php . The way to install on Visual Studio 2019 is mostly like.
++ Họ và tên: Nguyễn Quốc Huy - K68CB
 
-# Header file type:
-  - Manager: handle method to control objects, game loop
-  - Loader: load info game object from image
++ Mã sinh viên: 23020082
+
++ Bài tập lớn: Adventure Time 
+
+# Giới thiệu game
+
+- Video demo game 
+
+Adventure Time là một game thuộc thể loại RPG. Game thủ được nhập vai vào một chiến binh vô danh đang trên con đường đánh bại các Lord of Cinder, những người nắm giữ quyền năng to lớn của The First Flame. Liên tục đối đầu với những chiến binh thiện chiến, giành lấy sức mạnh to lớn và bước lên đỉnh vinh quang từ tro tàn. 
