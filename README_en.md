@@ -12,7 +12,7 @@
 
 # Introducing the game
 
-- Game introduction video:
+- Game introduction video: https://drive.google.com/file/d/1rFcbf3gFON2YECewMfVyV4nu8jZ-IW9Y/view?usp=sharing
 
 - Adventure Time is a game in the RPG genre. Gamers take on the role of an NoName warrior on the path to defeat the Lords of Space, who hold the great power of The First Crystal. Continuously confront skilled warriors, gain great power and rise to glory from the ashes.
 
