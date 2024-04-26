@@ -44,6 +44,7 @@ BarrerKnight::BarrerKnight() :
 	mCurrentAction = IDLE;
 	mAnimation->setPosition(*mPosition);
 	mStatus.HP = 200;
+	mStatus.DEF = 10;
 
 	mCountStamina = 0;
 
@@ -53,8 +54,6 @@ BarrerKnight::BarrerKnight() :
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
 
 	mMaxStatus = mStatus;
-
-	mStatus.LUCK = 100;
 }
 BarrerKnight::~BarrerKnight()
 {

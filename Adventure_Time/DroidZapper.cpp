@@ -46,6 +46,7 @@ DroidZapper::DroidZapper() :
 	mAnimation->setPosition(*mPosition);
 
 	mStatus.HP = 200;
+	mStatus.ATK = 30;
 
 	mCountStamina = 0;
 

@@ -58,7 +58,7 @@ Vagabond::Vagabond() :
 
 	mCurrentAction = IDLE;
 	mAnimation->setPosition(*mPosition);
-	mStatus.HP = 200;
+	
 
 	mCountStamina = 0;
 	mAttackRange = 20;
@@ -68,6 +68,8 @@ Vagabond::Vagabond() :
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
 	mStatus.HP = 1000;
+	mStatus.ATK = 40;
+	mStatus.DEF = 10;
 	mMaxStatus = mStatus;
 	m_bIsBoss = true;
 	nameBoss = "Vagabond";

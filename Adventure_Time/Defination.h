@@ -45,7 +45,7 @@ struct Status
 	int HP = 100;
 	int STA = 20;
 	int ATK = 20;
-	int DEF = 10;
+	int DEF = 5;
 	int IQ = 10;
 	int LUCK = 10;
 	int EXP = 100;

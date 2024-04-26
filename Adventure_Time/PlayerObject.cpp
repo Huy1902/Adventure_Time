@@ -42,7 +42,8 @@ PlayerObject::PlayerObject():
 	Mix_Volume(mSFXs["run"].channel, 100);
 	mStatus.LUCK = 10;
 	mStatus.STA = 200;
-
+	mStatus.DEF = 10;
+	mStatus.ATK = 30;
 	mCharHeight = 64;
 	mCharWidth = 64;
 	mCurrentAction = IDLE;

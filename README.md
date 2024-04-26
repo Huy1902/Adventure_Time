@@ -114,19 +114,24 @@
 - Sử dụng các đòn tấn công thường hay lướt sẽ tiêu tốn thể lực. Ngược lại, khi dùng skill, bạn không tiêu tốn thể lực nhưng sẽ có thời gian hồi và gây ít sát thương hơn. Đòn crit không tiêu hao gì cả.
 
 ## c. Kẻ địch
-
 - Có ba loại kẻ địch thường trong game:
 
 |                                         | Tên kẻ địch	       | Khả năng và sức mạnh                                                                                       |
 |-----------------------------------------|--------------------|--------------------------------------------------------------------------------------------------|
-| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Cận chiến, chiêu thức đa dạng, kháng phép cao.                                                                       |
+| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Cận chiến, chiêu thức đa dạng, trâu bò khó giết bằng đòn đánh thường.                                                                       |
 | ![gif](demo_resources/small_droid.gif)  | Droid Zapper	       | Tầm đánh trung bình, sát thương cao                                               |
 | ![gif](demo_resources/archer.gif)  | Archer	   | Tầm đánh xa, Không thể bị làm choáng, sát thương những mũi tên lớn                                                                 |
-|
 
-
-
-
+- Khám phá cách đánh phù hợp nhất cho từng loại quái, và tùy trường hợp chạy là một phương án tốt.
+## d. Boss
+- Hiện chỉ có một Lord of Space là "Vagabond" trong trò chơi. Khi hạ gục nó, bạn đã phá đảo trò chơi của tôi rồi đó. Cố gắng đạt điểm tối đa cho các lần chơi nhé.
+- Các chỉ số của Lord of Space đều cao. Hãy cẩn thận!
+- Một vài hành động của Vagabond:
+|                                         | Mô tả                                                                                       |
+|-----------------------------------------|--------------------|--------------------------------------------------------------------------------------------------|
+| ![gif](demo_resources/boss_attack1.gif) | Chém ba đòn liên tiếp.                                                                       |
+| ![gif](demo_resources/boss_attack2.gif)  | Tích sức mạnh, chém mạnh và dịch chuyển một đoạn                                               |
+| ![gif](demo_resources/boss_die.gif)  | Bị hạ gục                                                                 |
 
 
 
