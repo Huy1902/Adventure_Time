@@ -1,0 +1,9 @@
+- `.txt`: file dành cho việc nhập xuất dữ liệu, hỗ trợ lưu các dữ liệu không bị mất đi khi thoát game.
+- `.xml`: các file lưu thông tin về các object, được hỗ trợ do trình dịch do tự tay mình viết.
+- `.tmx`: là dạng file mà app Tiled sử dụng, có cấu trúc tương tự file `.xml` được hỗ trợ bởi trình dịnh do tự tay mình làm.
+- Trong folder `assets` của game ở một số chỗ còn có các file `.psd` là định dạng của Adobe Photoshop.
+- `.gìf`: một dạng file hình ảnh chuyển động được.
+- `.wav`: file sfx được thư viện SDL_mixer chấp nhận, file `.wav` có độ chi tiết cao hơn `.mp3`.
+- `.png`: file hình ảnh được thư viện SDL_image chấp nhận, là dạng file hình ảnh chính của game.
+- `.ttf`: file font chữ dùng cho chương trình được thư viện SDL_ttf sử dụng.
+- `.aseprite`: là định dạng của chương trinhg Aseprite.

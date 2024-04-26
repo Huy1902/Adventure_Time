@@ -84,6 +84,7 @@
 | BASH    |     U    |
 | SPELL 1 |     Q    |
 | SPELL 2 |     E    |
+| INTERACT|     F    |
 
 - Lưu ý: Nếu nhân vật của bạn không di chuyển, hãy xem lại bạn có đang để ngôn ngữ khác ngoài tiếng Anh trên máy không. Với Window, chọn English tại Keyboard layout để nhân vật di chuyển mượt mà.
 
@@ -158,7 +159,64 @@
 
 # 4. Về source code của game
 ## ***Lưu ý*** : Source code của game đã được sắp xếp và nằm trong folder [src](./src/) để mọi người tiện theo dõi.
+## Tổng quát về các folder có trong folder [src](./src/) như sau:
+- [Achievement](./src/Achievement/): quản lý thành tựu trong Game. Đọc thêm tại [đây](./src/Achievement/about_achieve_manager.md).
+- [EnemyObject](./src/EnemyObject/): chứa các đối tượng enemy có trong chương trình.
+- [Factory](./src/Factory/): áp dụng Factory Patter để viết các Generator, tự động hóa việc tạo các đối tượng được dịch từ file map(file .tmx). Đọc thêm tại [đây](./src/Factory/about_factory_method.md).
+- [FiniteStateMachine](./src/FiniteStateMachine/): một máy trạng thái hữu hạn quản lý các state. Đọc thêm tại [đây](./src/FiniteStateMachine/about_finite_state_machine.md).
+- [GameLoop](./src/GameLoop/): thực hiện nguyên tắc về game loop trong việc làm game. Đọc thêm tại [đây](./src/GameLoop/about_sequencing_patterns.md).
+- [Graphic]: chứa các file xử lý đồ họa của game. Đọc thêm tại [đây](./src/Graphic/about_graphic.md).
+- [InteractObject]: chứa các object tương tác được với người chơi.
+- [Map]: chứa các file xử lý map và va chạm. Chi tiết tại [đây](./src/Map/about_map.md)
+- [Misshit](./src/Misshit/): quản lý các đòn đánh và thông báo việc miss đòn đánh trong game.
+- [Status](./src/Status/): quản lý và hiện thị trạng thái nhân vật và kẻ địch trong game.
+- [Mode](./src/Model/): những model chính, các lớp cha của các object trong chương trình.
+- [Observe](./src/Observe/): thực hiện Observe pattern và Command patter để bắt các sự kiện trong game. Chi tiết tại [đây](./src/Observe/about_observe_and_command.md)
+- [Parser](./src/Parser/): trình dịch cho các file `.tmx` và `.xml`. Đây là cải tiến một project của mình từng viết trong quá khứ. Bạn có thể xem tại: https://github.com/Huy1902/XML
+- [PlayerObject](./src/PlayerObject/): chứa lớp cho nhân vật chính của game mà người chơi điều khiển.
+- [Sound](./src/Sound/): quản lý âm thanh trò chơi. Chi tiết tại [đây](./src/Sound/about_sound.md).
+- [Spell](./src/Spell/): quản lý và chứa các object spell của nhân vật.
+- [Standing](./src/Standing/): quản lý, lưu và hiển thị score của người chơi. Chi tiết ở [đây](./src/Standing/about_standing.md)
+- [States](./src/States/): các state: menu, pause, game_over, score, play của trò chơi. Thực hiện theo State Patter, có FSM để quản lý. Chi tiết tại [đây](./src/States/about_state_pattern.md)
+- [Utilities](./src/Utilities/): chứa các tiện ích cải thiện trải nghiệm người dùng. Chi tiết tại [đây](./src/Utilities/about_utilities.md).
 
 # 5. Về tài nguyên trong game
+- Folder chứa tài nguyên game: [assets](./Adventure_Time/assets/).
+- Chi tiết về hình ảnh(nguồn, cách xử lý và phương thức sử dụng): [graphic](./src/Graphic/about_graphic.md)
+- Chi tiết về âm thanh(nguồn, cách xử lý và phương thức sử dụng):
+[sound](./src/Sound/about_sound.md)
+- Chi tiết về font chứ: [font](./src/Utilities/Font/about_font.md).
+- Chi tiết về các loại file: [file](./src/about_file_type.md).
+
+- Tất cả các tài nguyên trong game đều được mình tự tìm kiếm, nhiều phần trong số đó là dạng thô, cần phải xử lý qua các phần mềm edit như Adobe Photoshop, Aseprite, Tiled, Adobe Premiere, Adobe Audition. Điều này khá mất thời gian và công sức.
+
+# 6. Tổng kết 
+
+## ***Điểm tốt***
+- Dự án này hoàn toàn là do em tự làm, tự học hỏi và tìm tòi không đi sao chép ở bất kì đâu. Code hoàn toàn do chính tay em viết ra 100%.
+
+- Cải thiện trau dồi tư duy lập trình theo hướng đối tượng, tư duy lên kế hoạch và phát triển sản phẩm.
+
+- Học thêm về design pattern, edit cùng nhiều phần mềm khác nhau.
+Đa số hình ảnh, âm thanh đều do em edit.
+
+- Học được cách setup môi trường, sử dụng thư viện ngoài. 
 
 
+### ***Điểm hạn chế*** 
+- Code còn chưa thực sự rõ ràng như em mong muốn. Nhiều phần còn chưa tách hẳn nhau. Điều này sẽ gây khó khăn khi muốn phát triển sản phẩm lớn hơn
+
+### ***Hướng phát triển*** 
+- Sử dụng các Pattern để tối ưu hóa chương trình. Model lại chương trình để dễ dàng update hơn.
+
+- Hoàn thiện cốt truyện của nhân vật
+
+- Thêm các NPC vào chương trình để nhân vật giao tiếp, mua bán.
+
+- Mục tiêu của em khi xây dựng game là: xây dựng lối đánh tương tự Dark Soul 3 và hệ thống kỹ năng, lên cấp như Final Fantasy 9. Hiện game của em chỉ mới thể hiện được một phần, tương lai cần hoàn thiện thêm.
+
+- Thêm các item vào để nhân vật tương tác như: bình máu. sách phép, ...
+
+- Thêm rương báu và hệ thống nhặt đồ, túi đồ.
+
+### *Mức điểm tự đánh giá: 9.5++ / 10* 

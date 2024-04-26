@@ -84,6 +84,7 @@
 | BASH | U |
 | SPELL 1 | Q |
 | SPELL 2 | E |
+| INTERACT|     F    |
 
 - Note: If your character does not move, check to see if you have a language other than English on the device. With Window, select English at Keyboard layout so the character moves smoothly.
 

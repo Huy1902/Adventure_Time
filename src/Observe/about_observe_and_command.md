@@ -1,0 +1,2 @@
+- Observe cho phép theo dõi hoạt động mà không can thiệp trực tiếp vào game.
+- Command sử dụng tính đa hình và kế thừa để thực hiện các hành động phù hợp trong từng tình huống

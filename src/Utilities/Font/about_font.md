@@ -1,0 +1,2 @@
+- SỬ dụng font được tải trên: https://itch.io/game-assets
+- Sử dụng thư viện SDL_ttf để dùng font.

@@ -1,0 +1,3 @@
+- Folder này chứa công cụ lưu và hiển thị score qua các lần chơi bằng cách sử dụng kỹ thuật nhập xuất file trong C++.
+- Dữ liệu không bị mất khi thoát game nhờ lưu vào một file [score.txt](../../Adventure_Time/score.txt).
+- Tối ưu việc load dữ liệu bằng file buffer [score_buffer.txt](../../Adventure_Time/score_buffer.txt)

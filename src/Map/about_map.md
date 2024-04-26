@@ -1,0 +1,6 @@
+- Chứa tất cả các file liên quan đến xử lý các đối tượng trong map.
+- Map được mình xầy dựng dựa trên Tileset qua app Tiled. Bạn có thể tải app này tại [đây](https://www.mapeditor.org/download.html).
+- Các map được lưu dưới dạng .tmx. Ví dụ trong chương trình có file [map1.tmx](../../Adventure_Time/map1.tmx).
+- Mình viết chương trình dịch cho các file .tmx tại folder[Parser](../Parser/).
+- Map được xây dựng trong chương trình qua cơ chế: load tileset -> load các layer (là các mảng gồm nhiều tile ký hiệu bằng id của chúng) -> hiển thị lên màn hình.
+- Ở đây cũng chưa file xử lý va chạm chính của chương trình [CollisionManager](./CollisionManager.h)
