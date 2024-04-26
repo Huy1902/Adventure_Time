@@ -12,9 +12,27 @@
 
 # Giới thiệu game
 
-- Video giới thiệu game:
+- Video giới thiệu game: https://drive.google.com/file/d/1rFcbf3gFON2YECewMfVyV4nu8jZ-IW9Y/view?usp=sharing
 
-- Adventure Time là một game thuộc thể loại RPG. Game thủ được nhập vai vào một chiến binh vô danh đang trên con đường đánh bại các Lord of Space, những người nắm giữ quyền năng to lớn của The First Crystal. Liên tục đối đầu với những chiến binh thiện chiến, giành lấy sức mạnh to lớn và bước lên đỉnh vinh quang từ tro tàn. 
+- Adventure Time là một game thuộc thể loại RPG. Game thủ được nhập vai vào một chiến binh vô danh đang trên con đường đánh bại các Lord of Space, những người nắm giữ quyền năng to lớn của The First Crystal. Liên tục đối đầu với những chiến binh thiện chiến, giành lấy sức mạnh to lớn và bước lên đỉnh vinh quang từ tro tàn.
+
+- [0. Cách tải game](#0-cách-tải-game)
+  + [a. Cách 1: Không bao gồm code.](#a-cách-1-không-bao-gồm-code)
+  + [b. Cách 2: Bao gồm code và có thể biên dịch.](#b-cách-2-bao-gồm-code-và-có-thể-biên-dịch)
+- [1. Tính năng game](#1-tính-năng-game)
+- [2. Bắt đầu game](#2-bắt-đầu-game)
+- [3. Hướng dẫn chơi game](#3-hướng-dẫn-chơi-game)
+  +[a. Về nhân vật:](#a-về-nhân-vật)
+  +[b. Cơ chế chơi:](#b-cơ-chế-chơi)
+  +[c. Kẻ địch](#c-kẻ-địch)
+  +[d. Boss](#d-boss)
+  +[e. Cơ chế tính điểm](#e-cơ-chế-tính-điểm)
+  +[f. Cơ chế tăng cấp](#f-cơ-chế-tăng-cấp)
+  +[g. Tạm dừng và hồi sinh](#g-tạm-dừng-và-hồi-sinh)
+- [4. Về source code của game](#4-về-source-code-của-game)
+- [5. Về tài nguyên trong game](#5-về-tài-nguyên-trong-game)
+- [6. Tổng kết ](#6-tổng-kết)
+
 
 # 0. Cách tải game
 
@@ -150,7 +168,7 @@
 - Khi kinh nghiệm đạt ngưỡng, nhân vật sẽ lên level và tăng chỉ số.
 - Cái chết sẽ lấy đi của bạn tất cả chỉ số đó.
 
-## h. Tạm dừng và hồi sinh.
+## g. Tạm dừng và hồi sinh.
 - Khi chơi game, bạn có thể nhấn `Esc` để tạm dừng game. Đồng thời tại đây, bạn có thể theo dõi các chỉ số của mình. Nhấn `Back home` sẽ đưa bạn về màn hình chính hoặc `Continue` để tiếp tục game.
 ![image](demo_resources/pause.png)
 
@@ -220,3 +238,8 @@
 - Thêm rương báu và hệ thống nhặt đồ, túi đồ.
 
 ### *Mức điểm tự đánh giá: 9.5++ / 10* 
+
+### Nguồn tham khảo:
+- Các design pattern tại: https://gameprogrammingpatterns.com/contents.html và https://www.geeksforgeeks.org/software-design-patterns/
+- Cách sử dụng thư viện và hàm tại: https://lazyfoo.net/tutorials/SDL/index.php
+- Nguồn học trên Youtube: https://www.youtube.com/watch?v=1KD4Ae0tX0g&list=PL-K0viiuJ2RctP5nlJlqmHGeh66-GOZR_
