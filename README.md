@@ -111,6 +111,19 @@
 - Khi hạ gục boss, thành tựu sẽ hiện ra. Bạn đã trở nên mạnh mẽ hơn rồi.
 ![image](demo_resources/boss_fallen.png)
 
+- Sử dụng các đòn tấn công thường hay lướt sẽ tiêu tốn thể lực. Ngược lại, khi dùng skill, bạn không tiêu tốn thể lực nhưng sẽ có thời gian hồi và gây ít sát thương hơn. Đòn crit không tiêu hao gì cả.
+
+## c. Kẻ địch
+
+- Có ba loại kẻ địch thường trong game:
+
+|                                         | Tên kẻ địch	       | Khả năng và sức mạnh                                                                                       |
+|-----------------------------------------|--------------------|--------------------------------------------------------------------------------------------------|
+| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Chiêu thức đa dạng, khánh phép cao.                                                                       |
+| ![image](resources/images/Choose_level/flag.png)   | Flag Zombie	       | Báo hiệu một lượng lớn zombie đang chuẩn bị ra.                                                  |
+| ![image](resources/images/Choose_level/cone.png)   | Conehead Zombie	   | Trâu gấp 3 lần zombie thường                                                                     |
+| ![image](resources/images/Choose_level/bucket.png) | Buckethead Zombie	 | Trâu gấp 6.5 lần zombie thường                                                                   |
+|
 
 
 
