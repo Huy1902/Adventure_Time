@@ -233,23 +233,23 @@
     <ClCompile Include="StandingManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SpellStream.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MissHitManager.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Defination.h">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SpellStream.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Darkra.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Observe.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="MissHitManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Defination.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -421,20 +421,20 @@
     <ClInclude Include="Tips.h">
       <Filter>Header Files\NewType</Filter>
     </ClInclude>
-    <ClInclude Include="SpellStream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Darkra.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Observe.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Darkra.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="MissHitManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellStream.h">
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -486,8 +486,10 @@
     <Xml Include="scourge.xml">
       <Filter>Resource Files\XML</Filter>
     </Xml>
-    <Xml Include="spell_menu.xml" />
     <Xml Include="darkra.xml">
+      <Filter>Resource Files\XML</Filter>
+    </Xml>
+    <Xml Include="spell_menu.xml">
       <Filter>Resource Files\XML</Filter>
     </Xml>
   </ItemGroup>
