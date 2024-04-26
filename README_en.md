@@ -123,9 +123,9 @@
 
 |                                         | Enemy name	       |                                 Abilities and Powers                                            |
 |-----------------------------------------|--------------------|--------------------------------------------------------------------------------------------------|
-| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Cận chiến, chiêu thức đa dạng, trâu bò khó giết bằng đòn đánh thường.                                                                       |
-| ![gif](demo_resources/small_droid.gif)  | Droid Zapper	       | Tầm đánh trung bình, sát thương cao                                               |
-| ![gif](demo_resources/archer.gif)  | Archer	   | Tầm đánh xa, Không thể bị làm choáng, sát thương những mũi tên lớn                                                                 |
+| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Close combat, diverse moves, difficult to kill with normal attacks.thường.                                                                       |
+| ![gif](demo_resources/small_droid.gif)  | Droid Zapper	       | Medium attack range, high damage                                              |
+| ![gif](demo_resources/archer.gif)  | Archer	   | Long range, Cannot be stunned, damage arrows                                                                 |
 
 - Discover the most suitable fighting style for each type of monster, and depending on the situation, running is a good option.
 ## d. Boss
@@ -135,9 +135,9 @@
 
 |  Action  |   Description      |
 |---------|------------------------------------------|
-| ![gif](demo_resources/boss_attack1.gif)    |     Chém ba đòn liên tiếp.      |
-|  ![gif](demo_resources/boss_attack2.gif)   |     Tích sức mạnh, chém mạnh và dịch chuyển một đoạn    |
-| ![gif](demo_resources/boss_die.gif)     |     Bị hạ gục       |
+| ![gif](demo_resources/boss_attack1.gif)    |     Slash three consecutive attacks.     |
+|  ![gif](demo_resources/boss_attack2.gif)   |     Accumulate power, slash hard and teleport a distance   |
+| ![gif](demo_resources/boss_die.gif)     |    Knocked out     |
 
 
 
