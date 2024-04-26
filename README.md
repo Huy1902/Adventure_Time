@@ -12,7 +12,7 @@
 
 - Video giới thiệu game:
 
-- Adventure Time là một game thuộc thể loại RPG. Game thủ được nhập vai vào một chiến binh vô danh đang trên con đường đánh bại các Lord of Cinder, những người nắm giữ quyền năng to lớn của The First Flame. Liên tục đối đầu với những chiến binh thiện chiến, giành lấy sức mạnh to lớn và bước lên đỉnh vinh quang từ tro tàn. 
+- Adventure Time là một game thuộc thể loại RPG. Game thủ được nhập vai vào một chiến binh vô danh đang trên con đường đánh bại các Lord of Space, những người nắm giữ quyền năng to lớn của The First Crystal. Liên tục đối đầu với những chiến binh thiện chiến, giành lấy sức mạnh to lớn và bước lên đỉnh vinh quang từ tro tàn. 
 
 # 0. Cách tải game
 
@@ -65,8 +65,55 @@
 - Sau khi nhấn Play tại màn hình chính, người chơi sẽ thấy màn hình đợi. Đây cũng sẽ là màn hình hiện mỗi khi người chơi chuyển map. Có vài tip khá hữu dụng được hiện tại đây.
 ![image](demo_resources/loading.png)
 
-- Màn hình chơi game khá dễ làm quen. Điều bạn cần chú ý khi chơi là điểm số ![image](demo_resources/score.png) và trạng thái máu và thể lực của nhân vật ![image](demo_resources/HP_STA.png).
+- Màn hình chơi game khá dễ làm quen. Điều bạn cần chú ý khi chơi là điểm số ![image](demo_resources/Score.png) và trạng thái máu và thể lực của nhân vật ![image](demo_resources/HP_STA.png).
 ![image](demo_resources/playing.png)
+
+## a. Về nhân vật:
+
+- Các phím điều khiển:
+
+| Control |    Key   |
+|---------|----------|
+| LEFT    |     A    |
+| RIGHT   |     D    |
+| JUMP    |     K    |
+| DASH    |     L    |
+| ATTACK  |     J    |
+| BASH    |     U    |
+| SPELL 1 |     Q    |
+| SPELL 2 |     E    |
+
+- Lưu ý: Nếu nhân vật của bạn không di chuyển, hãy xem lại bạn có đang để ngôn ngữ khác ngoài tiếng Anh trên máy không. Với Window, chọn English tại Keyboard layout để nhân vật di chuyển mượt mà.
+
+## b. Về cơ chế chơi:
+- Nhân vật gây sát thương lên kẻ địch bằng đòn tần công thường hoặc sử dụng các phép.
+![image](demo_resources/darkra.png)
+
+- Nhân vật có thể làm choáng kẻ địch bằng các đòn bash. Khi bash nhân vật sẽ không nhận sát thương, và nếu sử dụng đúng lúc kẻ địch tấn công, kẻ địch sẽ bị choáng.
+![image](demo_resources/bash_success.png)
+
+- Khi kẻ địch bị choáng, nhấn phím `J` nhân vật sẽ thực hiện đòn crit. Đây là đòn đánh gây cực kỳ nhiều sát thương. Hãy tận dụng cơ chế để hạ gục quái nhanh hơn.
+![image](demo_resources/crit.png)
+  + Lưu ý: Cơ chế này chỉ áp dụng với kẻ địch mang vũ khí tầm gần. Kẻ địch là cung thủ sẽ miễn khống chế.
+
+- Nhân vât có thể lưu điểm hồi sinh tại các cổng dịch chuyển hoặc trại lửa.
+![image](demo_resources/bonfire.png)
+
+- Di chuyển của các map khác nhau bằng cổng dịch chuyển màu xanh lá cây, khi đặt chân tới một vùng đất tên của nó sẽ hiện lên màn hình.
+![image](demo_resources/portal.png)
+
+- Nếu kẻ địch hạ gục bạn, thông báo "You died" sẽ hiện ra.
+![image](demo_resources/died.png)
+
+- Khi bị hạ gục, nhân vật sẽ hồi sinh tại điểm lưu gần nhất.
+![image](demo_resources/revival.png)
+
+- Khi hạ gục boss, thành tựu sẽ hiện ra. Bạn đã trở nên mạnh mẽ hơn rồi.
+![image](demo_resources/boss_fallen.png)
+
+
+
+
 
 
 
