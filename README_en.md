@@ -16,6 +16,23 @@
 
 - Adventure Time is a game in the RPG genre. Gamers take on the role of an NoName warrior on the path to defeat the Lords of Space, who hold the great power of The First Crystal. Continuously confront skilled warriors, gain great power and rise to glory from the ashes.
 
+- [0. How to download game](#0-how-to-download-the-game)
+   + [a. Method 1: Does not include code.](#a-method-1-do-not-include-code)
+   + [b. Method 2: Includes code and can compile.](#b-method-2-include-code-and-compile)
+- [first. Game features](#1-game-features)
+- [2. Start the game:](#2-start-the-game)
+- [3. Instructions for playing the game](#3-instructions-for-playing-the-game)
+   +[a. About the character:](#a-about-the-character)
+   +[b. About the playing mechanism](#b-about-the-playing-mechanism)
+   +[c. Enemy](#c-enemy)
+   +[d. Boss](#d-boss)
+   +[e. Scoring mechanism](#e-scoring-mechanism)
+   +[f. Level-up mechanism](#f-level-up-mechanism)
+   +[g. Pause and revive.](#g-pause-and-revive)
+- [4. About the game's source code](#4-about-the-game's-source-code)
+- [5. About in-game resources](#5-about-in-game-resources)
+- [6. Summary ](#6-summary)
+
 # 0. How to download the game
 
 ## a. Method 1: Do not include code.
@@ -140,5 +157,88 @@
 |  ![gif](demo_resources/boss_attack2.gif)   |     Accumulate power, slash hard and teleport a distance   |
 | ![gif](demo_resources/boss_die.gif)     |    Knocked out     |
 
+## e. Scoring mechanism
+- Collecting gold or defeating monsters will increase your score![image](demo_resources/Score.png).
+- Defeating the Boss will give you more points. Defeating monsters will increase the player's stats.
+- Scores will automatically be saved when you return to the main screen. You can see it in Score.
+
+## f. Level up mechanism
+- Defeating enemies will give experience.
+- When experience reaches the threshold, the character will level up and increase his stats.
+- Death will take away all of your stats.
+
+## g. Pause and revive.
+- When playing a game, you can press `Esc` to pause the game. At the same time here, you can track your metrics. Pressing `Back home` will take you to the main screen or `Continue` to continue the game.
+![image](demo_resources/pause.png)
+
+- If you are defeated, the game will ask if you want to try again. If you press `Try again`, you will be revived or `Back home` will return to the main screen.
+![image](demo_resources/game_over.png)
+
+# 4. About the game's source code
+## ***Note***: The game's source code has been arranged and is located in the [src](./src/) folder for everyone's convenience.
+## Overview of folders in folder [src](./src/) is as follows:
+- [Achievement](./src/Achievement/): manages achievements in the Game. Read more at [here](./src/Achievement/about_achieve_manager.md).
+- [EnemyObject](./src/EnemyObject/): contains enemy objects in the program.
+- [Factory](./src/Factory/): applies Factory Pattern to write Generators, automating the creation of objects translated from map file(.tmx file). Read more at [here](./src/Factory/about_factory_method.md).
+- [FiniteStateMachine](./src/FiniteStateMachine/): a finite state machine that manages states. Read more at [here](./src/FiniteStateMachine/about_finite_state_machine.md).
+- [GameLoop](./src/GameLoop/): implements the principle of game loop in game making. Read more at [here](./src/GameLoop/about_sequencing_patterns.md).
+- [Graphic]: contains the game's graphic processing files. Read more at [here](./src/Graphic/about_graphic.md).
+- [InteractObject]: contains objects that can interact with the player.
+- [Map]: contains map and collision processing files. Details at [here](./src/Map/about_map.md)
+- [Misshit](./src/Misshit/): manages attacks and reports missed attacks in the game.
+- [Status](./src/Status/): manages and displays the status of characters and enemies in the game.
+- [Mode](./src/Model/): main models, parent classes of objects in the program.
+- [Observe](./src/Observe/): implement Observe pattern and Command pattern to capture events in the game. Details at [here](./src/Observe/about_observe_and_command.md)
+- [Parser](./src/Parser/): compiler for `.tmx` and `.xml` files. This is an improvement on a project I wrote in the past. You can view it at: https://github.com/Huy1902/XML
+- [PlayerObject](./src/PlayerObject/): contains the class for the main character of the game that the player controls.
+- [Sound](./src/Sound/): manages game sound. Details at [here](./src/Sound/about_sound.md).
+- [Spell](./src/Spell/): manages and stores the character's spell objects.
+- [Standing](./src/Standing/): manages, saves and displays player scores. Details are [here](./src/Standing/about_standing.md)
+- [States](./src/States/): states: menu, pause, game_over, score, play of the game. Follow the State Pattern, have FSM for management. Details at [here](./src/States/about_state_pattern.md)
+- [Utilities](./src/Utilities/): contains utilities to improve user experience. Details at [here](./src/Utilities/about_utilities.md).
+
+# 5. About in-game resources
+- Folder containing game resources: [assets](./Adventure_Time/assets/).
+- Details about the image (source, processing and method of use): [graphic](./src/Graphic/about_graphic.md)
+- Details about sound (source, processing and method of use):
+[sound](./src/Sound/about_sound.md)
+- Details about the font: [font](./src/Utilities/Font/about_font.md).
+- Details about file types: [file](./src/about_file_type.md).
+
+- All resources in the game are searched by myself, many of them are in raw form, needing to be processed through editing software such as Adobe Photoshop, Aseprite, Tiled, Adobe Premiere, Adobe Audition. This takes quite a bit of time and effort.
+
+# 6. Summary
+
+## ***Good mark***
+- This project was completely done by me, I learned and researched it myself and did not copy it anywhere. The code is 100% written by myself.
+
+- Improve and cultivate object-oriented programming thinking, planning and product development thinking.
+
+- Learn more about design patterns, editing and many different software.
+Most of the images and sounds are edited by me.
+
+- Learn how to set up the environment and use external libraries.
 
 
+### ***Limitations***
+- The code is not really as clear as I would like. Many parts have not yet been completely separated from each other. This will make it difficult to develop larger products
+
+### ***Development***
+- Use Patterns to optimize the program. Remodel the program to make it easier to update.
+
+- Complete the character's backstory
+
+- Add NPCs to the program for characters to communicate and buy and sell.
+
+- My goal when building the game is: to build a fighting style similar to Dark Soul 3 and a skill system, leveling up like Final Fantasy 9. Currently my game is only partially demonstrated, it needs to be improved in the future. more.
+
+- Add items for characters to interact with such as: health potions. spell books,...
+
+- Added treasure chests and loot and inventory system.
+
+### *Self-assessment score: 9.5++ / 10*
+
+### Reference source:
+- Design patterns at: https://gameprogrammingpatterns.com/contents.html and https://www.geeksforgeeks.org/software-design-patterns/
+- How to use libraries and functions at: https://lazyfoo.net/tutorials/SDL/index.php
+- Learning source on Youtube: https://www.youtube.com/watch?v=1KD4Ae0tX0g&list=PL-K0viiuJ2RctP5nlJlqmHGeh66-GOZR_
