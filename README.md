@@ -29,7 +29,7 @@
 
 **Bước 2:** Cài Visual Studio. Khi xây dựng chương trình, mình dùng Visual Studio 2022. Bạn có thể tham khảo hướng dẫn cài tại: https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022 hoặc trên Youtube: https://www.youtube.com/watch?v=HS4c3kBEWr4.
 
-**Bước 3:** Mở file Adventure_Time.sln. [image](demo_resources/install.png)
+**Bước 3:** Mở file Adventure_Time.sln. ![image](demo_resources/install.png)
 
 **Bước 4:** Mở cmd trong thư mục chứa Makefile và gõ lệnh make.
 
