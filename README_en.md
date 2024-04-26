@@ -8,15 +8,15 @@
 
 + Student code: 23020082
 
-+ Big exercise: Adventure Time
++ Project: Adventure Time
 
 # Introducing the game
 
 - Game introduction video:
 
-- Adventure Time is a game in the RPG genre. Gamers take on the role of an unknown warrior on the path to defeat the Lords of Space, who hold the great power of The First Crystal. Continuously confront skilled warriors, gain great power and rise to glory from the ashes.
+- Adventure Time is a game in the RPG genre. Gamers take on the role of an NoName warrior on the path to defeat the Lords of Space, who hold the great power of The First Crystal. Continuously confront skilled warriors, gain great power and rise to glory from the ashes.
 
-#0. How to download the game
+# 0. How to download the game
 
 ## a. Method 1: Do not include code.
 
@@ -121,11 +121,11 @@
 ## c. Enemy
 - There are three types of common enemies in the game:
 
-| | Enemy name | Abilities and Powers |
-|-------------------------------------------|------- -------------|----------------------------------- -------------------------------------------------- ------------|
-| ![gif](demo_resources/Knight.gif) | Barrel Knight | Close combat, diverse moves, buffaloes are difficult to kill with normal attacks. |
-| ![gif](demo_resources/small_droid.gif) | Droid Zapper | Medium attack range, high damage |
-| ![gif](demo_resources/archer.gif) | Archer | Long range, Cannot be stunned, large arrow damage |
+|                                         | Enemy name	       |                                 Abilities and Powers                                            |
+|-----------------------------------------|--------------------|--------------------------------------------------------------------------------------------------|
+| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Cận chiến, chiêu thức đa dạng, trâu bò khó giết bằng đòn đánh thường.                                                                       |
+| ![gif](demo_resources/small_droid.gif)  | Droid Zapper	       | Tầm đánh trung bình, sát thương cao                                               |
+| ![gif](demo_resources/archer.gif)  | Archer	   | Tầm đánh xa, Không thể bị làm choáng, sát thương những mũi tên lớn                                                                 |
 
 - Discover the most suitable fighting style for each type of monster, and depending on the situation, running is a good option.
 ## d. Boss
@@ -133,11 +133,11 @@
 - Lord of Space's stats are all high. Be careful!
 - Some actions of Vagabond:
 
-| Action | Description |
-|--------|----------------------------------------- ---|
-| ![gif](demo_resources/boss_attack1.gif) | Slash three consecutive attacks. |
-| ![gif](demo_resources/boss_attack2.gif) | Accumulate power, slash hard and teleport a distance |
-| ![gif](demo_resources/boss_die.gif) | Knocked out |
+|  Action  |   Description      |
+|---------|------------------------------------------|
+| ![gif](demo_resources/boss_attack1.gif)    |     Chém ba đòn liên tiếp.      |
+|  ![gif](demo_resources/boss_attack2.gif)   |     Tích sức mạnh, chém mạnh và dịch chuyển một đoạn    |
+| ![gif](demo_resources/boss_die.gif)     |     Bị hạ gục       |
 
 
 
