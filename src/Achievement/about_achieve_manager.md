@@ -1,0 +1,2 @@
+- Lấy ý tưởng từ state_pattern và singleton. Dùng manager cho việc quản lý các sự kiện thành tựu trong game.
+- Mong muốn sử dụng command patter và observer pattern cho Manager này.

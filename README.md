@@ -157,7 +157,7 @@
 ![image](demo_resources/game_over.png)
 
 # 4. Về source code của game
-## **Lưu ý** : Source code của game đã được sắp xếp và nằm trong folder [src](./src/).
+## ***Lưu ý*** : Source code của game đã được sắp xếp và nằm trong folder [src](./src/) để mọi người tiện theo dõi.
 
 # 5. Về tài nguyên trong game
 

@@ -1,0 +1,4 @@
+- Thực hiện đầy đủ các nguyên tắc của một Game Loop: xử lý đầu vào, cập nhật trạng thái game, hiển thị hình ảnh game.
+- Tuân theo Update Method: GameManager giữ một FiniteStateMachine, máy hữu hạn trạng thái này quản lý chuyển đổi trạng thái màn hình, đảm bảo luôn có một trạng thái đang hiển thị. Trạng thái này giữ một tập các đối tượng cần cập nhật. Bằng cách này, khi game loop cần cập nhật, chương trình sẽ tự gọi đến tất cả các đối tượng cần cập nhật trong state đó.
+  + Đọc các state trong folder [States](../States/) để biết về cách quản lý một tập đối tượng của state.
+  + Xem qua về FSM trong folder [FiniteStateMachine](../FiniteStateMachine/).

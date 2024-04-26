@@ -1,0 +1,1 @@
+- Là máy hữu hạn trạng thái dùng để chuyển đổi giữa các state, ở đây là các cửa sổ của game mỗi khi đạt điều kiện chuyển.

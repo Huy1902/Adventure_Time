@@ -1,0 +1,2 @@
+- Chương trình sử dụng một máy trạng thái hữu hạn (Finite State Machine) để chuyển đổi giữa các state, ở đây là menu, play, pause và game_over.
+- Tuân theo nguyên lý của máy hữu hạn trạng thái, tạo các state và điều kiện chuyển đổi giữa chúng.
