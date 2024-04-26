@@ -119,12 +119,10 @@
 
 |                                         | Tên kẻ địch	       | Khả năng và sức mạnh                                                                                       |
 |-----------------------------------------|--------------------|--------------------------------------------------------------------------------------------------|
-| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Chiêu thức đa dạng, khánh phép cao.                                                                       |
-| ![image](resources/images/Choose_level/flag.png)   | Flag Zombie	       | Báo hiệu một lượng lớn zombie đang chuẩn bị ra.                                                  |
-| ![image](resources/images/Choose_level/cone.png)   | Conehead Zombie	   | Trâu gấp 3 lần zombie thường                                                                     |
-| ![image](resources/images/Choose_level/bucket.png) | Buckethead Zombie	 | Trâu gấp 6.5 lần zombie thường                                                                   |
+| ![gif](demo_resources/Knight.gif) | Barrel Knight	  | Cận chiến, chiêu thức đa dạng, kháng phép cao.                                                                       |
+| ![gif](demo_resources/small_droid.gif)  | Droid Zapper	       | Tầm đánh trung bình, sát thương cao                                               |
+| ![gif](demo_resources/archer.gif)  | Archer	   | Tầm đánh xa, Không thể bị làm choáng, sát thương những mũi tên lớn                                                                 |
 |
-
 
 
 
