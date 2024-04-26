@@ -68,7 +68,7 @@ Vagabond::Vagabond() :
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
 	mStatus.HP = 1000;
-	MaxStatus = mStatus;
+	mMaxStatus = mStatus;
 	m_bIsBoss = true;
 	nameBoss = "Vagabond";
 }

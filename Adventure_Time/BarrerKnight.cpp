@@ -52,7 +52,7 @@ BarrerKnight::BarrerKnight() :
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed - 1;
 	mWakeTime = mActions["wake"].numFrames * mActions["wake"].speed - 1;
 
-	MaxStatus = mStatus;
+	mMaxStatus = mStatus;
 
 	mStatus.LUCK = 100;
 }

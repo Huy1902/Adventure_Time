@@ -16,19 +16,28 @@ StatusManager* StatusManager::s_pInstance = nullptr;
 
 void StatusManager::updatePlayerStatus()
 {
+	if (mPlayer->getStatus()->EXP >= mPlayer->getmMaxStatus()->EXP)
+	{
+		mPlayer->levelUp();
+		mPlayer->getStatus()->EXP = 0;
+	}
+	if (mScore < 0)
+	{
+		mScore = 0;
+	}
 }
 
 void StatusManager::renderPlayerStatus()
 {
 	Bar temp = mBars["health_point"];
-	int w = int( (*mPlayer->getStatus()).HP * 1.0 / (*mPlayer->getMaxStatus()).HP * temp.w );
+	int w = int( (*mPlayer->getStatus()).HP * 1.0 / (*mPlayer->getmMaxStatus()).HP * temp.w );
 	TextureManager::getInstance()->drawSinglePic( temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
 
 	temp = mBars["health_bar"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
 
 	temp = mBars["sta_point"];
-	w = int( (*mPlayer->getStatus()).STA * 1.0 / (*mPlayer->getMaxStatus()).STA * temp.w );
+	w = int( (*mPlayer->getStatus()).STA * 1.0 / (*mPlayer->getmMaxStatus()).STA * temp.w );
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
 
 	temp = mBars["sta_bar"];
@@ -36,11 +45,6 @@ void StatusManager::renderPlayerStatus()
 
 	temp = mBars["score"];
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, temp.w, temp.h, GameManager::getInstance()->getRenderer());
-
-	if (mScore < 0)
-	{
-		mScore = 0;
-	}
 	string score = to_string(mScore);
 	while (score.size() < 5)
 	{
@@ -53,7 +57,7 @@ void StatusManager::renderPlayerStatus()
 void StatusManager::renderBossStatus(EnemyObject* mBoss)
 {
 	Bar temp = mBars["boss_point"];
-	int w = int((*mBoss->getStatus()).HP * 1.0 / (*mBoss->getMaxStatus()).HP * temp.w);
+	int w = int((*mBoss->getStatus()).HP * 1.0 / (*mBoss->getmMaxStatus()).HP * temp.w);
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, temp.x, temp.y, w, temp.h, GameManager::getInstance()->getRenderer());
 
 	temp = mBars["boss_bar"];
@@ -76,7 +80,11 @@ bool StatusManager::whenPlayerAttackEnemy(EnemyObject* obj)
 	}
 	int dmg	= int(getDMGtaken(taken->LUCK, cause->ATK, taken->DEF));
 	taken->HP -= dmg;
-	return (dmg != 0);
+	if (taken->HP <= 0)
+	{
+		mPlayer->getStatus()->EXP += 10;
+	}
+	return (dmg > 0);
 }
 
 bool StatusManager::whenEnemyAttackPlayer(EnemyObject* obj)
@@ -101,14 +109,17 @@ bool StatusManager::whenSpellAttackEnemy(SpellObject* spell, EnemyObject* obj)
 	}
 	int dmg = int(getDMGtaken(taken->LUCK, spell->getDamage(), taken->DEF));
 	taken->HP -= dmg;
-	cout << (dmg > 0) << '\n';
+	if (taken->HP <= 0)
+	{
+		mPlayer->getStatus()->EXP += 10;
+	}
 	return (dmg > 0);
 }
 
 void StatusManager::renderOnGamePause()
 {
 	Status mCurrentPlayer = *mPlayer->getStatus();
-	Status mMaxPlayer = *mPlayer->getMaxStatus();
+	Status mMaxPlayer = *mPlayer->getmMaxStatus();
 
 	string hp = to_string(mCurrentPlayer.HP);
 	hp += " / ";
@@ -143,7 +154,7 @@ void StatusManager::renderOnGamePause()
 	string exp = to_string(mCurrentPlayer.EXP);
 	exp += " / ";
 	exp += to_string(mMaxPlayer.EXP);
-	FontManager::getInstance()->drawText(hp.c_str(), 630, 206, 24);
+	FontManager::getInstance()->drawText(exp.c_str(), 630, 206, 24);
 	avatar->update();
 	avatar->draw();
 }
@@ -156,7 +167,7 @@ void StatusManager::renderEnemyStatus(EnemyObject* obj)
 		return;
 	}
 	Bar temp = mBars["greenbar"];
-	int w = int( obj->getStatus()->HP * 1.0 / obj->getMaxStatus()->HP * temp.w );
+	int w = int( obj->getStatus()->HP * 1.0 / obj->getmMaxStatus()->HP * temp.w );
 	TextureManager::getInstance()->drawSinglePic(temp.textureID, int( obj->getPosition()->getX() - obj->getMapPosition()->getX() + obj->getAnimation()->getWidth() / 2 - temp.w / 2 ), 
 		int( obj->getPosition()->getY() - obj->getMapPosition()->getY() - temp.w / 2 ), w, temp.h, GameManager::getInstance()->getRenderer());
 }

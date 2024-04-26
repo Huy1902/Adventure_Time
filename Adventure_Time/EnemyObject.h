@@ -85,9 +85,9 @@ public:
 	{
 		return &mStatus;
 	}
-	virtual Status* getMaxStatus()
+	virtual Status* getmMaxStatus()
 	{
-		return &MaxStatus;
+		return &mMaxStatus;
 	}
 	virtual bool isDying() const
 	{

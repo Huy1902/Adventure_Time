@@ -59,7 +59,7 @@ Archer::Archer() :
 
 	mCharWidth = 40;
 
-	MaxStatus = mStatus;
+	mMaxStatus = mStatus;
 
 }
 Archer::~Archer()

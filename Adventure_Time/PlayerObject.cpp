@@ -55,8 +55,9 @@ PlayerObject::PlayerObject():
 
 	mDyingTime = mActions["dying"].numFrames * mActions["dying"].speed;
 	mCountTimeHurt = 0;
-
-	MaxStatus = mStatus;
+	mStatus.EXP = 0;
+	mMaxStatus = mStatus;
+	mMaxStatus.EXP = 100;
 
 	SpellStream::getInstance()->addSkill("Scourge", SDL_SCANCODE_Q, 20);
 	SpellStream::getInstance()->addSkill("Darkra", SDL_SCANCODE_E, 20);
@@ -167,7 +168,7 @@ void PlayerObject::processData()
 	}
 
 
-	if (mStatus.STA < MaxStatus.STA)
+	if (mStatus.STA < mMaxStatus.STA)
 	{
 		mStatus.STA += STA_RECOVER_SPEED;
 	}
@@ -354,6 +355,16 @@ void PlayerObject::renderObject() const
 
 void PlayerObject::clearObject()
 {
+}
+
+void PlayerObject::levelUp()
+{
+	std::cout << "NoName knight level up! Gain ATK, STA and DEF until death!\n";
+	mStatus.ATK += 5;
+	mMaxStatus.ATK += 5;
+	mStatus.DEF += 5;
+	mMaxStatus.DEF += 5;
+	mMaxStatus.STA += 40;
 }
 
 void PlayerObject::getHurt()

@@ -18,9 +18,9 @@ public:
 	{
 		return &mStatus;
 	}
-	virtual Status* getMaxStatus()
+	virtual Status* getmMaxStatus()
 	{
-		return &MaxStatus;
+		return &mMaxStatus;
 	}
 	virtual bool isDying() const
 	{
@@ -37,7 +37,7 @@ public:
 protected:
 
 	Status mStatus;
-	Status MaxStatus;
+	Status mMaxStatus;
 
 	GameVector* mVelocity;
 	GameVector* mAcceleration;

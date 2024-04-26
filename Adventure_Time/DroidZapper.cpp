@@ -57,7 +57,7 @@ DroidZapper::DroidZapper() :
 
 	mCharWidth = 40;
 
-	MaxStatus = mStatus;
+	mMaxStatus = mStatus;
 
 }
 DroidZapper::~DroidZapper()

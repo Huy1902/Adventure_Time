@@ -44,6 +44,7 @@ public:
 	{
 		return mCharWidth;
 	}
+	void levelUp();
 	virtual  bool isAttack() const
 	{
 		if ((mCurrentAction == ATTACK1 && mAnimation->getIndexFrame() >= 1 && mAnimation->getIndexFrame() <= 3) || mCurrentAction == CRIT)
@@ -77,9 +78,9 @@ public:
 	{
 		return &mStatus;
 	}
-	virtual Status* getMaxStatus()
+	virtual Status* getmMaxStatus()
 	{
-		return &MaxStatus;
+		return &mMaxStatus;
 	}
 	virtual bool isDying() const
 	{
