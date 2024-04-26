@@ -58,10 +58,10 @@
 - Game sẽ vào thẳng màn hình chính.
 ![image](demo_resources/main_menu.png)
 
-- Chọn Play để vào game hoặc chọn Score để xem bảng xếp hạng ba điểm cao nhất.
+- Chọn `Play` để vào game hoặc chọn `Score` để xem bảng xếp hạng ba điểm cao nhất.
 ![image](demo_resources/standing.png)
 
-- Nhấn exit để thoát game.
+- Nhấn `Exit` để thoát game.
 
 # 3. Hướng dẫn chơi game:
 - Sau khi nhấn Play tại màn hình chính, người chơi sẽ thấy màn hình đợi. Đây cũng sẽ là màn hình hiện mỗi khi người chơi chuyển map. Có vài tip khá hữu dụng được hiện tại đây.
@@ -87,7 +87,7 @@
 
 - Lưu ý: Nếu nhân vật của bạn không di chuyển, hãy xem lại bạn có đang để ngôn ngữ khác ngoài tiếng Anh trên máy không. Với Window, chọn English tại Keyboard layout để nhân vật di chuyển mượt mà.
 
-## b. Về cơ chế chơi:
+## b. Cơ chế chơi:
 - Nhân vật gây sát thương lên kẻ địch bằng đòn tần công thường hoặc sử dụng các phép.
 ![image](demo_resources/darkra.png)
 
@@ -129,7 +129,7 @@
 
 - Khám phá cách đánh phù hợp nhất cho từng loại quái, và tùy trường hợp chạy là một phương án tốt.
 ## d. Boss
-- Hiện chỉ có một Lord of Space là "Vagabond" trong trò chơi. Khi hạ gục nó, bạn đã phá đảo trò chơi của tôi rồi đó. Cố gắng đạt điểm tối đa cho các lần chơi nhé.
+- Hiện chỉ có một Lord of Space là "Vagabond" trong trò chơi. Khi hạ gục nó, bạn đã phá đảo trò chơi rồi đó. Cố gắng đạt điểm tối đa cho các lần chơi nhé.
 - Các chỉ số của Lord of Space đều cao. Hãy cẩn thận!
 - Một vài hành động của Vagabond:
 
@@ -139,5 +139,26 @@
 |  ![gif](demo_resources/boss_attack2.gif)   |     Tích sức mạnh, chém mạnh và dịch chuyển một đoạn    |
 | ![gif](demo_resources/boss_die.gif)     |     Bị hạ gục       |
 
+## e. Cơ chế tính điểm
+- Thu vàng hoặc hạ quái đều sẽ tăng điểm ![image](demo_resources/Score.png). 
+- Riêng hạ Boss sẽ cho nhiều điểm hơn. Hạ quái đều sẽ tăng chỉ số cho người chơi.
+- Điểm sẽ tự động được lưu khi bạn quay về màn hình chính. Bạn có thể xem nó trong Score.
+
+## f. Cơ chế tăng cấp
+- Hạ kẻ địch sẽ cho kinh nghiệm.
+- Khi kinh nghiệm đạt ngưỡng, nhân vật sẽ lên level và tăng chỉ số.
+- Cái chết sẽ lấy đi của bạn tất cả chỉ số đó.
+
+## h. Tạm dừng và hồi sinh.
+- Khi chơi game, bạn có thể nhấn `Esc` để tạm dừng game. Đồng thời tại đây, bạn có thể theo dõi các chỉ số của mình. Nhấn `Back home` sẽ đưa bạn về màn hình chính hoặc `Continue` để tiếp tục game.
+![image](demo_resources/pause.png)
+
+- Nếu bạn bị hạ gục, game sẽ hỏi bạn có muốn thử lại không. Nếu nhấn `Try again`, bạn sẽ được hồi sinh hoặc `Back home` để về màn hình chính.
+![image](demo_resources/game_over.png)
+
+# 4. Về source code của game
+## **Lưu ý** : Source code của game đã được sắp xếp và nằm trong folder [src](./src/).
+
+# 5. Về tài nguyên trong game
 
 

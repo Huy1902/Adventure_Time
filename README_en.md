@@ -29,7 +29,7 @@
 
 - All code is in the Adventure_Time folder.
 
-**Step 2:** Install Visual Studio. When building the program, I use Visual Studio 2022. You can refer to the installation instructions at: https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs- 2022 or on Youtube: https://www.youtube.com/watch?v=HS4c3kBEWr4.
+**Step 2:** Install Visual Studio. When building the program, I use Visual Studio 2022. You can refer to the installation instructions at: https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022 or on Youtube: https://www.youtube.com/watch?v=HS4c3kBEWr4.
 
 **Step 3:** Open the file Adventure_Time.sln. ![image](demo_resources/install.png)
 - You can press `Ctrl + F5` to run the game in Visual Studio.
@@ -58,10 +58,10 @@
 - The game will go straight to the main screen.
 ![image](demo_resources/main_menu.png)
 
-- Select Play to enter the game or select Score to see the ranking of the three highest scores.
+- Select `Play` to enter the game or select `Score` to see the ranking of the three highest scores.
 ![image](demo_resources/standing.png)
 
-- Press exit to exit the game.
+- Press `Exit` to exit the game.
 
 # 3. Instructions for playing the game:
 - After pressing Play on the main screen, the player will see the waiting screen. This will also be the screen that appears every time the player switches maps. There are some pretty useful tips out there right now.
