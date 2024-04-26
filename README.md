@@ -127,11 +127,12 @@
 - Hiện chỉ có một Lord of Space là "Vagabond" trong trò chơi. Khi hạ gục nó, bạn đã phá đảo trò chơi của tôi rồi đó. Cố gắng đạt điểm tối đa cho các lần chơi nhé.
 - Các chỉ số của Lord of Space đều cao. Hãy cẩn thận!
 - Một vài hành động của Vagabond:
-|              Hành động                  | Mô tả                                                       |
-|-----------------------------------------|-------------------------------------------------------------|
-| ![gif](demo_resources/boss_attack1.gif) | Chém ba đòn liên tiếp.                                      |
-| ![gif](demo_resources/boss_attack2.gif) | Tích sức mạnh, chém mạnh và dịch chuyển một đoạn             |
-| ![gif](demo_resources/boss_die.gif)     | Bị hạ gục                                                   |
+
+|  Hành động  |    Mô tả       |
+|---------|------------------------------------------|
+| ![gif](demo_resources/boss_attack1.gif)    |     Chém ba đòn liên tiếp.      |
+|  ![gif](demo_resources/boss_attack2.gif)   |     Tích sức mạnh, chém mạnh và dịch chuyển một đoạn    |
+| ![gif](demo_resources/boss_die.gif)     |     Bị hạ gục       |
 
 
 
